@@ -1,6 +1,8 @@
 # How to set up your own AdGuard DNS on Raspberry Pi
 
-Here we'll describe a solution by installing AdGuard DNS on your [Raspberry Pi](https://www.raspberrypi.org) and using it to filter out ads, which also saves data traffic, which you can use on any machine connected to your local network.
+You can install AdGuard DNS on your [Raspberry Pi](https://www.raspberrypi.org) and use it to filter out ads. This also saves data traffic.
+
+Afterwards you can use your AdGuard DNS on any machine connected to same local network.
 
 This is different from browser-based ad blocking extension because it works not only in browser, but in other apps too.
 
