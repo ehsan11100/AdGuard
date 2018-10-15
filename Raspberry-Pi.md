@@ -1,10 +1,10 @@
-# How to set up your own AdGuard DNS on Raspberry Pi
+# How to set up your own AdGuard Home on Raspberry Pi
 
-You can install AdGuard DNS on your [Raspberry Pi](https://www.raspberrypi.org) and use it to filter out ads. This also saves data traffic.
+You can install AdGuard Home on your [Raspberry Pi](https://www.raspberrypi.org) and use it to filter out ads. This also saves data traffic.
 
-Afterwards you can use your AdGuard DNS on any machine connected to same local network.
+Afterwards you can use your AdGuard DNS on any machine connected to the same local network.
 
-This is different from browser-based ad blocking extension because it works not only in browser, but in other apps too.
+This is different from browser-based ad blocking extension because it works not only in a browser but in other apps too.
 
 There are many reasons to remove ads:
 
@@ -16,16 +16,16 @@ There are many reasons to remove ads:
 
 ## Prepare Raspberry Pi
 
-If you haven't already done so, set up your Raspberry Pi by preparing the SD card, then connecting keyboard, mouse and display/TV via HDMI, then connecting it to power supply and booting it. An official guide to do that is here — https://projects.raspberrypi.org/en/projects/raspberry-pi-setting-up
+If you haven't already done so, set up your Raspberry Pi by preparing the SD card, then connecting keyboard, mouse and display/TV via HDMI, then connecting it to a power supply and booting it. An official guide to do that is here — https://projects.raspberrypi.org/en/projects/raspberry-pi-setting-up
 
 You will not need a keyboard and mouse for very long, just to type a few commands and then write down the results.
 
-Once you've booted into desktop, you need to connect it to network:
+Once you've booted into the desktop, you need to connect it to network:
 
  * If you have a model that has built-in WiFi or you have USB WiFi dongle, follow this guide — https://www.raspberrypi.org/documentation/configuration/wireless/desktop.md
  * If you have ethernet/LAN adapter and LAN connectivity, just plug it into your Pi.
 
-Next we will enable SSH, so you can comfortably access it from your main computer. Open Terminal on your Pi and type this:
+Next, we will enable SSH, so you can comfortably access it from your main computer. Open Terminal on your Pi and type this:
 ```bash
 sudo systemctl enable ssh
 sudo systemctl start ssh
@@ -55,12 +55,12 @@ Once you're done and everything went successfully, you will be greeted by Raspbe
 
 Go to [AdGuard DNS page](https://github.com/AdguardTeam/AdguardDNS#installation) and download binaries for Raspberry Pi.
 
-At the time of writing this guide, latest version is v0.1.
+At the time of writing this guide, the latest version is v0.1.
 
 Let's download AdGuard DNS and unpack it:
 ```bash
 cd $HOME
-wget https://github.com/AdguardTeam/AdguardDNS/releases/download/v1.0/AdguardDNS_0.1_linux_arm.tar.gz
+wget https://github.com/AdguardTeam/AdGuardHome/releases/download/v0.1/AdguardDNS_0.1_linux_arm.tar.gz
 tar xvf AdguardDNS_0.1_linux_arm.tar.gz
 ```
 It will unpack into a new directory called `AdguardDNS`.
@@ -101,7 +101,7 @@ Once it's up and running, you can access your AdGuard DNS web interface on port 
 
 Don't forget to substitute `192.168.10.20` with IP of your Pi.
 
-**NOTE**: In version `v0.1`, you'll need to visit web interface and start DNS server manually on each reboot, it will be fixed in next release, alternatively you can [build newest version from source](https://github.com/AdguardTeam/AdguardDNS#how-to-build-from-source).
+**NOTE**: In version `v0.1`, you'll need to visit web interface and start DNS server manually on each reboot, it will be fixed in next release, alternatively you can [build the newest version from source](https://github.com/AdguardTeam/AdGuardHome#how-to-build-from-source).
 
 ## Verify DNS filtering
 You can verify that it's working properly by running this on your Pi:
@@ -123,11 +123,11 @@ Host doubleclick.net not found: 3(NXDOMAIN)
 
 Now, once we've established that AdGuard DNS works on our Raspberry Pi, you can use it on other computers in your network by changing their system DNS settings to use Pi's IP address (which is `192.168.10.20` in our case).
 
-<!-- TODO: link to guides or provide short guide here -->
+<!-- TODO: link to guides or provide a short guide here -->
 
 ## (Optionally) password-protect web interface
 
-You have an option to password-protect your AdGuard DNS's web interace so only you can access it.
+You have an option to password-protect your AdGuard DNS's web interface so only you can access it.
 
 To do so, stop it first:
 ```bash
@@ -152,4 +152,4 @@ After you're done editing, save the file and start your AdGuard DNS again:
 sudo systemctl start adguard-dns
 ```
 
-After that, visiting web interface in browser will ask for username and password.
+After that, visiting web interface in a browser will ask for username and password.
