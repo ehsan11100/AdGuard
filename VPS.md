@@ -1,19 +1,19 @@
-To run AdGuard DNS on a VPS, you need a server with Debian 8 or 9, x64 or x32.
+To run AdGuard Home on a VPS, you need a server with Debian 8 or 9, x64 or x32.
 
 ## Initial installation
 
-First let's ensure that your VPS has neccessary minimal requirements, run this as root:
+First let's ensure that your VPS has necessary minimal requirements, run this as root:
 ```bash
 apt-get install sudo nano bind9-host
 ```
 
-Go to [AdGuard DNS page](https://github.com/AdguardTeam/AdguardDNS#installation) and download binaries for your architecture (64-bit Linux in this example).
+Go to [AdGuard DNS page](https://github.com/AdguardTeam/AdGuardHome#installation) and download binaries for your architecture (64-bit Linux in this example).
 
-As of time of writing, latest version is v0.1
+As of the time of writing, the latest version is v0.1
 
 To download AdGuard DNS and unpack it execute following commands:
 ```bash
-wget https://github.com/AdguardTeam/AdguardDNS/releases/download/v0.1/AdguardDNS_0.1_linux_amd64.tar.gz
+wget https://github.com/AdguardTeam/AdGuardHome/releases/download/v0.1/AdguardDNS_0.1_linux_amd64.tar.gz
 tar xvf AdguardDNS_0.1_linux_amd64.tar.gz
 ```
 
@@ -81,7 +81,7 @@ Now, once you've established that AdGuard DNS works on your VPS, you can use it 
 
 ## (optional) Password-protect web interface
 
-You have an option to password-protect your AdGuard DNS's web interace so only you can access it.
+You have an option to password-protect your AdGuard DNS's web interface so only you can access it.
 
 To do so, stop it first:
 ```bash
@@ -106,4 +106,4 @@ After you're done editing, save the file and start your AdGuard DNS again:
 sudo systemctl start adguard-dns
 ```
 
-After that, visiting web interface in browser will require entering username and password.
+After that, visiting web interface in a browser will require entering username and password.
