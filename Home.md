@@ -8,7 +8,7 @@ The wiki was just recently created, so there isn't much content (yet).
 
 AdGuard Home is a network-wide ads & tracking blocking software. This means that it will cover ALL your home devices and you don't need any client-side software for that. With the rise of Internet-Of-Things and connected devices, it becomes more and more important to be able to control your whole network.
 
-> Please note, that the current state of AdGuard Home is just the beginning. Configuring it requires certain skills, and we will 
+> Please note, that the current state of AdGuard Home is just the beginning. Configuring it requires certain skills, and we will try to simplify the process in the future.
 
 ## How does it work?
 
