@@ -88,7 +88,7 @@ To do so, stop it first:
 sudo systemctl stop adguard-home
 ```
 
-Then edit `/root/AdGuardHome/AdGuardDNS.yaml` (substitute this path with your own as appropriate):
+Then edit `/root/AdGuardHome/AdGuardHome.yaml` (substitute this path with your own as appropriate):
 ```bash
 sudo nano /root/AdGuardHome/AdGuardHome.yaml
 ```
