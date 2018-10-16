@@ -60,8 +60,8 @@ At the time of writing this guide, the latest version is v0.9.
 Let's download AdGuard Home and unpack it:
 ```bash
 cd $HOME
-wget https://github.com/AdguardTeam/AdGuardHome/releases/download/v0.9/AdGuardHome_0.9_linux_arm.tar.gz
-tar xvf AdGuardHome_0.9_linux_arm.tar.gz
+wget https://github.com/AdguardTeam/AdGuardHome/releases/download/v0.9/AdGuardHome_v0.9_linux_arm.tar.gz
+tar xvf AdGuardHome_v0.9_linux_arm.tar.gz
 ```
 It will unpack into a new directory called `AdGuardHome`.
 
