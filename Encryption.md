@@ -21,7 +21,7 @@ In this guide we will explain how to setup your own "Secure DNS" server with AdG
 
 It does not make much sense to configure DNS encryption inside of your own local network. The purpose of securing your DNS traffic is to secure it from third-parties that might be analyzing or modifying it. For instance, from your ISP.
 
-It means that you will need a server with a public dedicated IP address. There are plenty of cheap cloud servers providers: [DigitalOcean](https://digitalocean.com), [Vultr](https://vultr.com), [Linode](https://www.linode.com/), etc. Just choose one, create a cloud server there, and [install AdGuard Home](Gettiing-Started) on your server.
+It means that you will need a server with a public dedicated IP address. There are plenty of cheap cloud servers providers: [DigitalOcean](https://digitalocean.com), [Vultr](https://vultr.com), [Linode](https://www.linode.com/), etc. Just choose one, create a cloud server there, and [install AdGuard Home](Getting-Started) on your server.
 
 <a id="register"></a>
 ## Register a domain name
