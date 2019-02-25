@@ -16,11 +16,11 @@ Download the archive with the binary file for your operating system from the [la
 
 We currently **officially** support the following operating systems:
 
-* [MacOS](https://github.com/AdguardTeam/AdGuardHome/releases/download/v0.92-hotfix2/AdGuardHome_v0.92-hotfix2_MacOS.zip)
-* [Windows 64-bit](https://github.com/AdguardTeam/AdGuardHome/releases/download/v0.92-hotfix2/AdGuardHome_v0.92-hotfix2_Windows.zip)
-* [Linux 64-bit](https://github.com/AdguardTeam/AdGuardHome/releases/download/v0.92-hotfix2/AdGuardHome_v0.92-hotfix2_linux_amd64.tar.gz)
-* [Linux 32-bit](https://github.com/AdguardTeam/AdGuardHome/releases/download/v0.92-hotfix2/AdGuardHome_v0.92-hotfix2_linux_386.tar.gz)
-* [Rapsberry Pi (32-bit ARM)](https://github.com/AdguardTeam/AdGuardHome/releases/download/v0.92-hotfix2/AdGuardHome_v0.92-hotfix2_linux_arm.tar.gz)
+* [MacOS](https://github.com/AdguardTeam/AdGuardHome/releases/download/v0.93/AdGuardHome_v0.93_MacOS.zip)
+* [Windows 64-bit](https://github.com/AdguardTeam/AdGuardHome/releases/download/v0.93/AdGuardHome_v0.93_Windows.zip)
+* [Linux 64-bit](https://github.com/AdguardTeam/AdGuardHome/releases/download/v0.93/AdGuardHome_v0.93_linux_amd64.tar.gz)
+* [Linux 32-bit](https://github.com/AdguardTeam/AdGuardHome/releases/download/v0.93/AdGuardHome_v0.93_linux_386.tar.gz)
+* [Rapsberry Pi (32-bit ARM)](https://github.com/AdguardTeam/AdGuardHome/releases/download/v0.93/AdGuardHome_v0.93_linux_arm.tar.gz)
 
 > AdGuard Home can work on other operating systems as well (for instance, it can work on devices with MIPS CPU), but we need your help with testing it.
 
