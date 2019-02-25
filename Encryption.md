@@ -1,6 +1,6 @@
 # AdGuard Home - Encryption
 
-We are proud to say that AdGuard Home supports all modern DNS encryptions protocols **out-of-the-box**:
+We are proud to say that AdGuard Home supports all modern DNS encryption protocols **out-of-the-box**:
 
 * [DNS-over-HTTPS](https://en.wikipedia.org/wiki/DNS_over_HTTPS)
 * [DNS-over-TLS](https://en.wikipedia.org/wiki/DNS_over_TLS)
@@ -21,12 +21,12 @@ In this guide we will explain how to setup your own "Secure DNS" server with AdG
 
 It does not make much sense to configure DNS encryption inside of your own local network. The purpose of securing your DNS traffic is to secure it from third-parties that might be analyzing or modifying it. For instance, from your ISP.
 
-It means that you will need a server with a public dedicated IP address. There are plenty of cheap cloud servers providers: [DigitalOcean](https://digitalocean.com), [Vultr](https://vultr.com), [Linode](https://www.linode.com/). Just choose any of them, create a cloud server there, and [install AdGuard Home](Gettiing-Started) on your server.
+It means that you will need a server with a public dedicated IP address. There are plenty of cheap cloud servers providers: [DigitalOcean](https://digitalocean.com), [Vultr](https://vultr.com), [Linode](https://www.linode.com/), etc. Just choose one, create a cloud server there, and [install AdGuard Home](Gettiing-Started) on your server.
 
 <a id="register"></a>
 ## Register a domain name
 
-First of all, you need a domain name. If you have never done it, here is a [simple instruction](https://www.pcworld.com/article/241722/web-apps/how-to-register-your-own-domain-name.html) that will help you with that.
+First of all, you need a domain name. If you have never registered one, here is a [simple instruction](https://www.pcworld.com/article/241722/web-apps/how-to-register-your-own-domain-name.html) that will help you with that.
 
 <a id="certificate"></a>
 ## Get an SSL certificate
