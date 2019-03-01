@@ -55,46 +55,29 @@ Once you're done and everything went successfully, you will be greeted by Raspbe
 
 Go to [AdGuard Home page](https://github.com/AdguardTeam/AdGuardHome#installation) and download binaries for Raspberry Pi.
 
-At the time of writing this guide, the latest version is v0.92-hotfix1.
+At the time of writing this guide, the latest version is v0.93.
 
 Let's download AdGuard Home and unpack it:
 ```bash
 cd $HOME
-wget https://github.com/AdguardTeam/AdGuardHome/releases/download/v0.92-hotfix1/AdGuardHome_v0.92-hotfix1_linux_arm.tar.gz
-tar xvf AdGuardHome_v0.92-hotfix1_linux_arm.tar.gz
+wget https://github.com/AdguardTeam/AdGuardHome/releases/download/v0.93/AdGuardHome_v0.93_linux_arm.tar.gz
+tar xvf AdGuardHome_v0.93_linux_arm.tar.gz
 ```
 It will unpack into a new directory called `AdGuardHome`.
 
-Now let's make it launch on Raspberry Pi's boot:
+All you have to do is simply type this command to the Terminal:
+
 ```bash
-sudo nano /etc/systemd/system/adguard-home.service
+sudo ./AdGuardHome -s install
 ```
 
-Fill the file contents with this:
-```ini
-[Unit]
-Description=AdGuard Home
-After=syslog.target
-After=network.target
+Here are the other commands you might need to control the service.
 
-[Service]
-Type=simple
-User=root
-Group=root
-WorkingDirectory=/home/pi/AdGuardHome
-ExecStart=/home/pi/AdGuardHome/AdGuardHome --host 192.168.10.20
-Restart=always
-
-[Install]
-WantedBy=multi-user.target
-```
-**NOTE**: Don't forget to replace `192.168.10.20` with IP of your Pi.
-
-After you're done with that, let's enable and start AdGuard Home:
-```bash
-sudo systemctl enable adguard-home
-sudo systemctl start adguard-home
-```
+* `AdGuardHome -s uninstall` - uninstalls the AdGuard Home service.
+* `AdGuardHome -s start` - starts the service.
+* `AdGuardHome -s stop` - stops the service.
+* `AdGuardHome -s restart` - restarts the service.
+* `AdGuardHome -s status` - shows the current service status.
 
 ## Visit the web interface
 Once it's up and running, you can access your AdGuard Home web interface on port 3000 by typing this in your browser — `http://192.168.10.20:3000/`
