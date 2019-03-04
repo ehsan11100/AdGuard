@@ -1,4 +1,6 @@
-To run AdGuard Home on a VPS, you need a server with Debian 8 or 9, x64 or x32.
+To run AdGuard Home on a VPS, you need a server with Debian 8 or 9, x64 or x32. 
+
+>Among possible solutions are [Vultr](https://www.vultr.com/), [1&1](https://www.1and1.co.uk/dynamic-cloud-server#configure-server), [Cloudways](https://www.cloudways.com/), [HostGator](https://hostgator.com/), [Digital Ocean](https://www.digitalocean.com/), [Bytemark](https://www.bytemark.co.uk/cloud-hosting/) and many more. AdGuard is not affiliated with any of these or other VPS services.
 
 ## Initial installation
 
@@ -9,12 +11,12 @@ apt-get install sudo nano bind9-host
 
 Go to [AdGuard Home page](https://github.com/AdguardTeam/AdGuardHome#installation) and download binaries for your architecture (64-bit Linux in this example).
 
-As of the time of writing, the latest version is v0.92-hotfix1.
+As of the time of writing, the latest version is v0.93.
 
 To download AdGuard Home and unpack it execute following commands:
 ```bash
-wget https://github.com/AdguardTeam/AdGuardHome/releases/download/v0.92-hotfix1/AdGuardHome_v0.92-hotfix1_linux_amd64.tar.gz
-tar xvf AdGuardHome_v0.92-hotfix1_linux_amd64.tar.gz
+wget https://github.com/AdguardTeam/AdGuardHome/releases/download/v0.93/AdGuardHome_v0.93_linux_amd64.tar.gz
+tar xvf AdGuardHome_v0.93_linux_amd64.tar.gz
 ```
 
 You can find out the directory where you've unpacked it to by running these commands:
@@ -23,37 +25,15 @@ cd AdGuardHome
 pwd
 ```
 
-In this example it is `/root/AdGuardHome`, now let's make it run on VPS boot:
-```bash
-sudo nano /etc/systemd/system/adguard-home.service
-```
+Run `sudo ./AdGuardHome -s install` to install AdGuard Home as a system service.
 
-A file will be opened, fill the file contents with this text:
-```ini
-[Unit]
-Description=AdGuard Home
-After=syslog.target
-After=network.target
+Here are the other commands you might need to control the service.
 
-[Service]
-Type=simple
-User=root
-Group=root
-WorkingDirectory=/root/AdGuardHome
-ExecStart=/root/AdGuardHome/AdGuardHome --host 0.0.0.0
-Restart=always
-
-[Install]
-WantedBy=multi-user.target
-```
-
-Note that I've used `/root/AdGuardHome` in that file, replace both instances with your own values there. Write to the file and close it.
-
-After you're done with that, let's enable and start AdGuard Home:
-```bash
-sudo systemctl enable adguard-home
-sudo systemctl start adguard-home
-```
+* `AdGuardHome -s uninstall` - uninstalls the AdGuard Home service.
+* `AdGuardHome -s start` - starts the service.
+* `AdGuardHome -s stop` - stops the service.
+* `AdGuardHome -s restart` - restarts the service.
+* `AdGuardHome -s status` - shows the current service status.
 
 You can verify that it's working properly by running this command:
 ```bash
@@ -78,32 +58,3 @@ Replace 1.2.3.4 with the IP address of your VPS.
 ## Configure your devices to use your AdGuard Home
 
 Now, once you've established that AdGuard Home works on your VPS, you can use it on your machine by changing system DNS settings to use your VPS's public IP address.
-
-## (optional) Password-protect web interface
-
-You have an option to password-protect your AdGuard Home's web interface so only you can access it.
-
-To do so, stop it first:
-```bash
-sudo systemctl stop adguard-home
-```
-
-Then edit `/root/AdGuardHome/AdGuardHome.yaml` (substitute this path with your own as appropriate):
-```bash
-sudo nano /root/AdGuardHome/AdGuardHome.yaml
-```
-
-Find lines containing `auth_name: ""` and `auth_pass: ""` and replace them with username and password:
-```ini
-auth_name: "your-secret-name"
-auth_pass: "your-secret-password"
-```
-
-Substitute name and password with your own, of course.
-
-After you're done editing, save the file and start your AdGuard Home again:
-```bash
-sudo systemctl start adguard-home
-```
-
-After that, visiting web interface in a browser will require entering username and password.
