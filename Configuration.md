@@ -45,7 +45,8 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
    * `ratelimit` — DDoS protection, specifies in how many packets per second a client should receive. Anything above that is silently dropped. To disable set 0, default is 20. Safe to disable if DNS server is not available from internet.
    * `ratelimit_whitelist` — If you want exclude some IP addresses from ratelimiting but keep ratelimiting on for others, put them here.
    * `refuse_any` — Another DDoS protection mechanism. Requests of type ANY are rarely needed, so refusing to serve them mitigates against attackers trying to use your DNS as a reflection. Safe to disable if DNS server is not available from internet.
-   * `bootstrap_dns` — DNS server used for initial hostname resolution in case if upstream server name is a hostname.
+   * `bootstrap_dns` — List of DNS servers used for initial hostname resolution in case an upstream server name is a hostname.
+   * `all_servers` — Enables parallel queries to all configured upstream servers to speed up resolving. If disabled, the queries are sent to each upstream server one-by-one and then sorted by RTT.
    * `parental_sensitivity` — Age group for parental control-based filtering, must be either 3, 10, 13 or 17 if enabled.
    * `parental_enabled` — Parental control-based DNS requests filtering.
    * `safesearch_enabled` — Enforcing "Safe search" option for search engines, when possible.
