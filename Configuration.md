@@ -79,3 +79,24 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
  * `verbose` — Enable our disables debug verbose output.
 
 Removing an entry from settings file will reset it to the default value. Deleting the file will reset all settings to the default values.
+
+## Configuring clients friendly names
+
+It may be useful to set up a friendly name for each IP address that clients use to connect to AdGuard Home.  To do this, follow these steps:
+
+1. Open `/etc/hosts` file in your text editor and add a name for each IP address, for example:
+
+		192.168.0.2    Mom
+		192.168.0.3    Dad
+		192.168.0.4    Sister
+		192.168.0.5    Brother
+
+	Note that on Windows file path to "hosts" file is different: `c:\windows\system32\drivers\etc\hosts`
+
+2. Restart AdGuard Home
+
+As a result you will see that the clients names are now shown:
+
+![](top-clients-names.png)
+
+In the future, we plan to add more configuration options in this area.
