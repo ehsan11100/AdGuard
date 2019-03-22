@@ -55,13 +55,13 @@ Once you're done and everything went successfully, you will be greeted by Raspbe
 
 Go to [AdGuard Home page](https://github.com/AdguardTeam/AdGuardHome#installation) and download binaries for Raspberry Pi.
 
-At the time of writing this guide, the latest version is v0.93.
+At the time of writing this guide, the latest version is v0.94.
 
 Let's download AdGuard Home and unpack it:
 ```bash
 cd $HOME
-wget https://github.com/AdguardTeam/AdGuardHome/releases/download/v0.93/AdGuardHome_v0.93_linux_arm.tar.gz
-tar xvf AdGuardHome_v0.93_linux_arm.tar.gz
+wget https://github.com/AdguardTeam/AdGuardHome/releases/download/v0.94/AdGuardHome_v0.94_linux_arm.tar.gz
+tar xvf AdGuardHome_v0.94_linux_arm.tar.gz
 ```
 It will unpack into a new directory called `AdGuardHome`.
 

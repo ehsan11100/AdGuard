@@ -2,6 +2,13 @@
 
 Most of these settings can be changed via the web-based admin interface. However, we decided to list them all here just in case.
 
+* [Command-line arguments](#command-line)
+* [Configuring upstreams](#upstreams)
+  * [Specifying upstreams for domains](#upstreams-for-domains)
+* [Configuring clients friendly names](#friendly-names)
+* [Configuration file](#configuration-file)
+
+<a id="command-line"></a>
 ## Command-line arguments
 
 Here is a list of all available command-line arguments.
@@ -25,6 +32,70 @@ Options:
 
 Please note, that the command-line arguments override settings from the configuration file.
 
+<a id="upstreams"></a>
+## Configuring upstreams
+
+AdGuard Home is basically a DNS proxy that sends your DNS queries to the upstream servers. You can specify multiple upstream servers in AdGuard Home settings, or you can even specify a DNS server that will be used to resolve specific domains.
+
+Examples:
+* `1.1.1.1` - regular DNS (over UDP).
+* `tls://1dot1dot1dot1.cloudflare-dns.com` – encrypted [DNS-over-TLS](https://en.wikipedia.org/wiki/DNS_over_TLS).
+* `https://cloudflare-dns.com/dns-query` – encrypted [DNS-over-HTTPS](https://en.wikipedia.org/wiki/DNS_over_HTTPS).
+* `tcp://1.1.1.1` – regular DNS (over TCP).
+* `sdns://...` – you can use [DNS Stamps](https://dnscrypt.info/stamps/) for [DNSCrypt](https://dnscrypt.info/) or [DNS-over-HTTPS](https://en.wikipedia.org/wiki/DNS_over_HTTPS) resolvers.
+* `[/example.local/]1.1.1.1` – you can specify DNS upstream for a specific domain(s).
+
+<a id="upstreams-for-domains"></a>
+### Specifying upstreams for domains
+
+![](upstreams.png)
+
+You can specify upstreams that will be used for a specific domain(s). We use the dnsmasq-like syntax (see `--server` description [here](http://www.thekelleys.org.uk/dnsmasq/docs/dnsmasq-man.html)). This feature is intended for private nameservers which deal with intranet domains.
+
+**Syntax:** `[/[domain1][/../domainN]/]upstreamString`
+
+If one or more domains are specified, that upstream (`upstreamString`) is used only for those domains. Usually, it is used for private nameservers. For instance, if you have a nameserver on your network which deals with `xxx.internal.local` at `192.168.0.1` then you can specify `[/internal.local/]192.168.0.1`, and dnsproxy will send all queries to that nameserver. Everything else will be sent to the default upstreams (which are mandatory!).
+
+1. An empty domain specification, // has the special meaning of "unqualified names only" ie names without any dots in them.
+2. More specific domains take precedence over less specific domains, so: `--upstream=[/host.com/]1.2.3.4 --upstream=[/www.host.com/]2.3.4.5` will send queries for *.host.com to 1.2.3.4, except *.www.host.com, which will go to 2.3.4.5
+3. The special server address '#' means, "use the standard servers", so: `--upstream=[/host.com/]1.2.3.4 --upstream=[/www.host.com/]#` will send queries for *.host.com to 1.2.3.4, except *.www.host.com which will be forwarded as usual.
+
+#### Examples
+
+Sends queries for `*.local` domains to `192.168.0.1:53`. Other queries are sent to `8.8.8.8:53`.
+```
+./dnsproxy -u 8.8.8.8:53 -u [/local/]192.168.0.1:53
+```
+
+Sends queries for `*.host.com` to `1.1.1.1:53` except for `*.maps.host.com` which are sent to `8.8.8.8:53` (as long as other queries).
+```
+./dnsproxy -u 8.8.8.8:53 -u [/host.com/]1.1.1.1:53 -u [/maps.host.com/]#`
+```
+
+
+<a id="friendly-names"></a>
+## Configuring clients friendly names
+
+It may be useful to set up a friendly name for each IP address that clients use to connect to AdGuard Home.  To do this, follow these steps:
+
+1. Open `/etc/hosts` file in your text editor and add a name for each IP address, for example:
+
+		192.168.0.2    Mom
+		192.168.0.3    Dad
+		192.168.0.4    Sister
+		192.168.0.5    Brother
+
+	Note that on Windows file path to "hosts" file is different: `c:\windows\system32\drivers\etc\hosts`
+
+2. Restart AdGuard Home
+
+As a result you will see that the clients names are now shown:
+
+![](top-clients-names.png)
+
+In the future, we plan to add more configuration options in this area.
+
+<a id="configuration-file"></a>
 ## Configuration file
 
 Upon the first execution, a file named `AdGuardHome.yaml` will be created, with default values written in it. You can modify the file while your AdGuard Home service is not running. Otherwise, any changes to the file will be lost because the running program will overwrite them.
@@ -79,24 +150,3 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
  * `verbose` — Enable our disables debug verbose output.
 
 Removing an entry from settings file will reset it to the default value. Deleting the file will reset all settings to the default values.
-
-## Configuring clients friendly names
-
-It may be useful to set up a friendly name for each IP address that clients use to connect to AdGuard Home.  To do this, follow these steps:
-
-1. Open `/etc/hosts` file in your text editor and add a name for each IP address, for example:
-
-		192.168.0.2    Mom
-		192.168.0.3    Dad
-		192.168.0.4    Sister
-		192.168.0.5    Brother
-
-	Note that on Windows file path to "hosts" file is different: `c:\windows\system32\drivers\etc\hosts`
-
-2. Restart AdGuard Home
-
-As a result you will see that the clients names are now shown:
-
-![](top-clients-names.png)
-
-In the future, we plan to add more configuration options in this area.
