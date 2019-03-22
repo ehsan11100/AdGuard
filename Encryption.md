@@ -84,7 +84,7 @@ Here's a list of the software that could be used.
 ### Android
 
 * Android 9 supports DNS-over-TLS natively. To configure it, go to Settings → Network & internet → Advanced → Private DNS and enter your domain name there.
-* [AdGuard for Android](https://adguard.com/en/adguard-android/overview.html) supports `DNS-over-HTTPS` and `DNS-over-TLS` in the [beta update channel](https://adguard.com/beta.html).
+* [AdGuard for Android](https://adguard.com/en/adguard-android/overview.html) supports `DNS-over-HTTPS` and `DNS-over-TLS`.
 * [Intra](https://getintra.org/) adds `DNS-over-HTTPS` support to Android.
 
 ### iOS
