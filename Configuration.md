@@ -110,6 +110,7 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
  * `bind_port` — Web interface IP port to listen on.
  * `auth_name` — Web interface optional authorization username.
  * `auth_pass` — Web interface optional authorization password.
+ * `rlimit_nofile` — Limit on the maximum number of open files for server process (Linux and macOS).  Set to 0 to use the system default value.
  * `dns` — DNS configuration section.
    * `bind_host` - DNS interface IP address to listen on. 
    * `port` — DNS server port to listen on.
@@ -149,6 +150,7 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
    * `port_dns_over_tls` - DNS-over-TLS port. If 0, DOT will be disabled.
    * `certificate_chain` - PEM-encoded certificates chain.
    * `private_key` - PEM-encoded private key.
+   * `icmp_timeout_msec` - time (ms) to wait for ICMP reply to detect an IP conflict. If 0, the feature is disabled.
  * `user_rules` — User-specified filtering rules.
  * `log_file` — Path to the log file. If empty, writes to stdout, if `syslog` -- system log (or eventlog on Windows).
  * `verbose` — Enable our disables debug verbose output.
