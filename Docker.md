@@ -54,7 +54,8 @@ docker run -d --net=host adguard/adguardhome
 
 Now open the browser and navigate to http://DOCKER_HOST_IP:3000/ to control your AdGuard Home service.
 
-## Persistent configuration / data
+
+## <a id="persistent"></a>Persistent configuration / data
 
 There are several ways to store data used by applications that run in Docker containers. 
 We encourage users of the `adguard/adguardhome` images to familiarize themselves with the options available, including:
@@ -97,11 +98,30 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
 
 ## How to update
 
+##### To update the container the following steps have to be executed:
+
+* Pull the new version from Docker Hub
+
 ```bash
 docker pull adguard/adguardhome
 ```
 
-To update the image for a specific architecture e.g. `arm64`:
+* Stop and remove currently running container (assuming the container is named `adguardhome`)
+
+```bash
+docker stop adguardhome
+docker rm adguardhome
+```
+
+* Start the container using the new image (for persistent configuration see [section](#persistent) above)
+
+```bash
+docker run --name adguardhome --net=host adguard/adguardhome
+```
+
+
+
+##### Updating the image for a specific architecture e.g. `arm64`:
 
 ```bash
 docker pull adguard/adguardhome:arm64-latest
