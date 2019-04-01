@@ -97,11 +97,30 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
 
 ## How to update
 
+##### To update the container the following steps have to be executed:
+
+* Pull the new version from Docker Hub
+
 ```bash
 docker pull adguard/adguardhome
 ```
 
-To update the image for a specific architecture e.g. `arm64`:
+* Stop and remove currently running container (assuming the container is named `adguardhome`)
+
+```bash
+docker stop adguardhome
+docker rm adguardhome
+```
+
+* Start the container using the new image
+
+```bash
+docker run --name adguardhome --net=host adguard/adguardhome
+```
+
+
+
+##### Updating the image for a specific architecture e.g. `arm64`:
 
 ```bash
 docker pull adguard/adguardhome:arm64-latest
