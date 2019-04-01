@@ -54,7 +54,8 @@ docker run -d --net=host adguard/adguardhome
 
 Now open the browser and navigate to http://DOCKER_HOST_IP:3000/ to control your AdGuard Home service.
 
-## Persistent configuration / data
+
+## <a id="persistent"></a>Persistent configuration / data
 
 There are several ways to store data used by applications that run in Docker containers. 
 We encourage users of the `adguard/adguardhome` images to familiarize themselves with the options available, including:
@@ -112,7 +113,7 @@ docker stop adguardhome
 docker rm adguardhome
 ```
 
-* Start the container using the new image
+* Start the container using the new image (for persistent configuration see [section](#persistent) above)
 
 ```bash
 docker run --name adguardhome --net=host adguard/adguardhome
