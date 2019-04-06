@@ -112,7 +112,7 @@ You have an option to password-protect your AdGuard Home's web interface so only
 
 To do so, stop it first:
 ```bash
-sudo systemctl stop adguard-home
+sudo ./AdGuardHome -s stop
 ```
 
 Then edit the configuration file:
@@ -130,7 +130,7 @@ Substitute name and password with your own, of course.
 
 After you're done editing, save the file and start your AdGuard Home again:
 ```bash
-sudo systemctl start adguard-home
+sudo ./AdGuardHome -s start
 ```
 
 After that, visiting web interface in a browser will ask for username and password.
