@@ -63,6 +63,8 @@ In the end you'll get two files:
 
 Both will be necessary to configure AdGuard Home.
 
+> You will need to use the very same procedure to renew the existing certificate.
+
 <a id="configure-home"></a>
 ## Configure AdGuard Home
 
