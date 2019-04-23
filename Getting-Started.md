@@ -16,16 +16,16 @@ Download the archive with the binary file for your operating system from the [la
 
 We currently **officially** support the following operating systems:
 
-* [Rapsberry Pi (32-bit ARM)](https://github.com/AdguardTeam/AdGuardHome/releases/download/v0.94/AdGuardHome_v0.94_linux_arm.tar.gz)
-* [MacOS](https://github.com/AdguardTeam/AdGuardHome/releases/download/v0.94/AdGuardHome_v0.94_MacOS.zip)
-* [Windows 64-bit](https://github.com/AdguardTeam/AdGuardHome/releases/download/v0.94/AdGuardHome_v0.94_Windows_amd64.zip)
-* [Windows 32-bit](https://github.com/AdguardTeam/AdGuardHome/releases/download/v0.94/AdGuardHome_v0.94_Windows_386.zip)
-* [Linux 64-bit](https://github.com/AdguardTeam/AdGuardHome/releases/download/v0.94/AdGuardHome_v0.94_linux_amd64.tar.gz)
-* [Linux 32-bit](https://github.com/AdguardTeam/AdGuardHome/releases/download/v0.94/AdGuardHome_v0.94_linux_386.tar.gz)
+* [Rapsberry Pi (32-bit ARM)](https://github.com/AdguardTeam/AdGuardHome/releases/download/v0.95/AdGuardHome_v0.95_linux_arm.tar.gz)
+* [MacOS](https://github.com/AdguardTeam/AdGuardHome/releases/download/v0.95/AdGuardHome_v0.95_MacOS.zip)
+* [Windows 64-bit](https://github.com/AdguardTeam/AdGuardHome/releases/download/v0.95/AdGuardHome_v0.95_Windows_amd64.zip)
+* [Windows 32-bit](https://github.com/AdguardTeam/AdGuardHome/releases/download/v0.95/AdGuardHome_v0.95_Windows_386.zip)
+* [Linux 64-bit](https://github.com/AdguardTeam/AdGuardHome/releases/download/v0.95/AdGuardHome_v0.95_linux_amd64.tar.gz)
+* [Linux 32-bit](https://github.com/AdguardTeam/AdGuardHome/releases/download/v0.95/AdGuardHome_v0.95_linux_386.tar.gz)
 
-* [64-bit ARM](https://github.com/AdguardTeam/AdGuardHome/releases/download/v0.94/AdGuardHome_v0.94_linux_arm64.tar.gz)
-* [MIPS](https://github.com/AdguardTeam/AdGuardHome/releases/download/v0.94/AdGuardHome_v0.94_linux_mips.tar.gz)
-* [MIPSLE](https://github.com/AdguardTeam/AdGuardHome/releases/download/v0.94/AdGuardHome_v0.94_linux_mipsle.tar.gz)
+* [64-bit ARM](https://github.com/AdguardTeam/AdGuardHome/releases/download/v0.95/AdGuardHome_v0.95_linux_arm64.tar.gz)
+* [MIPS](https://github.com/AdguardTeam/AdGuardHome/releases/download/v0.95/AdGuardHome_v0.95_linux_mips.tar.gz)
+* [MIPSLE](https://github.com/AdguardTeam/AdGuardHome/releases/download/v0.95/AdGuardHome_v0.95_linux_mipsle.tar.gz)
 
 > AdGuard Home can work on other operating systems as well (for instance, it can work on devices with MIPS CPU), but we need your help with testing it.
 
