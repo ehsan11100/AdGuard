@@ -116,6 +116,7 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
    * `port` — DNS server port to listen on.
    * `protection_enabled` — Whether any kind of filtering and protection should be done, when off it works as a plain dns forwarder.
    * `filtering_enabled` — Filtering of DNS requests based on filter lists.
+   * `blocking_mode` — Specifies how to block DNS requests.  "nxdomain" (default): respond with NXDOMAIN status;  "null_ip": respond with the unspecified IP address (0.0.0.0).
    * `blocked_response_ttl` — For how many seconds the clients should cache a filtered response. Low values are useful on LAN if you change filters very often, high values are useful to increase performance and save traffic.
    * `querylog_enabled` — Query logging (also used to calculate top 50 clients, blocked domains and requested domains for statistical purposes).
    * `ratelimit` — DDoS protection, specifies in how many packets per second a client should receive. Anything above that is silently dropped. To disable set 0, default is 20. Safe to disable if DNS server is not available from internet.
