@@ -85,6 +85,8 @@ Here are the other commands you might need to control the service.
 <a id="update"></a>
 ## How to update
 
+![](autoupdate-available.png)
+
 When a new version is released, AdGuard Home's UI shows a notification message and 'Update Now' button. Simply click on this button and AdGuard Home will be automatically upgraded to the latest version. Your current AdGuard Home executable file is saved inside 'backup' directory along with the current configuration file, so you can revert the changes, if necessary.
 
 In case the button isn't shown or an automatic update has failed, you can upgrade manually:
