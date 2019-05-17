@@ -85,13 +85,16 @@ Here are the other commands you might need to control the service.
 <a id="update"></a>
 ## How to update
 
-We have not yet implemented an auto-update of AdGuard Home, but it is planned for future versions.
+![](autoupdate-available.png)
 
-At the moment, the update procedure is manual:
+When a new version is released, AdGuard Home's UI shows a notification message and 'Update Now' button. Simply click on this button and AdGuard Home will be automatically upgraded to the latest version. Your current AdGuard Home executable file is saved inside 'backup' directory along with the current configuration file, so you can revert the changes, if necessary.
 
-1. Download the new AdGuard Home binary.
-2. Replace the old file with the new one.
-3. Restart AdGuard Home.
+In case the button isn't shown or an automatic update has failed, you can upgrade manually:
+
+1. Download the new AdGuard Home package.
+2. Unpack it to a temporary directory.
+3. Replace the old AdGuard Home executable file with the new one.
+4. Restart AdGuard Home.
 
 <a id="configure-devices"></a>
 ## How to configure your devices
