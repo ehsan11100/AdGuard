@@ -15,18 +15,82 @@
     <img src="https://cdn.adguard.com/public/Adguard/Common/adguard_home.gif" width="800" />
 </p>
 
-AdGuard Home is a network-wide software for blocking ads & tracking. After you set it up, it'll cover ALL your home devices, and you don't need any client-side software for that.
+1. [Introduction](#introduction)
+2. [Quick Start](#quickstart)
+3. [How to update to a newer version](#update)
+4. [Running dev builds](#unstable)
+5. [Supported tags / architectures](#tags)
+6. [Additional configuration](#configuration)
 
-## How does AdGuard Home work?
+## <a id="introduction"></a> Introduction
 
-AdGuard Home operates as a DNS server that re-routes tracking domains to a "black hole," thus preventing your devices from connecting to those servers. It's based on software we use for our public [AdGuard DNS](https://adguard.com/en/adguard-dns/overview.html) servers -- both share a lot of common code.
+AdGuard Home is a network-wide software for blocking ads & tracking. After you set it up, it'll cover ALL your home devices, and you don't need any client-side software for that. You can learn more about it in our [official Github repository](https://github.com/AdguardTeam/AdGuardHome).
 
-## Supported tags / architectures
+## <a id="quickstart"></a> Quick Start
+
+#### 1. Pull the Docker image
+
+This command will pull the latest stable version:
+
+```bash
+docker pull adguard/adguardhome
+```
+
+#### 2. Create directories for persistent configuration and data
+
+The image exposes two volumes for data/configuration persistence. You should create a **data** directory on a suitable volume on your host system, e.g. `/my/own/workdir`, and a **config** directory on a suitable volume on your host system, e.g. `/my/own/confdir`.
+
+#### 3. Create and run the container
+
+Use the following command to create a new container and run AdGuard Home:
+```bash
+docker run --name adguardhome -v /my/own/workdir:/opt/adguardhome/work -v /my/own/confdir:/opt/adguardhome/conf -p 53:53/tcp -p 53:53/udp -p 67:67/udp -p 68:68/tcp -p 68:68/udp -p 80:80/tcp -p 443:443/tcp -p 853:853/tcp -p 3000:3000/tcp -d adguard/adguardhome
+```
+
+> Don't forget to use your own **data** and **config** directories!
+
+Now you can open the browser and navigate to http://127.0.0.1:3000/ to control your AdGuard Home service.
+
+#### 4. Control the container
+
+* Start: `docker start adguardhome`
+* Stop: `docker stop adguardhome`
+* Remove: `docker rm adguardhome`
+
+## <a id="update"></a> How to update to a newer version
+
+1. Pull the new version from Docker Hub
+    ```bash
+    docker pull adguard/adguardhome
+    ```
+
+2. Stop and remove currently running container (assuming the container is named `adguardhome`):
+    ```bash
+    docker stop adguardhome
+    docker rm adguardhome
+    ```
+
+3. Create and start the container using the new image:
+    ```bash
+    docker run --name adguardhome -v /my/own/workdir:/opt/adguardhome/work -v /my/own/confdir:/opt/adguardhome/conf -p 53:53/tcp -p 53:53/udp -p 67:67/udp -p 68:68/tcp -p 68:68/udp -p 80:80/tcp -p 443:443/tcp -p 853:853/tcp -p 3000:3000/tcp -d adguard/adguardhome
+    ```
+
+## <a id="unstable"></a> Running dev builds
+
+If you want to be on the bleeding edge, you might want to run the image from the `edge` tag. It is automatically synced with the repository `master` branch.
+
+In order to use it, simply replace `adguard/adguardhome` with `adguard/adguardhome:edge` in every command from the quick start.
+
+```bash
+docker pull adguard/adguardhome:edge
+```
+
+## <a id="tags"></a> Supported tags / architectures
 
 `adguard/adguardhome` image is built for different architectures and supports the following tags:
 
 * `latest` - latest **stable** build from the last tagged release.
-* `edge` - latest build from the repository **master** trunk, may be unstable.
+* `edge` - latest build from the repository **master** branch, may be unstable.
 * `$version` - specific release e.g. `v0.92`.
 
 ### Tags for different architectures
@@ -44,85 +108,8 @@ AdGuard Home operates as a DNS server that re-routes tracking domains to a "blac
   * `latest`
   * `edge`
 
-## Usage
+## <a id="configuration"></a> Additional configuration
 
-To run `AdGuardHome` image:
+Upon the first execution, a file named `AdGuardHome.yaml` will be created, with default values written in it. You can modify the file while your AdGuard Home container is not running. Otherwise, any changes to the file will be lost because the running program will overwrite them.
 
-```bash
-docker run -d --net=host adguard/adguardhome
-```
-
-Now open the browser and navigate to http://DOCKER_HOST_IP:3000/ to control your AdGuard Home service.
-
-
-## <a id="persistent"></a>Persistent configuration / data
-
-There are several ways to store data used by applications that run in Docker containers. 
-We encourage users of the `adguard/adguardhome` images to familiarize themselves with the options available, including:
-
-* Let Docker manage the storage of data by writing the files to disk on the host system using its own internal volume management. 
-This is the default and is easy and fairly transparent to the user. 
-The downside is that the files may be hard to locate for tools and applications that run directly on the host system, i.e. outside containers.
-
-* Create a data directory on the host system (outside the container) and mount this to a directory visible from inside the container. 
-This places the files in a known location on the host system, and makes it easy for tools and applications on 
-the host system to access the files. The downside is that the user needs to make sure that the directory exists, and 
-that e.g. directory permissions and other security mechanisms on the host system are set up correctly.
-
-The image exposes two volumes for data/configuration persistence:
-* Configuration - `/opt/adguardhome/conf`
-* Filters and data - `/opt/adguardhome/work`
-
-The Docker documentation is a good starting point for understanding the different storage options and variations, and there are multiple blogs and forum postings that discuss and give advice in this area. We will simply show the basic procedure here for the latter option above:
-
-Create a **data** directory on a suitable volume on your host system, e.g. **/my/own/workdir**.
-
-Create a **config** directory on a suitable volume on your host system, e.g. **/my/own/confdir**.
-
-Start your `adguard/adguardhome` container like this:
-
-```
-docker run --name adguardhome -v /my/own/workdir:/opt/adguardhome/work -v /my/own/confdir:/opt/adguardhome/conf -d --net=host adguard/adguardhome
-```
-
-The `-v /my/own/workdir:/opt/adguardhome/work` part of the command mounts the `/my/own/workdir` directory from the underlying host system as `/opt/adguardhome/work` inside the container, 
-where AdGuardHome by default will write its data files.
-
-### Additional configuration
-
-Upon the first execution, a file named `AdGuardHome.yaml` will be created, with default values written in it. 
-You can modify the file while your AdGuard Home container is not running. 
-Otherwise, any changes to the file will be lost because the running program will overwrite them.
-
-Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possible parameters that you can configure are listed on [Project homepage](https://github.com/AdguardTeam/AdGuardHome).
-
-## How to update
-
-##### To update the container the following steps have to be executed:
-
-* Pull the new version from Docker Hub
-
-```bash
-docker pull adguard/adguardhome
-```
-
-* Stop and remove currently running container (assuming the container is named `adguardhome`)
-
-```bash
-docker stop adguardhome
-docker rm adguardhome
-```
-
-* Start the container using the new image (for persistent configuration see [section](#persistent) above)
-
-```bash
-docker run --name adguardhome --net=host adguard/adguardhome
-```
-
-
-
-##### Updating the image for a specific architecture e.g. `arm64`:
-
-```bash
-docker pull adguard/adguardhome:arm64-latest
-```
+Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possible parameters that you can configure are listed on [this page](https://github.com/AdguardTeam/Adguardhome/wiki/Configuration).
