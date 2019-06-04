@@ -20,14 +20,17 @@ Usage:
 ./AdGuardHome [options]
 
 Options:
-  -c, --config                       path to the config file
-  -w, --work-dir                     path to the working directory
-  -h, --host                         host address to bind HTTP server on
-  -p, --port                         port to serve HTTP pages on
-  -s, --service                      service control action: status, install, uninstall, start, stop, restart
-  -l, --logfile                      path to the log file. If empty, writes to stdout, if 'syslog' -- system log
-  -v, --verbose                      enable verbose output
-  --help                             print this help
+  -c, --config VALUE                 Path to the config file
+  -w, --work-dir VALUE               Path to the working directory
+  -h, --host VALUE                   Host address to bind HTTP server on
+  -p, --port VALUE                   Port to serve HTTP pages on
+  -s, --service VALUE                Service control action: status, install, uninstall, start, stop, restart
+  -l, --logfile VALUE                Path to log file. If empty: write to stdout; if 'syslog': write to system log
+  --pidfile VALUE                    Path to a file where PID is stored
+  --check-config                     Check configuration and exit
+  --no-check-update                  Don't check for updates
+  -v, --verbose                      Enable verbose output
+  --help                             Print this help
 ```
 
 Please note, that the command-line arguments override settings from the configuration file.

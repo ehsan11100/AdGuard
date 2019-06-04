@@ -96,6 +96,11 @@ In case the button isn't shown or an automatic update has failed, you can upgrad
 3. Replace the old AdGuard Home executable file with the new one.
 4. Restart AdGuard Home.
 
+### Docker and Hass.io updates
+
+Auto-updates for Docker and Hass.io are disabled.
+
+
 <a id="configure-devices"></a>
 ## How to configure your devices
 
