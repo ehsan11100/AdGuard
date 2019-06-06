@@ -11,12 +11,10 @@ apt-get install sudo nano bind9-host
 
 Go to [AdGuard Home page](https://github.com/AdguardTeam/AdGuardHome#installation) and download binaries for your architecture (64-bit Linux in this example).
 
-As of the time of writing, the latest version is v0.95-hotfix.
-
 To download AdGuard Home and unpack it execute following commands:
 ```bash
-wget https://github.com/AdguardTeam/AdGuardHome/releases/download/v0.95-hotfix/AdGuardHome_v0.95-hotfix_linux_amd64.tar.gz
-tar xvf AdGuardHome_v0.95-hotfix_linux_amd64.tar.gz
+wget https://static.adguard.com/adguardhome/release/AdGuardHome_linux_amd64.tar.gz
+tar xvf AdGuardHome_linux_amd64.tar.gz
 ```
 
 You can find out the directory where you've unpacked it to by running these commands:

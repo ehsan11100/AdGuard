@@ -1,7 +1,7 @@
 ## Guides
 
 * [Getting Started](Getting-Started)
-* [AdGuard Home Docker](Docker)
+* [Docker](Docker)
 * [Configuration](Configuration)
 * [Comparing AdGuard Home to other solutions](Comparison)
 * [AdGuard Home as a DNS-over-HTTPS or DNS-over-TLS server](Encryption)
