@@ -1,6 +1,8 @@
-# Comparing AdGuard Home to other solutions
+<a id="comparison"></a>
+## Comparing AdGuard Home to other solutions
 
-## How is this different from public AdGuard DNS servers?
+<a id="comparison-adguard-dns"></a>
+### How is this different from public AdGuard DNS servers?
 
 Running your own AdGuard Home server allows you to do much more than using a public DNS server. It's a completely different level. See for yourself:
 
@@ -9,7 +11,8 @@ Running your own AdGuard Home server allows you to do much more than using a pub
 * Add your own custom filtering rules.
 * **Most importantly, this is your own server, and you are the only one who's in control.**
 
-## How does AdGuard Home compare to Pi-Hole
+<a id="comparison-pi-hole"></a>
+### How does AdGuard Home compare to Pi-Hole
 
 At this point, AdGuard Home has a lot in common with Pi-Hole. Both block ads and trackers using "DNS sinkholing" method, and both allow customizing what's blocked.
 
@@ -34,7 +37,8 @@ AdGuard Home provides a lot of features out-of-the-box with no need to install a
 | Per-client (device) configuration                                       | ✅            | ❌                                                      |
 | Access settings (choose who can use AGH DNS)                            | ✅            | ❌                                                      |
 
-## How does AdGuard Home compare to traditional ad blockers
+<a id="comparison-adblock"></a>
+### How does AdGuard Home compare to traditional ad blockers
 
 It depends.
 
