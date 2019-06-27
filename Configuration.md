@@ -5,6 +5,7 @@ Most of these settings can be changed via the web-based admin interface. However
 * [Command-line arguments](#command-line)
 * [Configuring upstreams](#upstreams)
   * [Specifying upstreams for domains](#upstreams-for-domains)
+  * [Recursive DNS server](Unbound.md)
 * [Configuring clients friendly names](#friendly-names)
 * [Configuration file](#configuration-file)
 
