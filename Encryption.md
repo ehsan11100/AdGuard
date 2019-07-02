@@ -92,6 +92,7 @@ Here's a list of the software that could be used.
 ### iOS
 
 * [DNSCloak](https://itunes.apple.com/app/id1452162351) supports `DNS-over-HTTPS` but in order to configure it to use your own server, you'll need to generate a [DNS Stamp](https://dnscrypt.info/stamps) for it.
+* [AdGuard for iOS](https://adguard.com/en/adguard-ios/overview.html) supports `DNS-over-HTTPS` and `DNS-over-TLS`.
 
 ### Other implementations
 
