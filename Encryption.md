@@ -79,9 +79,9 @@ Both will be necessary to configure AdGuard Home.
 <a id="configure-devices"></a>
 ## Configure your devices
 
-Please note that encrypted DNS protocols aren't supported at an operating system level (except Android 9) so right now it requires the installation of additional software.
+Please note that encrypted DNS protocols are supported only on Android 9. So you need to install additional software for other operating systems.
 
-Here's a list of the software that could be used.
+Here's a list of software you can use.
 
 ### Android
 
@@ -100,4 +100,4 @@ Here's a list of the software that could be used.
 * [dnsproxy](https://github.com/AdguardTeam/dnsproxy) supports all known secure DNS protocols.
 * [dnscrypt-proxy](https://github.com/jedisct1/dnscrypt-proxy) supports `DNS-over-HTTPS`.
 * [Mozilla Firefox](https://www.mozilla.org/firefox/) supports `DNS-over-HTTPS`.
-* A lot more implementation can be [found here](https://dnscrypt.info/implementations) and [here](https://dnsprivacy.org/wiki/display/DP/DNS+Privacy+Clients).
+* You will find more implementations [here](https://dnscrypt.info/implementations) and [here](https://dnsprivacy.org/wiki/display/DP/DNS+Privacy+Clients).
