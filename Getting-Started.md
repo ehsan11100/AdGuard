@@ -22,6 +22,7 @@ We currently **officially** support the following operating systems:
 * [Windows 32-bit](https://static.adguard.com/adguardhome/release/AdGuardHome_Windows_386.zip)
 * [Linux 64-bit](https://static.adguard.com/adguardhome/release/AdGuardHome_linux_amd64.tar.gz)
 * [Linux 32-bit](https://static.adguard.com/adguardhome/release/AdGuardHome_linux_386.tar.gz)
+* [FreeBSD 64-bit](https://static.adguard.com/adguardhome/release/AdGuardHome_freebsd_amd64.tar.gz)
 * [64-bit ARM](https://static.adguard.com/adguardhome/release/AdGuardHome_linux_arm64.tar.gz)
 * [MIPS](https://static.adguard.com/adguardhome/release/AdGuardHome_linux_mips.tar.gz)
 * [MIPSLE](https://static.adguard.com/adguardhome/release/AdGuardHome_linux_mipsle.tar.gz)
