@@ -132,6 +132,11 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
    * `safesearch_enabled` — Enforcing "Safe search" option for search engines, when possible.
    * `safebrowsing_enabled` — Filtering of DNS requests based on safebrowsing.
    * `upstream_dns` — List of upstream DNS servers.
+   * `cache_size` — DNS cache size (in bytes)
+   * `safebrowsing_cache_size` — Safe Browsing cache size (in bytes)
+   * `safesearch_cache_size` — Safe Search cache size (in bytes)
+   * `parental_cache_size` — Parental Control cache size (in bytes)
+   * `cache_time` — Safe Browsing, Safe Search, Parental Control cache TTL
  * `filters` — List of filters, each filter has the following values:
    * `enabled` — Current filter's status (enabled/disabled).
    * `url` — URL pointing to the filter contents (filtering rules).
