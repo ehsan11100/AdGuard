@@ -7,6 +7,7 @@ Most of these settings can be changed via the web-based admin interface. However
   * [Specifying upstreams for domains](#upstreams-for-domains)
 * [Configuring clients friendly names](#friendly-names)
 * [Configuration file](#configuration-file)
+* [Reset Web Password](#password-reset)
 
 <a id="command-line"></a>
 ## Command-line arguments
@@ -165,3 +166,35 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
  * `verbose` — Enable our disables debug verbose output.
 
 Removing an entry from settings file will reset it to the default value. Deleting the file will reset all settings to the default values.
+
+
+<a id="password-reset"></a>
+## Reset Web Password
+
+Please follow these steps to create a new password for your user account:
+
+1. Install `htpasswd`:
+
+	Ubuntu:
+
+		apt-get install httpd
+
+	Fedora:
+
+		dnf install httpd
+
+2. Use `htpasswd` utility to generate a new hash:
+
+		htpasswd -B -n -b <USERNAME> <PASSWORD>
+
+	It will print `<USERNAME>:<HASH>` to the terminal.
+
+3. Open `AdGuardHome.yaml` in the text editor.
+
+4. In the `users:` section find your user name and set `<HASH>` value for the `password` setting:
+
+		users:
+		- name: ...
+		password: <HASH>
+
+5. Save the file, restart AGH.  Now you'll be able to log in to Web interface using your new password.
