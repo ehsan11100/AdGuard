@@ -1,0 +1,132 @@
+# AdGuard Home - How to write hosts blocklists
+
+There are two different approaches to writing hosts blocklists:
+
+- [/etc/hosts syntax](#etc-hosts) - the old, tried and true approach is to use the same syntax as Operation Systems use for the "hosts" files.
+- [Adblock-style syntax](#adblock-style) - modern approach to writing filtering rules based on using a subset of the Adblock-style syntax. This way blocklists will be compatible with browser ad blockers.
+
+If you are creating a blocklist for AdGuard Home, we recommend using the [Adblock-style syntax](#adblock-style). It has a couple of important advantages over the old-style syntax:
+
+- **Blocklists size.** Using pattern-matching allows you to have a single rule instead of hundreds of `/etc/hosts` entries.
+- **Compatibility.** Your blocklist will be compatible with browser ad blockers, and it will be easier to share rules with a browser filter list.
+- **Extensibility.** For the last decade, Adblock-style syntax has greatly evolved, and I don't see why we can't extend it even more, and provide additional features for network-wide blockers.
+
+## Rules examples
+
+- `||example.org^` - block access to the `example.org` domain and all its subdomains
+- `@@||example.org^` - unblock access to the example.org domain and all it's subdomains
+- `0.0.0.0 example.org` - (attention, old-style /etc/hosts syntax) block `example.org` domain (but NOT it's subdomains)
+- `! Here goes a comment` - just a comment
+- `# Also a comment` - just a comment
+- `/REGEX/` - block access to the domains matching the specified regular expression
+
+## <a id="etc-hosts"></a> /etc/hosts syntax
+
+For each host a single line should be present with the following information:
+
+```
+IP_address canonical_hostname [aliases...]
+```
+
+Fields of the entry are separated by any number of blanks and/or tab characters.
+
+Text from a `#` character until the end of the line is a comment and is ignored.
+
+Example:
+
+```
+# This is a comment
+```
+
+Hostnames may contain only alphanumeric characters, minus signs (`-`), and periods (`.`). They must begin with an alphabetic character and end with an alphanumeric character. Optional aliases provide for name changes, alternate spellings, shorter hostnames, or generic hostnames (for example, `localhost`).
+
+Examples:
+
+```
+127.0.0.1 example.org foo
+127.0.0.1 example.com
+```
+
+> Please note, that the `IP_address` value is ignored by most of the DNS filtering software.
+
+## <a id="adblock-style"></a> Adblock-style syntax
+
+This is a subset of the [traditional Adblock-style](https://kb.adguard.com/en/general/how-to-create-your-own-ad-filters) syntax which is used by browser ad blockers.
+
+```
+      rule = ["@@"] pattern [ "$" modifiers ]
+modifiers = [modifier0, modifier1[, ...[, modifierN]]]
+```
+
+- `pattern` — the hostname mask. Every hostname is matched against this mask. The pattern can also contain special characters, which are discussed below.
+- `@@` — a marker that is used in "exception" rules. Start your rule with this marker if you want to turn off filtering for the matching hostnames.
+- `modifiers` — parameters that clarify the rule. They may limit the scope of the rule or even completely change the way it works.
+
+### Special characters
+
+- `*` — wildcard character. It is used to represent "any set of characters". This can also be an empty string or a string of any length.
+- `||` — matching the beginning of a hostname (and any subdomain). For instance, `||example.org` matches `example.org` and `test.example.org`, but not `testexample.org`.
+- `^` — separator character mark. Unlike browser ad blocking, there's nothing to "separate" in a hostname, so the only purpose of this character is to mark the end of the hostname.
+- `|` — a pointer to the beginning or the end of the hostname. The value depends on the character placement in the mask. For example, a rule ample.org| corresponds to `example.org` , but not to `example.org.com`. `|example` corresponds to `example.org`, but not to `test.example`.
+
+### Regular expressions support
+
+If you want even more flexibility in making rules, you can use [Regular expressions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions) instead of the default simplified matching syntax.
+
+If you want to use a regular expression, the pattern has to look like this:
+
+```
+pattern = "/" regexp "/"
+```
+
+**Examples:**
+
+- `/example.*/` will block hosts which names match the `example.*` regex.
+- `@@/example.*/$important` will unblock hosts which names match the `example.*` regex. Note that this rule also has the `$important` modifier.
+
+### Rule modifiers
+
+You can change the behavior of a rule by using additional modifiers. Modifiers must be located at the end of the rule after the `$` character, and be separated by commas.
+
+Example:
+
+```
+||example.org^$important
+```
+
+- `||example.org^` - is a matching pattern
+- `$` - is a delimiter, it signals that now modifiers start
+- `important` - is a modifier
+
+> **IMPORTANT:** If a rule contains a modifier not listed in this document, the whole rule **must be ignored**. This way we will avoid false-positives when people are trying to use unmodified browser ad blockers' filter lists like EasyList or EasyPrivacy.
+
+#### `important`
+
+The `$important` modifier applied to a rule increases its priority over any other rule without \$important modifier. Even over basic exception rules.
+
+**Example 1:**
+
+```
+||example.org^$important
+@@||example.org^
+```
+
+`||example.org^$important` will block all requests despite the exception rule.
+
+**Example 2:**
+
+```
+||example.org^$important
+@@||example.org^$important
+```
+
+Now the exception rule also has the `$important` modifier so it will prevail.
+
+#### `badfilter`
+
+The rules with the `$badfilter` modifier disable other basic rules to which they refer. It means that the text of the disabled rule should match the text of the `$badfilter` rule (without the `badfilter` modifier).
+
+**Examples:**
+
+- `||example.com$badfilter` disables `||example.com`
+- `@@||example.org^$badfilter` disables ``@@||example.org^`

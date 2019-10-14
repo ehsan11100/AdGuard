@@ -1,4 +1,4 @@
-# OpenRC service-script
+# AdGuard Home - OpenRC service-script
 
 A service-script for OpenRC-based systems, for example if you run AdGuard Home in Alpine (without using Docker).
 
