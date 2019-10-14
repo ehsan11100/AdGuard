@@ -9,7 +9,7 @@ If you are creating a blocklist for AdGuard Home, we recommend using the [Adbloc
 
 - **Blocklists size.** Using pattern-matching allows you to have a single rule instead of hundreds of `/etc/hosts` entries.
 - **Compatibility.** Your blocklist will be compatible with browser ad blockers, and it will be easier to share rules with a browser filter list.
-- **Extensibility.** For the last decade, Adblock-style syntax has greatly evolved, and I don't see why we can't extend it even more, and provide additional features for network-wide blockers.
+- **Extensibility.** For the last decade, Adblock-style syntax has greatly evolved, and we don't see why we can't extend it even more, and provide additional features for network-wide blockers.
 
 ## Rules examples
 
@@ -58,7 +58,7 @@ This is a subset of the [traditional Adblock-style](https://kb.adguard.com/en/ge
 modifiers = [modifier0, modifier1[, ...[, modifierN]]]
 ```
 
-- `pattern` — the hostname mask. Every hostname is matched against this mask. The pattern can also contain special characters, which are discussed below.
+- `pattern` — the hostname mask. Every hostname is matched against this mask. The pattern can also contain special characters, which are described below.
 - `@@` — a marker that is used in "exception" rules. Start your rule with this marker if you want to turn off filtering for the matching hostnames.
 - `modifiers` — parameters that clarify the rule. They may limit the scope of the rule or even completely change the way it works.
 
@@ -67,7 +67,7 @@ modifiers = [modifier0, modifier1[, ...[, modifierN]]]
 - `*` — wildcard character. It is used to represent "any set of characters". This can also be an empty string or a string of any length.
 - `||` — matching the beginning of a hostname (and any subdomain). For instance, `||example.org` matches `example.org` and `test.example.org`, but not `testexample.org`.
 - `^` — separator character mark. Unlike browser ad blocking, there's nothing to "separate" in a hostname, so the only purpose of this character is to mark the end of the hostname.
-- `|` — a pointer to the beginning or the end of the hostname. The value depends on the character placement in the mask. For example, a rule ample.org| corresponds to `example.org` , but not to `example.org.com`. `|example` corresponds to `example.org`, but not to `test.example`.
+- `|` — a pointer to the beginning or the end of the hostname. The value depends on the character placement in the mask. For example, a rule `ample.org|` corresponds to `example.org` , but not to `example.org.com`. `|example` corresponds to `example.org`, but not to `test.example`.
 
 ### Regular expressions support
 
@@ -79,10 +79,18 @@ If you want to use a regular expression, the pattern has to look like this:
 pattern = "/" regexp "/"
 ```
 
+### Comments
+
+Any line that starts with an exclamation mark is a comment and it will be ignored by the filtering engine. Comments are usually placed above rules and used to describe what a rule does.
+
+```
+! This is a comment
+```
+
 **Examples:**
 
-- `/example.*/` will block hosts which names match the `example.*` regex.
-- `@@/example.*/$important` will unblock hosts which names match the `example.*` regex. Note that this rule also has the `$important` modifier.
+- `/example.*/` will block hosts matching the `example.*` regex.
+- `@@/example.*/$important` will unblock hosts matching the `example.*` regex. Note that this rule also has the `$important` modifier.
 
 ### Rule modifiers
 
@@ -129,4 +137,4 @@ The rules with the `$badfilter` modifier disable other basic rules to which they
 **Examples:**
 
 - `||example.com$badfilter` disables `||example.com`
-- `@@||example.org^$badfilter` disables ``@@||example.org^`
+- `@@||example.org^$badfilter` disables `@@||example.org^`
