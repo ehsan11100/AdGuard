@@ -9,13 +9,13 @@ If you are creating a blocklist for AdGuard Home, we recommend using the [Adbloc
 
 - **Blocklists size.** Using pattern-matching allows you to have a single rule instead of hundreds of `/etc/hosts` entries.
 - **Compatibility.** Your blocklist will be compatible with browser ad blockers, and it will be easier to share rules with a browser filter list.
-- **Extensibility.** For the last decade, Adblock-style syntax has greatly evolved, and we don't see why we can't extend it even more, and provide additional features for network-wide blockers.
+- **Extensibility.** For the last decade the Adblock-style syntax has greatly evolved, and we don't see why we can't extend it even more, and provide additional features for network-wide blockers.
 
 ## Rules examples
 
 - `||example.org^` - block access to the `example.org` domain and all its subdomains
-- `@@||example.org^` - unblock access to the example.org domain and all it's subdomains
-- `0.0.0.0 example.org` - (attention, old-style /etc/hosts syntax) block `example.org` domain (but NOT it's subdomains)
+- `@@||example.org^` - unblock access to the `example.org` domain and all its subdomains
+- `0.0.0.0 example.org` - (attention, old-style /etc/hosts syntax) block `example.org` domain (but NOT its subdomains)
 - `! Here goes a comment` - just a comment
 - `# Also a comment` - just a comment
 - `/REGEX/` - block access to the domains matching the specified regular expression
@@ -30,7 +30,7 @@ IP_address canonical_hostname [aliases...]
 
 Fields of the entry are separated by any number of blanks and/or tab characters.
 
-Text from a `#` character until the end of the line is a comment and is ignored.
+Text from the `#` character until the end of the line is a comment and is ignored.
 
 Example:
 
