@@ -59,7 +59,7 @@ modifiers = [modifier0, modifier1[, ...[, modifierN]]]
 ```
 
 - `pattern` — the hostname mask. Every hostname is matched against this mask. The pattern can also contain special characters, which are described below.
-- `@@` — a marker that is used in "exception" rules. Start your rule with this marker if you want to turn off filtering for the matching hostnames.
+- `@@` — a marker that is used in the "exception" rules. Start your rule with this marker if you want to turn off filtering for the matching hostnames.
 - `modifiers` — parameters that clarify the rule. They may limit the scope of the rule or even completely change the way it works.
 
 ### Special characters
@@ -67,7 +67,7 @@ modifiers = [modifier0, modifier1[, ...[, modifierN]]]
 - `*` — wildcard character. It is used to represent "any set of characters". This can also be an empty string or a string of any length.
 - `||` — matching the beginning of a hostname (and any subdomain). For instance, `||example.org` matches `example.org` and `test.example.org`, but not `testexample.org`.
 - `^` — separator character mark. Unlike browser ad blocking, there's nothing to "separate" in a hostname, so the only purpose of this character is to mark the end of the hostname.
-- `|` — a pointer to the beginning or the end of the hostname. The value depends on the character placement in the mask. For example, a rule `ample.org|` corresponds to `example.org` , but not to `example.org.com`. `|example` corresponds to `example.org`, but not to `test.example`.
+- `|` — a pointer to the beginning or the end of the hostname. The value depends on the character placement in the mask. For example, the rule `ample.org|` corresponds to `example.org`, but not to `example.org.com`. `|example` corresponds to `example.org`, but not to `test.example`.
 
 ### Regular expressions support
 
@@ -94,7 +94,7 @@ Any line that starts with an exclamation mark is a comment and it will be ignore
 
 ### Rule modifiers
 
-You can change the behavior of a rule by using additional modifiers. Modifiers must be located at the end of the rule after the `$` character, and be separated by commas.
+You can change the behavior of a rule by using additional modifiers. Modifiers must be located at the end of the rule after the `$` character and be separated by commas.
 
 Example:
 
@@ -102,9 +102,9 @@ Example:
 ||example.org^$important
 ```
 
-- `||example.org^` - is a matching pattern
-- `$` - is a delimiter, it signals that now modifiers start
-- `important` - is a modifier
+- `||example.org^` - a matching pattern
+- `$` - a delimiter, it signals that now modifiers start
+- `important` - a modifier
 
 > **IMPORTANT:** If a rule contains a modifier not listed in this document, the whole rule **must be ignored**. This way we will avoid false-positives when people are trying to use unmodified browser ad blockers' filter lists like EasyList or EasyPrivacy.
 
