@@ -8,3 +8,4 @@
 * [How to install and run AdGuard Home on Raspberry Pi](Raspberry-Pi)
 * [How to install and run AdGuard Home on a Virtual Private Server](VPS)
 * [OpenRC service-script](OpenRC)
+* [How to write hosts blocklists](Hosts-Blocklists)
