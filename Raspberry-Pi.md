@@ -66,6 +66,7 @@ It will unpack into a new directory called `AdGuardHome`.
 All you have to do is simply type this command to the Terminal:
 
 ```bash
+cd AdGuardHome
 sudo ./AdGuardHome -s install
 ```
 
