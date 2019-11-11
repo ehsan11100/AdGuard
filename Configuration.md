@@ -86,7 +86,10 @@ If one or more domains are specified, that upstream (`upstreamString`) is used o
 <a id="upstreams-for-rdns"></a>
 ### Specifying upstreams for rDNS
 
-AdGuardHome automatically gets the names of connected devices using rDNS.  It sends a PTR request with an IP address of a client to a DNS server and uses its name for "clients friendly names".  But what if you want AdGuardHome to use another DNS server for a specific IP address range?  You can do it using the same syntax as for general upstream servers, for example:
+AdGuardHome automatically gets the names of connected devices using Reverse DNS lookup (rDNS).
+It sends a PTR request with an IP address of a client to a DNS server and uses its name for "clients friendly names".
+But what if you want AdGuardHome to use another DNS server for a specific IP address range?
+You can do it using the same syntax as for general upstream servers, for example:
 
     [/168.192.in-addr.arpa/]192.168.0.1
 
