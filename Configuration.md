@@ -112,8 +112,9 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
 
  * `bind_host` — Web interface IP address to listen on.
  * `bind_port` — Web interface IP port to listen on.
- * `auth_name` — Web interface optional authorization username.
- * `auth_pass` — Web interface optional authorization password.
+ * `users` — Web users info
+   * `name` — User name
+   * `password` — Password
  * `rlimit_nofile` — Limit on the maximum number of open files for server process (Linux and macOS).  Set to 0 to use the system default value.
  * `dns` — DNS configuration section.
    * `bind_host` - DNS interface IP address to listen on. 
