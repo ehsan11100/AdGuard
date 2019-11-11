@@ -5,6 +5,7 @@ Most of these settings can be changed via the web-based admin interface. However
 * [Command-line arguments](#command-line)
 * [Configuring upstreams](#upstreams)
   * [Specifying upstreams for domains](#upstreams-for-domains)
+  * [Specifying upstreams for rDNS](#upstreams-for-rdns)
 * [Configuring clients friendly names](#friendly-names)
 * [Configuration file](#configuration-file)
 * [Reset Web Password](#password-reset)
@@ -80,6 +81,17 @@ If one or more domains are specified, that upstream (`upstreamString`) is used o
     [/maps.host.com/]#
     ```
     Sends queries for `*.host.com` to `1.1.1.1:53` except for `*.maps.host.com` which are sent to `8.8.8.8:53` (as long as other queries).
+
+
+<a id="upstreams-for-rdns"></a>
+### Specifying upstreams for rDNS
+
+AdGuardHome automatically gets the names of connected devices using rDNS.  It sends a PTR request with an IP address of a client to a DNS server and uses its name for "clients friendly names".  But what if you want AdGuardHome to use another DNS server for a specific IP address range?  You can do it using the same syntax as for general upstream servers, for example:
+
+    [/168.192.in-addr.arpa/]192.168.0.1
+
+This rule instructs AdGuardHome to use `192.168.0.1` DNS server for all rDNS requests to resolve clients' IP addresses `192.168.0.0/16`.
+
 
 <a id="friendly-names"></a>
 ## Configuring clients friendly names
