@@ -8,6 +8,7 @@ In order to start using AdGuard Home, you need to do a few things:
 4. [How to update](#update)
 5. [Configure your devices](#configure-devices)
 6. [Running without superuser (linux only)](#running-without-superuser)
+7. [Limitations](#limitations)
 
 <a id="installation"></a>
 ## Installation
@@ -172,3 +173,22 @@ dns:
 You can change port 53 to anything above 1024 to avoid requiring superuser privileges.
 
 If the file does not exist, create it in the same folder, type these two lines down and save.
+
+
+<a id="limitations"></a>
+## Limitations
+
+### Doesn't work on some file systems
+
+Some file systems don't support `mmap()` system call that Statistics module requires (more details here: https://github.com/AdguardTeam/AdGuardHome/issues/1188).
+
+You can resolve this issue:
+
+* by supplying `--work-dir DIRECTORY` arguments to `AdGuardHome` binary.  This option will tell AGH to use another directory for all its files (by default it's set to `./data`).
+
+* or you can create symbolic links pointing to another file system that supports `mmap()` (e.g. tmpfs):
+
+  ```
+  ln -s <YOUR_AGH_PATH>/data/stats.db /tmp/stats.db
+  ln -s <YOUR_AGH_PATH>/data/sessions.db /tmp/sessions.db
+  ```
