@@ -190,28 +190,42 @@ Removing an entry from settings file will reset it to the default value. Deletin
 
 Please follow these steps to create a new password for your user account:
 
-1. Install `htpasswd`:
+1. Install `htpasswd`, which is a part of *Apache2 Web Server*:
 
-	Ubuntu:
+    * Ubuntu:
 
-		apt-get install httpd
+          sudo apt-get install apache2
 
-	Fedora:
+    * Fedora:
 
-		dnf install httpd
+          sudo dnf install apache2
+
+    * Windows:
+
+      Choose a download option from https://httpd.apache.org/docs/current/platform/windows.html#down, extract the downloaded file into a new directory, open a terminal, navigate to its `bin` directory with `cd` command and run `.\Htpasswd`.
+
+      Other versions of `htpasswd` could be used, but **only** if they support *bcrypt* hash encryption, which rules out e.g. most web-hosted `htpasswd` generators.
 
 2. Use `htpasswd` utility to generate a new hash:
 
-		htpasswd -B -n -b <USERNAME> <PASSWORD>
+    * Ubuntu/Fedora:
 
-	It will print `<USERNAME>:<HASH>` to the terminal.
+          htpasswd -B -n -b <USERNAME> <PASSWORD>
 
-3. Open `AdGuardHome.yaml` in the text editor.
+    * Windows:
+
+          .\Htpasswd -B -n -b <USERNAME> <PASSWORD>
+
+    It will print `<USERNAME>:<HASH>` to the terminal.
+
+3. Open `AdGuardHome.yaml` in the text editor:
+
+        sudo <EDITOR> ./AdGuardHome.yaml
 
 4. In the `users:` section find your user name and set `<HASH>` value for the `password` setting:
 
-		users:
-		- name: ...
-		password: <HASH>
+        users:
+        - name: ...
+        password: <HASH>
 
 5. Save the file, restart AGH.  Now you'll be able to log in to Web interface using your new password.
