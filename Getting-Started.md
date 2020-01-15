@@ -17,14 +17,15 @@ Download the archive with the binary file for your operating system from the [la
 
 We currently **officially** support the following operating systems:
 
-* [Rapsberry Pi (32-bit ARM)](https://static.adguard.com/adguardhome/release/AdGuardHome_linux_arm.tar.gz)
+* [Raspberry Pi (32-bit ARMv6)](https://static.adguard.com/adguardhome/release/AdGuardHome_linux_arm.tar.gz)
 * [MacOS](https://static.adguard.com/adguardhome/release/AdGuardHome_MacOS.zip)
 * [Windows 64-bit](https://static.adguard.com/adguardhome/release/AdGuardHome_Windows_amd64.zip)
 * [Windows 32-bit](https://static.adguard.com/adguardhome/release/AdGuardHome_Windows_386.zip)
 * [Linux 64-bit](https://static.adguard.com/adguardhome/release/AdGuardHome_linux_amd64.tar.gz)
 * [Linux 32-bit](https://static.adguard.com/adguardhome/release/AdGuardHome_linux_386.tar.gz)
 * [FreeBSD 64-bit](https://static.adguard.com/adguardhome/release/AdGuardHome_freebsd_amd64.tar.gz)
-* [64-bit ARM](https://static.adguard.com/adguardhome/release/AdGuardHome_linux_arm64.tar.gz)
+* [Linux 64-bit ARM](https://static.adguard.com/adguardhome/release/AdGuardHome_linux_arm64.tar.gz)
+* [Linux 32-bit ARMv5](https://static.adguard.com/adguardhome/release/AdGuardHome_linux_armv5.tar.gz)
 * [MIPS](https://static.adguard.com/adguardhome/release/AdGuardHome_linux_mips.tar.gz)
 * [MIPSLE](https://static.adguard.com/adguardhome/release/AdGuardHome_linux_mipsle.tar.gz)
 
