@@ -32,6 +32,7 @@ Options:
   --check-config                     Check configuration and exit
   --no-check-update                  Don't check for updates
   -v, --verbose                      Enable verbose output
+  --version                          Show the version and exit
   --help                             Print this help
 ```
 
