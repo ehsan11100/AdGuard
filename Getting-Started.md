@@ -28,6 +28,8 @@ We currently **officially** support the following operating systems:
 * [MIPS](https://static.adguard.com/adguardhome/release/AdGuardHome_linux_mips.tar.gz)
 * [MIPSLE](https://static.adguard.com/adguardhome/release/AdGuardHome_linux_mipsle.tar.gz)
 
+> **MacOS 10.15 Catalina** please note, that on MacOS Catalina it is recommended to place AdGuard Home directory to the "Applications" directory.
+
 > AdGuard Home can work on other operating systems as well (for instance, it can work on devices with MIPS CPU), but we need your help with testing it.
 
 <a id="first-time"></a>
