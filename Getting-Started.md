@@ -33,6 +33,12 @@ We currently **officially** support the following operating systems:
 
 > AdGuard Home can work on other operating systems as well (for instance, it can work on devices with MIPS CPU), but we need your help with testing it.
 
+Unofficial packages:
+
+* [AUR package for Arch users](https://aur.archlinux.org/packages/adguardhome-bin/)
+* [AdGuardHome in Entware repository](http://bin.entware.net/mipselsf-k3.4/test/)
+
+
 <a id="first-time"></a>
 ## Running for the first time
 
