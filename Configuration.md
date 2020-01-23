@@ -175,6 +175,7 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
    * `port_https` - HTTPS port. If 0, HTTPS will be disabled.
    * `port_dns_over_tls` - DNS-over-TLS port. If 0, DOT will be disabled.
    * `certificate_chain` - PEM-encoded certificates chain.
+   * `strict_sni_check` - Reject connection if the client uses server name (in SNI) that doesn't match the certificate
    * `private_key` - PEM-encoded private key.
    * `icmp_timeout_msec` - time (ms) to wait for ICMP reply to detect an IP conflict. If 0, the feature is disabled.
  * `user_rules` — User-specified filtering rules.
