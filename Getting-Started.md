@@ -35,7 +35,6 @@ We currently **officially** support the following operating systems:
 
 Unofficial packages:
 
-* [AUR package for Arch users](https://aur.archlinux.org/packages/adguardhome-bin/)
 * [AdGuardHome in Entware repository](http://bin.entware.net/mipselsf-k3.4/test/)
 
 
