@@ -138,3 +138,52 @@ The rules with the `$badfilter` modifier disable other basic rules to which they
 
 - `||example.com$badfilter` disables `||example.com`
 - `@@||example.org^$badfilter` disables `@@||example.org^`
+
+
+#### <a id="ctag"></a> `ctag`
+
+`$ctag` modifier allows to block domains only for specific types of DNS clients.  You can assign tags to clients in AdGuardHome UI.  In the future we plan to assign tags automatically by analyzing the behaviour of each client.
+
+The syntax is:
+
+    $ctag=value1|value2|...
+
+If one of client's tags matches the `$ctag` values - this rule applies to this client.
+
+The syntax for exclusion is:
+
+    $ctag=~value1|~value2|...
+
+If one of client's tags matches the exclusion `$ctag` values - this rule doesn't apply to this client.
+
+**Examples:**
+
+- `||example.org^$ctag=device_pc|device_phone` - block `example.org` for clients tagged as `device_pc` or `device_phone`
+- `||example.org^$ctag=~device_phone` - block `example.org` for all clients except those tagged as `device_phone`
+
+The list of allowed tags:
+
+By device type:
+* device_audio - Audio device
+* device_gameconsole - Game Console
+* device_laptop - Laptop
+* device_nas - NAS (Network-attached Storage)
+* device_other - Other device
+* device_pc - PC
+* device_phone - Phone
+* device_printer - Printer
+* device_tablet - Tablet
+* device_tv - TV
+
+By Operating System:
+* os_android - Android
+* os_ios - iOS
+* os_linux - Linux
+* os_macos - Macos
+* os_other - Other OS
+* os_windows - Windows
+
+By user group:
+* user_admin - Administrator
+* user_child - Child
+* user_regular - Regular user
