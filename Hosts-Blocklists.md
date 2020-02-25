@@ -1,8 +1,9 @@
 # AdGuard Home - How to write hosts blocklists
 
-There are two different approaches to writing hosts blocklists:
+There are three different approaches to writing hosts blocklists:
 
 - [/etc/hosts syntax](#etc-hosts) - the old, tried and true approach is to use the same syntax as Operation Systems use for the "hosts" files.
+- [domains-only syntax](#domains-only) - a list of domain names.
 - [Adblock-style syntax](#adblock-style) - modern approach to writing filtering rules based on using a subset of the Adblock-style syntax. This way blocklists will be compatible with browser ad blockers.
 
 If you are creating a blocklist for AdGuard Home, we recommend using the [Adblock-style syntax](#adblock-style). It has a couple of important advantages over the old-style syntax:
@@ -48,6 +49,21 @@ Examples:
 ```
 
 > Please note, that the `IP_address` value is ignored by most of the DNS filtering software.
+
+
+## <a id="domains-only"></a> Domains-only syntax
+
+This is just a list of domain names, one name per line.
+
+Example:
+
+```
+example.com
+example.org
+```
+
+If a string is not a valid domain (e.g. `*.example.org`), AdGuard Home will consider it to be an [adblock-style](#adblock-style) rule.
+
 
 ## <a id="adblock-style"></a> Adblock-style syntax
 
