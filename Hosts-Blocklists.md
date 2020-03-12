@@ -2,15 +2,17 @@
 
 There are three different approaches to writing hosts blocklists:
 
+- [Adblock-style syntax](#adblock-style) - modern approach to writing filtering rules based on using a subset of the Adblock-style syntax. This way blocklists will be compatible with browser ad blockers.
 - [/etc/hosts syntax](#etc-hosts) - the old, tried and true approach is to use the same syntax as Operation Systems use for the "hosts" files.
 - [domains-only syntax](#domains-only) - a list of domain names.
-- [Adblock-style syntax](#adblock-style) - modern approach to writing filtering rules based on using a subset of the Adblock-style syntax. This way blocklists will be compatible with browser ad blockers.
 
 If you are creating a blocklist for AdGuard Home, we recommend using the [Adblock-style syntax](#adblock-style). It has a couple of important advantages over the old-style syntax:
 
 - **Blocklists size.** Using pattern-matching allows you to have a single rule instead of hundreds of `/etc/hosts` entries.
 - **Compatibility.** Your blocklist will be compatible with browser ad blockers, and it will be easier to share rules with a browser filter list.
 - **Extensibility.** For the last decade the Adblock-style syntax has greatly evolved, and we don't see why we can't extend it even more, and provide additional features for network-wide blockers.
+
+> If you're maintaining an old-style `/etc/hosts` blocklist or if you maintain multiple filter lists (regardless of which type), we provide a tool that can be used to compile blocklists for AdGuard Home. We called it [Hostlist compiler](https://github.com/AdguardTeam/HostlistCompiler) and we use it ourselves to create [AdGuard SDN filter](https://github.com/AdguardTeam/AdGuardSDNSFilter).
 
 ## Rules examples
 
@@ -20,50 +22,6 @@ If you are creating a blocklist for AdGuard Home, we recommend using the [Adbloc
 - `! Here goes a comment` - just a comment
 - `# Also a comment` - just a comment
 - `/REGEX/` - block access to the domains matching the specified regular expression
-
-## <a id="etc-hosts"></a> /etc/hosts syntax
-
-For each host a single line should be present with the following information:
-
-```
-IP_address canonical_hostname [aliases...]
-```
-
-Fields of the entry are separated by any number of blanks and/or tab characters.
-
-Text from the `#` character until the end of the line is a comment and is ignored.
-
-Example:
-
-```
-# This is a comment
-```
-
-Hostnames may contain only alphanumeric characters, minus signs (`-`), and periods (`.`). They must begin with an alphabetic character and end with an alphanumeric character. Optional aliases provide for name changes, alternate spellings, shorter hostnames, or generic hostnames (for example, `localhost`).
-
-Examples:
-
-```
-127.0.0.1 example.org foo
-127.0.0.1 example.com
-```
-
-> Please note, that the `IP_address` value is ignored by most of the DNS filtering software.
-
-
-## <a id="domains-only"></a> Domains-only syntax
-
-This is just a list of domain names, one name per line.
-
-Example:
-
-```
-example.com
-example.org
-```
-
-If a string is not a valid domain (e.g. `*.example.org`), AdGuard Home will consider it to be an [adblock-style](#adblock-style) rule.
-
 
 ## <a id="adblock-style"></a> Adblock-style syntax
 
@@ -155,10 +113,9 @@ The rules with the `$badfilter` modifier disable other basic rules to which they
 - `||example.com$badfilter` disables `||example.com`
 - `@@||example.org^$badfilter` disables `@@||example.org^`
 
-
 #### <a id="ctag"></a> `ctag`
 
-`$ctag` modifier allows to block domains only for specific types of DNS clients.  You can assign tags to clients in AdGuardHome UI.  In the future we plan to assign tags automatically by analyzing the behaviour of each client.
+`$ctag` modifier allows to block domains only for specific types of DNS clients. You can assign tags to clients in AdGuardHome UI. In the future we plan to assign tags automatically by analyzing the behaviour of each client.
 
 The syntax is:
 
@@ -180,26 +137,71 @@ If one of client's tags matches the exclusion `$ctag` values - this rule doesn't
 The list of allowed tags:
 
 By device type:
-* device_audio - Audio device
-* device_gameconsole - Game Console
-* device_laptop - Laptop
-* device_nas - NAS (Network-attached Storage)
-* device_other - Other device
-* device_pc - PC
-* device_phone - Phone
-* device_printer - Printer
-* device_tablet - Tablet
-* device_tv - TV
+
+- `device_audio` - Audio device
+- `device_gameconsole` - Game Console
+- `device_laptop` - Laptop
+- `device_nas` - NAS (Network-attached Storage)
+- `device_other` - Other device
+- `device_pc` - PC
+- `device_phone` - Phone
+- `device_printer` - Printer
+- `device_tablet` - Tablet
+- `device_tv` - TV
 
 By Operating System:
-* os_android - Android
-* os_ios - iOS
-* os_linux - Linux
-* os_macos - Macos
-* os_other - Other OS
-* os_windows - Windows
+
+- `os_android` - Android
+- `os_ios` - iOS
+- `os_linux` - Linux
+- `os_macos` - Macos
+- `os_other` - Other OS
+- `os_windows` - Windows
 
 By user group:
-* user_admin - Administrator
-* user_child - Child
-* user_regular - Regular user
+
+- `user_admin` - Administrator
+- `user_child` - Child
+- `user_regular` - Regular user
+
+## <a id="etc-hosts"></a> /etc/hosts syntax
+
+For each host a single line should be present with the following information:
+
+```
+IP_address canonical_hostname [aliases...]
+```
+
+Fields of the entry are separated by any number of blanks and/or tab characters.
+
+Text from the `#` character until the end of the line is a comment and is ignored.
+
+Example:
+
+```
+# This is a comment
+```
+
+Hostnames may contain only alphanumeric characters, minus signs (`-`), and periods (`.`). They must begin with an alphabetic character and end with an alphanumeric character. Optional aliases provide for name changes, alternate spellings, shorter hostnames, or generic hostnames (for example, `localhost`).
+
+Examples:
+
+```
+127.0.0.1 example.org foo
+127.0.0.1 example.com
+```
+
+> Please note, that the `IP_address` value is ignored by most of the DNS filtering software.
+
+## <a id="domains-only"></a> Domains-only syntax
+
+This is just a list of domain names, one name per line.
+
+Example:
+
+```
+example.com
+example.org
+```
+
+If a string is not a valid domain (e.g. `*.example.org`), AdGuard Home will consider it to be an [adblock-style](#adblock-style) rule.
