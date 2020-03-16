@@ -131,6 +131,7 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
  * `users` — Web users info
    * `name` — User name
    * `password` — Password
+ * `http_proxy` — proxy URL for HTTP client (e.g. "http://user:password@server:port/").  Supports "http", "https" and "socks5" scheme.
  * `web_session_ttl` — Web session TTL (in hours) - a web user will stay signed in for this amount of time.
  * `rlimit_nofile` — Limit on the maximum number of open files for server process (Linux and macOS).  Set to 0 to use the system default value.
  * `dns` — DNS configuration section.
