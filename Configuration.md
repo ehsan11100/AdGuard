@@ -146,7 +146,13 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
    * `refuse_any` — Another DDoS protection mechanism. Requests of type ANY are rarely needed, so refusing to serve them mitigates against attackers trying to use your DNS as a reflection. Safe to disable if DNS server is not available from internet.
    * `bootstrap_dns` — List of DNS servers used for initial hostname resolution in case an upstream server name is a hostname.
    * `all_servers` — Enables parallel queries to all configured upstream servers to speed up resolving. If disabled, the queries are sent to each upstream server one-by-one and then sorted by RTT.
-   * `parental_sensitivity` — Age group for parental control-based filtering, must be either 3, 10, 13 or 17 if enabled.
+   * `edns_client_subnet` — Enable EDNS Client Subnet option
+   * `aaaa_disabled` — Respond with an empty answer to all AAAA requests
+   * `allowed_clients` — IP addresses of allowed clients
+   * `disallowed_clients` — IP addresses of clients that should be blocked
+   * `blocked_hosts` — hosts that should be blocked
+   * `parental_block_host` — IP (or domain name) which is used to respond to DNS requests blocked by parental control
+   * `safebrowsing_block_host` — IP (or domain name) which is used to respond to DNS requests blocked by safe-browsing
    * `parental_enabled` — Parental control-based DNS requests filtering.
    * `safesearch_enabled` — Enforcing "Safe search" option for search engines, when possible.
    * `safebrowsing_enabled` — Filtering of DNS requests based on safebrowsing.
