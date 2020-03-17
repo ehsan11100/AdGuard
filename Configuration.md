@@ -26,7 +26,7 @@ Options:
   -w, --work-dir VALUE               Path to the working directory
   -h, --host VALUE                   Host address to bind HTTP server on
   -p, --port VALUE                   Port to serve HTTP pages on
-  -s, --service VALUE                Service control action: status, install, uninstall, start, stop, restart
+  -s, --service VALUE                Service control action: status, install, uninstall, start, stop, restart, reload (configuration)
   -l, --logfile VALUE                Path to log file. If empty: write to stdout; if 'syslog': write to system log
   --pidfile VALUE                    Path to a file where PID is stored
   --check-config                     Check configuration and exit
@@ -37,6 +37,12 @@ Options:
 ```
 
 Please note, that the command-line arguments override settings from the configuration file.
+
+`./AdGuardHome -s reload` command does the following:
+
+* Re-read runtime clients from `/etc/hosts` file and `arp -a` output
+* Re-read SSL certificate file (if it has changed)
+
 
 <a id="upstreams"></a>
 ## Configuring upstreams
