@@ -21,6 +21,8 @@
 4. [Running dev builds](#unstable)
 5. [Supported tags / architectures](#tags)
 6. [Additional configuration](#configuration)
+7. [Running DHCP server](#dhcp)
+8. [Running on a system with 'resolved' daemon](#resolved-daemon)
 
 ## <a id="introduction"></a> Introduction
 
@@ -113,3 +115,41 @@ docker pull adguard/adguardhome:edge
 Upon the first execution, a file named `AdGuardHome.yaml` will be created, with default values written in it. You can modify the file while your AdGuard Home container is not running. Otherwise, any changes to the file will be lost because the running program will overwrite them.
 
 Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possible parameters that you can configure are listed on [this page](https://github.com/AdguardTeam/Adguardhome/wiki/Configuration).
+
+
+## <a id="dhcp"></a> Running DHCP server
+
+If you want to use AdGuardHome's DHCP server, you should pass `--network host` argument when creating the container:
+
+    docker run --name adguardhome --network host -v /my/own/workdir:/opt/adguardhome/work -v /my/own/confdir:/opt/adguardhome/conf -d adguard/adguardhome
+
+This option instructs docker to use the host's network rather than docker-bridged network.
+Note that port mapping with `-p` is not necessary now.
+
+A note from Docker Documentation:
+
+    The host networking driver only works on Linux hosts, and is not supported on Docker Desktop for Mac, Docker Desktop for Windows, or Docker EE for Windows Server.
+
+
+## <a id="resolved-daemon"></a> Running on a system with 'resolved' daemon
+
+If you try to run AdGuardHome on a system where `resolved` daemon is working, docker will fail to bind on port 53, because `resolved` daemon is listening on `127.0.0.53:53`.
+
+Here's how you can disable DNSStubListener on your machine.
+
+Deactivate DNSStubListener and update DNS server address.  Create a new file: `/etc/systemd/resolved.conf.d/adguardhome.conf` (create a `/etc/systemd/resolved.conf.d` directory if necessary):
+
+    [Resolve]
+    DNS=127.0.0.1
+    DNSStubListener=no
+
+Specifying "127.0.0.1" as DNS server address is necessary because otherwise the nameserver will be "127.0.0.53" which doesn't work without DNSStubListener.
+
+Activate another resolv.conf file:
+
+    mv /etc/resolv.conf /etc/resolv.conf.backup
+    ln -s /run/systemd/resolve/resolv.conf /etc/resolv.conf
+
+Stop DNSStubListener:
+
+    systemctl reload-or-restart systemd-resolved
