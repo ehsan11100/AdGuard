@@ -165,6 +165,8 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
    * `safebrowsing_enabled` — Filtering of DNS requests based on safebrowsing.
    * `upstream_dns` — List of upstream DNS servers.
    * `cache_size` — DNS cache size (in bytes)
+   * `cache_ttl_min` — override TTL value (minimum) received from upstream server.  This value can't larger than 3600 (1 hour).
+   * `cache_ttl_max` — override TTL value (maximum) received from upstream server
    * `safebrowsing_cache_size` — Safe Browsing cache size (in bytes)
    * `safesearch_cache_size` — Safe Search cache size (in bytes)
    * `parental_cache_size` — Parental Control cache size (in bytes)
