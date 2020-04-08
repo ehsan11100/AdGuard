@@ -139,6 +139,7 @@ The list of allowed tags:
 By device type:
 
 - `device_audio` - Audio device
+- `device_camera` - Camera device
 - `device_gameconsole` - Game Console
 - `device_laptop` - Laptop
 - `device_nas` - NAS (Network-attached Storage)
@@ -146,6 +147,7 @@ By device type:
 - `device_pc` - PC
 - `device_phone` - Phone
 - `device_printer` - Printer
+- `device_securityalarm` - Security alarm
 - `device_tablet` - Tablet
 - `device_tv` - TV
 
