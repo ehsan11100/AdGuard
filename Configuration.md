@@ -155,6 +155,7 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
    * `all_servers` — Enables parallel queries to all configured upstream servers to speed up resolving. If disabled, the queries are sent to each upstream server one-by-one and then sorted by RTT.
    * `edns_client_subnet` — Enable EDNS Client Subnet option
    * `aaaa_disabled` — Respond with an empty answer to all AAAA requests
+   * `fastest_addr` — Use Fastest Address algorithm.  It finds an IP address with the lowest latency and returns this IP address in DNS response.
    * `allowed_clients` — IP addresses of allowed clients
    * `disallowed_clients` — IP addresses of clients that should be blocked
    * `blocked_hosts` — hosts that should be blocked
