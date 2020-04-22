@@ -9,6 +9,7 @@ Most of these settings can be changed via the web-based admin interface. However
 * [Configuring clients friendly names](#friendly-names)
 * [Configuration file](#configuration-file)
 * [Reset Web Password](#password-reset)
+* [Profiling with pprof](#pprof)
 
 <a id="command-line"></a>
 ## Command-line arguments
@@ -140,6 +141,7 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
  * `http_proxy` — proxy URL for HTTP client (e.g. "http://user:password@server:port/").  Supports "http", "https" and "socks5" scheme.
  * `web_session_ttl` — Web session TTL (in hours) - a web user will stay signed in for this amount of time.
  * `rlimit_nofile` — Limit on the maximum number of open files for server process (Linux and macOS).  Set to 0 to use the system default value.
+ * `debug_pprof` — Enable pprof HTTP server listening on port 6060 for debugging.  See section `Profiling with pprof`.
  * `dns` — DNS configuration section.
    * `bind_host` - DNS interface IP address to listen on. 
    * `port` — DNS server port to listen on.
@@ -248,3 +250,23 @@ Please follow these steps to create a new password for your user account:
         password: <HASH>
 
 5. Save the file, restart AGH.  Now you'll be able to log in to Web interface using your new password.
+
+
+<a id="pprof"></a>
+## Profiling with pprof
+
+To enable pprof, set `debug_pprof: true` in yaml configuration file and then restart AdGuardHome.  Now you can get profiling information with your browser, e.g.:
+
+    http://localhost:6060/debug/pprof/goroutine?debug=2
+
+will show the call trace of each running goroutine.
+
+This command lets you see information about the process's heap usage:
+
+    http://localhost:6060/debug/pprof/heap?debug=1
+
+or with `go tool pprof`:
+
+    go tool pprof -top http://localhost:6060/debug/pprof/heap
+
+For a list of supported profiles go to `http://localhost:6060/debug/pprof/`.
