@@ -65,7 +65,9 @@ Examples:
 
 You can specify upstreams that will be used for a specific domain(s). We use the dnsmasq-like syntax (see `--server` description [here](http://www.thekelleys.org.uk/dnsmasq/docs/dnsmasq-man.html)). This feature is intended for private nameservers which deal with intranet domains.
 
-**Syntax:** `[/[domain1][/../domainN]/]upstreamString`
+**Syntax:**
+
+    [/domain1/domain2/domainN/]upstreamString
 
 If one or more domains are specified, that upstream (`upstreamString`) is used only for those domains. Usually, it is used for private nameservers. For instance, if you have a nameserver on your network which deals with `xxx.internal.local` at `192.168.0.1` then you can specify `[/internal.local/]192.168.0.1`, and AdGuard Home will send all queries to that nameserver. Everything else will be sent to the default upstreams (which are mandatory!).
 
