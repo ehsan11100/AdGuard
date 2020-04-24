@@ -36,8 +36,8 @@ We currently **officially** support the following operating systems:
 Other options:
 
 * [AdGuard Home docker image](https://hub.docker.com/r/adguard/adguardhome)
-* You can get AdGuard Home from the [Snap Store](https://snapcraft.io/adguard-home) (Linux App Store).
-* (Unofficiaal) [AdGuardHome in Entware repository](http://bin.entware.net/mipselsf-k3.4/test/)
+* You can get AdGuard Home from the [Snap Store](https://snapcraft.io/adguard-home) (Linux App Store)
+* (Unofficial) [AdGuardHome in Entware repository](http://bin.entware.net/mipselsf-k3.4/test/)
 
 
 <a id="first-time"></a>
