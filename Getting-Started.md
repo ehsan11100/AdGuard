@@ -33,9 +33,11 @@ We currently **officially** support the following operating systems:
 
 > AdGuard Home can work on other operating systems as well (for instance, it can work on devices with MIPS CPU), but we need your help with testing it.
 
-Unofficial packages:
+Other options:
 
-* [AdGuardHome in Entware repository](http://bin.entware.net/mipselsf-k3.4/test/)
+* [AdGuard Home docker image](https://hub.docker.com/r/adguard/adguardhome)
+* You can get AdGuard Home from the [Snap Store](https://snapcraft.io/adguard-home) (Linux App Store).
+* (Unofficiaal) [AdGuardHome in Entware repository](http://bin.entware.net/mipselsf-k3.4/test/)
 
 
 <a id="first-time"></a>
