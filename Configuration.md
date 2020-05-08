@@ -144,38 +144,56 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
  * `web_session_ttl` — Web session TTL (in hours) - a web user will stay signed in for this amount of time.
  * `rlimit_nofile` — Limit on the maximum number of open files for server process (Linux and macOS).  Set to 0 to use the system default value.
  * `debug_pprof` — Enable pprof HTTP server listening on port 6060 for debugging.  See section `Profiling with pprof`.
+ 
  * `dns` — DNS configuration section.
-   * `bind_host` - DNS interface IP address to listen on. 
-   * `port` — DNS server port to listen on.
-   * `protection_enabled` — Whether any kind of filtering and protection should be done, when off it works as a plain dns forwarder.
-   * `filtering_enabled` — Filtering of DNS requests based on filter lists.
-   * `blocking_mode` — Specifies how to block DNS requests.  "nxdomain" (default): respond with NXDOMAIN status;  "null_ip": respond with the unspecified IP address (0.0.0.0).
-   * `blocked_response_ttl` — For how many seconds the clients should cache a filtered response. Low values are useful on LAN if you change filters very often, high values are useful to increase performance and save traffic.
-   * `querylog_enabled` — Query logging (also used to calculate top 50 clients, blocked domains and requested domains for statistical purposes).
-   * `ratelimit` — DDoS protection, specifies in how many packets per second a client should receive. Anything above that is silently dropped. To disable set 0, default is 20. Safe to disable if DNS server is not available from internet.
-   * `ratelimit_whitelist` — If you want exclude some IP addresses from ratelimiting but keep ratelimiting on for others, put them here.
-   * `refuse_any` — Another DDoS protection mechanism. Requests of type ANY are rarely needed, so refusing to serve them mitigates against attackers trying to use your DNS as a reflection. Safe to disable if DNS server is not available from internet.
-   * `bootstrap_dns` — List of DNS servers used for initial hostname resolution in case an upstream server name is a hostname.
-   * `all_servers` — Enables parallel queries to all configured upstream servers to speed up resolving. If disabled, the queries are sent to each upstream server one-by-one and then sorted by RTT.
-   * `edns_client_subnet` — Enable EDNS Client Subnet option
-   * `aaaa_disabled` — Respond with an empty answer to all AAAA requests
-   * `fastest_addr` — Use Fastest Address algorithm.  It finds an IP address with the lowest latency and returns this IP address in DNS response.
-   * `allowed_clients` — IP addresses of allowed clients
-   * `disallowed_clients` — IP addresses of clients that should be blocked
-   * `blocked_hosts` — hosts that should be blocked
-   * `parental_block_host` — IP (or domain name) which is used to respond to DNS requests blocked by parental control
-   * `safebrowsing_block_host` — IP (or domain name) which is used to respond to DNS requests blocked by safe-browsing
-   * `parental_enabled` — Parental control-based DNS requests filtering.
-   * `safesearch_enabled` — Enforcing "Safe search" option for search engines, when possible.
-   * `safebrowsing_enabled` — Filtering of DNS requests based on safebrowsing.
-   * `upstream_dns` — List of upstream DNS servers.
-   * `cache_size` — DNS cache size (in bytes)
-   * `cache_ttl_min` — override TTL value (minimum) received from upstream server.  This value can't larger than 3600 (1 hour).
-   * `cache_ttl_max` — override TTL value (maximum) received from upstream server
-   * `safebrowsing_cache_size` — Safe Browsing cache size (in bytes)
-   * `safesearch_cache_size` — Safe Search cache size (in bytes)
-   * `parental_cache_size` — Parental Control cache size (in bytes)
-   * `cache_time` — Safe Browsing, Safe Search, Parental Control cache TTL
+   * **General settings**
+     * `bind_host` - DNS interface IP address to listen on. 
+     * `port` — DNS server port to listen on.
+     * `statistics_interval` - time interval for statistics (in days) 
+   * **Protection settings**
+     * `protection_enabled` — Whether any kind of filtering and protection should be done, when off it works as a plain dns forwarder.
+     * `filtering_enabled` — Filtering of DNS requests based on filter lists.
+     * `blocking_mode` — Specifies how to block DNS requests.  "nxdomain" (default): respond with NXDOMAIN status;  "null_ip": respond with the unspecified IP address (0.0.0.0); or "custom_ip": reponsd with `blocking_ipv4` or `blocking_ipv6`.
+     * `blocking_ipv4` - IP address to be returned for a blocked A request if `blocking_mode` is set to `custom_ip`
+     * `blocking_ipv6` - IP address to be returned for a blocked AAAA request if `blocking_mode` is set to `custom_ip`
+     * `blocked_response_ttl` — For how many seconds the clients should cache a filtered response. Low values are useful on LAN if you change filters very often, high values are useful to increase performance and save traffic.
+     * `parental_block_host` — IP (or domain name) which is used to respond to DNS requests blocked by parental control
+     * `safebrowsing_block_host` — IP (or domain name) which is used to respond to DNS requests blocked by safe-browsing
+     * `parental_enabled` — Parental control-based DNS requests filtering.
+     * `safesearch_enabled` — Enforcing "Safe search" option for search engines, when possible.
+     * `safebrowsing_enabled` — Filtering of DNS requests based on safebrowsing.
+   * **Query log settings**
+     * `querylog_enabled` — Query logging (also used to calculate top 50 clients, blocked domains and requested domains for statistical purposes).
+     * `querylog_interval` - Time interval for query log (in days)
+     * `querylog_size_memory` - Number of entries kept in memory before they are flushed to disk
+     * `anonymize_client_ip` - If true, anonymize clients' IP addresses in logs and stats
+   * **Anti-DNS amplification features**
+     * `ratelimit` — DDoS protection, specifies in how many packets per second a client should receive. Anything above that is silently dropped. To disable set 0, default is 20. Safe to disable if DNS server is not available from internet.
+     * `ratelimit_whitelist` — If you want exclude some IP addresses from ratelimiting but keep ratelimiting on for others, put them here.
+     * `refuse_any` — Another DDoS protection mechanism. Requests of type ANY are rarely needed, so refusing to serve them mitigates against attackers trying to use your DNS as a reflection. Safe to disable if DNS server is not available from internet.
+   * **Upstream DNS servers settings**
+     * `upstream_dns` — List of upstream DNS servers.
+     * `bootstrap_dns` — List of DNS servers used for initial hostname resolution in case an upstream server name is a hostname.
+     * `all_servers` — Enables parallel queries to all configured upstream servers to speed up resolving. If disabled, the queries are sent to each upstream server one-by-one and then sorted by RTT.
+     * `fastest_addr` — Use Fastest Address algorithm.  It finds an IP address with the lowest latency and returns this IP address in DNS response.
+   * **ECS settings**
+     * `edns_client_subnet` — Enable EDNS Client Subnet option
+   * **Access settings**
+     * `allowed_clients` — IP addresses of allowed clients
+     * `disallowed_clients` — IP addresses of clients that should be blocked
+     * `blocked_hosts` — hosts that should be blocked
+   * **DNS cache settings**
+     * `cache_size` — DNS cache size (in bytes)
+     * `cache_ttl_min` — override TTL value (minimum) received from upstream server.  This value can't larger than 3600 (1 hour).
+     * `cache_ttl_max` — override TTL value (maximum) received from upstream server
+   * **Other settings**
+     * `bogus_nxdomain` - Transform responses with these IP addresses to NXDOMAIN 
+     * `enable_dnssec`  - Set DNSSEC flag in the outgoing DNS requests and check the result
+     * `aaaa_disabled` — Respond with an empty answer to all AAAA requests
+     * `safebrowsing_cache_size` — Safe Browsing cache size (in bytes)
+     * `safesearch_cache_size` — Safe Search cache size (in bytes)
+     * `parental_cache_size` — Parental Control cache size (in bytes)
+     * `cache_time` — Safe Browsing, Safe Search, Parental Control cache TTL
  * `filters` — List of filters, each filter has the following values:
    * `enabled` — Current filter's status (enabled/disabled).
    * `url` — URL pointing to the filter contents (filtering rules).
