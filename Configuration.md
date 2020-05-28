@@ -164,6 +164,7 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
      * `safebrowsing_enabled` — Filtering of DNS requests based on safebrowsing.
    * **Query log settings**
      * `querylog_enabled` — Query logging (also used to calculate top 50 clients, blocked domains and requested domains for statistical purposes).
+     * `querylog_file_enabled` — Write query logs to a file.
      * `querylog_interval` - Time interval for query log (in days)
      * `querylog_size_memory` - Number of entries kept in memory before they are flushed to disk
      * `anonymize_client_ip` - If true, anonymize clients' IP addresses in logs and stats
