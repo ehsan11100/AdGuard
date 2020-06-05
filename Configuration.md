@@ -221,8 +221,14 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
    * `private_key` - PEM-encoded private key.
    * `icmp_timeout_msec` - time (ms) to wait for ICMP reply to detect an IP conflict. If 0, the feature is disabled.
  * `user_rules` — User-specified filtering rules.
- * `log_file` — Path to the log file. If empty, writes to stdout, if `syslog` -- system log (or eventlog on Windows).
- * `verbose` — Enable our disables debug verbose output.
+ * **Log settings**
+   * `log_file` — Path to the log file. If empty, writes to stdout, if `syslog` -- system log (or eventlog on Windows).
+   * `log_compress` — Compress determines if the rotated log files should be compressed using gzip (default: false)
+   * `log_localtime` — If the time used for formatting the timestamps in is the computer's local time (default: false [UTC])
+   * `log_max_backups` — Maximum number of old log files to retain (MaxAge may still cause them to get deleted) (default: 0, which retains all old log files)
+   * `log_max_size` — Maximum size in megabytes of the log file before it gets rotated (default: 100 MB)
+   * `log_max_age` — MaxAge is the maximum number of days to retain old log files (default: 3)
+   * `verbose` — Enable our disables debug verbose output (default: false)
 
 Removing an entry from settings file will reset it to the default value. Deleting the file will reset all settings to the default values.
 
