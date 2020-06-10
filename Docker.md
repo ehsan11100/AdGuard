@@ -2,7 +2,7 @@
 
 &nbsp;
 <p align="center">
-  <img src="https://cdn.adguard.com/public/Adguard/Common/adguard_home.svg" width="300px" alt="AdGuard Home" />
+  <img src="https://cdn.adguard.com/public/Adguard/Common/adguard_home.svg?123" width="300px" alt="AdGuard Home" />
 </p>
 <h3 align="center">Privacy protection center for you and your devices</h3>
 <p align="center">
@@ -12,7 +12,7 @@
 <br />
 
 <p align="center">
-    <img src="https://cdn.adguard.com/public/Adguard/Common/adguard_home.gif" width="800" />
+    <img src="https://cdn.adguard.com/public/Adguard/Common/adguard_home.gif?123" width="800" />
 </p>
 
 1. [Introduction](#introduction)
