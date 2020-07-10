@@ -79,36 +79,13 @@ Now you can open the browser and navigate to http://127.0.0.1:3000/ to control y
 
 ## <a id="unstable"></a> Running dev builds
 
-If you want to be on the bleeding edge, you might want to run the image from the `edge` tag. It is automatically synced with the repository `master` branch.
+If you want to be on the bleeding edge, you might want to run the image from the `edge` or `beta` tags.
 
-In order to use it, simply replace `adguard/adguardhome` with `adguard/adguardhome:edge` in every command from the quick start.
+In order to use it, simply replace `adguard/adguardhome` with `adguard/adguardhome:edge` or `adguard/adguardhome:beta` in every command from the quick start.
 
 ```bash
 docker pull adguard/adguardhome:edge
 ```
-
-## <a id="tags"></a> Supported tags / architectures
-
-`adguard/adguardhome` image is built for different architectures and supports the following tags:
-
-* `latest` - latest **stable** build from the last tagged release.
-* `edge` - latest build from the repository **master** branch, may be unstable.
-* `$version` - specific release e.g. `v0.92`.
-
-### Tags for different architectures
-
-* **ARM64** - 64bit ARM build
-  * `arm64-latest`
-  * `arm64-edge`
-* **ARMHF** - 32bit ARM build
-  * `armhf-latest`
-  * `armhf-edge`
-* **i386** - x86 build
-  * `i386-latest`
-  * `i386-edge`
-* **AMD64** - x86_64 build **default** 
-  * `latest`
-  * `edge`
 
 ## <a id="configuration"></a> Additional configuration
 
