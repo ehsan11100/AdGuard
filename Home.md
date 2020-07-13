@@ -24,6 +24,7 @@ The wiki was just recently created, so there isn't much content (yet).
 ## Guides
 
 * [Getting Started](Getting-Started)
+* [FAQ](FAQ)
 * [AdGuard Home Docker](Docker)
 * [Configuration](Configuration)
 * [Comparing AdGuard Home to other solutions](Comparison)

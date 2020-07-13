@@ -1,6 +1,7 @@
 ## Guides
 
 * [Getting Started](Getting-Started)
+* [FAQ](FAQ)
 * [Docker](Docker)
 * [Configuration](Configuration)
 * [Comparing AdGuard Home to other solutions](Comparison)
