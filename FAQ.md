@@ -6,6 +6,7 @@
 * [How to configure AdGuard Home to run together with pixelsrv-tls?](#q2)
 * [Are there any known limitations?](#q3)
 * [Why am I getting "bind: address already in use" error when trying to install on Ubuntu?](#q4)
+* [How to configure a reverse proxy server for AdGuard Home?](#q5)
 
 ## Answers:
 
@@ -81,3 +82,27 @@ Activate another resolv.conf file:
 Stop DNSStubListener:
 
     systemctl reload-or-restart systemd-resolved
+
+
+<a id="q5"></a>
+
+### How to configure a reverse proxy server for AdGuard Home?
+
+If you're running a web server already and you want to access AdGuard Home dashboard UI from an URL like `http://YOUR_SERVER/aghome/` you can use this configuration for your web server:
+
+#### nginx
+
+    location /aghome/ {
+        proxy_pass http://AGH_IP:AGH_PORT/;
+        proxy_redirect / /aghome/;
+        proxy_cookie_path / /aghome/;
+    }
+
+#### caddy
+
+    :80/aghome/* {
+        route {
+            uri strip_prefix /aghome
+            reverse_proxy AGH_IP:AGH_PORT
+        }
+    }
