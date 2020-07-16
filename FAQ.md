@@ -2,15 +2,15 @@
 
 ## Questions:
 
-* [After installing AdGuard Home, how to change dashboard interface's address?](#q1)
-* [How to configure AdGuard Home to run together with pixelsrv-tls?](#q2)
-* [Are there any known limitations?](#q3)
-* [Why am I getting "bind: address already in use" error when trying to install on Ubuntu?](#q4)
-* [How to configure a reverse proxy server for AdGuard Home?](#q5)
+* [After installing AdGuard Home, how to change dashboard interface's address?](#webaddr)
+* [How to configure AdGuard Home to run together with pixelsrv-tls?](#pixelsrv)
+* [Are there any known limitations?](#limitations)
+* [Why am I getting "bind: address already in use" error when trying to install on Ubuntu?](#bindinuse)
+* [How to configure a reverse proxy server for AdGuard Home?](#reverseproxy)
 
 ## Answers:
 
-<a id="q1"></a>
+<a id="webaddr"></a>
 
 ### After installing AdGuard Home, how to change dashboard interface's address?
 
@@ -26,7 +26,7 @@
 	`./AdGuardHome -s restart`
 
 
-<a id="q2"></a>
+<a id="pixelsrv"></a>
 
 ### How to configure AdGuard Home to run together with pixelsrv-tls?
 
@@ -37,7 +37,7 @@
 5. Click `Save`
 
 
-<a id="q3"></a>
+<a id="limitations"></a>
 
 ### Are there any known limitations?
 
@@ -56,7 +56,7 @@ We're going to bring this feature support to AdGuard Home in the future.
 Unfortunately, even in this case, there still will be cases when this won't be enough or would require quite complicated configuration.
 
 
-<a id="q4"></a>
+<a id="bindinuse"></a>
 
 ### Why am I getting "bind: address already in use" error when trying to install on Ubuntu?
 
@@ -64,27 +64,35 @@ Because port 53 which is used for DNS is already occupied by another program.
 
 Ubuntu comes with a local DNS server by default - "systemd-resolved" which uses 53 port and thus prevents AdGuard Home from binding to it.  To fix this, you should disable "systemd-resolved" daemon.  Luckily, AdGuard Home can detect such configurations and disable "systemd-resolved" for you if you press "Fix" button which is shown near to "address already in use" message.
 
-But if you're using AdGuard Home with docker, you need to do it yourself.  Follow these steps:
+But if you're using AdGuard Home with docker or snap, you need to do it yourself. 
 
-Deactivate DNSStubListener and update DNS server address.  Create a new file: `/etc/systemd/resolved.conf.d/adguardhome.conf` (create a `/etc/systemd/resolved.conf.d` directory if necessary):
+Follow these steps:
 
+1. Deactivate `DNSStubListener` and update DNS server address.  Create a new file: `/etc/systemd/resolved.conf.d/adguardhome.conf` (create a `/etc/systemd/resolved.conf.d` directory if necessary):
+
+    ```
     [Resolve]
     DNS=127.0.0.1
     DNSStubListener=no
+    ```
 
-Specifying "127.0.0.1" as DNS server address is necessary because otherwise the nameserver will be "127.0.0.53" which doesn't work without DNSStubListener.
+2. Specifying `127.0.0.1` as DNS server address **is necessary** because otherwise the nameserver will be `127.0.0.53` which doesn't work without `DNSStubListener`.
 
-Activate another resolv.conf file:
+3. Activate another resolv.conf file:
 
-    mv /etc/resolv.conf /etc/resolv.conf.backup
+    ```
+    sudo mv /etc/resolv.conf /etc/resolv.conf.backup
     ln -s /run/systemd/resolve/resolv.conf /etc/resolv.conf
+    ```
 
-Stop DNSStubListener:
+4. Restart `DNSStubListener`:
 
+    ```
     systemctl reload-or-restart systemd-resolved
+    ```
 
 
-<a id="q5"></a>
+<a id="reverseproxy"></a>
 
 ### How to configure a reverse proxy server for AdGuard Home?
 
