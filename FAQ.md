@@ -60,7 +60,11 @@ Unfortunately, even in this case, there still will be cases when this won't be e
 
 ### Why am I getting "bind: address already in use" error when trying to install on Ubuntu?
 
-Because port 53 which is used for DNS is already occupied by another program.
+Because 127.0.0.1:53 which is used for DNS is already occupied by another program.
+
+**The easiest solution would be simply to choose a different network interface and bind it to your external IP (for instance, your Wi-Fi IP).**
+
+If for some reason you really want to bind to `127.0.0.1`, read the explanation below.
 
 Ubuntu comes with a local DNS server by default - "systemd-resolved" which uses 53 port and thus prevents AdGuard Home from binding to it.  To fix this, you should disable "systemd-resolved" daemon.  Luckily, AdGuard Home can detect such configurations and disable "systemd-resolved" for you if you press "Fix" button which is shown near to "address already in use" message.
 
