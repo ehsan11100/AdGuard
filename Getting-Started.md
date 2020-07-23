@@ -17,19 +17,15 @@ Download the archive with the binary file for your operating system from the [la
 
 We currently **officially** support the following operating systems:
 
-* [Raspberry Pi (32-bit ARMv6)](https://static.adguard.com/adguardhome/release/AdGuardHome_linux_arm.tar.gz)
-* [MacOS](https://static.adguard.com/adguardhome/release/AdGuardHome_MacOS.zip)
-* [Windows 64-bit](https://static.adguard.com/adguardhome/release/AdGuardHome_Windows_amd64.zip)
-* [Windows 32-bit](https://static.adguard.com/adguardhome/release/AdGuardHome_Windows_386.zip)
-* [Linux 64-bit](https://static.adguard.com/adguardhome/release/AdGuardHome_linux_amd64.tar.gz)
-* [Linux 32-bit](https://static.adguard.com/adguardhome/release/AdGuardHome_linux_386.tar.gz)
-* [FreeBSD 64-bit](https://static.adguard.com/adguardhome/release/AdGuardHome_freebsd_amd64.tar.gz)
-* [Linux 64-bit ARM](https://static.adguard.com/adguardhome/release/AdGuardHome_linux_arm64.tar.gz)
-* [Linux 32-bit ARMv5](https://static.adguard.com/adguardhome/release/AdGuardHome_linux_armv5.tar.gz)
-* [MIPS](https://static.adguard.com/adguardhome/release/AdGuardHome_linux_mips.tar.gz)
-* [MIPSLE](https://static.adguard.com/adguardhome/release/AdGuardHome_linux_mipsle.tar.gz)
+* Linux: [64-bit](https://static.adguard.com/adguardhome/release/AdGuardHome_linux_amd64.tar.gz), [32-bit](https://static.adguard.com/adguardhome/release/AdGuardHome_linux_386.tar.gz)
+* Linux ARM: [32-bit ARMv6](https://static.adguard.com/adguardhome/release/AdGuardHome_linux_armv6.tar.gz) (recommended for Rapsberry Pi), [64-bit](https://static.adguard.com/adguardhome/release/AdGuardHome_linux_arm64.tar.gz), [32-bit ARMv5](https://static.adguard.com/adguardhome/release/AdGuardHome_linux_armv5.tar.gz), [32-bit ARMv7](https://static.adguard.com/adguardhome/release/AdGuardHome_linux_armv7.tar.gz)
+* Linux MIPS: [32-bit MIPS](https://static.adguard.com/adguardhome/release/AdGuardHome_linux_mips_softfloat.tar.gz), [32-bit MIPSLE](https://static.adguard.com/adguardhome/release/AdGuardHome_linux_mipsle_softfloat.tar.gz), [64-bit MIPS](https://static.adguard.com/adguardhome/release/AdGuardHome_linux_mips64_softfloat.tar.gz), [64-bit MIPSLE](https://static.adguard.com/adguardhome/release/AdGuardHome_linux_mips64le_softfloat.tar.gz)
+* Windows: [64-bit](https://static.adguard.com/adguardhome/release/AdGuardHome_windows_amd64.zip), [32-bit](https://static.adguard.com/adguardhome/release/AdGuardHome_windows_386.zip)
+* MacOS: [64-bit](https://static.adguard.com/adguardhome/release/AdGuardHome_darwin_amd64.zip), [32-bit](https://static.adguard.com/adguardhome/release/AdGuardHome_darwin_386.zip)
+* FreeBSD: [64-bit](https://static.adguard.com/adguardhome/release/AdGuardHome_freebsd_amd64.tar.gz), [32-bit](https://static.adguard.com/adguardhome/release/AdGuardHome_freebsd_386.tar.gz)
+* FreeBSD ARM: [64-bit](https://static.adguard.com/adguardhome/release/AdGuardHome_freebsd_arm64.tar.gz), [32-bit ARMv5](https://static.adguard.com/adguardhome/release/AdGuardHome_freebsd_armv5.tar.gz), [32-bit ARMv6](https://static.adguard.com/adguardhome/release/AdGuardHome_freebsd_armv6.tar.gz), [32-bit ARMv7](https://static.adguard.com/adguardhome/release/AdGuardHome_freebsd_armv7.tar.gz)
 
-> **MacOS 10.15 Catalina** please note, that on MacOS Catalina it is recommended to place AdGuard Home directory to the "Applications" directory.
+> **MacOS 10.15 Catalina** or newer: please note, that on MacOS Catalina it is recommended to place AdGuard Home directory to the "Applications" directory.
 
 > AdGuard Home can work on other operating systems as well (for instance, it can work on devices with MIPS CPU), but we need your help with testing it.
 
