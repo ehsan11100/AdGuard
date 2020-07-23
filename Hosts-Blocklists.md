@@ -82,7 +82,36 @@ Example:
 
 > **IMPORTANT:** If a rule contains a modifier not listed in this document, the whole rule **must be ignored**. This way we will avoid false-positives when people are trying to use unmodified browser ad blockers' filter lists like EasyList or EasyPrivacy.
 
-#### `important`
+#### <a id="client"></a> `client`
+
+The `$client` modifier allows specifying clients this rule will be working for. It accepts both client names or IP addresses.
+
+The syntax is:
+
+```
+$client=value1|value2|...
+```
+
+You can also specify "excluded" clients by adding a `~` character before the client IP or name. In this case, the rule will not be applied to this client's DNS requests.
+
+```
+$client=~value1
+```
+
+**Specifying client names**
+
+Client names usually contain spaces or other special characters, that's why you should enclose the name in quotes (both double-quotes and single-quotes are supported). If the client name contains quotes, use `\` to escape them. Also, you need to escape commas (`,`) and pipes (`|`).
+
+> Please note, that when specifying aan "excluded" client, you must keep `~` out of the quotes.
+
+**Examples**
+
+* `@@||*^$client=127.0.0.1` — unblock everything for localhost
+* `||example.org^$client='Frank\'s laptop'` — block `example.org` for the client named `Frank's laptop` only. Note that quote (`'`) in the name must be escaped.
+* `||example.org^$client=~'Mary\'s\, John\'s\, and Boris\'s laptops'` — block `example.org` for everyone except the client named `Mary's, John's, and Boris's laptops`. Note that comma (`,`) must be escaped as well.
+* `||example.org^$client=~Mom|~Dad|Kids` -- block `example.org` for `Kids`, but not for `Mom` and `Dad`. This example demonstrates how to specify multiple clients in one rule.
+
+#### <a id="important"></a> `important`
 
 The `$important` modifier applied to a rule increases its priority over any other rule without \$important modifier. Even over basic exception rules.
 
@@ -104,7 +133,7 @@ The `$important` modifier applied to a rule increases its priority over any othe
 
 Now the exception rule also has the `$important` modifier so it will prevail.
 
-#### `badfilter`
+#### <a id="badfilter"></a> `badfilter`
 
 The rules with the `$badfilter` modifier disable other basic rules to which they refer. It means that the text of the disabled rule should match the text of the `$badfilter` rule (without the `badfilter` modifier).
 
