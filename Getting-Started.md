@@ -31,9 +31,11 @@ We currently **officially** support the following operating systems:
 
 Other options:
 
-* [AdGuard Home docker image](https://hub.docker.com/r/adguard/adguardhome)
-* You can get AdGuard Home from the [Snap Store](https://snapcraft.io/adguard-home) (Linux App Store)
-* (Unofficial) [AdGuardHome in Entware repository](http://bin.entware.net/mipselsf-k3.4/test/)
+* (Official) [AdGuard Home docker image](https://hub.docker.com/r/adguard/adguardhome)
+* (Official) You can get AdGuard Home from the [Snap Store](https://snapcraft.io/adguard-home) (Linux App Store)
+* (Maintained by @frenck) Home Assistant add-on: https://github.com/hassio-addons/addon-adguard-home
+* (Maintained by @rufengsuixing) OpenWrt LUCI app: https://github.com/rufengsuixing/luci-app-adguardhome
+* (Maintained by @graysky2) [Arch Linux](https://www.archlinux.org/), [Arch ARM](https://archlinuxarm.org/), and other Arch-based clones, may build via [adguardhome](https://aur.archlinux.org/packages/adguardhome/) in the [AUR](https://wiki.archlinux.org/index.php/Arch_User_Repository).
 
 
 <a id="first-time"></a>
