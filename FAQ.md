@@ -118,3 +118,8 @@ If you're running a web server already and you want to access AdGuard Home dashb
             reverse_proxy AGH_IP:AGH_PORT
         }
     }
+
+#### Disable DoH encryption on AdGuard Home
+
+When you use TLS on your reverse proxy server, there's no need to use TLS on AdGuard Home.
+Set `allow_unencrypted_doh: false` in AdGuardHome.yaml to allow AdGuard Home respond to DoH requests without TLS encryption.
