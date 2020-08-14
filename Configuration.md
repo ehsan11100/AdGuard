@@ -195,6 +195,7 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
      * `safesearch_cache_size` — Safe Search cache size (in bytes)
      * `parental_cache_size` — Parental Control cache size (in bytes)
      * `cache_time` — Safe Browsing, Safe Search, Parental Control cache TTL
+     * `max_goroutines` — Max. number of parallel goroutines for processing incoming requests
  * `filters` — List of filters, each filter has the following values:
    * `enabled` — Current filter's status (enabled/disabled).
    * `url` — URL pointing to the filter contents (filtering rules).
