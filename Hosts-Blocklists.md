@@ -102,7 +102,7 @@ $client=~value1
 
 Client names usually contain spaces or other special characters, that's why you should enclose the name in quotes (both double-quotes and single-quotes are supported). If the client name contains quotes, use `\` to escape them. Also, you need to escape commas (`,`) and pipes (`|`).
 
-> Please note, that when specifying aan "excluded" client, you must keep `~` out of the quotes.
+> Please note, that when specifying an "excluded" client, you must keep `~` out of the quotes.
 
 **Examples**
 
