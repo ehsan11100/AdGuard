@@ -195,6 +195,7 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
      * `safesearch_cache_size` — Safe Search cache size (in bytes)
      * `parental_cache_size` — Parental Control cache size (in bytes)
      * `cache_time` — Safe Browsing, Safe Search, Parental Control cache TTL
+     * `max_goroutines` — Max. number of parallel goroutines for processing incoming requests
  * `filters` — List of filters, each filter has the following values:
    * `enabled` — Current filter's status (enabled/disabled).
    * `url` — URL pointing to the filter contents (filtering rules).
@@ -204,11 +205,16 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
  * `dhcp` - Built-in DHCP server configuration.
    * `enabled` - DHCP server status.
    * `interface_name` - network interface name (eth0, en0 and so on).
-   * `gateway_ip` - gateway IP address.
-   * `subnet_mask` - subnet mask.
-   * `range_start` - start IP address of the controlled range.  
-   * `range_end` - end IP address of the controlled range.
-   * `lease_duration` - lease duration in seconds. If 0, using default duration (2 hours).
+     * `dhcpv4` - DHCPv4 settings
+       * `gateway_ip` - gateway IP address.
+       * `subnet_mask` - subnet mask.
+       * `range_start` - start IP address of the controlled range.
+       * `range_end` - end IP address of the controlled range.
+       * `lease_duration` - lease duration in seconds. If 0, using default duration (24 hours).
+       * `options` - custom options with arbitrary hex data (`DEC_CODE hex HEX_DATA`) or IP address (`DEC_CODE ip IP_ADDR`) where DEC_CODE is a decimal DHCPv4 option code in range [1..255]
+     * `dhcpv6` - DHCPv6 settings
+       * `range_start` - the first IP address to be assigned to a client
+       * `lease_duration` - lease TTL in seconds
  * `tls` - HTTPS/DOH/DOT settings.
    * `enabled` - encryption (DOT/DOH/HTTPS) status.
    * `server_name` - the hostname of your HTTPS/TLS server.
