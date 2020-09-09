@@ -5,6 +5,7 @@ Most of these settings can be changed via the web-based admin interface. However
 * [Command-line arguments](#command-line)
 * [Configuring upstreams](#upstreams)
   * [Specifying upstreams for domains](#upstreams-for-domains)
+  * [Loading the list of upstream servers from a file](#upstreams-from-file)
   * [Specifying upstreams for rDNS](#upstreams-for-rdns)
 * [Configuring clients friendly names](#friendly-names)
 * [Configuration file](#configuration-file)
@@ -54,14 +55,13 @@ Examples:
 * `1.1.1.1` - regular DNS (over UDP).
 * `tls://1dot1dot1dot1.cloudflare-dns.com` – encrypted [DNS-over-TLS](https://en.wikipedia.org/wiki/DNS_over_TLS).
 * `https://cloudflare-dns.com/dns-query` – encrypted [DNS-over-HTTPS](https://en.wikipedia.org/wiki/DNS_over_HTTPS).
+* `quic://dns-unfiltered.adguard.com:784` - experimental [DNS-over-QUIC](https://tools.ietf.org/html/draft-huitema-quic-dnsoquic) support.
 * `tcp://1.1.1.1` – regular DNS (over TCP).
 * `sdns://...` – you can use [DNS Stamps](https://dnscrypt.info/stamps/) for [DNSCrypt](https://dnscrypt.info/) or [DNS-over-HTTPS](https://en.wikipedia.org/wiki/DNS_over_HTTPS) resolvers.
 * `[/example.local/]1.1.1.1` – you can specify DNS upstream for a specific domain(s).
 
 <a id="upstreams-for-domains"></a>
 ### Specifying upstreams for domains
-
-![](upstreams.png)
 
 You can specify upstreams that will be used for a specific domain(s). We use the dnsmasq-like syntax (see `--server` description [here](http://www.thekelleys.org.uk/dnsmasq/docs/dnsmasq-man.html)). This feature is intended for private nameservers which deal with intranet domains.
 
@@ -92,6 +92,16 @@ If one or more domains are specified, that upstream (`upstreamString`) is used o
     ```
     Sends queries for `*.host.com` to `1.1.1.1:53` except for `*.maps.host.com` which are sent to `8.8.8.8:53` (as long as other queries).
 
+<a id="upstreams-from-file"></a>
+### Loading the list of upstream servers from a file
+
+Using specific upstreams for some domains is a common way to accelerate internet in China, for example see https://github.com/felixonmars/dnsmasq-china-list and many other dnsmasq lists.
+
+These lists can be easily converted to a list for AdGuard Home:
+
+* `server=/0-100.com/114.114.114.114` -> `[/0-100.com/]114.114.114.114`
+
+The problem with these lists is that they may be too large. In this case you may want to load them from a separate file instead of setting all upstreams in AdGuard settings. Just specify the path to a file with your list in the `upstream_dns_file` field of `AdGuardHome.yaml`.
 
 <a id="upstreams-for-rdns"></a>
 ### Specifying upstreams for rDNS
@@ -174,6 +184,7 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
      * `refuse_any` — Another DDoS protection mechanism. Requests of type ANY are rarely needed, so refusing to serve them mitigates against attackers trying to use your DNS as a reflection. Safe to disable if DNS server is not available from internet.
    * **Upstream DNS servers settings**
      * `upstream_dns` — List of upstream DNS servers.
+     * `upstream_dns_file` — Path to a file with the list of upstream DNS servers. If it is configured, the value of `upstream_dns` is ignored.
      * `bootstrap_dns` — List of DNS servers used for initial hostname resolution in case an upstream server name is a hostname.
      * `all_servers` — Enables parallel queries to all configured upstream servers to speed up resolving. If disabled, the queries are sent to each upstream server one-by-one and then sorted by RTT.
      * `fastest_addr` — Use Fastest Address algorithm.  It finds an IP address with the lowest latency and returns this IP address in DNS response.
