@@ -33,7 +33,9 @@ Options:
   --pidfile VALUE                    Path to a file where PID is stored
   --check-config                     Check configuration and exit
   --no-check-update                  Don't check for updates
+  --no-mem-optimization              Disable memory optimization
   -v, --verbose                      Enable verbose output
+  --glinet                           Run in GL-Inet compatibility mode
   --version                          Show the version and exit
   --help                             Print this help
 ```
@@ -45,6 +47,7 @@ Please note, that the command-line arguments override settings from the configur
 * Re-read runtime clients from `/etc/hosts` file and `arp -a` output
 * Re-read SSL certificate file (if it has changed)
 
+Command-line arguments passed to `-s install` command will be then used by the service. For instance if you install AdGuardHome service using `sudo ./AdGuardHome -s install --no-check-update`, it will disable update check functionality in the service as well.
 
 <a id="upstreams"></a>
 ## Configuring upstreams
