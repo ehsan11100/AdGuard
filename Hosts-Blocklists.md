@@ -1,5 +1,21 @@
 # AdGuard Home - How to write hosts blocklists
 
+* [Introduction](#introduction)
+* [Rules examples](#examples)
+* [Adblock-style syntax](#adblock-syntax)
+    * [Special characters](#special-characters)
+    * [Regular expressions support](#regular-expressions)
+    * [Rule modifiers](#modifiers)
+        * [client](#client)
+        * [important](#important)
+        * [badfilter](#badfilter)
+        * [ctag](#ctag)
+* [/etc/hosts syntax](#etc-hosts)
+* [Domains-only syntax](#domains-only)
+* [Hostlists compiler](#hostlists-compiler)
+
+## <a id="introduction"></a> Introduction
+
 There are three different approaches to writing hosts blocklists:
 
 - [Adblock-style syntax](#adblock-style) - modern approach to writing filtering rules based on using a subset of the Adblock-style syntax. This way blocklists will be compatible with browser ad blockers.
@@ -14,7 +30,7 @@ If you are creating a blocklist for AdGuard Home, we recommend using the [Adbloc
 
 > If you're maintaining an old-style `/etc/hosts` blocklist or if you maintain multiple filter lists (regardless of which type), we provide a tool that can be used to compile blocklists for AdGuard Home. We called it [Hostlist compiler](https://github.com/AdguardTeam/HostlistCompiler) and we use it ourselves to create [AdGuard SDN filter](https://github.com/AdguardTeam/AdGuardSDNSFilter).
 
-## Rules examples
+## <a id="rules-examples"></a> Rules examples
 
 - `||example.org^` - block access to the `example.org` domain and all its subdomains
 - `@@||example.org^` - unblock access to the `example.org` domain and all its subdomains
@@ -36,14 +52,14 @@ modifiers = [modifier0, modifier1[, ...[, modifierN]]]
 - `@@` — a marker that is used in the "exception" rules. Start your rule with this marker if you want to turn off filtering for the matching hostnames.
 - `modifiers` — parameters that clarify the rule. They may limit the scope of the rule or even completely change the way it works.
 
-### Special characters
+### <a id="special-characters"></a> Special characters
 
 - `*` — wildcard character. It is used to represent "any set of characters". This can also be an empty string or a string of any length.
 - `||` — matching the beginning of a hostname (and any subdomain). For instance, `||example.org` matches `example.org` and `test.example.org`, but not `testexample.org`.
 - `^` — separator character mark. Unlike browser ad blocking, there's nothing to "separate" in a hostname, so the only purpose of this character is to mark the end of the hostname.
 - `|` — a pointer to the beginning or the end of the hostname. The value depends on the character placement in the mask. For example, the rule `ample.org|` corresponds to `example.org`, but not to `example.org.com`. `|example` corresponds to `example.org`, but not to `test.example`.
 
-### Regular expressions support
+### <a id="regular-expressions"></a> Regular expressions support
 
 If you want even more flexibility in making rules, you can use [Regular expressions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions) instead of the default simplified matching syntax.
 
@@ -53,7 +69,7 @@ If you want to use a regular expression, the pattern has to look like this:
 pattern = "/" regexp "/"
 ```
 
-### Comments
+### <a id="comments"></a> Comments
 
 Any line that starts with an exclamation mark is a comment and it will be ignored by the filtering engine. Comments are usually placed above rules and used to describe what a rule does.
 
@@ -66,7 +82,7 @@ Any line that starts with an exclamation mark is a comment and it will be ignore
 - `/example.*/` will block hosts matching the `example.*` regex.
 - `@@/example.*/$important` will unblock hosts matching the `example.*` regex. Note that this rule also has the `$important` modifier.
 
-### Rule modifiers
+### <a id="modifiers"></a> Rule modifiers
 
 You can change the behavior of a rule by using additional modifiers. Modifiers must be located at the end of the rule after the `$` character and be separated by commas.
 
@@ -82,7 +98,7 @@ Example:
 
 > **IMPORTANT:** If a rule contains a modifier not listed in this document, the whole rule **must be ignored**. This way we will avoid false-positives when people are trying to use unmodified browser ad blockers' filter lists like EasyList or EasyPrivacy.
 
-#### <a id="client"></a> `client`
+#### <a id="client"></a> <a id="client"></a> `client`
 
 The `$client` modifier allows specifying clients this rule will be working for. It accepts both client names or IP addresses.
 
@@ -111,7 +127,7 @@ Client names usually contain spaces or other special characters, that's why you 
 * `||example.org^$client=~'Mary\'s\, John\'s\, and Boris\'s laptops'` — block `example.org` for everyone except the client named `Mary's, John's, and Boris's laptops`. Note that comma (`,`) must be escaped as well.
 * `||example.org^$client=~Mom|~Dad|Kids` -- block `example.org` for `Kids`, but not for `Mom` and `Dad`. This example demonstrates how to specify multiple clients in one rule.
 
-#### <a id="important"></a> `important`
+#### <a id="important"></a> <a id="important"></a> `important`
 
 The `$important` modifier applied to a rule increases its priority over any other rule without \$important modifier. Even over basic exception rules.
 
@@ -236,3 +252,15 @@ example.org
 ```
 
 If a string is not a valid domain (e.g. `*.example.org`), AdGuard Home will consider it to be an [adblock-style](#adblock-style) rule.
+
+## <a id="hostlists-compiler"></a> Hostlists compiler
+
+If you are maintaining a blocklist and use different sources in it, [Hostlists compiler](https://github.com/AdguardTeam/HostlistCompiler) may be useful to you.
+
+This is a simple tool that makes it easier to compile a hosts blocklist compatible with AdGuard Home or any other AdGuard product with DNS filtering.
+
+What it's capable of:
+
+1. Compile a single blocklist from multiple sources.
+2. Exclude the rules you don't need.
+3. Cleanup the resulting list: deduplicate, remove invalid rules, compress the list.
