@@ -2,7 +2,7 @@
 
 * [Introduction](#introduction)
 * [Rules examples](#examples)
-* [Adblock-style syntax](#adblock-syntax)
+* [Adblock-style syntax](#adblock-style)
     * [Special characters](#special-characters)
     * [Regular expressions support](#regular-expressions)
     * [Rule modifiers](#modifiers)
