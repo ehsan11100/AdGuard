@@ -11,6 +11,7 @@ Most of these settings can be changed via the web-based admin interface. However
 * [Configuration file](#configuration-file)
 * [Reset Web Password](#password-reset)
 * [Profiling with pprof](#pprof)
+* [Additional DHCP options](#dhcp-options)
 
 <a id="command-line"></a>
 ## Command-line arguments
@@ -230,6 +231,8 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
      * `dhcpv6` - DHCPv6 settings
        * `range_start` - the first IP address to be assigned to a client
        * `lease_duration` - lease TTL in seconds
+       * `ra_slaac_only` - send RA packets forcing the clients to use SLAAC
+       * `ra_allow_slaac` - send RA packets making the clients to choose between SLAAC and DHCPv6
  * `tls` - HTTPS/DOH/DOT settings.
    * `enabled` - encryption (DOT/DOH/HTTPS) status.
    * `server_name` - the hostname of your HTTPS/TLS server.
@@ -318,3 +321,33 @@ or with `go tool pprof`:
     go tool pprof -top http://localhost:6060/debug/pprof/heap
 
 For a list of supported profiles go to `http://localhost:6060/debug/pprof/`.
+
+
+<a id="dhcp-options"></a>
+## Additional DHCP options
+
+There are several configuration parameters for DHCP that can't be set via AGH administrator dashboard.
+
+`dhcp.dhcpv4.options` - list of DHCPv4 custom options
+
+Option with arbitrary hexadecimal data:
+
+    DEC_CODE hex HEX_DATA
+
+where DEC_CODE is a decimal DHCPv4 option code in range [1..255]
+
+Option with IP data (only 1 IP is supported):
+
+    DEC_CODE ip IP_ADDR
+
+Example:
+
+    ...
+    options:
+      - 123 hex abcdef
+      - 123 ip 1.2.3.4
+
+`dhcp.dhcpv6.ra_slaac_only` - if `true`, send RA packets forcing the clients to use SLAAC.
+DHCPv6 server won't be started in this case.
+
+`dhcp.dhcpv6.ra_allow_slaac` - if `true`, send RA packets making the clients to choose between SLAAC and DHCPv6
