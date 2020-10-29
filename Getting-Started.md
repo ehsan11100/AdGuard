@@ -153,18 +153,20 @@ This setup will automatically cover all the devices connected to your home route
 5. Choose ’Use the following DNS server addresses’ and enter your AdGuard Home address there.
 
 <a id="running-without-superuser"></a>
-## Running without superuser (linux only)
+## Running without superuser (Linux only)
 
 You can run AdGuard Home without superuser privileges, but you need to either grant the binary a capability (on Linux) or instruct it to use a different port (all platforms).
 
-#### Granting the CAP_NET_BIND_SERVICE capability (on Linux)
+#### Granting the necessary capabilities
 
-Note: using this method requires the `setcap` utility.  You may need to install it using your Linux distribution's package manager.
+Using this method requires the `setcap` utility.  You may need to install it
+using your Linux distribution's package manager.
 
-To allow AdGuard Home running on Linux to listen on port 53 without superuser privileges, run:
+To allow AdGuard Home running on Linux to listen on port 53 without superuser
+privileges, as well as bind to a particular interface run:
 
 ```bash
-sudo setcap CAP_NET_BIND_SERVICE=+eip ./AdGuardHome
+sudo setcap 'CAP_NET_BIND_SERVICE=+eip CAP_NET_RAW=+eip' ./AdGuardHome
 ```
 
 Then run `./AdGuardHome` as a unprivileged user.
