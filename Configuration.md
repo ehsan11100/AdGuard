@@ -153,7 +153,7 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
  * `bind_port` — Web interface IP port to listen on.
  * `users` — Web users info
    * `name` — User name
-   * `password` — Password
+   * `password` — BCrypt-encrypted password
  * `http_proxy` — proxy URL for HTTP client (e.g. "http://user:password@server:port/").  Supports "http", "https" and "socks5" scheme.
  * `web_session_ttl` — Web session TTL (in hours) - a web user will stay signed in for this amount of time.
  * `rlimit_nofile` — Limit on the maximum number of open files for server process (Linux and macOS).  Set to 0 to use the system default value.
@@ -260,47 +260,17 @@ Removing an entry from settings file will reset it to the default value. Deletin
 <a id="password-reset"></a>
 ## Reset Web Password
 
-Please follow these steps to create a new password for your user account:
+AdGuard Home stores password as a BCrypt-encoded hash.
 
-1. Install `htpasswd`, which is a part of *Apache2 Web Server*:
+Here's what you need to do to change the password:
 
-    * Ubuntu:
+1. Stop AdGuard Home
+2. Edit `AdGuardHome.yaml`
+3. Find `password` field there
+4. Replace it with the new value. You can use `htpasswd` tool or any online BCrypt generation tool (there are many available online).
+5. Start AdGuard Home
 
-          sudo apt-get install apache2
-
-    * Fedora:
-
-          sudo dnf install apache2
-
-    * Windows:
-
-      Choose a download option from https://httpd.apache.org/docs/current/platform/windows.html#down, extract the downloaded file into a new directory, open a terminal, navigate to its `bin` directory with `cd` command and run `.\Htpasswd`.
-
-      Other versions of `htpasswd` could be used, but **only** if they support *bcrypt* hash encryption, which rules out e.g. most web-hosted `htpasswd` generators.
-
-2. Use `htpasswd` utility to generate a new hash:
-
-    * Ubuntu/Fedora:
-
-          htpasswd -B -n -b <USERNAME> <PASSWORD>
-
-    * Windows:
-
-          .\Htpasswd -B -n -b <USERNAME> <PASSWORD>
-
-    It will print `<USERNAME>:<HASH>` to the terminal.
-
-3. Open `AdGuardHome.yaml` in the text editor:
-
-        sudo <EDITOR> ./AdGuardHome.yaml
-
-4. In the `users:` section find your user name and set `<HASH>` value for the `password` setting:
-
-        users:
-        - name: ...
-        password: <HASH>
-
-5. Save the file, restart AGH.  Now you'll be able to log in to Web interface using your new password.
+Now you'll be able to log in to Web interface using your new password.
 
 
 <a id="pprof"></a>
