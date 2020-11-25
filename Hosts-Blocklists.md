@@ -7,6 +7,7 @@
     * [Regular expressions support](#regular-expressions)
     * [Rule modifiers](#modifiers)
         * [client](#client)
+        * [dnstype](#dnstype)
         * [important](#important)
         * [badfilter](#badfilter)
         * [ctag](#ctag)
@@ -98,7 +99,7 @@ Example:
 
 > **IMPORTANT:** If a rule contains a modifier not listed in this document, the whole rule **must be ignored**. This way we will avoid false-positives when people are trying to use unmodified browser ad blockers' filter lists like EasyList or EasyPrivacy.
 
-#### <a id="client"></a> <a id="client"></a> `client`
+#### <a id="client"></a> `client`
 
 The `$client` modifier allows specifying clients this rule will be working for. It accepts both client names, IP addresses or CIDR ranges.
 
@@ -127,6 +128,39 @@ Client names usually contain spaces or other special characters, that's why you 
 * `||example.org^$client=~'Mary\'s\, John\'s\, and Boris\'s laptops'` — block `example.org` for everyone except the client named `Mary's, John's, and Boris's laptops`. Note that comma (`,`) must be escaped as well.
 * `||example.org^$client=~Mom|~Dad|Kids` -- block `example.org` for `Kids`, but not for `Mom` and `Dad`. This example demonstrates how to specify multiple clients in one rule.
 * `||example.org^$client=192.168.0.0/24` -- block `example.org` for all clients with IP addresses in the range `192.168.0.0-192.168.0.255`
+
+#### <a id="dnstype"></a> `dnstype`
+
+The `$dnstype` modifier allows specifying DNS request type on which this rule
+will be triggered.
+
+The syntax is:
+
+```
+$dnstype=value1|value2|...
+$dnstype=~value1|~value2|~...
+```
+
+The names of the types are case-insensitive, but are validated against a set of
+actual DNS resource record (RR) types.
+
+This:
+
+```
+$dnstype=~value1|value2
+```
+
+Is equivalent to this:
+
+```
+$dnstype=value2
+```
+
+**Examples**
+
+* `||example.org^$dnstype=AAAA` — Block IPv6 DNS requests for `example.org`.
+* `||example.org^$dnstype=~A|~CNAME` — Only allow `A` and `CNAME` DNS requests
+  for `example.org`, block out the rest.
 
 #### <a id="important"></a> <a id="important"></a> `important`
 
