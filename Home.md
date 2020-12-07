@@ -29,6 +29,7 @@ The wiki was just recently created, so there isn't much content (yet).
 * [Configuration](Configuration)
 * [Comparing AdGuard Home to other solutions](Comparison)
 * [AdGuard Home as a DNS-over-HTTPS or DNS-over-TLS server](Encryption)
+* [AdGuard Home as a DNSCrypt server](DNSCrypt)
 * [How to install and run AdGuard Home on Raspberry Pi](Raspberry-Pi)
 * [How to install and run AdGuard Home on a Virtual Private Server](VPS)
 * [OpenRC service-script](OpenRC)

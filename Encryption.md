@@ -4,7 +4,9 @@ We are proud to say that AdGuard Home supports all modern DNS encryption protoco
 
 - [DNS-over-HTTPS](https://en.wikipedia.org/wiki/DNS_over_HTTPS)
 - [DNS-over-TLS](https://en.wikipedia.org/wiki/DNS_over_TLS)
-- [DNSCrypt](https://dnscrypt.info/) (upstreams only)
+- [DNS-over-QUIC](https://tools.ietf.org/html/draft-ietf-dprive-dnsoquic-01)
+
+> AdGuard Home also supports [DNSCrypt](https://dnscrypt.info/) (both client-side and server-side). [Read this](DNSCrypt) to learn about configuring AdGuard Home as a DNSCrypt server.
 
 In this guide we will explain how to setup your own "Secure DNS" server with AdGuard Home.
 
@@ -98,20 +100,26 @@ There's also a really nice and easy-to-use alternative to CertBot called [lego](
 
 ## Configure your devices
 
-Please note that encrypted DNS protocols are supported only on Android 9. So you need to install additional software for other operating systems.
-
-Here's a list of software you can use.
-
 ### Android
 
-- Android 9 supports DNS-over-TLS natively. To configure it, go to Settings → Network & internet → Advanced → Private DNS and enter your domain name there.
-- [AdGuard for Android](https://adguard.com/en/adguard-android/overview.html) supports `DNS-over-HTTPS` and `DNS-over-TLS`.
+- Android 9 supports `DNS-over-TLS` natively. To configure it, go to Settings → Network & internet → Advanced → Private DNS and enter your domain name there.
+- [AdGuard for Android](https://adguard.com/en/adguard-android/overview.html) supports `DNS-over-HTTPS`, `DNS-over-TLS`, `DNSCrypt` and `DNS-over-QUIC`.
 - [Intra](https://getintra.org/) adds `DNS-over-HTTPS` support to Android.
 
 ### iOS
 
+- iOS 14 and higher support `DNS-over-TLS` and `DNS-over-HTTPS` natively via configuration profiles. In order to make things easier, AdGuard Home can generate these configuration profiles for you. Just head to "Setup Guide" -> "DNS Privacy" and scroll to iOS.
+- [AdGuard for iOS](https://adguard.com/en/adguard-ios/overview.html) supports `DNS-over-HTTPS`, `DNS-over-TLS`, `DNSCrypt` and `DNS-over-QUIC`.
 - [DNSCloak](https://itunes.apple.com/app/id1452162351) supports `DNS-over-HTTPS` but in order to configure it to use your own server, you'll need to generate a [DNS Stamp](https://dnscrypt.info/stamps) for it.
-- [AdGuard for iOS](https://adguard.com/en/adguard-ios/overview.html) supports `DNS-over-HTTPS` and `DNS-over-TLS`.
+
+### Windows
+
+- Windows 10 Build 19628 and higher support `DNS-over-HTTPS` natively.
+- [AdGuard for Windows](https://adguard.com/en/adguard-windows/overview.html) supports `DNS-over-HTTPS`, `DNS-over-TLS`, `DNSCrypt` and `DNS-over-QUIC`.
+
+### MacOS
+
+- MacOS Big Sur and higher support `DNS-over-TLS` and `DNS-over-HTTPS` natively via configuration profiles. In order to make things easier, AdGuard Home can generate these configuration profiles for you. Just head to "Setup Guide" -> "DNS Privacy" and scroll to iOS.
 
 ### Other implementations
 
@@ -119,4 +127,5 @@ Here's a list of software you can use.
 - [dnsproxy](https://github.com/AdguardTeam/dnsproxy) supports all known secure DNS protocols.
 - [dnscrypt-proxy](https://github.com/jedisct1/dnscrypt-proxy) supports `DNS-over-HTTPS`.
 - [Mozilla Firefox](https://www.mozilla.org/firefox/) supports `DNS-over-HTTPS`.
-- You will find more implementations [here](https://dnscrypt.info/implementations) and [here](https://dnsprivacy.org/wiki/display/DP/DNS+Privacy+Clients).
+
+You can find more implementations [here](https://dnscrypt.info/implementations) and [here](https://dnsprivacy.org/wiki/display/DP/DNS+Privacy+Clients).

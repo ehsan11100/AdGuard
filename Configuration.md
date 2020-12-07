@@ -243,8 +243,14 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
   - `enabled` - encryption (DOT/DOH/HTTPS) status.
   - `server_name` - the hostname of your HTTPS/TLS server.
   - `force_https` - if true, forces HTTP->HTTPS redirect.
-  - `port_https` - HTTPS port. If 0, HTTPS will be disabled.
-  - `port_dns_over_tls` - DNS-over-TLS port. If 0, DOT will be disabled.
+  - `port_https` - HTTPS port.  If `0`, HTTPS is disabled.
+  - `port_dns_over_tls` - DNS-over-TLS port.  If `0`, DOT is disabled.
+  - `port_dns_over_quic` - DNS-over-QUIC port.  If `0`, DOQ is disabled.
+  - `port_dnscrypt` - DNSCrypt port.  If `0`, DNSCrypt is disabled.  See
+    [DNSCrypt] for more information and examples.
+  - `dnscrypt_config_file` - DNSCrypt configuration file path.  **Must** be set
+    if `port_dnscrypt` is not `0`.  See the [`dnscrypt`] utility documentation
+    for examples of configuration generation.
   - `allow_unencrypted_doh` - Allow DOH queries via unencrypted HTTP (e.g. for reverse proxying)
   - `certificate_chain` - PEM-encoded certificates chain.
   - `strict_sni_check` - Reject connection if the client uses server name (in SNI) that doesn't match the certificate
@@ -261,6 +267,9 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
   - `verbose` — Enable our disables debug verbose output (default: false)
 
 Removing an entry from settings file will reset it to the default value. Deleting the file will reset all settings to the default values.
+
+[DNSCrypt]: https://github.com/AdguardTeam/AdGuardHome/wiki/DNSCrypt
+[`dnscrypt`]: https://github.com/ameshkov/dnscrypt
 
 <a id="password-reset"></a>
 
