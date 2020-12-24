@@ -8,6 +8,7 @@
     * [Rule modifiers](#modifiers)
         * [client](#client)
         * [dnstype](#dnstype)
+        * [dnsrewrite](#dnsrewrite)
         * [important](#important)
         * [badfilter](#badfilter)
         * [ctag](#ctag)
@@ -131,6 +132,8 @@ Client names usually contain spaces or other special characters, that's why you 
 
 #### <a id="dnstype"></a> `dnstype`
 
+(Since **v0.105.0**.)
+
 The `$dnstype` modifier allows specifying DNS request type on which this rule
 will be triggered.
 
@@ -161,6 +164,121 @@ $dnstype=value2
 * `||example.org^$dnstype=AAAA` — Block IPv6 DNS requests for `example.org`.
 * `||example.org^$dnstype=~A|~CNAME` — Only allow `A` and `CNAME` DNS requests
   for `example.org`, block out the rest.
+
+#### <a id="dnsrewrite"></a> `dnsrewrite`
+
+(Since **v0.105.0**.)
+
+The `$dnsrewrite` response modifier allows replacing the content of the response
+to the DNS request for the matching hosts.
+
+The shorthand syntax is:
+
+```
+$dnsrewrite=1.2.3.4
+$dnsrewrite=abcd::1234
+$dnsrewrite=example.net
+$dnsrewrite=REFUSED
+```
+
+The keywords, like `REFUSED`, MUST be in all caps.
+
+The full syntax is of the form `RCODE;RRTYPE;VALUE`:
+
+```
+$dnsrewrite=NOERROR;A;1.2.3.4
+$dnsrewrite=NOERROR;AAAA;abcd::1234
+$dnsrewrite=NOERROR;CNAME;example.net
+$dnsrewrite=REFUSED;;
+```
+
+The `CNAME` one is special because _AdGuardHome_ will resolve the host and add
+its info to the response.  That is, if example.net has IP `1.2.3.4`, and the
+user has this in their filter rules:
+
+```
+||example.com^$dnsrewrite=example.net
+```
+
+Or:
+
+```
+||example.com^$dnsrewrite=NOERROR;CNAME;example.net
+```
+
+Then the response will be something like:
+
+```
+$ nslookup example.com my.adguard.local
+Server:		my.adguard.local
+Address:	127.0.0.1#53
+
+Non-authoritative answer:
+example.com	canonical name = example.net.
+Name:	example.net
+Address: 1.2.3.4
+```
+
+Keyword rewrites (for example, `REFUSED`) take precedence over the other.  Next,
+the `CNAME` rewrite.  After that, all other records's values are summed as one
+response, so this:
+
+```
+||example.com^$dnsrewrite=NOERROR;A;1.2.3.4
+||example.com^$dnsrewrite=NOERROR;A;1.2.3.5
+```
+
+Will result in a response with two `A` records.
+
+Currently supported RR types with examples:
+
+* `||4.3.2.1.in-addr.arpa.^$dnsrewrite=NOERROR;PTR;example.net.` adds a `PTR`
+  record for reverse DNS.  Reverse DNS requests for `1.2.3.4` to the
+  _AdGuardHome_ DNS server will result in `example.net`.
+
+  **NOTE:** the IP MUST be in reverse order, and the value MUST contain a final
+  dot.  See [RFC](https://tools.ietf.org/html/rfc1035#section-3.5).
+
+* `||example.com^$dnsrewrite=NOERROR;A;1.2.3.4` adds an `A` record with the
+  value `1.2.3.4`.
+
+* `||example.com^$dnsrewrite=NOERROR;AAAA;abcd::1234` adds an `AAAA` record with
+  the value `abcd::1234`.
+
+* `||example.com^$dnsrewrite=NOERROR;CNAME;example.org` adds a `CNAME` record.
+  See explanation above.
+
+* `||example.com^$dnsrewrite=NOERROR;HTTPS;32 example.com alpn=h3` adds an
+  `HTTPS` record.  Only a subsed of parameter values is supported: values must
+  be `contiguous` and, where a `value-list` is expected`, only one value is
+  currently supported:
+
+  ```
+  ipv4hint=127.0.0.1             // Supported.
+  ipv4hint="127.0.0.1"           // Unsupported.
+  ipv4hint=127.0.0.1,127.0.0.2   // Unsupported.
+  ipv4hint="127.0.0.1,127.0.0.2" // Unsupported.
+  ```
+
+  This will change in the future.
+
+* `||example.com^$dnsrewrite=NOERROR;MX;32 example.mail` adds an `MX` record
+  with precedence value `32` and exchange value `example.mail`.
+
+* `||example.com^$dnsrewrite=NOERROR;SVCB;32 example.com alpn=h3` adds and
+  `SVCB` value.  See `HTTPS` above.
+
+* `||example.com^$dnsrewrite=NOERROR;TXT;hello_world` adds a `TXT` record with
+  the value `hello_world`.
+
+* `||example.com^$dnsrewrite=NXDOMAIN;;` responds with an `NXDOMAIN` code.
+
+Exception rules remove one or all rules:
+
+* `||example.com^$dnsrewrite` removes all DNS rewrite rules.
+
+* `||example.com^$dnsrewrite=1.2.3.4` removes the DNS rewrite rule that adds an
+  `A` record with the value `1.2.3.4`.
 
 #### <a id="important"></a> <a id="important"></a> `important`
 

@@ -173,7 +173,7 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
   - **Protection settings**
     - `protection_enabled` — Whether any kind of filtering and protection should be done, when off it works as a plain dns forwarder.
     - `filtering_enabled` — Filtering of DNS requests based on filter lists.
-    - `blocking_mode` — Specifies how to block DNS requests. "nxdomain" (default): respond with NXDOMAIN status; "null_ip": respond with the unspecified IP address (0.0.0.0); or "custom_ip": reponsd with `blocking_ipv4` or `blocking_ipv6`.
+    - `blocking_mode` — Specifies how to block DNS requests. "nxdomain" (default): respond with NXDOMAIN status; "null_ip": respond with the unspecified IP address (0.0.0.0); or "custom_ip": respond with `blocking_ipv4` or `blocking_ipv6`.
     - `blocking_ipv4` - IP address to be returned for a blocked A request if `blocking_mode` is set to `custom_ip`
     - `blocking_ipv6` - IP address to be returned for a blocked AAAA request if `blocking_mode` is set to `custom_ip`
     - `blocked_response_ttl` — For how many seconds the clients should cache a filtered response. Low values are useful on LAN if you change filters very often, high values are useful to increase performance and save traffic.
