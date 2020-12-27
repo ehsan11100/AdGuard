@@ -46,12 +46,27 @@ The image exposes two volumes for data/configuration persistence. You should cre
 
 Use the following command to create a new container and run AdGuard Home:
 ```bash
-docker run --name adguardhome -v /my/own/workdir:/opt/adguardhome/work -v /my/own/confdir:/opt/adguardhome/conf -p 53:53/tcp -p 53:53/udp -p 67:67/udp -p 68:68/tcp -p 68:68/udp -p 80:80/tcp -p 443:443/tcp -p 853:853/tcp -p 3000:3000/tcp -d adguard/adguardhome
+docker run --name adguardhome \
+    -v /my/own/workdir:/opt/adguardhome/work \
+    -v /my/own/confdir:/opt/adguardhome/conf \
+    -p 53:53/tcp -p 53:53/udp \
+    -p 80:80/tcp -p 3000:3000/tcp \
+    -p 67:67/udp -p 68:68/tcp -p 68:68/udp \
+    -p 443:443/tcp \
+    -p 853:853/tcp \
+    -d adguard/adguardhome
 ```
+
+Now you can open the browser and navigate to http://127.0.0.1:3000/ to control your AdGuard Home service.
 
 > Don't forget to use your own **data** and **config** directories!
 
-Now you can open the browser and navigate to http://127.0.0.1:3000/ to control your AdGuard Home service.
+> Ports mappings you may need:
+> * `-p 67:67/udp -p 68:68/tcp -p 68:68/udp` - add if you intend to use AdGuard Home as a DHCP server.
+> * `-p 443:443/tcp` - add if you are going to run AdGuard Home as an [HTTPS/DNS-over-HTTPS](https://github.com/AdguardTeam/Adguardhome/wiki/Encryption) server.
+> * `-p 853:853/tcp` - add if you are going to run AdGuard Home as a [DNS-over-TLS](https://github.com/AdguardTeam/Adguardhome/wiki/Encryption) server.
+> * `-p 784:784/udp` - add if you are going to run AdGuard Home as a [DNS-over-QUIC](https://github.com/AdguardTeam/Adguardhome/wiki/Encryption) server.
+> * `-p 5443:5443/tcp -p 5443:5443/udp` - add if you are going to run AdGuard Home as a [DNSCrypt](https://github.com/AdguardTeam/Adguardhome/wiki/DNSCrypt) server.
 
 #### 4. Control the container
 
