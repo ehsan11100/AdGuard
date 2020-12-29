@@ -11,7 +11,6 @@ Most of these settings can be changed via the web-based admin interface. However
 - [Configuration file](#configuration-file)
 - [Reset Web Password](#password-reset)
 - [Profiling with pprof](#pprof)
-- [Additional DHCP options](#dhcp-options)
 
 <a id="command-line"></a>
 
@@ -224,21 +223,24 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
   - `name` — Name of the filter. If it's an adguard syntax filter it will get updated automatically, otherwise it stays unchanged.
   - `last_updated` — Time when the filter was last updated from server.
   - `ID` - filter ID (must be unique).
-- `dhcp` - Built-in DHCP server configuration.
+- `dhcp` - Built-in DHCP server configuration.  See also the [DHCP] article.
   - `enabled` - DHCP server status.
-  - `interface_name` - network interface name (eth0, en0 and so on).
-  - `dhcpv4` - DHCPv4 settings
+  - `interface_name` - network interface name (`eth0`, `en0`, and so on).
+  - `dhcpv4` - DHCPv4 settings.
     - `gateway_ip` - gateway IP address.
     - `subnet_mask` - subnet mask.
-    - `range_start` - start IP address of the controlled range.
-    - `range_end` - end IP address of the controlled range.
-    - `lease_duration` - lease duration in seconds. If 0, using default duration (24 hours).
-    - `options` - custom options with arbitrary hex data (`DEC_CODE hex HEX_DATA`) or IP address (`DEC_CODE ip IP_ADDR`) where DEC_CODE is a decimal DHCPv4 option code in range [1..255]
-  - `dhcpv6` - DHCPv6 settings
-    - `range_start` - the first IP address to be assigned to a client
-    - `lease_duration` - lease TTL in seconds
-    - `ra_slaac_only` - send RA packets forcing the clients to use SLAAC
-    - `ra_allow_slaac` - send RA packets making the clients to choose between SLAAC and DHCPv6
+    - `range_start`, `range_end` - the start and the end of the leased IP
+      address range.
+    - `lease_duration` - lease duration in seconds.  If `0`, use the default
+      duration of 24 hours.
+    - `options` - custom DHCP options.  See the [DHCP] article section on these
+      options for more information.
+  - `dhcpv6` - DHCPv6 settings.
+    - `range_start` - the first IP address to be assigned to a client.
+    - `lease_duration` - same as in v4 above.
+    - `ra_slaac_only` and `ra_allow_slaac` - send RA packets either forcing the
+      clients to use SLAAC or allowing them to choose.  See the [DHCP] article
+      section on these options for more information.
 - `tls` - HTTPS/DOH/DOT settings.
   - `enabled` - encryption (DOT/DOH/HTTPS) status.
   - `server_name` - the hostname of your HTTPS/TLS server.
@@ -268,6 +270,7 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
 
 Removing an entry from settings file will reset it to the default value. Deleting the file will reset all settings to the default values.
 
+[DHCP]: https://github.com/AdguardTeam/AdGuardHome/wiki/DHCP
 [DNSCrypt]: https://github.com/AdguardTeam/AdGuardHome/wiki/DNSCrypt
 [`dnscrypt`]: https://github.com/ameshkov/dnscrypt
 
@@ -306,33 +309,3 @@ or with `go tool pprof`:
     go tool pprof -top http://localhost:6060/debug/pprof/heap
 
 For a list of supported profiles go to `http://localhost:6060/debug/pprof/`.
-
-<a id="dhcp-options"></a>
-
-## Additional DHCP options
-
-There are several configuration parameters for DHCP that can't be set via AGH administrator dashboard.
-
-`dhcp.dhcpv4.options` - list of DHCPv4 custom options
-
-Option with arbitrary hexadecimal data:
-
-    DEC_CODE hex HEX_DATA
-
-where DEC_CODE is a decimal DHCPv4 option code in range [1..255]
-
-Option with IP data (only 1 IP is supported):
-
-    DEC_CODE ip IP_ADDR
-
-Example:
-
-    ...
-    options:
-      - 123 hex abcdef
-      - 123 ip 1.2.3.4
-
-`dhcp.dhcpv6.ra_slaac_only` - if `true`, send RA packets forcing the clients to use SLAAC.
-DHCPv6 server won't be started in this case.
-
-`dhcp.dhcpv6.ra_allow_slaac` - if `true`, send RA packets making the clients to choose between SLAAC and DHCPv6
