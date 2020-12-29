@@ -249,7 +249,7 @@ Currently supported RR types with examples:
   See explanation above.
 
 * `||example.com^$dnsrewrite=NOERROR;HTTPS;32 example.com alpn=h3` adds an
-  `HTTPS` record.  Only a subsed of parameter values is supported: values must
+  `HTTPS` record.  Only a subset of parameter values is supported: values must
   be `contiguous` and, where a `value-list` is expected`, only one value is
   currently supported:
 
@@ -313,7 +313,7 @@ The rules with the `$badfilter` modifier disable other basic rules to which they
 
 #### <a id="ctag"></a> `ctag`
 
-`$ctag` modifier allows to block domains only for specific types of DNS clients. You can assign tags to clients in AdGuardHome UI. In the future we plan to assign tags automatically by analyzing the behaviour of each client.
+`$ctag` modifier allows to block domains only for specific types of DNS clients. You can assign tags to clients in AdGuardHome UI. In the future we plan to assign tags automatically by analyzing the behavior of each client.
 
 The syntax is:
 

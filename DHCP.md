@@ -72,7 +72,7 @@ use:
     - '6 ip 1.2.3.4'
 ```
 
-An easier format for multiple IP addresses is planned, see issue #2395.
+An easier format for multiple IP addresses is planned, see issue [#2385].
 
  ###  <a id="config-6" href="#config-6">DHCPv6 Options</a>
 
@@ -82,6 +82,7 @@ clients to use SLAAC.  The DHCPv6 server won't be started in this case.
 The option `dhcp.dhcpv6.ra_allow_slaac`, if `true`, sends RA packets allowing
 the clients to choose between SLAAC and DHCPv6.
 
+[#2385]:         https://github.com/AdguardTeam/AdGuardHome/issues/2385
 [configuration]: https://github.com/AdguardTeam/AdGuardHome/wiki/Configuration
 
 ##  <a id="autohosts" href="#autohosts">Automatic Hosts</a>
@@ -92,4 +93,6 @@ a machine called “workstation” in the network, and it sends a DHCP request w
 option 12 set to `workstation`, you can reach it over HTTP on the host
 `http://workstation.lan`.
 
-Configuring custom TLDs instead of the `.lan` one is planned, see issue #2393.
+Configuring custom TLDs instead of the `.lan` one is planned, see issue [#2393].
+
+[#2393]: https://github.com/AdguardTeam/AdGuardHome/issues/2393
