@@ -9,12 +9,11 @@
 * [Are there any known limitations?](#limitations)
 * [Why am I getting "bind: address already in use" error when trying to install on Ubuntu?](#bindinuse)
 * [How to configure a reverse proxy server for AdGuard Home?](#reverseproxy)
+* [How to fix “permission denied” errors on Fedora?](#fedora)
 
 ## Answers:
 
-<a id="doesntblock"></a>
-
-### Why AdGuard Home doesn't block ads?
+### <a href="#doesntblock" id="doesntblock">Why AdGuard Home doesn't block ads?</a>
 
 Suppose you expect that AdGuard Home must block `somebadsite.com` but for some reason it doesn't.  Let's try to resolve this issue.
 
@@ -52,9 +51,8 @@ Now that you are sure that your device uses AdGuard Home as default DNS server, 
 6. You have no custom rules in `Filters -> Custom filtering rules` that may interfere.
 
 
-<a id="webaddr"></a>
 
-### After installing AdGuard Home, how to change dashboard interface's address?
+### <a href="#webaddr" id="webaddr">After installing AdGuard Home, how to change dashboard interface's address?</a>
 
 1. Open `AdGuardHome.yaml` in the text editor
 2. Modify `bind_host:` value to set a new network interface, e.g.:
@@ -68,9 +66,8 @@ Now that you are sure that your device uses AdGuard Home as default DNS server, 
 	`./AdGuardHome -s restart`
 
 
-<a id="defaultdns"></a>
 
-### How to set up AdGuard Home as default DNS server?
+### <a href="#defaultdns" id="defaultdns">How to set up AdGuard Home as default DNS server?</a>
 
 #### Router
 
@@ -113,9 +110,8 @@ This setup will automatically cover all the devices connected to your home route
 4. In the DNS field enter your AdGuard Home server addresses.
 
 
-<a id="pixelsrv"></a>
 
-### How to configure AdGuard Home to run together with pixelsrv-tls?
+### <a href="#pixelsrv" id="pixelsrv">How to configure AdGuard Home to run together with pixelsrv-tls?</a>
 
 1. Open dashboard
 2. Go to `Settings` -> `DNS settings`
@@ -124,14 +120,13 @@ This setup will automatically cover all the devices connected to your home route
 5. Click `Save`
 
 
-<a id="limitations"></a>
 
-### Are there any known limitations?
+### <a id="limitations">Are there any known limitations?</a>
 
 Here are some examples of what cannot be blocked by a DNS-level blocker:
 
-    YouTube, Twitch ads
-    Facebook, Twitter, Instagram sponsored posts
+ *  YouTube, Twitch ads
+ *  Facebook, Twitter, Instagram sponsored posts
 
 Essentially, any advertising that shares a domain with content cannot be blocked by a DNS-level blocker.
 
@@ -143,9 +138,8 @@ We're going to bring this feature support to AdGuard Home in the future.
 Unfortunately, even in this case, there still will be cases when this won't be enough or would require quite complicated configuration.
 
 
-<a id="bindinuse"></a>
 
-### Why am I getting "bind: address already in use" error when trying to install on Ubuntu?
+### <a href="#bindinuse" id="bindinuse">Why am I getting "bind: address already in use" error when trying to install on Ubuntu?</a>
 
 Because 127.0.0.1:53 which is used for DNS is already occupied by another program.
 
@@ -183,9 +177,8 @@ Follow these steps:
     ```
 
 
-<a id="reverseproxy"></a>
 
-### How to configure a reverse proxy server for AdGuard Home?
+### <a href="#reverseproxy" id="reverseproxy">How to configure a reverse proxy server for AdGuard Home?</a>
 
 If you're running a web server already and you want to access AdGuard Home dashboard UI from an URL like `http://YOUR_SERVER/aghome/` you can use this configuration for your web server:
 
@@ -210,3 +203,28 @@ If you're running a web server already and you want to access AdGuard Home dashb
 
 When you use TLS on your reverse proxy server, there's no need to use TLS on AdGuard Home.
 Set `allow_unencrypted_doh: false` in AdGuardHome.yaml to allow AdGuard Home respond to DoH requests without TLS encryption.
+
+
+
+### <a href="#fedora" id="fedora">How to fix “permission denied” errors on Fedora?</a>
+
+1.  Moved the `AdGuardHome` binary to `/usr/local/bin`.
+1.  As `root`, execute the following command to change the security context of
+    the file:
+    ```
+    # chcon -t bin_t /usr/local/bin/AdGuardHome
+    ```
+1.  Add the required firewall rules in order to make it reachable through the
+    network.  For example:
+    ```
+    # firewall-cmd --new-zone=adguard --permanent
+    # firewall-cmd --zone=adguard --add-source=192.168.0.14/24 --permanent
+    # firewall-cmd --zone=adguard --add-port=3000/tcp --permanent
+    # firewall-cmd --zone=adguard --add-port=53/udp --permanent
+    # firewall-cmd --zone=adguard --add-port=80/tcp --permanent
+    # firewall-cmd --reload
+    ```
+
+See [issue 765].
+
+[issue 765]: https://github.com/AdguardTeam/AdGuardHome/issues/765#issuecomment-752262353
