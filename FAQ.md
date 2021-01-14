@@ -10,6 +10,7 @@
 * [Why am I getting "bind: address already in use" error when trying to install on Ubuntu?](#bindinuse)
 * [How to configure a reverse proxy server for AdGuard Home?](#reverseproxy)
 * [How to fix “permission denied” errors on Fedora?](#fedora)
+* [How to uninstall AdGuard Home?](#uninstall) 
 
 ## Answers:
 
@@ -228,3 +229,26 @@ Set `allow_unencrypted_doh: false` in AdGuardHome.yaml to allow AdGuard Home res
 See [issue 765].
 
 [issue 765]: https://github.com/AdguardTeam/AdGuardHome/issues/765#issuecomment-752262353
+
+
+
+### <a href="#uninstall" id="uninstall">How to uninstall AdGuard Home?</a>
+
+The way to uninstall AdGuard Home depends on how you installed it.
+
+> **IMPORTANT:** After uninstalling AdGuard Home, don't forget to change your devices configuration and point them to a different DNS server.
+
+#### Regular installation
+
+In this case you need to do the following:
+
+* Unregister AdGuard Home service: `./AdGuardHome -s uninstall`
+* Remove AdGuard Home directory
+
+#### Docker
+
+Uninstalling is trivial, stop and remove the image.
+
+#### Snap Store
+
+Just one command: `snap remove adguard-home`
