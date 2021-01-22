@@ -1,4 +1,4 @@
-# AdGuard Home - How to write hosts blocklists
+ # AdGuard Home - How to Write Hosts Blocklists
 
 * [Introduction](#introduction)
 * [Rules examples](#examples)

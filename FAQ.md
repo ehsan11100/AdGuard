@@ -1,4 +1,4 @@
-# AdGuard Home - FAQ
+ # AdGuard Home - FAQ
 
 ## Questions:
 

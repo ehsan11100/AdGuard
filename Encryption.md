@@ -1,4 +1,4 @@
-# AdGuard Home - Encryption
+ # AdGuard Home - Encryption
 
 We are proud to say that AdGuard Home supports all modern DNS encryption protocols **out-of-the-box**:
 

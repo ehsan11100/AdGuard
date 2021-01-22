@@ -1,4 +1,4 @@
-# How to set up your own AdGuard Home on Raspberry Pi
+ # How to Install and Run AdGuard Home on a Raspberry Pi
 
 You can install AdGuard Home on your [Raspberry Pi](https://www.raspberrypi.org) and use it to filter out ads. This also saves data traffic.
 
@@ -58,8 +58,8 @@ Go to [AdGuard Home page](https://github.com/AdguardTeam/AdGuardHome#installatio
 Let's download AdGuard Home and unpack it:
 ```bash
 cd $HOME
-wget https://static.adguard.com/adguardhome/release/AdGuardHome_linux_arm.tar.gz
-tar xvf AdGuardHome_linux_arm.tar.gz
+wget https://static.adguard.com/adguardhome/release/AdGuardHome_linux_armv6.tar.gz
+tar xvf AdGuardHome_linux_armv6.tar.gz
 ```
 It will unpack into a new directory called `AdGuardHome`.
 

@@ -7,7 +7,6 @@ Most of these settings can be changed via the web-based admin interface. However
   - [Specifying upstreams for domains](#upstreams-for-domains)
   - [Loading the list of upstream servers from a file](#upstreams-from-file)
   - [Specifying upstreams for rDNS](#upstreams-for-rdns)
-- [Configuring clients friendly names](#friendly-names)
 - [Configuration file](#configuration-file)
 - [Reset Web Password](#password-reset)
 - [Profiling with pprof](#pprof)
@@ -122,29 +121,6 @@ You can do it using the same syntax as for general upstream servers, for example
     [/168.192.in-addr.arpa/]192.168.0.1
 
 This rule instructs AdGuardHome to use `192.168.0.1` DNS server for all rDNS requests to resolve clients' IP addresses `192.168.0.0/16`.
-
-<a id="friendly-names"></a>
-
-## Configuring clients friendly names
-
-It may be useful to set up a friendly name for each IP address that clients use to connect to AdGuard Home. To do this, follow these steps:
-
-1.  Open `/etc/hosts` file in your text editor and add a name for each IP address, for example:
-
-        192.168.0.2    Mom
-        192.168.0.3    Dad
-        192.168.0.4    Sister
-        192.168.0.5    Brother
-
-    Note that on Windows file path to "hosts" file is different: `c:\windows\system32\drivers\etc\hosts`
-
-2.  Restart AdGuard Home
-
-As a result you will see that the clients names are now shown:
-
-![](top-clients-names.png)
-
-In the future, we plan to add more configuration options in this area.
 
 <a id="configuration-file"></a>
 

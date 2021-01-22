@@ -1,4 +1,4 @@
-# AdGuard Home - Getting Started
+ # AdGuard Home - Getting Started
 
 In order to start using AdGuard Home, you need to do a few things:
 
@@ -94,7 +94,7 @@ Here are the other commands you might need to control the service.
 <a id="update"></a>
 ## How to update
 
-![](autoupdate-available.png)
+![](images/autoupdate-available.png)
 
 When a new version is released, AdGuard Home's UI shows a notification message and 'Update Now' button. Simply click on this button and AdGuard Home will be automatically upgraded to the latest version. Your current AdGuard Home executable file is saved inside 'backup' directory along with the current configuration file, so you can revert the changes, if necessary.
 

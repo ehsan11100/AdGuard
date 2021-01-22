@@ -1,4 +1,4 @@
-# AdGuard Home - Docker
+ # AdGuard Home - Docker
 
 &nbsp;
 <p align="center">

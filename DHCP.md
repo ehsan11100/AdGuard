@@ -1,4 +1,4 @@
- #  *AdGuard Home* - DHCP Server
+ # AdGuard Home - DHCP Server
 
  *  [Prerequisites](#prereq)
  *  [Default Options](#default)
