@@ -59,7 +59,7 @@ name while configuring your client. Here's an example:
     * On the client device you can now configure:
         * `DNS-over-TLS`: `tls://my-client.example.org`
         * `DNS-over-QUIC`: `quic://my-client.example.org`
-        * `DNS-over-HTTPS`: `https://example.org/dns-query-my-client`
+        * `DNS-over-HTTPS`: `https://example.org/dns-query/my-client`
 
 ### <a id="clientsettings" href="#clientsettings">Settings</a>
 
