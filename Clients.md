@@ -51,7 +51,7 @@ way to do this, but it may be not good enough if the IP address changes too ofte
 whole range of IP addresses (in the example it is `192.168.0.*`) to the same client.
 3. **MAC address** - using MAC as a client identifier is only possible when 
 AdGuard Home works as a [DHCP server](DHCP).
-4. **Client ID** - this method is supposed to be used for encrypted DNS protocols 
+4. **Client ID** - *(added in v0.105)* this method is supposed to be used for encrypted DNS protocols 
 (DoH, DoT or DoQ). Once this identifier is used, you can use a special domain 
 name while configuring your client. Here's an example:
     * AdGuard Home domain name `example.org`.
