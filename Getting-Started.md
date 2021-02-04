@@ -36,6 +36,7 @@ Other options:
 * (Maintained by @frenck) Home Assistant add-on: https://github.com/hassio-addons/addon-adguard-home
 * (Maintained by @kongfl888) OpenWrt LUCI app: https://github.com/kongfl888/luci-app-adguardhome
 * (Maintained by @graysky2) [Arch Linux](https://www.archlinux.org/), [Arch ARM](https://archlinuxarm.org/), and other Arch-based clones, may build via [adguardhome](https://aur.archlinux.org/packages/adguardhome/) in the [AUR](https://wiki.archlinux.org/index.php/Arch_User_Repository).
+* (Maintained by @gramakri) Cloudron app: https://git.cloudron.io/cloudron/adguard-home-app
 
 
 <a id="first-time"></a>
