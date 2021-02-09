@@ -20,7 +20,8 @@ to it:
 
     Where `example.org` is the name of your host and `./dnscrypt.yaml` is the
     name of the configuration output file.
-3.  In your *AdGuardHome* configuration file (typically `AdGuardHome.yaml`), add
+3.  Before changing the configuration file, it is important to **stop AdGuard Home**.
+    In your *AdGuardHome* configuration file (typically `AdGuardHome.yaml`), add
     the following lines:
 
     ```yaml
