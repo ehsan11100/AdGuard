@@ -57,9 +57,10 @@ name while configuring your client. Here's an example:
     * AdGuard Home domain name `example.org`.
     * In AdGuard Home you add a client with the client ID `my-client`.
     * On the client device you can now configure:
-        * `DNS-over-TLS`: `tls://my-client.example.org`
-        * `DNS-over-QUIC`: `quic://my-client.example.org`
         * `DNS-over-HTTPS`: `https://example.org/dns-query/my-client`
+        * `DNS-over-TLS`: `tls://my-client.example.org` (requires a [Wildcard certificate](https://en.wikipedia.org/wiki/Wildcard_certificate))
+        * `DNS-over-QUIC`: `quic://my-client.example.org` (requires a [Wildcard certificate](https://en.wikipedia.org/wiki/Wildcard_certificate))
+        
 
 ### <a id="clientsettings" href="#clientsettings">Settings</a>
 
