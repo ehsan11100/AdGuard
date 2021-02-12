@@ -59,7 +59,7 @@ Now that you are sure that your device uses AdGuard Home as default DNS server, 
 To troubleshoot a complicated issue, it is often needed to enable verbose-level logging in AdGuard Home. Here's how it should be done:
 
 1. Stop AdGuard Home
-2. Configure AdGuard Home to collect logs. In order to do that, edit `AdGuardHome.yaml`:
+2. Configure AdGuard Home to write verbose-level log. In order to do that, edit `AdGuardHome.yaml`:
     * Set path to the log file in `log_file`
     * Set `verbose` to `True`
 3. Restart AdGuard Home and reproduce the issue
