@@ -285,3 +285,10 @@ or with `go tool pprof`:
     go tool pprof -top http://localhost:6060/debug/pprof/heap
 
 For a list of supported profiles go to `http://localhost:6060/debug/pprof/`.
+
+Alternatively, you may want to simply download the file and analyze it later:
+
+```
+wget http://localhost:6060/debug/pprof/heap
+go tool -http=:8080 heap
+```
