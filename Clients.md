@@ -45,22 +45,30 @@ First of all, you need to decide how you would like to identify the client.
 
 There are several options to do this.
 
-1. **IP address** - for instance, `192.168.0.1`. This is the easiest 
-way to do this, but it may be not good enough if the IP address changes too often.
-2. **CIDR range** - for instance, `192.168.0.1/24`. Allows attributing a 
-whole range of IP addresses (in the example it is `192.168.0.*`) to the same client.
-3. **MAC address** - using MAC as a client identifier is only possible when 
-AdGuard Home works as a [DHCP server](DHCP).
-4. **Client ID** - *(added in v0.105)* this method is supposed to be used for encrypted DNS protocols 
-(DoH, DoT or DoQ). Once this identifier is used, you can use a special domain 
-name while configuring your client. Here's an example:
-    * AdGuard Home domain name `example.org`.
-    * In AdGuard Home you add a client with the client ID `my-client`.
-    * On the client device you can now configure:
-        * `DNS-over-HTTPS`: `https://example.org/dns-query/my-client`
-        * `DNS-over-TLS`: `tls://my-client.example.org` (requires a [Wildcard certificate](https://en.wikipedia.org/wiki/Wildcard_certificate))
-        * `DNS-over-QUIC`: `quic://my-client.example.org` (requires a [Wildcard certificate](https://en.wikipedia.org/wiki/Wildcard_certificate))
-        
+1.  **IP address**.  For instance, `192.168.0.1`. This is the easiest way to do
+    this, but it may be not good enough if the IP address changes too often.
+2.  **CIDR range**.  For instance, `192.168.0.1/24`. Allows attributing a whole
+    range of IP addresses (in the example it is `192.168.0.*`) to the same
+    client.
+3.  **MAC address**.  Using MAC as a client identifier is only possible when
+    AdGuard Home works as a [DHCP server](DHCP).
+4.  **Client ID** *(added in v0.105)*.  This method is supposed to be used for
+    encrypted DNS protocols (DoH, DoT or DoQ).  Once this identifier is used,
+    you can use a special domain name while configuring your client.  Here's an
+    example:
+
+     *  AdGuard Home has the domain name `example.org`.
+     *  In AdGuard Home you add a client with the client ID `my-client`.
+     *  On the client device you can now configure:
+
+         *  `DNS-over-HTTPS`: `https://example.org/dns-query/my-client`
+         *  `DNS-over-TLS`: `tls://my-client.example.org` (requires a [Wildcard certificate](https://en.wikipedia.org/wiki/Wildcard_certificate))
+         *  `DNS-over-QUIC`: `quic://my-client.example.org` (requires a [Wildcard certificate](https://en.wikipedia.org/wiki/Wildcard_certificate))
+
+    Note that the certificate for TLS and QUIC client IDs must be valid **both**
+    for `*.example.org` **and** `example.org`.
+
+
 
 ### <a id="clientsettings" href="#clientsettings">Settings</a>
 
