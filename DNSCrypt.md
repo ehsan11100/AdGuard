@@ -1,4 +1,4 @@
- # AdGuard Home* - DNSCrypt
+ # AdGuard Home - DNSCrypt
 
 1. [Generating A Configuration File](#generate-config)
 2. [Generating A *DNSCrypt* Stamp](#generate-stamp)
