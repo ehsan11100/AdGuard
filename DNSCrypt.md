@@ -4,6 +4,8 @@
 2. [Generating A *DNSCrypt* Stamp](#generate-stamp)
 3. [Configuring Devices To Use *DNSCrypt*](#configure-devices)
 
+Since v0.105.0, AdGuard Home is able to work as a DNSCrypt server. However, this feature is only available via configuration file, you cannot set it up using the Web UI. This guide explains how to do this.
+
 <a id="generate-config"></a>
 
 ## Generating A Configuration File
