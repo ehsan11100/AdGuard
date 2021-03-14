@@ -266,6 +266,11 @@ Here's what you need to do to change the password:
 
 Now you'll be able to log in to Web interface using your new password.
 
+Example using htpasswd:
+```
+htpasswd -bnBC 10 "" MY_NEW_PASS | tr -d ':'
+```
+
 <a id="pprof"></a>
 
 ## Profiling with pprof
