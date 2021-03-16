@@ -72,7 +72,31 @@ use:
     - '6 ip 1.2.3.4'
 ```
 
-An easier format for multiple IP addresses is planned, see issue [#2385].
+The `ips` format (since **v0.106.0**) is the same, but with comma-separated
+IP-addresses:
+
+```yaml
+# …
+'dhcp':
+  # …
+  'dhcpv4':
+    # …
+    'options':
+    - '6 ips 1.2.3.4,5.6.7.8'
+```
+
+The `text` format (since **v0.106.0**) allows you to put arbitrary UTF-8 text as
+the option data.  For example:
+
+```yaml
+# …
+'dhcp':
+  # …
+  'dhcpv4':
+    # …
+    'options':
+    - '252 text http://example.com'
+```
 
  ###  <a id="config-6" href="#config-6">DHCPv6 Options</a>
 
@@ -82,7 +106,6 @@ clients to use SLAAC.  The DHCPv6 server won't be started in this case.
 The option `dhcp.dhcpv6.ra_allow_slaac`, if `true`, sends RA packets allowing
 the clients to choose between SLAAC and DHCPv6.
 
-[#2385]:         https://github.com/AdguardTeam/AdGuardHome/issues/2385
 [configuration]: https://github.com/AdguardTeam/AdGuardHome/wiki/Configuration
 
 ##  <a id="autohosts" href="#autohosts">Automatic Hosts</a>
