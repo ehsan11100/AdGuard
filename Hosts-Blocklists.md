@@ -88,7 +88,7 @@ Any line that starts with an exclamation mark is a comment and it will be ignore
 
 You can change the behavior of a rule by using additional modifiers. Modifiers must be located at the end of the rule after the `$` character and be separated by commas.
 
-Example:
+**Examples:**
 
 ```
 ||example.org^$important
@@ -97,6 +97,18 @@ Example:
 - `||example.org^` - a matching pattern
 - `$` - a delimiter, it signals that now modifiers start
 - `important` - a modifier
+
+You may want to use multiple modifiers in a rule. Separate them by commas in this case.
+
+```
+||example.org^$client=127.0.0.1,dnstype=A
+```
+
+- `||example.org^` - a matching pattern
+- `$` - a delimiter, it signals that now modifiers start
+- `client=127.0.0.1` - [client](#client) modifier with its value
+- `,` - modifiers delimiter
+- `dnstype=A` - [dnstype](#dnstype) modifier with its value
 
 > **IMPORTANT:** If a rule contains a modifier not listed in this document, the whole rule **must be ignored**. This way we will avoid false-positives when people are trying to use unmodified browser ad blockers' filter lists like EasyList or EasyPrivacy.
 
