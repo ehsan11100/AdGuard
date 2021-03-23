@@ -182,7 +182,8 @@ $dnstype=value2
 (Since **v0.105.0**.)
 
 The `$dnsrewrite` response modifier allows replacing the content of the response
-to the DNS request for the matching hosts.
+to the DNS request for the matching hosts.  Rules with the `$dnsrewrite`
+response modifier have higher priority than other rules in AdGuard Home.
 
 The shorthand syntax is:
 
@@ -244,12 +245,13 @@ Will result in a response with two `A` records.
 
 Currently supported RR types with examples:
 
-* `||4.3.2.1.in-addr.arpa.^$dnsrewrite=NOERROR;PTR;example.net.` adds a `PTR`
+* `||4.3.2.1.in-addr.arpa^$dnsrewrite=NOERROR;PTR;example.net.` adds a `PTR`
   record for reverse DNS.  Reverse DNS requests for `1.2.3.4` to the
   _AdGuardHome_ DNS server will result in `example.net`.
 
-  **NOTE:** the IP MUST be in reverse order, and the value MUST contain a final
-  dot.  See [RFC](https://tools.ietf.org/html/rfc1035#section-3.5).
+  **NOTE:** the IP MUST be in reverse order.  Before **v0.106.0**, the value had
+  to contain a final dot, but since **v0.106.0** both forms are accepted.  See
+  [RFC](https://tools.ietf.org/html/rfc1035#section-3.5).
 
 * `||example.com^$dnsrewrite=NOERROR;A;1.2.3.4` adds an `A` record with the
   value `1.2.3.4`.
@@ -283,14 +285,18 @@ Currently supported RR types with examples:
 * `||example.com^$dnsrewrite=NOERROR;TXT;hello_world` adds a `TXT` record with
   the value `hello_world`.
 
+* `||_svctype._tcp.example.com^$dnsrewrite=NOERROR;SRV;10 60 8080 example.com`
+  adds an `SRV` record with priority value `10`, weight value `60`, port `8080`,
+  and target value `example.com`.
+
 * `||example.com^$dnsrewrite=NXDOMAIN;;` responds with an `NXDOMAIN` code.
 
 Exception rules remove one or all rules:
 
-* `||example.com^$dnsrewrite` removes all DNS rewrite rules.
+* `@@||example.com^$dnsrewrite` removes all DNS rewrite rules.
 
-* `||example.com^$dnsrewrite=1.2.3.4` removes the DNS rewrite rule that adds an
-  `A` record with the value `1.2.3.4`.
+* `@@||example.com^$dnsrewrite=1.2.3.4` removes the DNS rewrite rule that adds
+  an `A` record with the value `1.2.3.4`.
 
 #### <a id="important"></a> <a id="important"></a> `important`
 
