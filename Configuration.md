@@ -142,7 +142,10 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
 
 - `dns` — DNS configuration section.
   - **General settings**
-    - `bind_host` - DNS interface IP address to listen on.
+    - `bind_host` (**before v0.106.0**) - IP address on which to serve DNS
+       queries.
+    - `bind_hosts` (**after v0.106.0**) - IP addresses on which to serve DNS
+       queries.  The addresses must be on different interfaces.
     - `port` — DNS server port to listen on.
     - `statistics_interval` - time interval for statistics (in days)
   - **Protection settings**
