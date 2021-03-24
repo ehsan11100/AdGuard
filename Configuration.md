@@ -145,7 +145,34 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
     - `bind_host` (**before v0.106.0**) - IP address on which to serve DNS
        queries.
     - `bind_hosts` (**after v0.106.0**) - IP addresses on which to serve DNS
-       queries.  The addresses must be on different interfaces.
+       queries.  For each network interface there can only be one IP address of
+       each IP version.  Examples of valid configurations:
+
+       ```yaml
+       # Different network interfaces.
+       'dns':
+           'bind_hosts':
+           - '127.0.0.1'
+           - '192.168.1.1'
+       ```
+
+       ```yaml
+       # Same network interface, different IP versions.
+       'dns':
+           'bind_hosts':
+           - '127.0.0.1'
+           - '::1'
+       ```
+
+       If you want your server to accept requests on all interfaces and using
+       both IP versions, for example if you run a public server, put **one**
+       item with the unspecified IP of any version:
+
+       ```yaml
+       'dns':
+           'bind_hosts':
+           - '0.0.0.0'
+       ```
     - `port` — DNS server port to listen on.
     - `statistics_interval` - time interval for statistics (in days)
   - **Protection settings**
