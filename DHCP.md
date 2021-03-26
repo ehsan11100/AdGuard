@@ -110,12 +110,11 @@ the clients to choose between SLAAC and DHCPv6.
 
 ##  <a id="autohosts" href="#autohosts">Automatic Hosts</a>
 
-You can reach machines in the network more easily using the hostnames they send
-in the DHCP requests with the `.lan` top-level domain.  For example, if you have
-a machine called “workstation” in the network, and it sends a DHCP request with
-option 12 set to `workstation`, you can reach it over HTTP on the host
-`http://workstation.lan`.
+Machines in the network can be reached more easily using the hostnames they send
+in the DHCP requests with a configurable top-level domain (TLD).  By default,
+the TLD is `lan`.  For example, if you have a machine called “workstation” in
+the network, and it sends a DHCP request with option 12 set to `workstation`,
+you can reach it over HTTP on the host `http://workstation.lan`.
 
-Configuring custom TLDs instead of the `.lan` one is planned, see issue [#2393].
-
-[#2393]: https://github.com/AdguardTeam/AdGuardHome/issues/2393
+You can also set a custom TLD using the `dns.autohost_tld` field in the
+[configuration] file.
