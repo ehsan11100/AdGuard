@@ -36,7 +36,7 @@ Options:
   --no-mem-optimization              Disable memory optimization
   -v, --verbose                      Enable verbose output
   --glinet                           Run in GL-Inet compatibility mode
-  --version                          Show the version and exit
+  --version                          Show the version and exit. Show more detailed version description with -v
   --help                             Print this help
 ```
 
