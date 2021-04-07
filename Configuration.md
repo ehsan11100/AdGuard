@@ -115,12 +115,15 @@ The problem with these lists is that they may be too large. In this case you may
 
 AdGuardHome automatically gets the names of connected devices using Reverse DNS lookup (rDNS).
 It sends a PTR request with an IP address of a client to a DNS server and uses its name for "clients friendly names".
+
+Since **v0.106.0** you can enable and disable this feature by "Enable clients' hostname resolution" setting in the "Upstream DNS servers" section or via `resolve_clients` field in the configuration file. Also since **v0.106.0** all the addresses from [private IP range](https://tools.ietf.org/html/rfc6303) are only resolved via appropriate local resolvers to avoid the leaks of clients' information. But you can also set custom upstreams for it by "Private DNS servers" field in the "Upstream DNS servers" section or by `local_ptr_upstreams` field in the configuration file. Note that the specified upstreams are also used by DNS server to resolve PTR for the same IP range.
+
 But what if you want AdGuardHome to use another DNS server for a specific IP address range?
 You can do it using the same syntax as for general upstream servers, for example:
 
-    [/168.192.in-addr.arpa/]192.168.0.1
+    [/128.in-addr.arpa/]8.8.8.8
 
-This rule instructs AdGuardHome to use `192.168.0.1` DNS server for all rDNS requests to resolve clients' IP addresses `192.168.0.0/16`.
+This rule instructs AdGuardHome to use `8.8.8.8` DNS server for all rDNS requests to resolve clients' IP addresses `128.0.0.0/8`.
 
 <a id="configuration-file"></a>
 
@@ -201,6 +204,10 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
     - `upstream_dns` — List of upstream DNS servers.
     - `upstream_dns_file` — Path to a file with the list of upstream DNS servers. If it is configured, the value of `upstream_dns` is ignored.
     - `bootstrap_dns` — List of DNS servers used for initial hostname resolution in case an upstream server name is a hostname.
+    - `local_ptr_upstreams` (**since v0.106.0**) – List of upstream DNS servers
+      to resolve PTR requests for addresses inside locally-served networks. If
+      empty, AdGuard Home will automatically try to get local resolvers from the
+      OS.
     - `all_servers` — Enables parallel queries to all configured upstream servers to speed up resolving. If disabled, the queries are sent to each upstream server one-by-one and then sorted by RTT.
     - `fastest_addr` — Use Fastest Address algorithm. It finds an IP address with the lowest latency and returns this IP address in DNS response.
   - **ECS settings**
@@ -227,6 +234,8 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
       Home uses for known internal hosts.  The default value, which is also set
       when this value is empty, is `lan`.  So, if you have a machine called
       `myhost` in your network, its automatic hostname will be `myhost.lan`.
+    - `resolve_clients` (**since v0.106.0**) - Enable/disable resolving clients'
+      addresses by sending PTR requests.
 - `filters` — List of filters, each filter has the following values:
   - `enabled` — Current filter's status (enabled/disabled).
   - `url` — URL pointing to the filter contents (filtering rules).
