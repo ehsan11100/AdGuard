@@ -34,6 +34,7 @@ Options:
   --check-config                     Check configuration and exit
   --no-check-update                  Don't check for updates
   --no-mem-optimization              Disable memory optimization
+  --no-etc-hosts                     Do not use the OS-provided hosts.
   -v, --verbose                      Enable verbose output
   --glinet                           Run in GL-Inet compatibility mode
   --version                          Show the version and exit. Show more detailed version description with -v
