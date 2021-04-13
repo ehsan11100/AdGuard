@@ -24,21 +24,21 @@ Usage:
 ./AdGuardHome [options]
 
 Options:
-  -c, --config VALUE                 Path to the config file
-  -w, --work-dir VALUE               Path to the working directory
-  -h, --host VALUE                   Host address to bind HTTP server on
-  -p, --port VALUE                   Port to serve HTTP pages on
-  -s, --service VALUE                Service control action: status, install, uninstall, start, stop, restart, reload (configuration)
-  -l, --logfile VALUE                Path to log file. If empty: write to stdout; if 'syslog': write to system log
-  --pidfile VALUE                    Path to a file where PID is stored
-  --check-config                     Check configuration and exit
-  --no-check-update                  Don't check for updates
-  --no-mem-optimization              Disable memory optimization
+  -c, --config VALUE                 Path to the config file.
+  -w, --work-dir VALUE               Path to the working directory.
+  -h, --host VALUE                   Host address to bind HTTP server on.
+  -p, --port VALUE                   Port to serve HTTP pages on.
+  -s, --service VALUE                Service control action: status, install, uninstall, start, stop, restart, reload (configuration).
+  -l, --logfile VALUE                Path to log file.  If empty: write to stdout; if 'syslog': write to system log.
+  --pidfile VALUE                    Path to a file where PID is stored.
+  --check-config                     Check configuration and exit.
+  --no-check-update                  Don't check for updates.
+  --no-mem-optimization              Disable memory optimization.
   --no-etc-hosts                     Do not use the OS-provided hosts.
-  -v, --verbose                      Enable verbose output
-  --glinet                           Run in GL-Inet compatibility mode
-  --version                          Show the version and exit. Show more detailed version description with -v
-  --help                             Print this help
+  -v, --verbose                      Enable verbose output.
+  --glinet                           Run in GL-Inet compatibility mode.
+  --version                          Show the version and exit.  Show more detailed version description with -v.
+  --help                             Print this help.
 ```
 
 Please note, that the command-line arguments override settings from the configuration file.
