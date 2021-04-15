@@ -116,5 +116,5 @@ the TLD is `lan`.  For example, if you have a machine called “workstation” i
 the network, and it sends a DHCP request with option 12 set to `workstation`,
 you can reach it over HTTP on the host `http://workstation.lan`.
 
-You can also set a custom TLD using the `dns.autohost_tld` field in the
-[configuration] file.
+You can also set a custom TLD or domain name using the `dns.local_domain_name`
+field in the [configuration] file.
