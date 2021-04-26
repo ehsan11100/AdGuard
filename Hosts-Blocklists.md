@@ -7,6 +7,7 @@
     * [Regular expressions support](#regular-expressions)
     * [Rule modifiers](#modifiers)
         * [client](#client)
+        * [denyallow](#denyallow)
         * [dnstype](#dnstype)
         * [dnsrewrite](#dnsrewrite)
         * [important](#important)
@@ -141,6 +142,48 @@ Client names usually contain spaces or other special characters, that's why you 
 * `||example.org^$client=~'Mary\'s\, John\'s\, and Boris\'s laptops'` — block `example.org` for everyone except the client named `Mary's, John's, and Boris's laptops`. Note that comma (`,`) must be escaped as well.
 * `||example.org^$client=~Mom|~Dad|Kids` -- block `example.org` for `Kids`, but not for `Mom` and `Dad`. This example demonstrates how to specify multiple clients in one rule.
 * `||example.org^$client=192.168.0.0/24` -- block `example.org` for all clients with IP addresses in the range `192.168.0.0-192.168.0.255`
+
+#### <a id="denyallow"></a> `denyallow`
+
+(Since **v0.106.0**.)
+
+You can use the `$denyallow` modifier to exclude domains from the blocking rule.
+To add multiple domains to one rule, use the `|` character as a separator.
+
+The syntax is:
+
+```
+$denyallow=domain1|domain2|...
+```
+
+It allows avoiding creating unnecessary "exception" rules when our blocking rule
+covers too many domains. Here's a simple use-case, you may want to block
+everything save for a couple of TLD domains. You could use the standard approach,
+i.e. rules like this:
+
+```
+! Block everything
+/.*/
+! Unblock a couple of TLDs
+@@||com^
+@@||net^
+```
+
+The problem with this approach is that this way you will also unblock tracking
+domains that are located on those TLDs (i.e. `google-analytics.com`). 
+
+Here's how to solve this with `$denyallow`:
+
+```
+*$denyallow=com|net
+```
+
+**Examples**
+
+* `*$denyallow=com|net` — Block everything save for `*.com` and `*.net`.
+* `@@*$denyallow=com|net` — Unblock everything save for `*.com` and `*.net`.
+* `||example.org^$denyallow=sub.example.org` — Block `example.org` and
+`*.example.org`, but don't block `sub.example.org`.
 
 #### <a id="dnstype"></a> `dnstype`
 
