@@ -139,6 +139,11 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
 - `users` — Web users info
   - `name` — User name
   - `password` — BCrypt-encrypted password
+- `auth_attempts` (**after v0.106.0**) – Maximum number of failed login attempts
+  a user can do before being blocked.  The entire blocking logic is disabled if
+  it equals to 0.
+- `block_auth_min` (**after v0.106.0**) – The duration of blocking period.  The
+  entire blocking logic is disabled if it equals to 0.
 - `http_proxy` — proxy URL for HTTP client (e.g. "http://user:password@server:port/"). Supports "http", "https" and "socks5" scheme.
 - `web_session_ttl` — Web session TTL (in hours) - a web user will stay signed in for this amount of time.
 - `rlimit_nofile` — Limit on the maximum number of open files for server process (Linux and macOS). Set to 0 to use the system default value.
