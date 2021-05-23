@@ -34,7 +34,7 @@ AdGuard Home provides a lot of features out-of-the-box with no need to install a
 | Blocking phishing and malware domains                                   | ✅            | ❌                                                      |
 | Parental control (blocking adult domains)                               | ✅            | ❌                                                      |
 | Force Safe search on search engines                                     | ✅            | ❌                                                      |
-| Per-client (device) configuration                                       | ✅            | ❌                                                      |
+| Per-client (device) configuration                                       | ✅            | ✅                                                      |
 | Access settings (choose who can use AGH DNS)                            | ✅            | ❌                                                      |
 
 <a id="comparison-adblock"></a>
