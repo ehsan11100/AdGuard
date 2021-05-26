@@ -117,7 +117,11 @@ The problem with these lists is that they may be too large. In this case you may
 AdGuardHome automatically gets the names of connected devices using Reverse DNS lookup (rDNS).
 It sends a PTR request with an IP address of a client to a DNS server and uses its name for "clients friendly names".
 
-Since **v0.106.0** you can enable and disable this feature by "Enable clients' hostname resolution" setting in the "Upstream DNS servers" section or via `resolve_clients` field in the configuration file. Also since **v0.106.0** all the addresses from [private IP range](https://tools.ietf.org/html/rfc6303) are only resolved via appropriate local resolvers to avoid the leaks of clients' information. But you can also set custom upstreams for it by "Private DNS servers" field in the "Upstream DNS servers" section or by `local_ptr_upstreams` field in the configuration file. Note that the specified upstreams are also used by DNS server to resolve PTR for the same IP range.
+Since **v0.106.0** you can enable and disable this feature by "Enable clients' hostname resolution" setting in the "Upstream DNS servers" section or via `resolve_clients` field in the configuration file.
+
+Also since **v0.106.0** all the addresses from [private IP range](https://tools.ietf.org/html/rfc6303) are only resolved via appropriate local resolvers to avoid the leaks of clients' information.  But you can also set custom upstreams for it by "Private DNS servers" field in the "Upstream DNS servers" section or by `local_ptr_upstreams` field in the configuration file. Note that the specified upstreams are also used by DNS server to resolve PTR for the same IP range.
+
+Since **v0.107.0** you can control using private reverse DNS upstream servers by "Use private rDNS resolvers" checkbox in the "Upstream DNS servers" section or by `use_private_ptr_resolvers` field in the configuration file. In case it is disabled, the unknown addresses from locally-served networks won't be resolved at all.
 
 But what if you want AdGuardHome to use another DNS server for a specific IP address range?
 You can do it using the same syntax as for general upstream servers, for example:
@@ -210,6 +214,8 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
     - `upstream_dns` — List of upstream DNS servers.
     - `upstream_dns_file` — Path to a file with the list of upstream DNS servers. If it is configured, the value of `upstream_dns` is ignored.
     - `bootstrap_dns` — List of DNS servers used for initial hostname resolution in case an upstream server name is a hostname.
+    - `use_private_ptr_resolvers`  (**since v0.107.0**) – If AdGuard Home should
+      use private reverse DNS servers.
     - `local_ptr_upstreams` (**since v0.106.0**) – List of upstream DNS servers
       to resolve PTR requests for addresses inside locally-served networks. If
       empty, AdGuard Home will automatically try to get local resolvers from the
