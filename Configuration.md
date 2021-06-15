@@ -242,6 +242,9 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
     - `cache_time` — Safe Browsing, Safe Search, Parental Control cache TTL
     - `max_goroutines` — Max. number of parallel goroutines for processing incoming requests
     - `ipset` — List of domain-ipset_name associations for adding IP addresses of the specified domain names to an ipset list. Syntax: `DOMAIN[,DOMAIN].../IPSET_NAME[,IPSET_NAME]...`. IPv4 addresses are added to an ipset list with `ipv4` family, IPv6 addresses - to `ipv6` ipset list. ipset list must exist. This setting is supported on Linux only. This feature is similar to `--ipset` in dnsmasq.
+    - `upstream_timeout` (**since v0.107.0**) — The timeout for querying
+      upstream servers.  Zero value will be rewritten with default one which is
+      10s.
     - `local_domain_name` (**since v0.106.0**) — The domain name that AdGuard
       Home uses for known internal hosts.  The default value, which is also set
       when this value is empty, is `lan`.  So, if you have a machine called
