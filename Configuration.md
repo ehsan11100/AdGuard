@@ -203,7 +203,10 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
   - **Query log settings**
     - `querylog_enabled` — Query logging (also used to calculate top 50 clients, blocked domains and requested domains for statistical purposes).
     - `querylog_file_enabled` — Write query logs to a file.
-    - `querylog_interval` - Time interval for query log (in days)
+    - `querylog_interval` - time interval for query log files rotation.  It's in
+      days **until v0.107.0**, the possible values are: `90`, `30`, `7`, `1`.
+      **Since v0.107.0** it's a human-readable duration in hours, the possible
+      values are: `2160h`, `720h`, `168h`, `24h`, `6h`.
     - `querylog_size_memory` - Number of entries kept in memory before they are flushed to disk
     - `anonymize_client_ip` - If true, anonymize clients' IP addresses in logs and stats
   - **Anti-DNS amplification features**
