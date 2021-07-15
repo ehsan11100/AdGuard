@@ -235,6 +235,9 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
     - `cache_size` — DNS cache size (in bytes)
     - `cache_ttl_min` — override TTL value (minimum) received from upstream server. This value can't larger than 3600 (1 hour).
     - `cache_ttl_max` — override TTL value (maximum) received from upstream server
+    - `cache_optimistic` (**since v0.107.0**) — make AdGuard Home respond from
+      the cache even when the entries are expired and also try to refresh them.
+      The TTL for such responses is 60 seconds.
   - **Other settings**
     - `bogus_nxdomain` - Transform responses with these IP addresses to NXDOMAIN
     - `enable_dnssec` - Set DNSSEC flag in the outgoing DNS requests and check the result
