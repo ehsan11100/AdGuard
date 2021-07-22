@@ -1,19 +1,20 @@
 # AdGuard Home - Configuration
 
-Most of these settings can be changed via the web-based admin interface. However, we decided to list them all here just in case.
+Most of these settings can be changed via the web-based admin interface.
+However, we decided to list them all here just in case.
 
-- [Command-line arguments](#command-line)
-- [Configuring upstreams](#upstreams)
-  - [Specifying upstreams for domains](#upstreams-for-domains)
-  - [Loading the list of upstream servers from a file](#upstreams-from-file)
-  - [Specifying upstreams for rDNS](#upstreams-for-rdns)
-- [Configuration file](#configuration-file)
-- [Reset Web Password](#password-reset)
-- [Profiling with pprof](#pprof)
+ *  [Command-line Arguments](#command-line)
+ *  [Configuring Upstreams](#upstreams)
+     *  [Specifying Upstreams For Domains](#upstreams-for-domains)
+     *  [Loading Upstreams From File](#upstreams-from-file)
+     *  [Specifying Upstreams For Reverse DNS](#upstreams-for-rdns)
+ *  [Configuration File](#configuration-file)
+ *  [Reset Web Password](#password-reset)
+ *  [Profiling With Pprof](#pprof)
 
-<a id="command-line"></a>
 
-## Command-line arguments
+
+## <a href="#command-line" id="command-line" name="command-line">Command-line Arguments</a>
 
 Here is a list of all available command-line arguments.
 
@@ -48,91 +49,175 @@ Please note, that the command-line arguments override settings from the configur
 - Re-read runtime clients from `/etc/hosts` file and `arp -a` output
 - Re-read SSL certificate file (if it has changed)
 
-Command-line arguments passed to `-s install` command will be then used by the service. For instance if you install AdGuardHome service using `sudo ./AdGuardHome -s install --no-check-update`, it will disable update check functionality in the service as well.
+Command-line arguments passed to `-s install` command will be then used by the
+service.  For instance, if you install the AdGuard Home service using `sudo
+./AdGuardHome -s install --no-check-update`, it will disable update check
+functionality in the service as well.
 
-<a id="upstreams"></a>
 
-## Configuring upstreams
 
-AdGuard Home is basically a DNS proxy that sends your DNS queries to the upstream servers. You can specify multiple upstream servers in AdGuard Home settings, or you can even specify a DNS server that will be used to resolve specific domains.
+## <a href="#upstreams" id="upstreams" name="upstreams">Configuring Upstreams</a>
+
+AdGuard Home is basically a DNS proxy that sends your DNS queries to the
+upstream servers.  You can specify multiple upstream servers in AdGuard Home
+settings, or you can even specify a DNS server that will be used to resolve
+specific domains.
 
 Examples:
 
-- `1.1.1.1` - regular DNS (over UDP).
-- `tls://1dot1dot1dot1.cloudflare-dns.com` – encrypted [DNS-over-TLS](https://en.wikipedia.org/wiki/DNS_over_TLS).
-- `https://cloudflare-dns.com/dns-query` – encrypted [DNS-over-HTTPS](https://en.wikipedia.org/wiki/DNS_over_HTTPS).
-- `quic://dns-unfiltered.adguard.com:784` - experimental [DNS-over-QUIC](https://tools.ietf.org/html/draft-huitema-quic-dnsoquic) support.
-- `tcp://1.1.1.1` – regular DNS (over TCP).
-- `sdns://...` – you can use [DNS Stamps](https://dnscrypt.info/stamps/) for [DNSCrypt](https://dnscrypt.info/) or [DNS-over-HTTPS](https://en.wikipedia.org/wiki/DNS_over_HTTPS) resolvers.
-- `[/example.local/]1.1.1.1` – you can specify DNS upstream for a specific domain(s).
+* `94.140.14.140`: plain DNS (over UDP).
 
-<a id="upstreams-for-domains"></a>
+* `tls://dns-unfiltered.adguard.com`: encrypted [DNS-over-TLS].
 
-### Specifying upstreams for domains
+* `https://cloudflare-dns.com/dns-query`: encrypted [DNS-over-HTTPS].
 
-You can specify upstreams that will be used for a specific domain(s). We use the dnsmasq-like syntax (see `--server` description [here](http://www.thekelleys.org.uk/dnsmasq/docs/dnsmasq-man.html)). This feature is intended for private nameservers which deal with intranet domains.
+* `quic://dns-unfiltered.adguard.com:784`: experimental [DNS-over-QUIC] support.
 
-**Syntax:**
+* `tcp://1.1.1.1`: plain DNS (over TCP).
 
-    [/domain1/domain2/domainN/]upstreamString
+* `sdns://...`: [DNS Stamps] for [DNSCrypt] or [DNS-over-HTTPS] resolvers.
 
-If one or more domains are specified, that upstream (`upstreamString`) is used only for those domains. Usually, it is used for private nameservers. For instance, if you have a nameserver on your network which deals with `xxx.internal.local` at `192.168.0.1` then you can specify `[/internal.local/]192.168.0.1`, and AdGuard Home will send all queries to that nameserver. Everything else will be sent to the default upstreams (which are mandatory!).
+* `[/example.local/]1.1.1.1`: DNS upstream for specific domains, see below.
 
-1. An empty domain specification, // has the special meaning of "unqualified names only" ie names without any dots in them.
-2. More specific domains take precedence over less specific domains, so: `[/host.com/]1.2.3.4` + `[/www.host.com/]2.3.4.5` will send queries for _.host.com to 1.2.3.4, except _.www.host.com, which will go to 2.3.4.5
-3. The special server address '#' means, "use the standard servers", so: `[/host.com/]1.2.3.4` + `[/www.host.com/]#` will send queries for _.host.com to 1.2.3.4, except _.www.host.com which will be forwarded as usual.
+### <a hfer="#upstreams-for-domains" id="upstreams-for-domains" name="upstreams-for-domains">Specifying Upstreams For Domains</a>
+
+You can specify upstreams that will be used for specific domains using the
+dnsmasq-like syntax (see the documentation for the option `--server`
+[here][dnsmasq-man]).  This feature is intended for private nameservers which
+deal with intranet domains.
+
+The syntax is:
+
+```none
+[/domain1/domain2/domainN/]upstreamString
+
+If one or more domains are specified, that upstream (here `upstreamString`) is
+used only for those domains.  Usually, it is used for private nameservers.  For
+instance, if you have a nameserver on your network which deals with
+`xxx.internal.local` at address `192.168.0.1` then you can specify
+`[/internal.local/]192.168.0.1`, and AdGuard Home will send all
+`*.internal.local` queries to that nameserver.  Everything else will be sent to
+the default upstreams, which should be specified as well.
+
+An empty domain specification, `//` has the special meaning of “unqualified
+names only”, i.e. names without any dots in them, like `myhost` or `router`.
+
+More specific domains take precedence over less specific domains.  So,
+a configuration like this:
+
+```none
+[/host.com/]1.2.3.4
+[/www.host.com/]2.3.4.5
+```
+
+sends queries for `*.host.com` to `1.2.3.4`, except for queries for
+`*.www.host.com`, which are sent to `2.3.4.5`.
+
+The special server address `#` means “use the default servers”. So,
+a configuration like this:
+
+```none
+6.7.8.9
+[/host.com/]1.2.3.4
+[/www.host.com/]#
+```
+
+sends queries for `*.host.com` to `1.2.3.4` except for queries for
+`*.www.host.com`, which are sent to `6.7.8.9`, which is the default upstream.
 
 #### Examples
 
-- ```
-  8.8.8.8:53
-  [/local/]192.168.0.1:53
-  ```
+ *  A configuration like:
 
-  Sends queries for `*.local` domains to `192.168.0.1:53`. Other queries are sent to `8.8.8.8:53`.
+    ```none
+    8.8.8.8:53
+    [/local/]192.168.0.1:53
+    ```
 
-- ```
-  8.8.8.8:53
-  [/host.com/]1.1.1.1:53
-  [/maps.host.com/]#
-  ```
-  Sends queries for `*.host.com` to `1.1.1.1:53` except for `*.maps.host.com` which are sent to `8.8.8.8:53` (as long as other queries).
+    sends queries for `*.local` domains to `192.168.0.1:53`.  Other queries are
+    sent to `8.8.8.8:53`.
 
-<a id="upstreams-from-file"></a>
+ *  A configuration like:
 
-### Loading the list of upstream servers from a file
+    ```none
+    8.8.8.8:53
+    [/host.com/]1.1.1.1:53
+    [/maps.host.com/]#
+    ```
 
-Using specific upstreams for some domains is a common way to accelerate internet in China, for example see https://github.com/felixonmars/dnsmasq-china-list and many other dnsmasq lists.
+    sends queries for `*.host.com` to `1.1.1.1:53` except for `*.maps.host.com`
+    which are sent to `8.8.8.8:53` along with all other queries.
 
-These lists can be easily converted to a list for AdGuard Home:
+### <a href="#upstreams-from-file" id="upstreams-from-file" name="upstreams-from-file">Loading Upstreams From File</a>
 
-- `server=/0-100.com/114.114.114.114` -> `[/0-100.com/]114.114.114.114`
+Using specific upstreams for some domains is a common way to accelerate internet
+in China.  For an example, see https://github.com/felixonmars/dnsmasq-china-list
+or any other of the many `dnsmasq` lists.  These lists can be easily converted
+to a list for AdGuard Home:
 
-The problem with these lists is that they may be too large. In this case you may want to load them from a separate file instead of setting all upstreams in AdGuard settings. Just specify the path to a file with your list in the `upstream_dns_file` field of `AdGuardHome.yaml`.
+```none
+Before:  server=/0-100.com/114.114.114.114
+After:   [/0-100.com/]114.114.114.114
+```
 
-<a id="upstreams-for-rdns"></a>
+The problem with these lists is that they may be too large.  In this case you
+may want to load them from a separate file instead of setting all upstreams in
+AdGuard Home settings.  To do that, simply specify the path to a file with your
+list in the `upstream_dns_file` field of `AdGuardHome.yaml`.
 
-### Specifying upstreams for rDNS
+### <a id="upstreams-for-rdns">Specifying Upstreams For Reverse DNS</a>
 
-AdGuardHome automatically gets the names of connected devices using Reverse DNS lookup (rDNS).
-It sends a PTR request with an IP address of a client to a DNS server and uses its name for "clients friendly names".
+AdGuard Home automatically gets the names of connected devices using reverse DNS
+lookup (rDNS).  It sends `PTR` requests with the IP addresses of clients to DNS
+servers and uses the responses for “clients' human-friendly names”.
 
-Since **v0.106.0** you can enable and disable this feature by "Enable clients' hostname resolution" setting in the "Upstream DNS servers" section or via `resolve_clients` field in the configuration file.
+Since **v0.106.0** you can enable and disable this feature with “Enable clients'
+hostname resolution” setting in the “Upstream DNS servers” section or via the
+`resolve_clients` field in the configuration file.
 
-Also since **v0.106.0** all the addresses from [private IP range](https://tools.ietf.org/html/rfc6303) are only resolved via appropriate local resolvers to avoid the leaks of clients' information.  But you can also set custom upstreams for it by "Private DNS servers" field in the "Upstream DNS servers" section or by `local_ptr_upstreams` field in the configuration file. Note that the specified upstreams are also used by DNS server to resolve PTR for the same IP range.
+Also since **v0.106.0** all the addresses from [private IP ranges][private-ip]
+are only resolved via appropriate local resolvers to avoid the leaks of clients'
+information.  But you can also set custom upstreams for it in the “Private DNS
+servers” field in the “Upstream DNS servers” section or via the
+`local_ptr_upstreams` field in the configuration file.  Note that the specified
+upstreams are also used by DNS server to resolve `PTR` for the same IP range.
 
-Since **v0.107.0** you can control using private reverse DNS upstream servers by "Use private rDNS resolvers" checkbox in the "Upstream DNS servers" section or by `use_private_ptr_resolvers` field in the configuration file. In case it is disabled, the unknown addresses from locally-served networks won't be resolved at all.
+Since **v0.107.0** you can disable the usage of private reverse DNS upstream
+servers via the “Use private reverse DNS resolvers” checkbox in the “Upstream
+DNS servers” section or via the `use_private_ptr_resolvers` field in the
+configuration file.  If it is disabled, the unknown addresses from
+locally served networks won't be resolved at all.
 
-But what if you want AdGuardHome to use another DNS server for a specific IP address range?
-You can do it using the same syntax as for general upstream servers, for example:
+But what if you want AdGuard Home to use another DNS server for a specific IP
+address range?  You can do it using the same syntax as for general upstream
+servers, for example:
 
-    [/128.in-addr.arpa/]8.8.8.8
+```none
+[/128.in-addr.arpa/]192.168.8.8
+```
 
-This rule instructs AdGuardHome to use `8.8.8.8` DNS server for all rDNS requests to resolve clients' IP addresses `128.0.0.0/8`.
+This rule instructs AdGuard Home to use `192.168.8.8` DNS server for all rDNS
+requests to resolve clients' IP addresses from the `128.0.0.0/8` network.
 
-<a id="configuration-file"></a>
+Note that if you want to use that address for `PTR` queries for IP addresses
+outside of the locally served network ranges, you should also add this to your
+main “Upstream DNS servers” field:
 
-## Configuration file
+```none
+[/in-addr.arpa/]192.168.8.8
+```
+
+[DNS Stamps]:     https://dnscrypt.info/stamps/
+[DNS-over-HTTPS]: https://en.wikipedia.org/wiki/DNS_over_HTTPS
+[DNS-over-QUIC]:  https://datatracker.ietf.org/doc/html/draft-ietf-dprive-dnsoquic-03
+[DNS-over-TLS]:   https://en.wikipedia.org/wiki/DNS_over_TLS
+[DNSCrypt]:       https://dnscrypt.info/
+[dnsmasq-man]:    http://www.thekelleys.org.uk/dnsmasq/docs/dnsmasq-man.html
+[private-ip]:     https://tools.ietf.org/html/rfc6303
+
+
+
+## <a href="#configuration-file" id="configuration-file" name="configuration-file">Configuration File</a>
 
 Upon the first execution, a file named `AdGuardHome.yaml` will be created, with default values written in it. You can modify the file while your AdGuard Home service is not running. Otherwise, any changes to the file will be lost because the running program will overwrite them.
 
@@ -251,10 +336,15 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
     - `upstream_timeout` (**since v0.107.0**) — The timeout for querying
       upstream servers.  Zero value will be rewritten with default one which is
       10s.
-    - `local_domain_name` (**since v0.106.0**) — The domain name that AdGuard
-      Home uses for known internal hosts.  The default value, which is also set
-      when this value is empty, is `lan`.  So, if you have a machine called
-      `myhost` in your network, its hostname will be `myhost.lan`.
+    - `local_domain_name` (**since v0.106.0**): The domain name that AdGuard
+      Home's DHCP server uses for hostnames of its clients.  The default value,
+      which is also set when this value is empty, is `lan`.  So, if you have
+      a machine called `myhost` in your network, and AdGuard Home is this
+      network's DHCP server, the hostname of that machine is `myhost.lan`.
+
+      DNS queries of type `A` for such hosts are only allowed from locally
+      served networks, such as `10.0.0.0/8`, `192.168.0.0`, and so on.  Other
+      clients receive an empty `NXDOMAIN` response.
     - `resolve_clients` (**since v0.106.0**) - Enable/disable resolving clients'
       addresses by sending PTR requests.
 - `filters` — List of filters, each filter has the following values:
@@ -314,50 +404,56 @@ Removing an entry from settings file will reset it to the default value. Deletin
 [DNSCrypt]: https://github.com/AdguardTeam/AdGuardHome/wiki/DNSCrypt
 [`dnscrypt`]: https://github.com/ameshkov/dnscrypt
 
-<a id="password-reset"></a>
 
-## Reset Web Password
+
+## <a href="#password-reset" id="password-reset" name="password-reset">Reset Web Password</a>
 
 AdGuard Home stores password as a BCrypt-encoded hash.
 
 Here's what you need to do to change the password:
 
-1. Stop AdGuard Home
-2. Edit `AdGuardHome.yaml`
-3. Find `password` field there
-4. Replace it with the new value. You can use `htpasswd` tool or any online BCrypt generation tool (there are many available online).
-5. Start AdGuard Home
+1.  Stop AdGuard Home.
+
+2.  Open `AdGuardHome.yaml`.
+
+3.  Find the `password` field there.
+
+4.  Replace it with the new value.  You can use `htpasswd` tool or any online
+    BCrypt generation tool (there are many available online).
+
+5.  Restart AdGuard Home.
 
 Now you'll be able to log in to Web interface using your new password.
 
 Example using htpasswd:
-```
+
+```sh
 htpasswd -bnBC 10 "" MY_NEW_PASS | tr -d ':'
 ```
 
-<a id="pprof"></a>
 
-## Profiling with pprof
 
-To enable pprof, set `debug_pprof: true` in yaml configuration file and then restart AdGuardHome. Now you can get profiling information with your browser, e.g.:
+## <a href="#pprof" id="pprof" name="pprof">Profiling With Pprof</a>
 
-    http://localhost:6060/debug/pprof/goroutine?debug=2
+To enable pprof, set `debug_pprof: true` in yaml configuration file and then
+restart AdGuard Home.  Now you can get profiling information with your browser,
+for example `http://localhost:6060/debug/pprof/goroutine?debug=2` will show the
+call trace of each running goroutine.
 
-will show the call trace of each running goroutine.
+This URL lets you see information about the heap usage of the AdGuard Home
+process: `http://localhost:6060/debug/pprof/heap?debug=1`.
 
-This command lets you see information about the process's heap usage:
+Or, with `go tool pprof`:
 
-    http://localhost:6060/debug/pprof/heap?debug=1
-
-or with `go tool pprof`:
-
-    go tool pprof -top http://localhost:6060/debug/pprof/heap
+```sh
+go tool pprof -top http://localhost:6060/debug/pprof/heap
+```
 
 For a list of supported profiles go to `http://localhost:6060/debug/pprof/`.
 
 Alternatively, you may want to simply download the file and analyze it later:
 
-```
+```sh
 wget http://localhost:6060/debug/pprof/heap
-go tool -http=:8080 heap
+go tool --http=':8080' heap
 ```
