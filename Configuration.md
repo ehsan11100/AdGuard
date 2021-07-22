@@ -90,6 +90,7 @@ The syntax is:
 
 ```none
 [/domain1/domain2/domainN/]upstreamString
+```
 
 If one or more domains are specified, that upstream (here `upstreamString`) is
 used only for those domains.  Usually, it is used for private nameservers.  For
@@ -418,18 +419,18 @@ Here's what you need to do to change the password:
 
 3.  Find the `password` field there.
 
-4.  Replace it with the new value.  You can use `htpasswd` tool or any online
-    BCrypt generation tool (there are many available online).
+4.  Replace it with the new value.  You can use the [`htpasswd`] utility or any
+    online BCrypt generation tool.  For example:
+
+    ```sh
+    htpasswd -b -n -B -C 10 '' MY_NEW_PASS | tr -d ':'
+    ```
 
 5.  Restart AdGuard Home.
 
 Now you'll be able to log in to Web interface using your new password.
 
-Example using htpasswd:
-
-```sh
-htpasswd -bnBC 10 "" MY_NEW_PASS | tr -d ':'
-```
+[`htpasswd`]: http://manpages.ubuntu.com/manpages/focal/en/man1/htpasswd.1.html
 
 
 
