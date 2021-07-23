@@ -1,7 +1,7 @@
  #  AdGuard Home - How to Write Hosts Blocklists
 
  *  [Introduction](#introduction)
- *  [Basic Examples](#examples)
+ *  [Basic Examples](#rules-examples)
  *  [Adblock-Style Syntax](#adblock-style)
      *  [Special Characters](#special-characters)
      *  [Regular Expressions](#regular-expressions)
@@ -54,7 +54,11 @@ compiler][hlc] and we use it ourselves to create [AdGuard DNS filter][sdn].
 
 
 
-##  <a href="#rules-examples" id="rules-examples" name="rules-examples">Basic Examples</a>
+<!-- "-rules-examples" is the old ID that GitHub automatically generated because
+the ID from the table of contents didn't match.  Add it here so that old links
+work. -->
+
+##  <span id="-rules-examples"><a href="#rules-examples" id="rules-examples" name="rules-examples">Basic Examples</a>
 
  *  `||example.org^`: block access to the `example.org` domain and all its
     subdomains, like `www.example.org`.
@@ -201,7 +205,7 @@ $client=~value1
 
 Client names usually contain spaces or other special characters, which is why
 you should enclose the name in quotes.  Both single and double ASCII quotes are
-supported.  Use the backslack (`\`) to escape quotes (`"` and `'`), commas
+supported.  Use the backslash (`\`) to escape quotes (`"` and `'`), commas
 (`,`), and pipes (`|`).
 
 Please note that when excluding a client, you must keep `~` **out** of the
