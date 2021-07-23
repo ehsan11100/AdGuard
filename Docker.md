@@ -1,4 +1,4 @@
- # AdGuard Home - Docker
+ #  AdGuard Home - Docker
 
 &nbsp;
 <p align="center">
@@ -15,133 +15,202 @@
     <img src="https://cdn.adguard.com/public/Adguard/Common/adguard_home.gif" width="800" />
 </p>
 
-1. [Introduction](#introduction)
-2. [Quick Start](#quickstart)
-3. [How to update to a newer version](#update)
-4. [Running dev builds](#unstable)
-5. [Supported tags / architectures](#tags)
-6. [Additional configuration](#configuration)
-7. [Running DHCP server](#dhcp)
-8. [Running on a system with 'resolved' daemon](#resolved-daemon)
+ *  [Introduction](#introduction)
+ *  [Quick Start](#quickstart)
+ *  [Update To A Newer Version](#update)
+ *  [Running Dev Builds](#unstable)
+ *  [Additional Configuration](#configuration)
+ *  [DHCP Server](#dhcp)
+ *  [`resolved`](#resolved-daemon)
 
-## <a id="introduction"></a> Introduction
 
-AdGuard Home is a network-wide software for blocking ads & tracking. After you set it up, it'll cover ALL your home devices, and you don't need any client-side software for that. You can learn more about it in our [official Github repository](https://github.com/AdguardTeam/AdGuardHome).
 
-## <a id="quickstart"></a> Quick Start
+##  <a href="#introduction" id="introduction" name="introduction">Introduction</a>
 
-#### 1. Pull the Docker image
+AdGuard Home is a network-wide software for blocking ads and tracking.  After
+you set it up, it'll cover *all* your home devices, and you won't need any
+client-side software for that.  Learn more on our [official Github
+repository][agh].
+
+[agh]: https://github.com/AdguardTeam/AdGuardHome
+
+
+
+##  <a href="#quickstart" id="quickstart" name="quickstart">Quick Start</a>
+
+ ###  Pull the Docker image
 
 This command will pull the latest stable version:
 
-```bash
+```sh
 docker pull adguard/adguardhome
 ```
 
-#### 2. Create directories for persistent configuration and data
+ ###  Create directories for persistent configuration and data
 
-The image exposes two volumes for data/configuration persistence. You should create a **data** directory on a suitable volume on your host system, e.g. `/my/own/workdir`, and a **config** directory on a suitable volume on your host system, e.g. `/my/own/confdir`.
+The image exposes two volumes for data and configuration persistence.  You
+should create a **data** directory on a suitable volume on your host system,
+e.g.  `/my/own/workdir`, and a **configuration** directory on a suitable volume
+on your host system, e.g. `/my/own/confdir`.
 
-#### 3. Create and run the container
+ ###  Create and run the container
 
 Use the following command to create a new container and run AdGuard Home:
-```bash
-docker run --name adguardhome \
-    -v /my/own/workdir:/opt/adguardhome/work \
-    -v /my/own/confdir:/opt/adguardhome/conf \
-    -p 53:53/tcp -p 53:53/udp \
-    -p 80:80/tcp -p 3000:3000/tcp \
-    -p 67:67/udp -p 68:68/tcp -p 68:68/udp \
-    -p 443:443/tcp \
-    -p 853:853/tcp \
+
+```sh
+docker run --name adguardhome\
+    --restart unless-stopped\
+    -v /my/own/workdir:/opt/adguardhome/work\
+    -v /my/own/confdir:/opt/adguardhome/conf\
+    -p 53:53/tcp -p 53:53/udp\
+    -p 67:67/udp -p 68:68/udp\
+    -p 80:80/tcp -p 443:443/tcp -p 443:443/udp -p 3000:3000/tcp\
+    -p 853:853/tcp\
+    -p 784:784/udp -p 853:853/udp -p 8853:8853/udp\
+    -p 5443:5443/tcp -p 5443:5443/udp\
     -d adguard/adguardhome
 ```
 
-Now you can open the browser and navigate to http://127.0.0.1:3000/ to control your AdGuard Home service.
+Now you can open the browser and navigate to http://127.0.0.1:3000/ to control
+your AdGuard Home service.
 
-> Don't forget to use your own **data** and **config** directories!
+Don't forget to use your own **data** and **config** directories!
 
-> Ports mappings you may need:
-> * `-p 67:67/udp -p 68:68/tcp -p 68:68/udp` - add if you intend to use AdGuard Home as a DHCP server.
-> * `-p 443:443/tcp` - add if you are going to run AdGuard Home as an [HTTPS/DNS-over-HTTPS](https://github.com/AdguardTeam/Adguardhome/wiki/Encryption) server.
-> * `-p 853:853/tcp` - add if you are going to run AdGuard Home as a [DNS-over-TLS](https://github.com/AdguardTeam/Adguardhome/wiki/Encryption) server.
-> * `-p 784:784/udp` - add if you are going to run AdGuard Home as a [DNS-over-QUIC](https://github.com/AdguardTeam/Adguardhome/wiki/Encryption) server.
-> * `-p 5443:5443/tcp -p 5443:5443/udp` - add if you are going to run AdGuard Home as a [DNSCrypt](https://github.com/AdguardTeam/Adguardhome/wiki/DNSCrypt) server.
+Ports mappings you may need:
 
-#### 4. Control the container
+ *  `-p 53:53/tcp -p 53:53/udp`: plain DNS.
 
-* Start: `docker start adguardhome`
-* Stop: `docker stop adguardhome`
-* Remove: `docker rm adguardhome`
+ *  `-p 67:67/udp -p 68:68/tcp -p 68:68/udp`: add if you intend to use AdGuard
+    Home as a DHCP server.
 
-## <a id="update"></a> How to update to a newer version
+ *  `-p 80:80/tcp -p 443:443/tcp -p 443:443/udp -p 3000:3000/tcp`: add if you
+    are going to use AdGuard Home's admin panel as well as run AdGuard Home as
+    an [HTTPS/DNS-over-HTTPS][enc] server.
 
-1. Pull the new version from Docker Hub
-    ```bash
+ *  `-p 853:853/tcp`: add if you are going to run AdGuard Home as
+    a [DNS-over-TLS][enc] server.
+
+ *  `-p 784:784/udp -p 853:853/udp -p 8853:8853/udp`: add if you are going to
+    run AdGuard Home as a [DNS-over-QUIC][enc] server.  You may only leave one
+    or two of these.
+
+ *  `-p 5443:5443/tcp -p 5443:5443/udp`: add if you are going to run AdGuard
+    Home as a [DNSCrypt] server.
+
+ ###  Control the container
+
+ *  Start: `docker start adguardhome`
+
+ *  Stop: `docker stop adguardhome`
+
+ *  Remove: `docker rm adguardhome`
+
+[DNSCrypt]: https://github.com/AdguardTeam/AdGuardHome/wiki/DNSCrypt
+[enc]:      https://github.com/AdguardTeam/AdGuardHome/wiki/Encryption
+
+
+
+##  <a href="#update" id="update" name="update">Update To A Newer Version</a>
+
+1.  Pull the new version from Docker Hub:
+
+    ```sh
     docker pull adguard/adguardhome
     ```
 
-2. Stop and remove currently running container (assuming the container is named `adguardhome`):
-    ```bash
+2.  Stop and remove currently running container (assuming the container is named
+    `adguardhome`):
+
+    ```sh
     docker stop adguardhome
     docker rm adguardhome
     ```
 
-3. Create and start the container using the new image:
-    ```bash
-    docker run --name adguardhome -v /my/own/workdir:/opt/adguardhome/work -v /my/own/confdir:/opt/adguardhome/conf -p 53:53/tcp -p 53:53/udp -p 67:67/udp -p 68:68/tcp -p 68:68/udp -p 80:80/tcp -p 443:443/tcp -p 853:853/tcp -p 3000:3000/tcp -d adguard/adguardhome
-    ```
+3.  Create and start the container using the new image using the command from
+    the previous section.
 
-## <a id="unstable"></a> Running dev builds
 
-If you want to be on the bleeding edge, you might want to run the image from the `edge` or `beta` tags.
 
-In order to use it, simply replace `adguard/adguardhome` with `adguard/adguardhome:edge` or `adguard/adguardhome:beta` in every command from the quick start.
+##  <a href="#unstable" id="unstable" name="unstable">Running Dev Builds</a>
 
-```bash
+If you want to be on the bleeding edge, you might want to run the image from the
+`edge` or `beta` tags.  In order to use it, simply replace `adguard/adguardhome`
+with `adguard/adguardhome:edge` or `adguard/adguardhome:beta` in every command
+from the quick start.  For example:
+
+```sh
 docker pull adguard/adguardhome:edge
 ```
 
-## <a id="configuration"></a> Additional configuration
-
-Upon the first execution, a file named `AdGuardHome.yaml` will be created, with default values written in it. You can modify the file while your AdGuard Home container is not running. Otherwise, any changes to the file will be lost because the running program will overwrite them.
-
-Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possible parameters that you can configure are listed on [this page](https://github.com/AdguardTeam/Adguardhome/wiki/Configuration).
 
 
-## <a id="dhcp"></a> Running DHCP server
+## <a href="#configuration" id="configuration" name="configuration">Additional Configuration</a>
 
-If you want to use AdGuardHome's DHCP server, you should pass `--network host` argument when creating the container:
+Upon the first run, a file named `AdGuardHome.yaml` will be created, with
+default values written into it.  You can modify the file while your AdGuard Home
+container is not running.  Otherwise, any changes to the file will be lost
+because the running program will overwrite them.
 
-    docker run --name adguardhome --network host -v /my/own/workdir:/opt/adguardhome/work -v /my/own/confdir:/opt/adguardhome/conf -d adguard/adguardhome
+Settings are stored in [YAML], possible parameters that you can configure are
+listed on [this page][conf].
 
-This option instructs docker to use the host's network rather than docker-bridged network.
-Note that port mapping with `-p` is not necessary now.
-
-A note from Docker Documentation:
-
-    The host networking driver only works on Linux hosts, and is not supported on Docker Desktop for Mac, Docker Desktop for Windows, or Docker EE for Windows Server.
+[YAML]: https://yaml.org
+[conf]: https://github.com/AdguardTeam/Adguardhome/wiki/Configuration
 
 
-## <a id="resolved-daemon"></a> Running on a system with 'resolved' daemon
 
-If you try to run AdGuardHome on a system where `resolved` daemon is working, docker will fail to bind on port 53, because `resolved` daemon is listening on `127.0.0.53:53`.
+## <a href="#dhcp" id="dhcp" name="dhcp">DHCP Server</a>
 
-Here's how you can disable DNSStubListener on your machine.
+If you want to use AdGuardHome's DHCP server, you should pass `--network host`
+argument when creating the container:
 
-Deactivate DNSStubListener and update DNS server address.  Create a new file: `/etc/systemd/resolved.conf.d/adguardhome.conf` (create a `/etc/systemd/resolved.conf.d` directory if necessary):
+```sh
+docker run --name adguardhome --network host ...
+```
 
+This option instructs Docker to use the host's network rather than
+a docker-bridged network.  Note that port mapping with `-p` is not necessary in
+this case.
+
+A note from the Docker documentation:
+
+> The host networking driver only works on Linux hosts, and is not supported on
+> Docker Desktop for Mac, Docker Desktop for Windows, or Docker EE for Windows
+> Server.
+
+
+
+## <a href="#resolved-daemon" id="resolved-daemon" name="resolved-daemon">`resolved`</a>
+
+If you try to run AdGuardHome on a system where the `resolved` daemon is
+started, docker will fail to bind on port 53, because `resolved` daemon is
+listening on `127.0.0.53:53`.  Here's how you can disable `DNSStubListener` on
+your machine:
+
+1.  Deactivate `DNSStubListener` and update the DNS server address.  Create
+    a new file, `/etc/systemd/resolved.conf.d/adguardhome.conf` (creating
+    the `/etc/systemd/resolved.conf.d` directory if needed) and add the
+    following content to it:
+
+    ```none
     [Resolve]
     DNS=127.0.0.1
     DNSStubListener=no
+    ```
 
-Specifying "127.0.0.1" as DNS server address is necessary because otherwise the nameserver will be "127.0.0.53" which doesn't work without DNSStubListener.
+    Specifying `127.0.0.1` as the DNS server address is necessary because
+    otherwise the nameserver will be `127.0.0.53` which doesn't work without
+    `DNSStubListener`.
 
-Activate another resolv.conf file:
+2.  Activate a new `resolv.conf` file:
 
+    ```sh
     mv /etc/resolv.conf /etc/resolv.conf.backup
     ln -s /run/systemd/resolve/resolv.conf /etc/resolv.conf
+    ```
 
-Stop DNSStubListener:
+3.  Stop `DNSStubListener`:
 
+    ```sh
     systemctl reload-or-restart systemd-resolved
+    ```
