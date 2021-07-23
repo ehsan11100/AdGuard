@@ -57,8 +57,9 @@ compiler][hlc] and we use it ourselves to create [AdGuard DNS filter][sdn].
 <!-- "-rules-examples" is the old ID that GitHub automatically generated because
 the ID from the table of contents didn't match.  Add it here so that old links
 work. -->
+<a id="-rules-examples" name="-rules-examples"></a>
 
-##  <span id="-rules-examples"><a href="#rules-examples" id="rules-examples" name="rules-examples">Basic Examples</a>
+##  <a href="#rules-examples" id="rules-examples" name="rules-examples">Basic Examples</a>
 
  *  `||example.org^`: block access to the `example.org` domain and all its
     subdomains, like `www.example.org`.
