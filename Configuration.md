@@ -1,4 +1,4 @@
-# AdGuard Home - Configuration
+ #  AdGuard Home - Configuration
 
 Most of these settings can be changed via the web-based admin interface.
 However, we decided to list them all here just in case.
@@ -8,13 +8,16 @@ However, we decided to list them all here just in case.
      *  [Specifying Upstreams For Domains](#upstreams-for-domains)
      *  [Loading Upstreams From File](#upstreams-from-file)
      *  [Specifying Upstreams For Reverse DNS](#upstreams-for-rdns)
+         *  [Private Addresses](#rdns-private)
+         *  [Public Addresses](#rdns-public)
+         *  [Client Look-Ups](#rdns-clients)
  *  [Configuration File](#configuration-file)
  *  [Reset Web Password](#password-reset)
  *  [Profiling With Pprof](#pprof)
 
 
 
-## <a href="#command-line" id="command-line" name="command-line">Command-line Arguments</a>
+##  <a href="#command-line" id="command-line" name="command-line">Command-line Arguments</a>
 
 Here is a list of all available command-line arguments.
 
@@ -56,7 +59,7 @@ functionality in the service as well.
 
 
 
-## <a href="#upstreams" id="upstreams" name="upstreams">Configuring Upstreams</a>
+##  <a href="#upstreams" id="upstreams" name="upstreams">Configuring Upstreams</a>
 
 AdGuard Home is basically a DNS proxy that sends your DNS queries to the
 upstream servers.  You can specify multiple upstream servers in AdGuard Home
@@ -79,7 +82,7 @@ Examples:
 
 * `[/example.local/]1.1.1.1`: DNS upstream for specific domains, see below.
 
-### <a hfer="#upstreams-for-domains" id="upstreams-for-domains" name="upstreams-for-domains">Specifying Upstreams For Domains</a>
+###  <a hfer="#upstreams-for-domains" id="upstreams-for-domains" name="upstreams-for-domains">Specifying Upstreams For Domains</a>
 
 You can specify upstreams that will be used for specific domains using the
 dnsmasq-like syntax (see the documentation for the option `--server`
@@ -126,7 +129,7 @@ a configuration like this:
 sends queries for `*.host.com` to `1.2.3.4` except for queries for
 `*.www.host.com`, which are sent to `6.7.8.9`, which is the default upstream.
 
-#### Examples
+  ####  Examples
 
  *  A configuration like:
 
@@ -149,7 +152,7 @@ sends queries for `*.host.com` to `1.2.3.4` except for queries for
     sends queries for `*.host.com` to `1.1.1.1:53` except for `*.maps.host.com`
     which are sent to `8.8.8.8:53` along with all other queries.
 
-### <a href="#upstreams-from-file" id="upstreams-from-file" name="upstreams-from-file">Loading Upstreams From File</a>
+   ###  <a href="#upstreams-from-file" id="upstreams-from-file" name="upstreams-from-file">Loading Upstreams From File</a>
 
 Using specific upstreams for some domains is a common way to accelerate internet
 in China.  For an example, see https://github.com/felixonmars/dnsmasq-china-list
@@ -166,47 +169,85 @@ may want to load them from a separate file instead of setting all upstreams in
 AdGuard Home settings.  To do that, simply specify the path to a file with your
 list in the `upstream_dns_file` field of `AdGuardHome.yaml`.
 
-### <a id="upstreams-for-rdns">Specifying Upstreams For Reverse DNS</a>
+   ###  <a href="#upstreams-for-rdns" id="upstreams-for-rdns" name="upstreams-for-rdns">Specifying Upstreams For Reverse DNS</a>
 
-AdGuard Home automatically gets the names of connected devices using reverse DNS
-lookup (rDNS).  It sends `PTR` requests with the IP addresses of clients to DNS
-servers and uses the responses for “clients' human-friendly names”.
+Using the domain-specific upstream notation, you can specify dedicated upstream
+DNS servers for reverse DNS (rDNS) requests.  If you want **all** your `PTR`
+queries to be redirected to `192.168.8.8`:
 
-Since **v0.106.0** you can enable and disable this feature with “Enable clients'
-hostname resolution” setting in the “Upstream DNS servers” section or via the
-`resolve_clients` field in the configuration file.
+1.  Enter the following into the “Upstream DNS servers” field on the “Settings
+    → DNS settings” page:
 
-Also since **v0.106.0** all the addresses from [private IP ranges][private-ip]
-are only resolved via appropriate local resolvers to avoid the leaks of clients'
-information.  But you can also set custom upstreams for it in the “Private DNS
-servers” field in the “Upstream DNS servers” section or via the
-`local_ptr_upstreams` field in the configuration file.  Note that the specified
-upstreams are also used by DNS server to resolve `PTR` for the same IP range.
+    ```none
+    [/in-addr.arpa/]192.168.8.8
+    [/ip6.arpa/]192.168.8.8
+    ```
+
+2.  Enter the following into the “Private reverse DNS servers” field on the
+    same page below the previous field:
+
+    ```none
+    192.168.8.8
+    ```
+
+    There is no need to use the domain-specific notation here, unless you want
+    to redirect requests for different private ranges to different upstream
+    servers.
+
+**NOTE:**  All upstreams for private ranges **must** go to the “Private reverse
+DNS servers” field **and not** the main “Upstream DNS servers” field.  Entering
+something like `[/192.in-addr.arpa/]192.168.8.8` into the main field will have
+no effect.
+
+Read below for more details.
+
+  ####  <a href="#rdns-private" id="rdns-private" name="rdns-private">Private Addresses</a>
+
+Since **v0.106.0** all the addresses from [private IP ranges][private-ip]
+are only resolved via appropriate local resolvers to avoid leaks of clients'
+information.  By default, AdGuard Home tries to get the addresses of the default
+resolvers from the OS.  You can set custom upstreams for it in the “Private
+reverse DNS servers” field in the “Upstream DNS servers” section or via the
+`local_ptr_upstreams` field in the configuration file.
 
 Since **v0.107.0** you can disable the usage of private reverse DNS upstream
 servers via the “Use private reverse DNS resolvers” checkbox in the “Upstream
 DNS servers” section or via the `use_private_ptr_resolvers` field in the
-configuration file.  If it is disabled, the unknown addresses from
-locally served networks won't be resolved at all.
+configuration file.  If it is disabled, the unknown addresses from locally
+served networks won't be resolved at all, and clients performing these queries
+will receive `NXDOMAIN` responses.
 
-But what if you want AdGuard Home to use another DNS server for a specific IP
-address range?  You can do it using the same syntax as for general upstream
-servers, for example:
+  ####  <a href="#rdns-public" id="rdns-public" name="rdns-public">Public Addresses</a>
 
-```none
-[/128.in-addr.arpa/]192.168.8.8
-```
-
-This rule instructs AdGuard Home to use `192.168.8.8` DNS server for all rDNS
-requests to resolve clients' IP addresses from the `128.0.0.0/8` network.
-
-Note that if you want to use that address for `PTR` queries for IP addresses
-outside of the locally served network ranges, you should also add this to your
-main “Upstream DNS servers” field:
+If you want AdGuard Home to use another DNS server for a specific IP address
+range, you can do it using the same syntax as for general upstream servers.  For
+example, if you add this to your “Upstream DNS servers” field:
 
 ```none
-[/in-addr.arpa/]192.168.8.8
+[/200.in-addr.arpa/]192.168.7.7
 ```
+
+then AdGuard Home will use the `192.168.7.7` DNS server for all rDNS requests to
+resolve clients' IP addresses from the `200.0.0.0/8` network.
+
+Note that if you want to use that address for `PTR` queries for IP addresses in
+a locally served network range, for example `192.168.0.0/16`, you should add
+this to the “Private reverse DNS servers” field:
+
+```none
+[/168.192.in-addr.arpa/]192.168.7.7
+```
+
+  ####  <a href="#rdns-clients" id="rdns-clients" name="rdns-clients">Client Look-Ups</a>
+
+AdGuard Home automatically gets the names of connected devices using reverse DNS
+lookup (rDNS).  It sends `PTR` requests with the IP addresses of clients to
+appropriate DNS servers and uses the responses to enrich client information with
+human-friendly names.
+
+Since **v0.106.0** you can enable and disable this feature with “Enable clients'
+hostname resolution” setting in the “Upstream DNS servers” section or via the
+`resolve_clients` field in the configuration file.
 
 [DNS Stamps]:     https://dnscrypt.info/stamps/
 [DNS-over-HTTPS]: https://en.wikipedia.org/wiki/DNS_over_HTTPS
@@ -218,7 +259,7 @@ main “Upstream DNS servers” field:
 
 
 
-## <a href="#configuration-file" id="configuration-file" name="configuration-file">Configuration File</a>
+##  <a href="#configuration-file" id="configuration-file" name="configuration-file">Configuration File</a>
 
 Upon the first execution, a file named `AdGuardHome.yaml` will be created, with default values written in it. You can modify the file while your AdGuard Home service is not running. Otherwise, any changes to the file will be lost because the running program will overwrite them.
 
@@ -407,7 +448,7 @@ Removing an entry from settings file will reset it to the default value. Deletin
 
 
 
-## <a href="#password-reset" id="password-reset" name="password-reset">Reset Web Password</a>
+##  <a href="#password-reset" id="password-reset" name="password-reset">Reset Web Password</a>
 
 AdGuard Home stores password as a BCrypt-encoded hash.
 
@@ -434,7 +475,7 @@ Now you'll be able to log in to Web interface using your new password.
 
 
 
-## <a href="#pprof" id="pprof" name="pprof">Profiling With Pprof</a>
+##  <a href="#pprof" id="pprof" name="pprof">Profiling With Pprof</a>
 
 To enable pprof, set `debug_pprof: true` in yaml configuration file and then
 restart AdGuard Home.  Now you can get profiling information with your browser,

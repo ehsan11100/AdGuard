@@ -2,23 +2,21 @@
 
 &nbsp;
 <p align="center">
-  <img src="https://cdn.adguard.com/public/Adguard/Common/adguard_home.svg" width="300px" alt="AdGuard Home" />
+    <img src="https://cdn.adguard.com/public/Adguard/Common/adguard_home.svg" width="300px" alt="AdGuard Home" />
 </p>
 <h3 align="center">Privacy protection center for you and your devices</h3>
 <p align="center">
-  Free and open source, powerful network-wide ads & trackers blocking DNS server.
+    Free and open source, powerful network-wide ads & trackers blocking DNS server.
 </p>
-
-<br />
-
+<br/>
 <p align="center">
-    <img src="https://cdn.adguard.com/public/Adguard/Common/adguard_home.gif" width="800" />
+    <img src="https://cdn.adguard.com/public/Adguard/Common/adguard_home.gif" width="800"/>
 </p>
 
  *  [Introduction](#introduction)
  *  [Quick Start](#quickstart)
  *  [Update To A Newer Version](#update)
- *  [Running Dev Builds](#unstable)
+ *  [Running Development Builds](#unstable)
  *  [Additional Configuration](#configuration)
  *  [DHCP Server](#dhcp)
  *  [`resolved`](#resolved-daemon)
@@ -38,7 +36,7 @@ repository][agh].
 
 ##  <a href="#quickstart" id="quickstart" name="quickstart">Quick Start</a>
 
- ###  Pull the Docker image
+   ###  Pull the Docker image
 
 This command will pull the latest stable version:
 
@@ -46,14 +44,14 @@ This command will pull the latest stable version:
 docker pull adguard/adguardhome
 ```
 
- ###  Create directories for persistent configuration and data
+   ###  Create directories for persistent configuration and data
 
 The image exposes two volumes for data and configuration persistence.  You
 should create a **data** directory on a suitable volume on your host system,
 e.g.  `/my/own/workdir`, and a **configuration** directory on a suitable volume
 on your host system, e.g. `/my/own/confdir`.
 
- ###  Create and run the container
+   ###  Create and run the container
 
 Use the following command to create a new container and run AdGuard Home:
 
@@ -76,7 +74,7 @@ your AdGuard Home service.
 
 Don't forget to use your own **data** and **config** directories!
 
-Ports mappings you may need:
+Port mappings you might need:
 
  *  `-p 53:53/tcp -p 53:53/udp`: plain DNS.
 
@@ -97,7 +95,7 @@ Ports mappings you may need:
  *  `-p 5443:5443/tcp -p 5443:5443/udp`: add if you are going to run AdGuard
     Home as a [DNSCrypt] server.
 
- ###  Control the container
+   ###  Control the container
 
  *  Start: `docker start adguardhome`
 
@@ -131,7 +129,7 @@ Ports mappings you may need:
 
 
 
-##  <a href="#unstable" id="unstable" name="unstable">Running Dev Builds</a>
+##  <a href="#unstable" id="unstable" name="unstable">Running Development Builds</a>
 
 If you want to be on the bleeding edge, you might want to run the image from the
 `edge` or `beta` tags.  In order to use it, simply replace `adguard/adguardhome`
@@ -146,20 +144,20 @@ docker pull adguard/adguardhome:edge
 
 ## <a href="#configuration" id="configuration" name="configuration">Additional Configuration</a>
 
-Upon the first run, a file named `AdGuardHome.yaml` will be created, with
-default values written into it.  You can modify the file while your AdGuard Home
-container is not running.  Otherwise, any changes to the file will be lost
-because the running program will overwrite them.
+Upon the first run, a file with the default values named `AdGuardHome.yaml` is
+created.  You can modify the file while your AdGuard Home container is not
+running.  Otherwise, any changes to the file will be lost because the running
+program will overwrite them.
 
-Settings are stored in [YAML], possible parameters that you can configure are
-listed on [this page][conf].
+The settings are stored in the [YAML] format.  The documentation describing all
+configurable parameters and their values is available on [this page][conf].
 
 [YAML]: https://yaml.org
 [conf]: https://github.com/AdguardTeam/Adguardhome/wiki/Configuration
 
 
 
-## <a href="#dhcp" id="dhcp" name="dhcp">DHCP Server</a>
+##  <a href="#dhcp" id="dhcp" name="dhcp">DHCP Server</a>
 
 If you want to use AdGuardHome's DHCP server, you should pass `--network host`
 argument when creating the container:
@@ -174,13 +172,13 @@ this case.
 
 A note from the Docker documentation:
 
-> The host networking driver only works on Linux hosts, and is not supported on
-> Docker Desktop for Mac, Docker Desktop for Windows, or Docker EE for Windows
-> Server.
+ >  The host networking driver only works on Linux hosts, and is not supported on
+ >  Docker Desktop for Mac, Docker Desktop for Windows, or Docker EE for Windows
+ >  Server.
 
 
 
-## <a href="#resolved-daemon" id="resolved-daemon" name="resolved-daemon">`resolved`</a>
+##  <a href="#resolved-daemon" id="resolved-daemon" name="resolved-daemon">`resolved`</a>
 
 If you try to run AdGuardHome on a system where the `resolved` daemon is
 started, docker will fail to bind on port 53, because `resolved` daemon is

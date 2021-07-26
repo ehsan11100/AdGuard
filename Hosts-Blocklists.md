@@ -26,7 +26,7 @@ There are three different approaches to writing hosts blocklists:
     This way blocklists are compatible with browser ad blockers.
 
  *  [`/etc/hosts` syntax](#etc-hosts): the old, tried-and-true approach that
-    uses the same syntax the one operating systems use for their hosts files.
+    uses the same syntax that operating systems do for their hosts files.
 
  *  [Domains-only syntax](#domains-only): a simple list of domain names.
 
@@ -34,7 +34,7 @@ If you are creating a blocklist for AdGuard Home, we recommend using the
 [Adblock-style syntax](#adblock-style).  It has a couple of important advantages
 over the old-style syntax:
 
- *  **Blocklists size.**  Using pattern-matching allows you to have a single
+ *  **Blocklists size.**  Using pattern matching allows you to have a single
     rule instead of hundreds of `/etc/hosts` entries.
 
  *  **Compatibility.**  Your blocklist will be compatible with browser ad
@@ -72,7 +72,14 @@ work. -->
     subdomains.  `www.example.org` remains allowed.
 
     Using the unspecified IP address (`0.0.0.0`) or a local address (`127.0.0.1`
-    and alike) with an address is basically the same as blocking this address.
+    and alike) for a host is basically the same as blocking that host.
+
+    ```none
+    # Returns the IP address 1.2.3.4 for exmaple.org.
+    1.2.3.4 example.org
+    # Blocks example.com by responding with 0.0.0.0.
+    0.0.0.0 example.com
+    ```
 
  *  `example.org`: a simple domain rule.  Blocks `example.org` domain but
     **not** its subdomains.  `www.example.org` remains allowed.
@@ -103,7 +110,7 @@ modifiers = [modifier0, modifier1[, ...[, modifierN]]]
  *  `modifiers`: parameters that clarify the rule.  They may limit the scope of
     the rule or even completely change the way it works.
 
- ###  <a href="#special-characters" id="special-characters" name="special-characters">Special Characters</a>
+   ###  <a href="#special-characters" id="special-characters" name="special-characters">Special Characters</a>
 
  *  `*`: the wildcard character.  It is used to represent any set of characters.
     This can also be an empty string or a string of any length.
@@ -121,7 +128,7 @@ modifiers = [modifier0, modifier1[, ...[, modifierN]]]
     `ample.org|` corresponds to `example.org` but not to `example.org.com`.
     `|example` corresponds to `example.org` but not to `test.example`.
 
- ###  <a href="#regular-expressions" id="regular-expressions" name="regular-expressions">Regular Expressions</a>
+   ###  <a href="#regular-expressions" id="regular-expressions" name="regular-expressions">Regular Expressions</a>
 
 If you want even more flexibility in making rules, you can use [regular
 expressions][regexp] instead of the default simplified matching syntax.  If you
@@ -138,7 +145,7 @@ pattern = "/" regexp "/"
 * `@@/example.*/$important` will unblock hosts matching the `example.*` regexp.
   Note that this rule also implies the `important` modifier.
 
- ###  <a href="#comments" id="comments" name="comments">Comments</a>
+   ###  <a href="#comments" id="comments" name="comments">Comments</a>
 
 Any line that starts with an exclamation mark or a hash sign is a comment and it
 will be ignored by the filtering engine.  Comments are usually placed above
@@ -151,7 +158,7 @@ rules and used to describe what a rule does.
 # This is also a comment.
 ```
 
- ###  <a href="#modifiers" id="modifiers" name="modifiers">Rule Modifiers</a>
+   ###  <a href="#modifiers" id="modifiers" name="modifiers">Rule Modifiers</a>
 
 You can change the behavior of a rule by adding modifiers.  Modifiers must be
 located at the end of the rule after the `$` character and be separated by
@@ -185,7 +192,7 @@ rule **must be ignored**.  This way we avoid false-positives when people are
 trying to use unmodified browser ad blockers' filter lists like EasyList or
 EasyPrivacy.
 
-####  <a href="#client" id="client" name="client">`client`</a>
+  ####  <a href="#client" id="client" name="client">`client`</a>
 
 The `client` modifier allows specifying clients this rule will be working for.
 It accepts client names (**not** ClientIDs), IP addresses, or CIDR ranges.
@@ -231,7 +238,7 @@ quotes.
  *  `||example.org^$client=192.168.0.0/24`: block `example.org` for all clients
     with IP addresses in the range from `192.168.0.0` to `192.168.0.255`.
 
-####  <a href="#denyallow" id="denyallow" name="denyallow">`denyallow`</a>
+  ####  <a href="#denyallow" id="denyallow" name="denyallow">`denyallow`</a>
 
 Available since **v0.106.0**.
 
@@ -275,7 +282,7 @@ how to solve this with `denyallow`:
  *  `||example.org^$denyallow=sub.example.org`. block `example.org` and
     `*.example.org` but don't block `sub.example.org`.
 
-####  <a href="#dnstype" id="dnstype" name="dnstype">`dnstype`</a>
+  ####  <a href="#dnstype" id="dnstype" name="dnstype">`dnstype`</a>
 
 Available since **v0.105.0**.
 
@@ -312,7 +319,7 @@ $dnstype=value2
 * `||example.org^$dnstype=~A|~CNAME`: only allow `A` and `CNAME` DNS queries for
   `example.org`, block out the rest.
 
-####  <a href="#dnsrewrite" id="dnsrewrite" name="dnsrewrite">`dnsrewrite`</a>
+  ####  <a href="#dnsrewrite" id="dnsrewrite" name="dnsrewrite">`dnsrewrite`</a>
 
 Available since **v0.105.0**.
 
@@ -429,7 +436,7 @@ Exception rules remove one or all rules:
  *  `@@||example.com^$dnsrewrite=1.2.3.4` removes the DNS rewrite rule that adds
     an `A` record with the value `1.2.3.4`.
 
-####  <a href="#important" id="important" name="important">`important`</a>
+  ####  <a href="#important" id="important" name="important">`important`</a>
 
 The `important` modifier applied to a rule increases its priority over any
 other rule without the modifier.  Even over basic exception rules.
@@ -455,7 +462,7 @@ other rule without the modifier.  Even over basic exception rules.
 
     the exception rule also has the `important` modifier, so it will work.
 
-####  <a href="#badfilter" id="badfilter" name="badfilter">`badfilter`</a>
+  ####  <a href="#badfilter" id="badfilter" name="badfilter">`badfilter`</a>
 
 The rules with the `badfilter` modifier disable other basic rules to which they
 refer.  It means that the text of the disabled rule should match the text of the
@@ -471,7 +478,7 @@ refer.  It means that the text of the disabled rule should match the text of the
 `/etc/hosts`-style rules.  `127.0.0.1 example.org$badfilter` will **not**
 disable the original `127.0.0.1 example.org` rule.
 
-#### <a href="#ctag" id="ctag" name="ctag">`ctag`</a>
+  #### <a href="#ctag" id="ctag" name="ctag">`ctag`</a>
 
 The `ctag` modifier allows to block domains only for specific types of DNS
 client tags.  You can assign tags to clients in the AdGuard Home UI.  In the
@@ -511,13 +518,13 @@ The list of allowed tags:
      *  `device_gameconsole`: game consoles.
      *  `device_laptop`: laptops,
      *  `device_nas`: NAS (Network-attached Storages).
-     *  `device_other`: other devices.
      *  `device_pc`: PCs.
      *  `device_phone`: phones.
      *  `device_printer`: printers.
      *  `device_securityalarm`: security alarms.
      *  `device_tablet`: tablets.
      *  `device_tv`: TVs.
+     *  `device_other`: other devices.
 
  *  By operating system:
 
@@ -525,14 +532,14 @@ The list of allowed tags:
      *  `os_ios`: iOS.
      *  `os_linux`: Linux.
      *  `os_macos`: macOS.
-     *  `os_other`: other OSes.
      *  `os_windows`: Windows.
+     *  `os_other`: other OSes.
 
  *  By user group:
 
      *  `user_admin`: administrators.
-     *  `user_child`: children.
      *  `user_regular`: regular users.
+     *  `user_child`: children.
 
 [adb]:     https://kb.adguard.com/en/general/how-to-create-your-own-ad-filters
 [regexp]:  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
