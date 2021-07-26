@@ -357,7 +357,10 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
   - **Access settings**
     - `allowed_clients` — IP addresses of allowed clients
     - `disallowed_clients` — IP addresses of clients that should be blocked
-    - `blocked_hosts` — hosts that should be blocked
+    - `blocked_hosts` — Hosts that should be blocked
+    - `trusted_proxies` (**since v0.107.0**) – The list of IP addresses and CIDR
+      networks to detect proxy servers' addresses from which AdGuard Home should
+      accept and handle DNS-over-HTTPS requests.
   - **DNS cache settings**
     - `cache_size` — DNS cache size (in bytes)
     - `cache_ttl_min` — override TTL value (minimum) received from upstream server. This value can't larger than 3600 (1 hour).
