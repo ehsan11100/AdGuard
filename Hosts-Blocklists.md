@@ -316,8 +316,8 @@ $dnstype=value2
  *  `||example.org^$dnstype=AAAA`: block DNS queries for the IPv6 addresses of
     `example.org`.
 
- * `||example.org^$dnstype=~A|~CNAME`: only allow `A` and `CNAME` DNS queries for
-   `example.org`, block out the rest.
+ *  `||example.org^$dnstype=~A|~CNAME`: only allow `A` and `CNAME` DNS queries
+    for `example.org`, block out the rest.
 
   ####  <a href="#dnsrewrite" id="dnsrewrite" name="dnsrewrite">`dnsrewrite`</a>
 

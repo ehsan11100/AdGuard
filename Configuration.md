@@ -169,6 +169,11 @@ may want to load them from a separate file instead of setting all upstreams in
 AdGuard Home settings.  To do that, simply specify the path to a file with your
 list in the `upstream_dns_file` field of `AdGuardHome.yaml`.
 
+**BUG:** The file, just like the input in the web interface, currently doesn't
+accept internationalized domain names (e.g. `пример.рф` or `例子.中国`).  As
+a workaround, convert them to Punycode (e.g. `xn--e1afmkfd.xn--p1ai` or
+`xn--fsqu00a.xn--fiqs8s` respectively).  See [issue 2915][2915].
+
    ###  <a href="#upstreams-for-rdns" id="upstreams-for-rdns" name="upstreams-for-rdns">Specifying Upstreams For Reverse DNS</a>
 
 Using the domain-specific upstream notation, you can specify dedicated upstream
@@ -249,6 +254,7 @@ Since **v0.106.0** you can enable and disable this feature with “Enable client
 hostname resolution” setting in the “Upstream DNS servers” section or via the
 `resolve_clients` field in the configuration file.
 
+[2915]:           https://github.com/AdguardTeam/AdGuardHome/issues/2915
 [DNS Stamps]:     https://dnscrypt.info/stamps/
 [DNS-over-HTTPS]: https://en.wikipedia.org/wiki/DNS_over_HTTPS
 [DNS-over-QUIC]:  https://datatracker.ietf.org/doc/html/draft-ietf-dprive-dnsoquic-03
