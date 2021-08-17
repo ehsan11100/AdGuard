@@ -1,8 +1,8 @@
  #  AdGuard Home - DNSCrypt
 
  *  [Generating A Configuration File](#generate-config)
- *  [Generating A *DNSCrypt* Stamp](#generate-stamp)
- *  [Configuring Devices To Use *DNSCrypt*](#configure-devices)
+ *  [Generating A DNSCrypt Stamp](#generate-stamp)
+ *  [Configuring Devices To Use DNSCrypt](#configure-devices)
 
 **Since v0.105.0**, AdGuard Home is able to work as a DNSCrypt server.  However,
 this feature is only available via configuration file, you cannot set it up
@@ -40,7 +40,7 @@ it:
       'dnscrypt_config_file': './dnscrypt.yaml'
     ```
 
-    Where `5443` is the port for your *DNSCrypt* server and `./dnscrypt.yaml` is
+    Where `5443` is the port for your DNSCrypt server and `./dnscrypt.yaml` is
     the name of the configuration file generated in step 2.
 
 [`dnscrypt`]: https://github.com/ameshkov/dnscrypt/releases
@@ -49,7 +49,7 @@ it:
 
 ##  <a href="#generate-stamp" id="generate-stamp" name="generate-stamp">Generating A DNSCrypt Stamp</a>
 
-Here is how to generate a *DNSCrypt* stamp and check your installation:
+Here is how to generate a DNSCrypt stamp and check your installation:
 
 1.  Go to <https://dnscrypt.info/stamps/>.
 
