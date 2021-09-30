@@ -97,7 +97,7 @@ easiest way to get a certificate.
 Run this command and follow the certbot's instructions:
 
 ```sh
-sudo certbot certonly --manual --preferred-challenges=dns
+sudo certbot certonly --manual --preferred-challenges=dns --preferred-chain="ISRG Root X1"
 ```
 
 In the end you'll get two files:
@@ -120,7 +120,8 @@ There's also a really nice and easy-to-use alternative to CertBot called
 1.  Choose your DNS provider from [the list][lego-provider]
     and follow the instruction to obtain a certificate.
 
-
+Also, here's [a simple script][legoagh] that you can use to automate
+certificates generation and renewal.
 
 [tls-wikipedia]: https://en.wikipedia.org/wiki/Transport_Layer_Security
 [letsencrypt]:   https://letsencrypt.org
@@ -128,6 +129,7 @@ There's also a really nice and easy-to-use alternative to CertBot called
 [lego-source]:   https://go-acme.github.io/lego
 [lego-install]:  https://go-acme.github.io/lego/installation
 [lego-provider]: https://go-acme.github.io/lego/dns
+[legoagh]:       https://github.com/ameshkov/legoagh
 
 
 
