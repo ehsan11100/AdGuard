@@ -1,4 +1,4 @@
- # AdGuard Home - DHCP Server
+ #  AdGuard Home - DHCP Server
 
  *  [Prerequisites](#prereq)
  *  [Default Options](#default)
@@ -7,96 +7,112 @@
      *  [DHCPv6 Options](#config-6)
  *  [Automatic Hosts](#autohosts)
 
-*AdGuard Home* can be used as a DHCP server.  This page describes how to do that.
+AdGuard Home can be used as a DHCP server.  This page describes how to do that.
+
+
 
 ##  <a id="prereq" href="#prereq">Prerequisites</a>
 
-1.  Make sure that you run an OS on which *AdGuard Home* supports DHCP.  We
-    currently don't support DHCP on *Windows*.
+1.  Make sure that you run an OS on which AdGuard Home supports DHCP.  We
+    currently don't support DHCP on Windows.
+
 1.  Make sure that your machine has a static IP address.
+
+
 
 ##  <a id="default" href="#default">Default Options</a>
 
-By default, *AdGuard Home* will set itself as the DNS server for the DHCP
-clients.  The default lease time is 24 hours.
+By default, AdGuard Home will set itself as the DNS server for the DHCP clients.
+The default lease time is 24 hours.
+
+
 
 ##  <a id="config" href="#config">Configuration</a>
 
 See the DHCP section in the [configuration] article for the overview of the DHCP
 configuration options.  There are several configuration parameters for DHCP that
-can't be set via the *AdGuard Home* administrator dashboard.  Those are
-described below.
+can't be set via the AdGuard Home administrator dashboard.  Those are described
+below.
 
- ###  <a id="config-4" href="#config-4">The `dhcp.dhcpv4.options` Array Field</a>
 
-The `options` field accepts two types of values: `hex` and `ip`.  Both start
-with the `CODE`, which MUST be an integer in the [1, 255] range.
 
-See [RFC 2132, sec. 3](https://tools.ietf.org/html/rfc2132#section-3).
+   ###  <a id="config-4" href="#config-4">The `dhcp.dhcpv4.options` Array Field</a>
 
-The `hex` format is:
+The `options` field accepts four types of values: `hex`, `ip`, `ips`, and
+`text`.  They all start with the `CODE`, which MUST be an integer in the [1,
+255] range.  See also [RFC 2132, sec. 3][rfc-2132].
 
-```
-CODE hex HEX_VALUE
-```
+In accordance with [RFC 2131, sec. 4.3.1][rfc-2131], these options override the
+default options set by Adguard Home.  Which means that if you want to set DNS
+server addresses using option `6`, you should also add Adguard Home's own
+addresses there.  Otherwise, AdGuard Home's filtering won't work for the DHCP
+clients who receive these DNS server addresses.
 
-For example, to set option `6`, the DNS server, to two IP addresses, `1.2.3.4`
-and `1.2.3.5`, use:
+ *  The `hex` format is:
 
-```yaml
-# …
-'dhcp':
-  # …
-  'dhcpv4':
+    ```
+    CODE hex HEX_VALUE
+    ```
+
+    For example, to set option `6`, the DNS server, to two IP addresses,
+    `1.2.3.4` and `1.2.3.5`, use:
+
+    ```yaml
     # …
-    'options':
-    - '6 hex 0102030401020305'
-```
+    'dhcp':
+      # …
+      'dhcpv4':
+        # …
+        'options':
+        - '6 hex 0102030401020305'
+    ```
 
-The `ip` format is:
+ *  The `ip` format is:
 
-```
-CODE ip IPV4_VALUE
-```
+    ```
+    CODE ip IPV4_VALUE
+    ```
 
-For example, to set option `6`, the DNS server, to one IP address, `1.2.3.4`,
-use:
+    For example, to set option `6`, the DNS server, to one IP address,
+    `1.2.3.4`, use:
 
-```yaml
-# …
-'dhcp':
-  # …
-  'dhcpv4':
+    ```yaml
     # …
-    'options':
-    - '6 ip 1.2.3.4'
-```
+    'dhcp':
+      # …
+      'dhcpv4':
+        # …
+        'options':
+        - '6 ip 1.2.3.4'
+    ```
 
-The `ips` format (since **v0.106.0**) is the same, but with comma-separated
-IP-addresses:
+ *  The `ips` format (since **v0.106.0**) is the same, but with comma-separated
+    IP-addresses:
 
-```yaml
-# …
-'dhcp':
-  # …
-  'dhcpv4':
+    ```yaml
     # …
-    'options':
-    - '6 ips 1.2.3.4,5.6.7.8'
-```
+    'dhcp':
+      # …
+      'dhcpv4':
+        # …
+        'options':
+        - '6 ips 1.2.3.4,5.6.7.8'
+    ```
 
-The `text` format (since **v0.106.0**) allows you to put arbitrary UTF-8 text as
-the option data.  For example:
+ *  The `text` format (since **v0.106.0**) allows you to put arbitrary UTF-8
+    text as the option data.  For example:
 
-```yaml
-# …
-'dhcp':
-  # …
-  'dhcpv4':
+    ```yaml
     # …
-    'options':
-    - '252 text http://example.com'
-```
+    'dhcp':
+      # …
+      'dhcpv4':
+        # …
+        'options':
+        - '252 text http://example.com'
+    ```
+
+
 
  ###  <a id="config-6" href="#config-6">DHCPv6 Options</a>
 
@@ -107,6 +123,10 @@ The option `dhcp.dhcpv6.ra_allow_slaac`, if `true`, sends RA packets allowing
 the clients to choose between SLAAC and DHCPv6.
 
 [configuration]: https://github.com/AdguardTeam/AdGuardHome/wiki/Configuration
+[rfc-2131]:      https://tools.ietf.org/html/rfc2131#page-29
+[rfc-2132]:      https://tools.ietf.org/html/rfc2132#section-3
+
+
 
 ##  <a id="autohosts" href="#autohosts">Automatic Hosts</a>
 

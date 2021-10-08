@@ -75,7 +75,7 @@ work. -->
     and alike) for a host is basically the same as blocking that host.
 
     ```none
-    # Returns the IP address 1.2.3.4 for exmaple.org.
+    # Returns the IP address 1.2.3.4 for example.org.
     1.2.3.4 example.org
     # Blocks example.com by responding with 0.0.0.0.
     0.0.0.0 example.com

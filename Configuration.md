@@ -82,7 +82,7 @@ Examples:
 
 * `[/example.local/]1.1.1.1`: DNS upstream for specific domains, see below.
 
-###  <a hfer="#upstreams-for-domains" id="upstreams-for-domains" name="upstreams-for-domains">Specifying Upstreams For Domains</a>
+###  <a href="#upstreams-for-domains" id="upstreams-for-domains" name="upstreams-for-domains">Specifying Upstreams For Domains</a>
 
 You can specify upstreams that will be used for specific domains using the
 dnsmasq-like syntax (see the documentation for the option `--server`
