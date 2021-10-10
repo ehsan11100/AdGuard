@@ -567,9 +567,10 @@ spellings, shorter hostnames, or generic hostnames (for example, `localhost`).
 **Example:**
 
 ```
-127.0.0.1 example.org foo
-127.0.0.1 example.com
 # This is a comment
+127.0.0.1 example.org example.info
+127.0.0.1 example.com
+127.0.0.1 example.net # this is also a comment
 ```
 
 The IP addresses are used to respond to the DNS queries for these domains.
@@ -583,8 +584,10 @@ A simple list of domain names, one name per line.
 Example:
 
 ```
+# This is a comment
 example.com
 example.org
+example.net # this is also a comment
 ```
 
 If a string is not a valid domain (e.g. `*.example.org`), AdGuard Home will
