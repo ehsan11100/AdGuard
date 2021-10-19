@@ -182,10 +182,10 @@ commas.
     ```
 
     `||example.org^` is the matching pattern.  `$` is the delimiter, which
-    signals that the rest of the rule are modifiers.  `client=127.0.0.1`
-    is the [`client`](#client) modifier with its value, `127.0.0.1.  `,` is the
-    delimiter.  And finally, `dnstype=A` is the [`dnstype`](#dnstype) modifier
-    with its value, `A`.
+    signals that the rest of the rule are modifiers.  `client=127.0.0.1` is the
+    [`client`](#client) modifier with its value, `127.0.0.1`, is the delimiter.
+    And finally, `dnstype=A` is the [`dnstype`](#dnstype) modifier with its
+    value, `A`.
 
 **NOTE:**  If a rule contains a modifier not listed in this document, the whole
 rule **must be ignored**.  This way we avoid false-positives when people are
