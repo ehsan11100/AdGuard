@@ -462,28 +462,45 @@ Removing an entry from settings file will reset it to the default value. Deletin
 
 ##  <a href="#password-reset" id="password-reset" name="password-reset">Reset Web Password</a>
 
-AdGuard Home stores password as a BCrypt-encoded hash.
+Please follow these steps to create a new password for your user account:
 
-Here's what you need to do to change the password:
+1. Install `htpasswd`, which is a part of *Apache2 Web Server*:
 
-1.  Stop AdGuard Home.
+    Ubuntu:
 
-2.  Open `AdGuardHome.yaml`.
+    `sudo apt-get install apache2`
 
-3.  Find the `password` field there.
+    Fedora:
 
-4.  Replace it with the new value.  You can use the [`htpasswd`] utility or any
-    online BCrypt generation tool.  For example:
+    `sudo dnf install apache2`
 
-    ```sh
-    htpasswd -b -n -B -C 10 '' MY_NEW_PASS | tr -d ':'
-    ```
+    Windows:
 
-5.  Restart AdGuard Home.
+    > Choose a download from https://httpd.apache.org/docs/current/platform/windows.html#down, extract the downloaded folder, open a terminal, navigate to its `bin` folder with the `cd` command, and run `.\Htpasswd` (Note the capital H in the Windows version).
 
-Now you'll be able to log in to Web interface using your new password.
+    Other versions of `htpasswd` could be used, but **only** if they support *bcrypt* hash encryption, which rules out e.g. most web-hosted `htpasswd` generators.
 
-[`htpasswd`]: http://manpages.ubuntu.com/manpages/focal/en/man1/htpasswd.1.html
+2. Use the `htpasswd` utility to generate a new hash:
+
+    Ubuntu/Fedora:
+
+    `htpasswd -B -n -b <USERNAME> <PASSWORD>`
+
+    Windows:
+
+    `.\Htpasswd -B -n -b <USERNAME> <PASSWORD>`
+
+    It will print `<USERNAME>:<HASH>` to the terminal.
+
+3. Open `AdGuardHome.yaml` in a text editor with sudo rights.
+
+    In the `users:` section, find your username and insert the `<HASH>` value for the `password` setting:
+
+    ```users:
+    - name: ...
+      password: <HASH>```
+
+4. Save the file, restart AGH. Now you'll be able to log in to the Web interface using your new password.
 
 
 
