@@ -140,10 +140,10 @@ pattern = "/" regexp "/"
 
 **Examples:**
 
-* `/example.*/` will block hosts matching the `example.*` regexp.
+ *  `/example.*/` will block hosts matching the `example.*` regexp.
 
-* `@@/example.*/$important` will unblock hosts matching the `example.*` regexp.
-  Note that this rule also implies the `important` modifier.
+ *  `@@/example.*/$important` will unblock hosts matching the `example.*`
+    regexp.  Note that this rule also implies the `important` modifier.
 
    ###  <a href="#comments" id="comments" name="comments">Comments</a>
 
