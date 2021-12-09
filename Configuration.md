@@ -367,8 +367,18 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
     - `disallowed_clients` — IP addresses of clients that should be blocked
     - `blocked_hosts` — Hosts that should be blocked
     - `trusted_proxies` (**since v0.107.0**) – The list of IP addresses and CIDR
-      networks to detect proxy servers' addresses from which AdGuard Home should
-      accept and handle DNS-over-HTTPS requests.
+      prefixes of trusted HTTP proxy servers.  If a DNS-over-HTTPS request comes
+      from one of these addresses or networks, AdGuard Home uses the provided
+      proxy headers, such as `X-Real-IP`, to get the real IP address of the
+      client.  Requests from HTTP proxies outside of these networks are
+      considered to be requests from the proxy itself.  That is, the proxy
+      headers are ignored.
+
+      The full list of proxy headers, in the order AdGuard Home inspects them:
+      1.  `CF-Connecting-IP`
+      1.  `True-Client-IP`
+      1.  `X-Real-IP`
+      1.  `X-Forwarded-For`
   - **DNS cache settings**
     - `cache_size` — DNS cache size (in bytes)
     - `cache_ttl_min` — override TTL value (minimum) received from upstream server. This value can't larger than 3600 (1 hour).
