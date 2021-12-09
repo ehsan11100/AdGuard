@@ -48,7 +48,7 @@ docker pull adguard/adguardhome
 
 The image exposes two volumes for data and configuration persistence.  You
 should create a **data** directory on a suitable volume on your host system,
-e.g.  `/my/own/workdir`, and a **configuration** directory on a suitable volume
+e.g. `/my/own/workdir`, and a **configuration** directory on a suitable volume
 on your host system, e.g. `/my/own/confdir`.
 
    ###  Create and run the container

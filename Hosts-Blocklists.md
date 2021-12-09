@@ -153,7 +153,7 @@ rules and used to describe what a rule does.
 
 **Example:**
 
-```
+```none
 ! This is a comment.
 # This is also a comment.
 ```
@@ -194,8 +194,19 @@ EasyPrivacy.
 
   ####  <a href="#client" id="client" name="client">`client`</a>
 
-The `client` modifier allows specifying clients this rule will be working for.
-It accepts client names (**not** ClientIDs), IP addresses, or CIDR ranges.
+The `client` modifier allows specifying clients this rule is applied to.  There
+are two main ways to identify a client:
+
+ *  By their IP address or CIDR prefix.  This way works for all kinds of
+    clients.
+
+ *  By their name.  This way only works for persistent clients, that is clients
+    which you have manually added on the “Settings → Client settings” page.
+
+    **NOTE:** ClientIDs are not currently supported, only names are.  If you
+    have added a client with the name “My Client” and ClientID `my-client`,
+    spell your modifier as `$client='My Client'` as opposed to
+    `$client=my-client`.
 
 The syntax is:
 
@@ -203,9 +214,8 @@ The syntax is:
 $client=value1|value2|...
 ```
 
-You can also specify excluded clients by adding a `~` character before the
-client IP or name.  In this case, the rule will not be applied to this client's
-DNS requests.
+You can also exclude clients by adding a `~` character before the value.  In
+this case, the rule is not be applied to this client's DNS requests.
 
 ```none
 $client=~value1
@@ -216,8 +226,7 @@ you should enclose the name in quotes.  Both single and double ASCII quotes are
 supported.  Use the backslash (`\`) to escape quotes (`"` and `'`), commas
 (`,`), and pipes (`|`).
 
-Please note that when excluding a client, you must keep `~` **out** of the
-quotes.
+**NOTE:** When excluding a client, you **must** keep `~` out of the quotes.
 
 **Examples:**
 
@@ -359,8 +368,11 @@ user has this in their filter rules:
 
 then the response will be something like:
 
-```
+```sh
 $ nslookup example.com my.adguard.local
+```
+
+```none
 Server:		my.adguard.local
 Address:	127.0.0.1#53
 
@@ -374,7 +386,7 @@ Keyword rewrites (for example, `REFUSED`) take precedence over the other.  Next,
 the `CNAME` rewrite.  After that, all other records's values are summed as one
 response, so this:
 
-```
+```none
 ||example.com^$dnsrewrite=NOERROR;A;1.2.3.4
 ||example.com^$dnsrewrite=NOERROR;A;1.2.3.5
 ```
@@ -405,7 +417,7 @@ Currently supported RR types with examples:
     be `contiguous` and, where a `value-list` is expected`, only one value is
     currently supported:
 
-    ```
+    ```none
     ipv4hint=127.0.0.1             // Supported.
     ipv4hint="127.0.0.1"           // Unsupported.
     ipv4hint=127.0.0.1,127.0.0.2   // Unsupported.
@@ -551,7 +563,7 @@ The list of allowed tags:
 
 For each host a single line should be present with the following information:
 
-```
+```none
 IP_address canonical_hostname [aliases...]
 ```
 
@@ -566,7 +578,7 @@ spellings, shorter hostnames, or generic hostnames (for example, `localhost`).
 
 **Example:**
 
-```
+```none
 # This is a comment
 127.0.0.1 example.org example.info
 127.0.0.1 example.com
@@ -583,7 +595,7 @@ A simple list of domain names, one name per line.
 
 Example:
 
-```
+```none
 # This is a comment
 example.com
 example.org
