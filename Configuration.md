@@ -283,7 +283,6 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
   entire blocking logic is disabled if it equals to 0.
 - `http_proxy` — proxy URL for HTTP client (e.g. "http://user:password@server:port/"). Supports "http", "https" and "socks5" scheme.
 - `web_session_ttl` — Web session TTL (in hours) - a web user will stay signed in for this amount of time.
-- `rlimit_nofile` — Limit on the maximum number of open files for server process (Linux and macOS). Set to 0 to use the system default value.
 - `debug_pprof` — Enable pprof HTTP server listening on port 6060 for debugging. See section `Profiling with pprof`.
 
 - `dns` — DNS configuration section.
@@ -443,6 +442,11 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
   - `private_key` - PEM-encoded private key.
   - `icmp_timeout_msec` - time (ms) to wait for ICMP reply to detect an IP conflict. If 0, the feature is disabled.
 - `user_rules` — User-specified filtering rules.
+- `os` (**since v0.107.0**) — Operating system related settings.
+  - `group` — The name of the user group to switch to after the startup.
+  - `user` — The name of the user to switch to after the startup.
+  - `rlimit_nofile` — Limit on the maximum number of open files for the server
+    process (on unixlike OSes).  Set to `0` to use the system's default value.
 - **Log settings**
   - `log_file` — Path to the log file. If empty, writes to stdout, if `syslog` -- system log (or eventlog on Windows).
   - `log_compress` — Compress determines if the rotated log files should be compressed using gzip (default: false)
