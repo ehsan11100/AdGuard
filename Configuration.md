@@ -321,8 +321,12 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
     - `port` — DNS server port to listen on.
     - `statistics_interval` - time interval for statistics (in days)
   - **Protection settings**
-    - `protection_enabled` — Whether any kind of filtering and protection should be done, when off it works as a plain dns forwarder.
-    - `filtering_enabled` — Filtering of DNS requests based on filter lists.
+    - `protection_enabled` — whether any kind of filtering and protection should
+      be preformed.  **Since v0.107.0** it doesn't affect the rules with
+      `$dnsrewrite` modifier and other rewrites, including those taken from the
+      operating system's hosts file.
+    - `filtering_enabled` — whether filtering of DNS requests based on rule
+      lists should be performed.
     - `blocking_mode` — Specifies how to block DNS requests. "nxdomain" (default): respond with NXDOMAIN status; "null_ip": respond with the unspecified IP address (0.0.0.0); or "custom_ip": respond with `blocking_ipv4` or `blocking_ipv6`.
     - `blocking_ipv4` - IP address to be returned for a blocked A request if `blocking_mode` is set to `custom_ip`
     - `blocking_ipv6` - IP address to be returned for a blocked AAAA request if `blocking_mode` is set to `custom_ip`
@@ -399,7 +403,7 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
     - `upstream_timeout` (**since v0.107.0**) — The timeout for querying
       upstream servers.  Zero value will be rewritten with default one which is
       10s.
-    - `local_domain_name` (**since v0.106.0**): The domain name that AdGuard
+    - `local_domain_name` (**since v0.106.0**) — The domain name that AdGuard
       Home's DHCP server uses for hostnames of its clients.  The default value,
       which is also set when this value is empty, is `lan`.  So, if you have
       a machine called `myhost` in your network, and AdGuard Home is this
