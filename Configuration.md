@@ -281,7 +281,7 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
   it equals to 0.
 - `block_auth_min` (**after v0.106.0**) – The duration of blocking period.  The
   entire blocking logic is disabled if it equals to 0.
-- `http_proxy` — proxy URL for HTTP client (e.g. "http://user:password@server:port/"). Supports "http", "https" and "socks5" scheme.
+- `http_proxy` — Proxy URL for HTTP client (e.g. "http://user:password@server:port/"). Supports "http", "https" and "socks5" scheme.
 - `web_session_ttl` — Web session TTL (in hours) - a web user will stay signed in for this amount of time.
 - `debug_pprof` — Enable pprof HTTP server listening on port 6060 for debugging. See section `Profiling with pprof`.
 
@@ -319,13 +319,13 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
            - '0.0.0.0'
        ```
     - `port` — DNS server port to listen on.
-    - `statistics_interval` - time interval for statistics (in days)
+    - `statistics_interval` — Time interval for statistics (in days)
   - **Protection settings**
-    - `protection_enabled` — whether any kind of filtering and protection should
-      be preformed.  **Since v0.107.0** it doesn't affect the rules with
+    - `protection_enabled` — Whether any kind of filtering and protection should
+      be performed.  **Since v0.107.0** it doesn't affect the rules with
       `$dnsrewrite` modifier and other rewrites, including those taken from the
       operating system's hosts file.
-    - `filtering_enabled` — whether filtering of DNS requests based on rule
+    - `filtering_enabled` — Whether filtering of DNS requests based on rule
       lists should be performed.
     - `blocking_mode` — Specifies how to block DNS requests. "nxdomain" (default): respond with NXDOMAIN status; "null_ip": respond with the unspecified IP address (0.0.0.0); or "custom_ip": respond with `blocking_ipv4` or `blocking_ipv6`.
     - `blocking_ipv4` - IP address to be returned for a blocked A request if `blocking_mode` is set to `custom_ip`
@@ -359,8 +359,18 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
       to resolve PTR requests for addresses inside locally-served networks. If
       empty, AdGuard Home will automatically try to get local resolvers from the
       OS.
-    - `all_servers` — Enables parallel queries to all configured upstream servers to speed up resolving. If disabled, the queries are sent to each upstream server one-by-one and then sorted by RTT.
-    - `fastest_addr` — Use Fastest Address algorithm. It finds an IP address with the lowest latency and returns this IP address in DNS response.
+    - `all_servers` — Enables parallel queries to all configured upstream
+      servers to speed up resolving.
+
+      If enabled, the queries are sent to each server simultaneously and the
+      first response is chosen.
+    
+      If disabled, the queries are sent to each upstream server one-by-one and
+      then sorted by RTT.  Note that more stable upstream servers are preferred
+      by the algorithm.
+    - `fastest_addr` — Use the Fastest Address algorithm.  It finds an IP
+      address with the lowest latency and returns this IP address in DNS
+      response.
     - `fastest_timeout` (**since v0.107.0**) — The timeout used for dialing the
       addresses while picking the fastest.  Values other than positive ones are
       replaced with the default one, `1s`.
@@ -385,9 +395,9 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
       1.  `X-Forwarded-For`
   - **DNS cache settings**
     - `cache_size` — DNS cache size (in bytes)
-    - `cache_ttl_min` — override TTL value (minimum) received from upstream server. This value can't larger than 3600 (1 hour).
-    - `cache_ttl_max` — override TTL value (maximum) received from upstream server
-    - `cache_optimistic` (**since v0.107.0**) — make AdGuard Home respond from
+    - `cache_ttl_min` — Override TTL value (minimum) received from upstream server. This value can't larger than 3600 (1 hour).
+    - `cache_ttl_max` — Override TTL value (maximum) received from upstream server
+    - `cache_optimistic` (**since v0.107.0**) — Make AdGuard Home respond from
       the cache even when the entries are expired and also try to refresh them.
       The TTL for such responses is 60 seconds.
   - **Other settings**
