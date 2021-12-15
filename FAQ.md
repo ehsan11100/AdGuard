@@ -2,9 +2,9 @@
 
  *  [Why AdGuard Home doesn't block ads?](#doesntblock)
  *  [How to configure AdGuard Home to write verbose-level logs](#verboselog)
+ *  [How to show a custom block page](#customblock)
  *  [After installing AdGuard Home, how to change dashboard interface's address?](#webaddr)
  *  [How to set up AdGuard Home as default DNS server?](#defaultdns)
- *  [How to configure AdGuard Home to run together with pixelsrv-tls?](#pixelsrv)
  *  [Are there any known limitations?](#limitations)
  *  [Why am I getting "bind: address already in use" error when trying to install on Ubuntu?](#bindinuse)
  *  [How to configure a reverse proxy server for AdGuard Home?](#reverseproxy)
@@ -95,6 +95,88 @@ required.  Here's how to enable it:
     ```sh
     ./AdGuardHome -s start
     ```
+
+
+
+<!-- There are still links to the #pixelsrv section which was merged into this
+one on the Internet, and Cool URIs Don't Change, so use an additional ID/name
+anchor into this header. -->
+
+## <a href="#customblock" id="customblock" name="customblock"><span id="pixelsrv" name="pixelsrv"/>How to show a custom block page?</a>
+
+   ###  A note about HTTPS
+
+Before doing any of this, please note that modern browsers are set up to use
+HTTPS, and so they validate the certificate of the web server they're trying to
+reach for authenticity.  That means that using any of these will result in
+warning screens.
+
+There are a couple of proposed extensions that, when they become reasonably well
+supported by clients, would allow for a better user experience, including the
+[RFC 8914 Extended DNS Error codes][rfc8914] and the [DNS Access Denied Error
+Page RFC draft][rfcaccess].  We'll implement them when browsers actually start
+to support them.
+
+[rfc8914]:   https://datatracker.ietf.org/doc/html/rfc8914
+[rfcaccess]: https://datatracker.ietf.org/doc/html/draft-reddy-dnsop-error-page-08
+
+
+
+   ###  Prerequisites
+
+To use any of these ways to show a custom block page, you'll need an HTTP server
+running on some IP address and serving the page in question on all routes.
+Something like [`pixelserv-tls`][pxsrv].
+
+[pxsrv]: https://github.com/kvic-z/pixelserv-tls
+
+
+
+   ###  Custom block page for parental control and safe browsing filters
+
+There is currently no way to set these parameters from the UI, so you'll need to
+edit the configuration file manually:
+
+1.  Stop AdGuard Home:
+
+    ```sh
+    ./AdGuardHome -s stop
+    ```
+
+1.  Open `AdGuardHome.yaml` in your editor.
+
+1.  Set the `dns.parental_block_host` or `dns.safebrowsing_block_host` settings
+    to the IP address of the server (in this example, `192.168.123.45`):
+
+    ```yaml
+    # …
+    dns:
+      # …
+
+      # NOTE: Change to the actual IP address of your server.
+      parental_block_host: 192.168.123.45
+      safebrowsing_block_host: 192.168.123.45
+    ```
+
+1.  Restart AdGuard Home:
+
+    ```sh
+    ./AdGuardHome -s start
+    ```
+
+
+
+   ###  Custom block page for other filters
+
+1.  Open the web UI.
+
+1.  Open the “Settings → DNS settings” page.
+
+1.  In the “DNS server configuration” section, select the “Custom IP” radio
+    button in the “Blocking mode” selector and enter the IPv4 and IPv6 addresses
+    of the server.
+
+1.  Click “Save”.
 
 
 
@@ -215,26 +297,12 @@ and you won't need to configure each of them manually.
 
 
 
-##  <a href="#pixelsrv" id="pixelsrv" name="pixelsrv">How to configure AdGuard Home to run together with pixelsrv-tls?</a>
-
-1.  Open the web UI.
-
-1.  Go to “Settings → DNS settings”.
-
-1.  Scroll to the “DNS server configuration” section.
-
-1.  For the “Blocking mode” setting select the “Custom IP” radio button and
-    enter the IP address of the pixelsrv-tls instance.
-
-1.  Click “Save”.
-
-
-
-##  <a id="limitations" name="limitations">Are there any known limitations?</a>
+##  <a href="#limitations" id="limitations" name="limitations">Are there any known limitations?</a>
 
 Here are some examples of what cannot be blocked by a DNS-level blocker:
 
  *  YouTube, Twitch ads.
+
  *  Facebook, Twitter, Instagram sponsored posts.
 
 Essentially, any advertising that shares a domain with content cannot be blocked
@@ -291,7 +359,7 @@ yourself by following these steps:
 
     ```sh
     sudo mv /etc/resolv.conf /etc/resolv.conf.backup
-    ln -s /run/systemd/resolve/resolv.conf /etc/resolv.conf
+    sudo ln -s /run/systemd/resolve/resolv.conf /etc/resolv.conf
     ```
 
 1.  Restart `DNSStubListener`:
