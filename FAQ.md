@@ -9,7 +9,8 @@
  *  [Why am I getting `bind: address already in use` error when trying to install on Ubuntu?](#bindinuse)
  *  [How to configure a reverse proxy server for AdGuard Home?](#reverseproxy)
  *  [How to fix `permission denied` errors on Fedora?](#fedora)
- *  [How to uninstall AdGuard Home?](#uninstall) 
+ *  [How to fix `incompatible file system` errors?](#incompatfs)
+ *  [How to uninstall AdGuard Home?](#uninstall)
 
 
 
@@ -371,6 +372,14 @@ See [issue 765] and [issue 3281].
 
 [issue 3281]: https://github.com/AdguardTeam/AdGuardHome/issues/3281
 [issue 765]:  https://github.com/AdguardTeam/AdGuardHome/issues/765#issuecomment-752262353
+
+
+
+##  <a href="#incompatfs" id="incompatfs" name="incompatfs">How to fix `incompatible file system` errors?</a>
+
+You should move your AdGuard Home installation or working directory to another
+location.  See the [limitations section](Getting-Started#limitations) section on
+the “Getting Started” page.
 
 
 
