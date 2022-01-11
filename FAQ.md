@@ -332,7 +332,7 @@ DOMAIN {
    ###  Disable DoH encryption on AdGuard Home
 
 When you use TLS on your reverse proxy server, there's no need to use TLS on
-AdGuard Home.  Set `allow_unencrypted_doh: false` in `AdGuardHome.yaml` to allow
+AdGuard Home.  Set `allow_unencrypted_doh: true` in `AdGuardHome.yaml` to allow
 AdGuard Home respond to DoH requests without TLS encryption.
 
 
