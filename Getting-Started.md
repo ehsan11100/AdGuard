@@ -99,6 +99,16 @@ Other unofficial options:
 
 ##  <a href="#first-time" id="first-time" name="first-time">First Start</a>
 
+First of all, check your firewall settings.  To install and use AdGuard Home,
+the following ports and protocols must be available:
+
+ *  3000/TCP for the initial installation;
+ *  80/TCP for the web interface;
+ *  53/UDP for the DNS server.
+
+You may need to open additional ports for protocols other than plain DNS, for
+example DNS-over-HTTP.
+
 DNS servers bind to port 53, which requires superuser privileges most of the
 time ([see below](#running-without-superuser).  Therefore, on unix systems you
 need to run it with `sudo` or `doas` in terminal:
