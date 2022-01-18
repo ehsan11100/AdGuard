@@ -30,6 +30,9 @@ Welcome to the AdGuard Home wiki!
      *  [AdGuard Home as a DHCP Server](DHCP)
  *  Installing AdGuard Home
      *  [Docker](Docker)
-     *  [How to Install and Run AdGuard Home on a Raspberry Pi](Raspberry-Pi)
-     *  [How to Install and Run AdGuard Home on a Virtual Private Server](VPS)
+     *  [OpenWrt][owwiki] (on the OpenWrt Wiki)
+     *  [Raspberry Pi](Raspberry-Pi)
+     *  [Virtual Private Server](VPS)
  *  [Verifying Releases](Verify-Releases)
+
+[owwiki]: https://openwrt.org/docs/guide-user/services/dns/adguard-home
