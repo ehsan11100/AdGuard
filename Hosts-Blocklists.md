@@ -345,7 +345,14 @@ $dnsrewrite=example.net
 $dnsrewrite=REFUSED
 ```
 
-The keywords, like `REFUSED`, MUST be in all caps.
+The keywords MUST be in all caps (e.g. `NOERROR`).  Keyword rewrites take
+precedence over the other and will result in an empty response with an
+appropriate response code.
+
+Before **v0.107.3** the only possible keyword is `REFUSED`.
+
+Since **v0.107.3** response codes `NOERROR`, `NXDOMAIN`, and `SERVFAIL` are also
+supported.
 
 The full syntax is of the form `RCODE;RRTYPE;VALUE`:
 
@@ -355,6 +362,9 @@ $dnsrewrite=NOERROR;AAAA;abcd::1234
 $dnsrewrite=NOERROR;CNAME;example.net
 $dnsrewrite=REFUSED;;
 ```
+
+Since **v0.107.3** a `$dnsrewrite` modifier with the `NOERROR` response code may
+also has empty `RRTYPE` and `VALUE` fields.
 
 The `CNAME` one is special because AdGuard Home will resolve the host and add
 its info to the response.  That is, if `example.net` has IP `1.2.3.4`, and the
@@ -382,9 +392,8 @@ Name:	example.net
 Address: 1.2.3.4
 ```
 
-Keyword rewrites (for example, `REFUSED`) take precedence over the other.  Next,
-the `CNAME` rewrite.  After that, all other records's values are summed as one
-response, so this:
+Next, the `CNAME` rewrite.  After that, all other records's values are summed as
+one response, so this:
 
 ```none
 ||example.com^$dnsrewrite=NOERROR;A;1.2.3.4
@@ -440,6 +449,12 @@ Currently supported RR types with examples:
     `8080`, and target value `example.com`.
 
  *  `||example.com^$dnsrewrite=NXDOMAIN;;` responds with an `NXDOMAIN` code.
+
+ *  `$dnstype=AAAA,denyallow=example.org,dnsrewrite=NOERROR;;` responds with an
+    empty `NOERROR` answers for all `AAAA` requests except the ones for
+    `example.org`.
+
+    **NOTE:** this is available since **v0.107.3**.
 
 Exception rules remove one or all rules:
 
