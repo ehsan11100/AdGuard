@@ -337,6 +337,17 @@ AdGuard Home respond to DoH requests without TLS encryption.
 
 
 
+   ###  Real IP addresses of clients
+
+**Since v0.107.0,** you can set the parameter `trusted_proxies` to the IP
+address(es) of your HTTP proxy to make AdGuard Home take the headers containing
+the real client IP address into account.  See the [configuration page][conf] for
+more information.
+
+[conf]: https://github.com/AdguardTeam/AdGuardHome/wiki/Configuration
+
+
+
 ##  <a href="#fedora" id="fedora" name="fedora">How to fix `permission denied` errors on Fedora?</a>
 
 1.  Move the `AdGuardHome` binary to `/usr/local/bin`.
