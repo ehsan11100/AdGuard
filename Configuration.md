@@ -402,7 +402,8 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
       The TTL for such responses is 60 seconds.
   - **Other settings**
     - `bogus_nxdomain` - Respond with `NXDOMAIN` instead of any response having
-      IP addresses matching CIDRs and IP addresses from this list.
+      IP addresses matching the ones from this list.  **Since v0.108.0** it also
+      supports CIDRs.
     - `enable_dnssec` - Set DNSSEC flag in the outgoing DNS requests and check the result
     - `aaaa_disabled` — Respond with an empty answer to all AAAA requests
     - `safebrowsing_cache_size` — Safe Browsing cache size (in bytes)
