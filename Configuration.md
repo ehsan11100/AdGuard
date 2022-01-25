@@ -401,7 +401,8 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
       the cache even when the entries are expired and also try to refresh them.
       The TTL for such responses is 60 seconds.
   - **Other settings**
-    - `bogus_nxdomain` - Transform responses with these IP addresses to NXDOMAIN
+    - `bogus_nxdomain` - Respond with `NXDOMAIN` instead of any response having
+      IP addresses matching CIDRs and IP addresses from this list.
     - `enable_dnssec` - Set DNSSEC flag in the outgoing DNS requests and check the result
     - `aaaa_disabled` — Respond with an empty answer to all AAAA requests
     - `safebrowsing_cache_size` — Safe Browsing cache size (in bytes)
