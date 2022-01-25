@@ -415,15 +415,6 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
     - `upstream_timeout` (**since v0.107.0**) — The timeout for querying
       upstream servers.  Zero value will be rewritten with default one which is
       10s.
-    - `local_domain_name` (**since v0.106.0**) — The domain name that AdGuard
-      Home's DHCP server uses for hostnames of its clients.  The default value,
-      which is also set when this value is empty, is `lan`.  So, if you have
-      a machine called `myhost` in your network, and AdGuard Home is this
-      network's DHCP server, the hostname of that machine is `myhost.lan`.
-
-      DNS queries of type `A` for such hosts are only allowed from locally
-      served networks, such as `10.0.0.0/8`, `192.168.0.0`, and so on.  Other
-      clients receive an empty `NXDOMAIN` response.
     - `resolve_clients` (**since v0.106.0**) - Enable/disable resolving clients'
       addresses by sending PTR requests.
 - `filters` — List of filters, each filter has the following values:
@@ -450,6 +441,17 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
     - `ra_slaac_only` and `ra_allow_slaac` - send RA packets either forcing the
       clients to use SLAAC or allowing them to choose.  See the [DHCP] article
       section on these options for more information.
+  - `local_domain_name` — The domain name that AdGuard Home's DHCP server uses
+    for hostnames of its clients.  The default value, which is also set when
+    this value is empty, is `lan`.  So, if you have a machine called `myhost` in
+    your network, and AdGuard Home is this network's DHCP server, the hostname
+    of that machine is `myhost.lan`.
+
+    DNS queries of type `A` for such hosts are only allowed from locally served
+    networks, such as `10.0.0.0/8`, `192.168.0.0/16`, and so on.  Other clients
+    receive an empty `NXDOMAIN` response.
+
+    **Before v0.108.0** this setting was a part of the `dns` object.
 - `tls` - HTTPS/DOH/DOT settings.
   - `enabled` - encryption (DOT/DOH/HTTPS) status.
   - `server_name` - the hostname of your HTTPS/TLS server.
