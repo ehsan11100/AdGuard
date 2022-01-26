@@ -1,6 +1,7 @@
  #  AdGuard Home - FAQ
 
  *  [Why AdGuard Home doesn't block ads?](#doesntblock)
+ *  [Where can I inspect the logs?](#logs)
  *  [How to configure AdGuard Home to write verbose-level logs](#verboselog)
  *  [How to show a custom block page](#customblock)
  *  [After installing AdGuard Home, how to change dashboard interface's address?](#webaddr)
@@ -68,6 +69,33 @@ ensure that:
 
 1.  You don't have any custom filtering rules that may interfere on the “Filters
     → Custom filtering rules” page.
+
+
+
+##  <a href="#logs" id="logs" name="logs">Where can I inspect the logs?</a>
+
+The default location of the plain-text logs (not to be confused with the query
+logs) depends on the operating system and installation mode:
+
+<!--
+    TODO(a.garipov): Add more info about Docker; add links to tools.
+-->
+
+ *  **OpenWrt Linux:** use the `logread -e AdGuardHome` command.
+
+ *  **Linux** systems with **systemd** and other **Unix** systems with
+    **SysV-style init** including **macOS:** `/var/log/AdGuardHome.err`.
+
+ *  **Linux** systems with **Snapcraft** use the `snap logs adguard-home`
+    command.
+
+ *  **FreeBSD** and **OpenBSD:** currently, no logs are written to by default.
+    That will change in the future, see [issue 4213].
+
+ *  On **Windows:** the [Windows Event Log][wlog] is used.
+
+[wlog]:       https://docs.microsoft.com/en-us/windows/win32/wes/windows-event-log
+[issue 4213]: https://github.com/AdguardTeam/AdGuardHome/issues/4213
 
 
 
