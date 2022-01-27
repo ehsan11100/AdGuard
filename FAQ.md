@@ -2,9 +2,9 @@
 
  *  [Why AdGuard Home doesn't block ads?](#doesntblock)
  *  [Where can I inspect the logs?](#logs)
- *  [How to configure AdGuard Home to write verbose-level logs](#verboselog)
- *  [How to show a custom block page](#customblock)
- *  [After installing AdGuard Home, how to change dashboard interface's address?](#webaddr)
+ *  [How to configure AdGuard Home to write verbose-level logs?](#verboselog)
+ *  [How to show a custom block page?](#customblock)
+ *  [How to change dashboard interface's address?](#webaddr)
  *  [How to set up AdGuard Home as default DNS server?](#defaultdns)
  *  [Are there any known limitations?](#limitations)
  *  [Why am I getting `bind: address already in use` error when trying to install on Ubuntu?](#bindinuse)
@@ -40,35 +40,35 @@ DNS server.  To check if you're using AdGuard Home as the default DNS server:
     ```
 
 1.  Check if the `Server` IP address is the one on which AdGuard Home is
-    running.  If no, then you need to configure your device, see
+    running.  If not, you need to configure your device, see
     [below](#defaultdns).
 
 1.  Ensure that your request to `example.org` appears in the AdGuard Home UI on
-    the Query Log page.  If not, then you need to configure AdGuard Home to
-    listen on the specified network interface.  The most straightforward way to
-    do so is to reinstall AdGuard Home with default settings.
+    the Query Log page.  If not, you need to configure AdGuard Home to listen on
+    the specified network interface.  The most straightforward way to do so is
+    to reinstall AdGuard Home with default settings.
 
-Now that you are sure that your device uses AdGuard Home as its default DNS
-server, the problem might be in AdGuard Home misconfiguration.  Please check and
-ensure that:
+If you are sure that your device uses AdGuard Home as its default DNS server,
+but the problem persists, it might have something to do with an AdGuard Home
+misconfiguration.  Please check and ensure that:
 
 1.  You have the “Block domains using filters and hosts files” setting enabled
     on the “Settings → General settings” page.
 
-1.  You have the appropriate safety mechanisms, such as parental control,
+1.  You have the appropriate safety mechanisms, such as Parental Control,
     enabled on the “Settings → General settings”.
 
 1.  You have the appropriate filters enabled on the “Filters → DNS blocklists”
     page.
 
-1.  You don't have any filters that may interfere enabled on the “Filters → DNS
-    allowlists” page.
+1.  You don't have any exception rule lists that may allow the requests enabled
+    on the “Filters → DNS allowlists” page.
 
-1.  You don't have any DNS rewrites that may interfere on the “Filters → DNS
+1.  You don't have any DNS rewrites that may interfere with the “Filters → DNS
     rewrites” page.
 
-1.  You don't have any custom filtering rules that may interfere on the “Filters
-    → Custom filtering rules” page.
+1.  You don't have any custom filtering rules that may interfere with the
+    “Filters → Custom filtering rules” page.
 
 
 
@@ -89,7 +89,7 @@ logs) depends on the operating system and installation mode:
  *  **Linux** systems with **Snapcraft** use the `snap logs adguard-home`
     command.
 
- *  **FreeBSD** and **OpenBSD:** currently, no logs are written to by default.
+ *  **FreeBSD** and **OpenBSD:** currently, no logs are written by default.
     That will change in the future, see [issue 4213].
 
  *  On **Windows:** the [Windows Event Log][wlog] is used.
@@ -136,9 +136,8 @@ anchor into this header. -->
    ###  A note about HTTPS
 
 Before doing any of this, please note that modern browsers are set up to use
-HTTPS, and so they validate the certificate of the web server they're trying to
-reach for authenticity.  That means that using any of these will result in
-warning screens.
+HTTPS, so they validate the authenticity of the web server certificate.  That
+means that using any of these will result in warning screens.
 
 There are a couple of proposed extensions that, when they become reasonably well
 supported by clients, would allow for a better user experience, including the
@@ -161,7 +160,7 @@ Something like [`pixelserv-tls`][pxsrv].
 
 
 
-   ###  Custom block page for parental control and safe browsing filters
+   ###  Custom block page for Parental Control and Safe Browsing filters
 
 There is currently no way to set these parameters from the UI, so you'll need to
 edit the configuration file manually:
@@ -209,7 +208,7 @@ edit the configuration file manually:
 
 
 
-## <a href="#webaddr" id="webaddr" name="webaddr">After installing AdGuard Home, how to change dashboard interface's address?</a>
+## <a href="#webaddr" id="webaddr" name="webaddr">How to change dashboard interface's address?</a>
 
 1.  Stop AdGuard Home:
 
@@ -267,20 +266,21 @@ enough or would require quite complicated configuration.
 
 ##  <a href="#bindinuse" id="bindinuse" name="bindinuse">Why am I getting `bind: address already in use` error when trying to install on Ubuntu?</a>
 
-Because `127.0.0.1:53`, which is used for DNS, is already occupied by another
-program.
+This happens because the address `127.0.0.1:53`, which is used for DNS, is
+already taken by another program.
 
 **The easiest solution would be simply to choose a different network interface
-and bind it to your external IP (for instance, your Wi-Fi IP).**
+and bind it to an accessible IP address (for instance, the IP address of your
+router inside your network).**
 
-If for some reason you really want to bind to `127.0.0.1`, read the explanation
-below.
+If you need AdGuard Home to accept connections on `127.0.0.1`, read the
+explanation below.
 
 Ubuntu comes with a local DNS server by default called `systemd-resolved`, which
 uses port 53 and thus prevents AdGuard Home from binding to it.  To fix this,
 disable the `systemd-resolved` daemon.  Luckily, AdGuard Home can detect such
-configurations and disable `systemd-resolved` for you if you press "Fix" button
-which is shown near the `address already in use` message.
+configurations and disable `systemd-resolved` for you if you press the “Fix”
+button, which is shown near the `address already in use` message.
 
 Note that if you're using AdGuard Home with docker or snap, you'll have to do it
 yourself by following these steps:
@@ -317,8 +317,8 @@ yourself by following these steps:
 
 ##  <a href="#reverseproxy" id="reverseproxy" name="reverseproxy">How to configure a reverse proxy server for AdGuard Home?</a>
 
-If you're running a web server already and you want to access AdGuard Home
-dashboard UI from an URL like `http://YOUR_SERVER/aghome/` you can use this
+If you're already running a web server and want to access the AdGuard Home
+dashboard UI from a URL like `http://YOUR_SERVER/aghome/`, you can use this
 configuration for your web server:
 
    ###  nginx
@@ -344,8 +344,8 @@ location /aghome/ {
 }
 ```
 
-Or, if you just want to serve AdGuard Home with automatic TLS, something similar
-to:
+Or, if you just want to serve AdGuard Home with automatic TLS, use
+a configuration similar to the example shown below:
 
 ```none
 DOMAIN {
@@ -417,8 +417,8 @@ See [issue 765] and [issue 3281].
 ##  <a href="#incompatfs" id="incompatfs" name="incompatfs">How to fix `incompatible file system` errors?</a>
 
 You should move your AdGuard Home installation or working directory to another
-location.  See the [limitations section](Getting-Started#limitations) section on
-the “Getting Started” page.
+location.  See the [limitations section](Getting-Started#limitations) on the
+“Getting Started” page.
 
 
 
