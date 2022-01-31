@@ -1,12 +1,13 @@
  #  AdGuard Home - Getting Started
 
-1.  [Installation](#installation)
-1.  [First Start](#first-time)
-1.  [Running As A Service](#service)
-1.  [Updating](#update)
-1.  [Configuring Devices](#configure-devices)
-1.  [Running Without Superuser (Linux Only)](#running-without-superuser)
-1.  [Limitations](#limitations)
+ *  [Installation](#installation)
+ *  [First Start](#first-time)
+ *  [Running As A Service](#service)
+ *  [Updating](#update)
+     *  [Manual Update](#manual-update)
+ *  [Configuring Devices](#configure-devices)
+ *  [Running Without Superuser (Linux Only)](#running-without-superuser)
+ *  [Limitations](#limitations)
 
 
 
@@ -20,7 +21,7 @@ We currently **officially** support the following operating systems:
  *  Linux:
 
     **Fedora** and its derivatives: install AdGuard Home into the
-    `/usr/local/bin` directory.  Otherwise it may cause issues with SELinux and
+    `/usr/local/bin` directory.  Otherwise, it may cause issues with SELinux and
     permissions.  See [issue 765] and [issue 3281].
 
      *  [AMD64](https://static.adguard.com/adguardhome/release/AdGuardHome_linux_amd64.tar.gz);
@@ -40,9 +41,9 @@ We currently **officially** support the following operating systems:
      *  [AMD64](https://static.adguard.com/adguardhome/release/AdGuardHome_windows_amd64.zip);
      *  [x86](https://static.adguard.com/adguardhome/release/AdGuardHome_windows_386.zip).
 
- *  MacOS:
+ *  macOS:
 
-    **MacOS 10.15 Catalina** or newer: please note, that on MacOS Catalina it is
+    **macOS 10.15 Catalina** or newer: please note that on macOS Catalina it is
     recommended to place AdGuard Home directory to the `/Applications`
     directory.
 
@@ -67,8 +68,8 @@ Other official options:
 
  *  [AdGuard Home docker image][docker].
 
- *  You can get AdGuard Home from the [Snap Store][snap] (an app store for
-    Ubuntu and relates OSes).
+ *  You can get AdGuard Home from the [Snap Store][snap], an app store for
+    Ubuntu and related OSes.
 
 Other unofficial options:
 
@@ -107,18 +108,18 @@ the following ports and protocols must be available:
  *  53/UDP for the DNS server.
 
 You may need to open additional ports for protocols other than plain DNS, for
-example DNS-over-HTTP.
+example DNS-over-HTTPS.
 
 DNS servers bind to port 53, which requires superuser privileges most of the
-time ([see below](#running-without-superuser).  Therefore, on unix systems you
+time, [see below](#running-without-superuser).  Therefore, on unix systems you
 need to run it with `sudo` or `doas` in terminal:
 
 ```sh
 sudo ./AdGuardHome
 ```
 
-On Windows, run `cmd.exe` with admin privileges and run `AdGuardHome.exe` from
-there.
+On Windows, run `cmd.exe` or PowerShell with admin privileges and run
+`AdGuardHome.exe` from there.
 
 When you run AdGuard Home for the first time, it starts listening to
 `0.0.0.0:3000` and prompts you to open it in your browser:
@@ -159,11 +160,10 @@ Here are the other commands you might need to control the service:
 
    ###  Logs
 
-By default, the log is written to stderr when you run AdGuard Home as a console
-application.  If you run it as a service, the log output depends on the
-platform:
+By default, the logs are written to stderr when you run AdGuard Home in
+a terminal.  If you run it as a service, the log output depends on the platform:
 
- *  On MacOS, the log is written to `/var/log/AdGuardHome.*.log` files.
+ *  On macOS, the log is written to `/var/log/AdGuardHome.*.log` files.
 
  *  On other unixes, the log is written to `syslog` or `journald`.
 
@@ -179,27 +179,34 @@ file](Configuration).
 ![](images/autoupdate-available.png)
 
 When a new version is released, AdGuard Home's UI shows a notification message
-and the “Update Now” button.  Just click on this button, and AdGuard Home will
-be automatically upgraded to the latest version.  Your current AdGuard Home
+and the “Update Now” button.  Click this button, and AdGuard Home will be
+automatically updated to the latest version.  Your current AdGuard Home
 executable file is saved inside the `backup` directory along with the current
 configuration file, so you can revert the changes, if necessary.
 
-In case the button isn't shown or an automatic update has failed, you can
-upgrade manually:
-
-1. Download the new AdGuard Home package.
-
-1. Unpack it to a temporary directory.
-
-1. Replace the old AdGuard Home executable file with the new one.
-
-1. Restart AdGuard Home.
 
 
+   ###  <a href="#manual-update" id="manual-update" name="manual-update">Manual Update</a>
 
-   ###  Docker And Hass.io Updates
+In case the button isn't shown or an automatic update has failed, you can update
+manually.  We have a [detailed guide on manual updates][mupd], but in short:
 
-Auto-updates for Docker and Hass.io installations are disabled.
+1.  Download the new AdGuard Home package.
+
+1.  Unpack it to a temporary directory.
+
+1.  Replace the old AdGuard Home executable file with the new one.
+
+1.  Restart AdGuard Home.
+
+[mupd]: https://github.com/AdguardTeam/AdGuardHome/wiki/FAQ#manual-update
+
+
+
+   ###  Docker, Home Assistant, And Snapcraft Updates
+
+Auto-updates for Docker, Hass.io / Home Assistant, and Snapcraft installations
+are disabled.  Update the image instead.
 
 
 
@@ -238,13 +245,13 @@ and you won't need to configure each of them manually.
 
 1.  Go to Network and Internet category and then to Network and Sharing Center.
 
-1.  On the left side of the screen find “Change adapter settings” and click on
-    it.
+1.  On the left side of the screen find the “Change adapter settings” button and
+    click it.
 
-1.  Select your active connection, right-click on it and choose Properties.
+1.  Select your active connection, right-click it and choose Properties.
 
 1.  Find “Internet Protocol Version 4 (TCP/IPv4)” (or, for IPv6, “Internet
-    Protocol Version 6 (TCP/IPv6)”) in the list, select it and then click on
+    Protocol Version 6 (TCP/IPv6)”) in the list, select it and then click
     Properties again.
 
 1.  Choose “Use the following DNS server addresses” and enter your AdGuard Home
@@ -254,9 +261,9 @@ and you won't need to configure each of them manually.
 
    ###  macOS
 
-1.  Click on Apple icon and go to System Preferences.
+1.  Click the Apple icon and go to System Preferences.
 
-1.  Click on Network.
+1.  Click Network.
 
 1.  Select the first connection in your list and click Advanced.
 
@@ -288,7 +295,7 @@ and you won't need to configure each of them manually.
 1.  Choose Wi-Fi in the left menu (it is impossible to configure DNS for mobile
     networks).
 
-1.  Tap on the name of the currently active network.
+1.  Tap the name of the currently active network.
 
 1.  In the DNS field enter your AdGuard Home server addresses.
 
@@ -306,13 +313,13 @@ Using this method requires the `setcap` utility.  You may need to install it
 using your Linux distribution's package manager.
 
 To allow AdGuard Home running on Linux to listen on port 53 without superuser
-privileges, as well as bind to a particular interface run:
+privileges and bind its DNS servers to a particular interface run:
 
 ```bash
 sudo setcap 'CAP_NET_BIND_SERVICE=+eip CAP_NET_RAW=+eip' ./AdGuardHome
 ```
 
-Then run `./AdGuardHome` as a unprivileged user.
+Then run `./AdGuardHome` as an unprivileged user.
 
 
 

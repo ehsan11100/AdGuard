@@ -11,6 +11,7 @@
  *  [How to configure a reverse proxy server for AdGuard Home?](#reverseproxy)
  *  [How to fix `permission denied` errors on Fedora?](#fedora)
  *  [How to fix `incompatible file system` errors?](#incompatfs)
+ *  [How to update AdGuard Home manually?](#manual-update)
  *  [How to uninstall AdGuard Home?](#uninstall)
 
 
@@ -419,6 +420,157 @@ See [issue 765] and [issue 3281].
 You should move your AdGuard Home installation or working directory to another
 location.  See the [limitations section](Getting-Started#limitations) on the
 “Getting Started” page.
+
+
+
+##  <a href="#manual-update" id="manual-update" name="manual-update">How to update AdGuard Home manually?</a>
+
+In case the button isn't shown or an automatic update has failed, you can
+update manually.  In the examples below, we'll use AdGuard Home releases for
+Linux and Windows for AMD64 CPUs.
+
+
+
+   ###  <a href="#manual-update-unix" id="manual-update-unix" name="manual-update-unix">Unix (Linux, macOS, BSD)</a>
+
+1.  Download the new AdGuard Home package from the [releases page][releases].
+    If you want to perform this step from the command line:
+
+    ```sh
+    curl -L -S -o '/tmp/AdGuardHome_linux_amd64.tar.gz' -s\
+        'https://static.adguard.com/adguardhome/release/AdGuardHome_linux_amd64.tar.gz'
+    ```
+
+    Or, with `wget`:
+
+    ```sh
+    wget -o '/tmp/AdGuardHome_linux_amd64.tar.gz'\
+        'https://static.adguard.com/adguardhome/release/AdGuardHome_linux_amd64.tar.gz'
+    ```
+
+1.  Navigate to the directory where AdGuard Home was installed.  On most Unix
+    systems the default directory is `/opt/AdGuardHome`, but on macOS it's
+    `/Applications/AdGuardHome`.
+
+1.  Stop AdGuard Home:
+
+    ```sh
+    sudo ./AdGuardHome -s stop
+    ```
+
+    (On OpenBSD you probably want to use `doas` instead of `sudo`.)
+
+1.  Backup your data.  That is, your configuration file and the data directory
+    (`AdGuardHome.yaml` and `data/` by default).  For example, to backup your
+    data to a new directory called `~/my-agh-backup`:
+
+    ```sh
+    mkdir -p ~/my-agh-backup
+    cp -r ./AdGuardHome.yaml ./data ~/my-agh-backup/
+    ```
+
+1.  Unpack the AdGuard Home archive to a temporary directory.  For example, if
+    you downloaded the archive to your `~/Downloads` directory and want to
+    unpack it to `/tmp/`:
+
+    ```sh
+    tar -C /tmp/ -f ~/Downloads/AdGuardHome_linux_amd64.tar.gz -x -v -z
+    ```
+
+    On macOS, something like:
+
+    ```sh
+    unzip -d /tmp/ ~/Downloads/AdGuardHome_darwin_amd64.zip
+    ```
+
+1.  Replace the old AdGuard Home executable file with the new one.  On most Unix
+    systems the command would look something like:
+
+    ```sh
+    sudo cp /tmp/AdGuardHome/AdGuardHome /opt/AdGuardHome/AdGuardHome
+    ```
+
+    On macOS, something like:
+
+    ```sh
+    sudo cp /tmp/AdGuardHome/AdGuardHome /Applications/AdGuardHome/AdGuardHome
+    ```
+
+    You may also want to copy the documentation parts of the package, such as
+    the change log (`CHANGELOG.md`), the README file (`README.md`), and the
+    license (`LICENSE.txt`).
+
+    You can now remove the temporary directory.
+
+1.  Restart AdGuard Home:
+
+    ```sh
+    sudo ./AdGuardHome -s start
+    ```
+
+    (On OpenBSD you probably want to use `doas` instead of `sudo`.)
+
+
+
+   ###  <a href="#manual-update-win" id="manual-update-win" name="manual-update-win">Windows (Using PowerShell)</a>
+
+In all examples below, the PowerShell must be run as Administrator.
+
+1.  Download the new AdGuard Home package from the [releases page][releases].
+    If you want to perform this step from the command line:
+
+    ```ps1
+    $outFile = Join-Path -Path $Env:USERPROFILE -ChildPath 'Downloads\AdGuardHome_windows_amd64.zip'
+    $aghUri = 'https://static.adguard.com/adguardhome/release/AdGuardHome_windows_amd64.zip'
+    Invoke-WebRequest -OutFile "$outFile" -Uri "$aghUri"
+    ```
+
+1.  Navigate to the directory where AdGuard Home was installed.  In the examples
+    below, we'll use `C:\Program Files\AdGuardHome`.
+
+1.  Stop AdGuard Home:
+
+    ```ps1
+    .\AdGuardHome.exe -s stop
+    ```
+
+1.  Backup your data.  That is, your configuration file and the data directory
+    (`AdGuardHome.yaml` and `data/` by default).  For example, to backup your
+    data to a new directory called `my-agh-backup`:
+
+    ```ps1
+    $newDir = Join-Path -Path $Env:USERPROFILE -ChildPath 'my-agh-backup'
+    New-Item -Path $newDir -ItemType Directory
+    Copy-Item -Path .\AdGuardHome.yaml, .\data -Destination $newDir -Recurse
+    ```
+
+1.  Unpack the AdGuard Home archive to a temporary directory.  For example, if
+    you downloaded the archive to your `Downloads` directory and want to
+    unpack it to a temporary directory:
+
+    ```ps1
+    $outFile = Join-Path -Path $Env:USERPROFILE -ChildPath 'Downloads\AdGuardHome_windows_amd64.zip'
+    Expand-Archive -Path "$outFile" -DestinationPath $Env:TEMP
+    ```
+
+1.  Replace the old AdGuard Home executable file with the new one.  For example:
+
+    ```ps1
+    $aghExe = Join-Path -Path $Env:TEMP -ChildPath 'AdGuardHome\AdGuardHome.exe'
+    Copy-Item -Path "$aghExe" -Destination .\AdGuardHome.exe
+    ```
+
+    You may also want to copy the documentation parts of the package, such as
+    the change log (`CHANGELOG.md`), the README file (`README.md`), and the
+    license (`LICENSE.txt`).
+
+    You can now remove the temporary directory.
+
+1.  Restart AdGuard Home:
+
+    ```ps1
+    .\AdGuardHome.exe -s start
+    ```
 
 
 
