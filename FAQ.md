@@ -85,7 +85,9 @@ logs) depends on the operating system and installation mode:
  *  **OpenWrt Linux:** use the `logread -e AdGuardHome` command.
 
  *  **Linux** systems with **systemd** and other **Unix** systems with
-    **SysV-style init** including **macOS:** `/var/log/AdGuardHome.err`.
+    **SysV-style init:** `/var/log/AdGuardHome.err`.
+
+ *  **macOS:** `/var/log/AdGuardHome.stderr.log`.
 
  *  **Linux** systems with **Snapcraft** use the `snap logs adguard-home`
     command.
