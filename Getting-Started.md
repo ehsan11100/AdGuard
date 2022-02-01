@@ -13,65 +13,47 @@
 
 ##  <a href="#installation" id="installation" name="installation">Installation</a>
 
+   ###  Official Releases
+
 Download the archive with the binary file for your operating system from the
-[latest stable release page][releases].
+[latest stable release page][releases].  The full list of supported platforms as
+well as links to beta and edge (unstable) releases can be found on our
+“[Platforms][platforms]” page.
 
-We currently **officially** support the following operating systems:
+To install AdGuard Home as a service, unpack the archive, enter the
+`AdGuardHome` directory, and run:
 
- *  Linux:
+```sh
+./AdGuardHome -s install
+```
 
-    **Fedora** and its derivatives: install AdGuard Home into the
+  ####  Notes
+
+ *  Users of **Fedora Linux** and its derivatives: install AdGuard Home into the
     `/usr/local/bin` directory.  Otherwise, it may cause issues with SELinux and
     permissions.  See [issue 765] and [issue 3281].
 
-     *  [AMD64](https://static.adguard.com/adguardhome/release/AdGuardHome_linux_amd64.tar.gz);
-     *  [x86](https://static.adguard.com/adguardhome/release/AdGuardHome_linux_386.tar.gz);
-     *  [64-bit ARM](https://static.adguard.com/adguardhome/release/AdGuardHome_linux_arm64.tar.gz);
-     *  [32-bit ARMv5](https://static.adguard.com/adguardhome/release/AdGuardHome_linux_armv5.tar.gz);
-     *  [32-bit ARMv6](https://static.adguard.com/adguardhome/release/AdGuardHome_linux_armv6.tar.gz) (recommended for Raspberry Pi);
-     *  [32-bit ARMv7](https://static.adguard.com/adguardhome/release/AdGuardHome_linux_armv7.tar.gz);
-     *  [64-bit MIPS](https://static.adguard.com/adguardhome/release/AdGuardHome_linux_mips64_softfloat.tar.gz);
-     *  [64-bit MIPS LE](https://static.adguard.com/adguardhome/release/AdGuardHome_linux_mips64le_softfloat.tar.gz);
-     *  [32-bit MIPS](https://static.adguard.com/adguardhome/release/AdGuardHome_linux_mips_softfloat.tar.gz);
-     *  [32-bit MIPS LE](https://static.adguard.com/adguardhome/release/AdGuardHome_linux_mipsle_softfloat.tar.gz);
-     *  [64-bit PowerPC LE](https://static.adguard.com/adguardhome/release/AdGuardHome_linux_ppc64le.tar.gz);
+ *  Users of **macOS 10.15 Catalina** and newer should place the AdGuard Home
+    working directory inside the `/Applications` directory.
 
- *  Windows:
+[platforms]:  https://github.com/AdguardTeam/AdGuardHome/wiki/Platforms
+[releases]:   https://github.com/AdguardTeam/AdGuardHome/releases/latest
 
-     *  [AMD64](https://static.adguard.com/adguardhome/release/AdGuardHome_windows_amd64.zip);
-     *  [x86](https://static.adguard.com/adguardhome/release/AdGuardHome_windows_386.zip).
 
- *  macOS:
 
-    **macOS 10.15 Catalina** or newer: please note that on macOS Catalina it is
-    recommended to place AdGuard Home directory to the `/Applications`
-    directory.
+   ###  Docker And Snap
 
-     *  [AMD64](https://static.adguard.com/adguardhome/release/AdGuardHome_darwin_amd64.zip);
-     *  [64-bit ARM](https://static.adguard.com/adguardhome/release/AdGuardHome_darwin_arm64.zip).
+We also provide an [official AdGuard Home docker image][docker] and an [official
+Snap Store package][snap].
 
- *  FreeBSD:
+[docker]:  https://hub.docker.com/r/adguard/adguardhome
+[snap]:    https://snapcraft.io/adguard-home
 
-     *  [AMD64](https://static.adguard.com/adguardhome/release/AdGuardHome_freebsd_amd64.tar.gz);
-     *  [x86](https://static.adguard.com/adguardhome/release/AdGuardHome_freebsd_386.tar.gz);
-     *  [64-bit ARM](https://static.adguard.com/adguardhome/release/AdGuardHome_freebsd_arm64.tar.gz);
-     *  [32-bit ARMv5](https://static.adguard.com/adguardhome/release/AdGuardHome_freebsd_armv5.tar.gz);
-     *  [32-bit ARMv6](https://static.adguard.com/adguardhome/release/AdGuardHome_freebsd_armv6.tar.gz);
-     *  [32-bit ARMv7](https://static.adguard.com/adguardhome/release/AdGuardHome_freebsd_armv7.tar.gz).
 
- *  OpenBSD:
 
-     *  [AMD64](https://static.adguard.com/adguardhome/release/AdGuardHome_openbsd_amd64.tar.gz);
-     *  [64-bit ARM](https://static.adguard.com/adguardhome/release/AdGuardHome_openbsd_arm64.tar.gz);
+   ###  Other
 
-Other official options:
-
- *  [AdGuard Home docker image][docker].
-
- *  You can get AdGuard Home from the [Snap Store][snap], an app store for
-    Ubuntu and related OSes.
-
-Other unofficial options:
+Some other unofficial options include:
 
  *  (Maintained by @frenck) [Home Assistant add-on][has].
 
@@ -88,13 +70,8 @@ Other unofficial options:
 [archarm]:    https://archlinuxarm.org/
 [aur]:        https://wiki.archlinux.org/index.php/Arch_User_Repository
 [cloudron]:   https://git.cloudron.io/cloudron/adguard-home-app
-[docker]:     https://hub.docker.com/r/adguard/adguardhome
 [has]:        https://github.com/hassio-addons/addon-adguard-home
-[issue 3281]: https://github.com/AdguardTeam/AdGuardHome/issues/3281
-[issue 765]:  https://github.com/AdguardTeam/AdGuardHome/issues/765#issuecomment-752262353
 [luci]:       https://github.com/kongfl888/luci-app-adguardhome
-[releases]:   https://github.com/AdguardTeam/AdGuardHome/releases/latest
-[snap]:       https://snapcraft.io/adguard-home
 
 
 
