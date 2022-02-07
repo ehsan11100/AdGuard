@@ -394,9 +394,13 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
       1.  `X-Real-IP`
       1.  `X-Forwarded-For`
   - **DNS cache settings**
-    - `cache_size` — DNS cache size (in bytes)
-    - `cache_ttl_min` — Override TTL value (minimum) received from upstream server. This value can't larger than 3600 (1 hour).
-    - `cache_ttl_max` — Override TTL value (maximum) received from upstream server
+    - `cache_size` — DNS cache size (in bytes).
+    - `cache_ttl_min` — The minimum TTL override, in seconds.  If the TTL of
+      a response from upstream is below this value, the TTL is replaced with it.
+      Must be less than or equal to `cache_ttl_max`.
+    - `cache_ttl_max` — The maximum TTL override, in seconds.  If the TTL of
+      a response from upstream is above this value, the TTL is replaced with it.
+      Must be greater than or equal to `cache_ttl_min`.
     - `cache_optimistic` (**since v0.107.0**) — Make AdGuard Home respond from
       the cache even when the entries are expired and also try to refresh them.
       The TTL for such responses is 60 seconds.
