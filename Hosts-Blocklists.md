@@ -295,8 +295,8 @@ how to solve this with `denyallow`:
 
 Available since **v0.105.0**.
 
-The `dnstype` modifier allows specifying DNS request type on which this rule
-will be triggered.
+The `dnstype` modifier allows specifying DNS request or response type on which
+this rule will be triggered.
 
 The syntax is:
 
@@ -327,6 +327,28 @@ $dnstype=value2
 
  *  `||example.org^$dnstype=~A|~CNAME`: only allow `A` and `CNAME` DNS queries
     for `example.org`, block out the rest.
+
+**NOTE:** Before version **v0.108.0,** AdGuard Home would use the type of the
+request to filter the response records, as opposed to the type of the response
+record itself.  That caused issues, since that meant that you could not write
+rules that would allow certain `CNAME` records in responses in `A` and `AAAA`
+requests.  In **v0.108.0** that behaviour was changed, so now this:
+
+```none
+||canon.example.com^$dnstype=~CNAME
+```
+
+allows you to avoid filtering of the following response:
+
+```none
+ANSWERS:
+->  example.com
+    canonical name = canon.example.com.
+    ttl = 60
+->  canon.example.com
+    internet address = 1.2.3.4
+    ttl = 60
+```
 
   ####  <a href="#dnsrewrite" id="dnsrewrite" name="dnsrewrite">`dnsrewrite`</a>
 
