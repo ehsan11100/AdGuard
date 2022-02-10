@@ -13,7 +13,7 @@ you applying different rules depending on the client.
 
 
 
-##  <a href="#friendlynames"id="friendlynames" name="friendlynames">Friendly Names</a>
+##  <a href="#friendlynames" id="friendlynames" name="friendlynames">Friendly Names</a>
 
 AdGuard Home tries to automatically collect some basic information about the
 device that's connecting to it.
@@ -32,7 +32,7 @@ Here is what it tries to do in order to figure out the client's hostname:
 
 If the only thing you need is to see friendly names in AdGuard Home stats then
 editing the hosts file may be the easiest way to achieve this.  Please note that
-you may need to restart AdGuard Home to apply the changes immediately.
+you may need to restart AdGuard Home to apply the changes.
 
 ![](images/top-clients-names.png)
 
