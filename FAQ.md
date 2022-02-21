@@ -512,6 +512,8 @@ Linux and Windows for AMD64 CPUs.
 
     (On OpenBSD you probably want to use `doas` instead of `sudo`.)
 
+[releases]:   https://github.com/AdguardTeam/AdGuardHome/releases/latest
+
 
 
    ###  <a href="#manual-update-win" id="manual-update-win" name="manual-update-win">Windows (Using PowerShell)</a>
