@@ -92,13 +92,15 @@ logs) depends on the operating system and installation mode:
  *  **Linux** systems with **Snapcraft** use the `snap logs adguard-home`
     command.
 
- *  **FreeBSD** and **OpenBSD:** currently, no logs are written by default.
-    That will change in the future, see [issue 4213].
+ *  **FreeBSD:** `/var/log/daemon.log` (**since v0.108.0-b.4**).  Before
+    **v0.108.0-b.4** no logs are written by default.
+
+ *  **OpenBSD:** `/var/log/daemon` (**since v0.108.0-b.4**).  Before
+    **v0.108.0-b.4** no logs are written by default.
 
  *  On **Windows:** the [Windows Event Log][wlog] is used.
 
-[wlog]:       https://docs.microsoft.com/en-us/windows/win32/wes/windows-event-log
-[issue 4213]: https://github.com/AdguardTeam/AdGuardHome/issues/4213
+[wlog]: https://docs.microsoft.com/en-us/windows/win32/wes/windows-event-log
 
 
 
