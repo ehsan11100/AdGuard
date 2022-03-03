@@ -375,7 +375,10 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
       addresses while picking the fastest.  Values other than positive ones are
       replaced with the default one, `1s`.
   - **ECS settings**
-    - `edns_client_subnet` — Enable EDNS Client Subnet option. If enabled, AdGuard Home will be sending ECS extension to the upstream DNS servers. Please note, that this will be done for clients with public IP addresses only.
+    - `edns_client_subnet` — Add EDNS Client Subnet (ECS) option to upstream
+      requests and log the values sent by the clients in the query log.  Please
+      note that ECS option will be added automatically for clients with public
+      IP addresses only.
   - **Access settings**
     - `allowed_clients` — IP addresses of allowed clients
     - `disallowed_clients` — IP addresses of clients that should be blocked
