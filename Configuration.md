@@ -406,7 +406,8 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
       Must be greater than or equal to `cache_ttl_min`.
     - `cache_optimistic` (**since v0.107.0**) — Make AdGuard Home respond from
       the cache even when the entries are expired and also try to refresh them.
-      The TTL for such responses is 60 seconds.
+      Before **v0.108.0-b.5** the TTL for such responses is 60 seconds and since
+      **v0.108.0-b.5** it's 10 seconds.
   - **Other settings**
     - `bogus_nxdomain` - Respond with `NXDOMAIN` instead of any response having
       IP addresses matching the ones from this list.  **Since v0.108.0** it also
