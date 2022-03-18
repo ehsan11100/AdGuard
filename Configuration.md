@@ -353,12 +353,16 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
     - `upstream_dns` — List of upstream DNS servers.
     - `upstream_dns_file` — Path to a file with the list of upstream DNS servers. If it is configured, the value of `upstream_dns` is ignored.
     - `bootstrap_dns` — List of DNS servers used for initial hostname resolution in case an upstream server name is a hostname.
-    - `use_private_ptr_resolvers`  (**since v0.107.0**) – If AdGuard Home should
+    - `private_networks` (**since v0.108.0-b.5**) — List of networks used to
+      check if an IP address belongs to a locally-served address registry.  If
+      empty, AdGuard Home will use the set defined by RFC 6303.
+    - `use_private_ptr_resolvers` (**since v0.107.0**) – If AdGuard Home should
       use private reverse DNS servers.
     - `local_ptr_upstreams` (**since v0.106.0**) – List of upstream DNS servers
       to resolve PTR requests for addresses inside locally-served networks. If
       empty, AdGuard Home will automatically try to get local resolvers from the
-      OS.
+      OS.  **Since v0.108.0-b.4** the domain-specific upstreams are validated
+      for being a valid ARPA domain pointing to a locally-served network.
     - `all_servers` — Enables parallel queries to all configured upstream
       servers to speed up resolving.
 
