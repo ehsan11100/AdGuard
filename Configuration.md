@@ -208,12 +208,15 @@ Read below for more details.
 
   ####  <a href="#rdns-private" id="rdns-private" name="rdns-private">Private Addresses</a>
 
-Since **v0.106.0** all the addresses from [private IP ranges][private-ip]
-are only resolved via appropriate local resolvers to avoid leaks of clients'
+Since **v0.106.0** all the addresses from [private IP ranges][private-ip] are
+only resolved via appropriate local resolvers to avoid leaks of clients'
 information.  By default, AdGuard Home tries to get the addresses of the default
 resolvers from the OS.  You can set custom upstreams for it in the “Private
 reverse DNS servers” field in the “Upstream DNS servers” section or via the
-`local_ptr_upstreams` field in the configuration file.
+`local_ptr_upstreams` field in the configuration file.  Since **v0.108.0-b.5**
+the private IP ranges may be customized through the `private_networks` field.
+It's empty by default which makes AdGuard Home use the aforementioned default
+set of networks.
 
 Since **v0.107.0** you can disable the usage of private reverse DNS upstream
 servers via the “Use private reverse DNS resolvers” checkbox in the “Upstream
@@ -355,7 +358,7 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
     - `bootstrap_dns` — List of DNS servers used for initial hostname resolution in case an upstream server name is a hostname.
     - `private_networks` (**since v0.108.0-b.5**) — List of networks used to
       check if an IP address belongs to a locally-served address registry.  If
-      empty, AdGuard Home will use the set defined by RFC 6303.
+      empty, AdGuard Home will use the set defined by [RFC 6303][private-ip].
     - `use_private_ptr_resolvers` (**since v0.107.0**) – If AdGuard Home should
       use private reverse DNS servers.
     - `local_ptr_upstreams` (**since v0.106.0**) – List of upstream DNS servers
