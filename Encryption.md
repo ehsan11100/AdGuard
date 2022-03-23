@@ -5,7 +5,7 @@ protocols **out-of-the-box**:
 
  *  [DNS-over-HTTPS](https://en.wikipedia.org/wiki/DNS_over_HTTPS)
  *  [DNS-over-TLS](https://en.wikipedia.org/wiki/DNS_over_TLS)
- *  [DNS-over-QUIC](https://tools.ietf.org/html/draft-ietf-dprive-dnsoquic-01)
+ *  [DNS-over-QUIC](https://tools.ietf.org/html/draft-ietf-dprive-dnsoquic-10)
 
  >  AdGuard Home also supports [DNSCrypt](https://dnscrypt.info/) (both
  >  client-side and server-side).  [Read this](DNSCrypt) to learn about

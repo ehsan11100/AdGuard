@@ -74,7 +74,7 @@ Examples:
 
 * `https://cloudflare-dns.com/dns-query`: encrypted [DNS-over-HTTPS].
 
-* `quic://dns-unfiltered.adguard.com:784`: experimental [DNS-over-QUIC] support.
+* `quic://dns-unfiltered.adguard.com:853`: experimental [DNS-over-QUIC] support.
 
 * `tcp://1.1.1.1`: plain DNS (over TCP).
 
@@ -260,7 +260,7 @@ hostname resolution” setting in the “Upstream DNS servers” section or via 
 [2915]:           https://github.com/AdguardTeam/AdGuardHome/issues/2915
 [DNS Stamps]:     https://dnscrypt.info/stamps/
 [DNS-over-HTTPS]: https://en.wikipedia.org/wiki/DNS_over_HTTPS
-[DNS-over-QUIC]:  https://datatracker.ietf.org/doc/html/draft-ietf-dprive-dnsoquic-03
+[DNS-over-QUIC]:  https://datatracker.ietf.org/doc/html/draft-ietf-dprive-dnsoquic-10
 [DNS-over-TLS]:   https://en.wikipedia.org/wiki/DNS_over_TLS
 [DNSCrypt]:       https://dnscrypt.info/
 [dnsmasq-man]:    http://www.thekelleys.org.uk/dnsmasq/docs/dnsmasq-man.html
@@ -472,8 +472,10 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
   - `server_name` - the hostname of your HTTPS/TLS server.
   - `force_https` - if true, forces HTTP->HTTPS redirect.
   - `port_https` - HTTPS port.  If `0`, HTTPS is disabled.
-  - `port_dns_over_tls` - DNS-over-TLS port.  If `0`, DOT is disabled.
-  - `port_dns_over_quic` - DNS-over-QUIC port.  If `0`, DOQ is disabled.
+  - `port_dns_over_tls` - DNS-over-TLS port.  If `0`, DNS-over-TLS is disabled.
+  - `port_dns_over_quic` - DNS-over-QUIC port.  If `0`, DNS-over-QUIC is
+    disabled.  Before **v0.108.0-b.5** the default value was `754`, since
+    **v0.108.0-b.5** it's `853`.
   - `port_dnscrypt` - DNSCrypt port.  If `0`, DNSCrypt is disabled.  See
     [DNSCrypt] for more information and examples.
   - `dnscrypt_config_file` - DNSCrypt configuration file path.  **Must** be set
