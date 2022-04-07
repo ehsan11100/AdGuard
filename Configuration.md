@@ -37,8 +37,9 @@ Options:
   --pidfile VALUE                    Path to a file where PID is stored.
   --check-config                     Check configuration and exit.
   --no-check-update                  Don't check for updates.
-  --no-mem-optimization              Disable memory optimization.
+  --no-mem-optimization              Deprecated.  Disable memory optimization.
   --no-etc-hosts                     Do not use the OS-provided hosts.
+  --local-frontend                   Use local frontend directories.
   -v, --verbose                      Enable verbose output.
   --glinet                           Run in GL-Inet compatibility mode.
   --version                          Show the version and exit.  Show more detailed version description with -v.
