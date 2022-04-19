@@ -460,7 +460,7 @@ Currently supported RR types with examples:
  *  `||example.com^$dnsrewrite=NOERROR;MX;32 example.mail` adds an `MX` record
     with precedence value `32` and exchange value `example.mail`.
 
- *  `||example.com^$dnsrewrite=NOERROR;SVCB;32 example.com alpn=h3` adds and
+ *  `||example.com^$dnsrewrite=NOERROR;SVCB;32 example.com alpn=h3` adds an
     `SVCB` value.  See the `HTTPS` example above.
 
  *  `||example.com^$dnsrewrite=NOERROR;TXT;hello_world` adds a `TXT` record with
