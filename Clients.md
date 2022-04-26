@@ -20,15 +20,18 @@ device that's connecting to it.
 
 Here is what it tries to do in order to figure out the client's hostname:
 
-1.  Inspects the hosts files (for example, `/etc/hosts` on Unix systems) and
-    uses hostnames found there to identify clients.
+1.  inspects the hosts files (for example, `/etc/hosts`) and uses hostnames
+    found there to identify clients;
 
-1.  Makes reverse DNS lookups.
+1.  makes reverse DNS lookups;
 
-1.  Inspects the system ARP table.
+1.  inspects the system ARP table;
 
-1.  For public IP addresses it also makes [WHOIS][whois] queries in order to
-    find out the client's location and the company the IP belongs to.
+1.  for public IP addresses it also makes [WHOIS][whois] queries in order to
+    find out the client's location and the company the IP belongs to;
+
+1.  for IP addresses leased by AdGuard Home's DHCP server it obtains the
+    hostname from leases.
 
 If the only thing you need is to see friendly names in AdGuard Home stats then
 editing the hosts file may be the easiest way to achieve this.  Please note that
@@ -36,7 +39,11 @@ you may need to restart AdGuard Home to apply the changes.
 
 ![](images/top-clients-names.png)
 
-[whois]: https://en.wikipedia.org/wiki/WHOIS
+Since **v0.108.0** runtime clients sources can be disabled via the
+[`clients.runtime_sources`][sources] object of the configuration file.
+
+[whois]:   https://en.wikipedia.org/wiki/WHOIS
+[sources]: https://github.com/AdguardTeam/AdGuardHome/wiki/Configuration#configuration-file
 
 
 

@@ -38,7 +38,7 @@ Options:
   --check-config                     Check configuration and exit.
   --no-check-update                  Don't check for updates.
   --no-mem-optimization              Deprecated.  Disable memory optimization.
-  --no-etc-hosts                     Do not use the OS-provided hosts.
+  --no-etc-hosts                     Deprecated.  Do not use the OS-provided hosts.
   --local-frontend                   Use local frontend directories.
   -v, --verbose                      Enable verbose output.
   --glinet                           Run in GL-Inet compatibility mode.
@@ -50,8 +50,9 @@ Please note, that the command-line arguments override settings from the configur
 
 `./AdGuardHome -s reload` command does the following:
 
-- Re-read runtime clients from `/etc/hosts` file and `arp -a` output
-- Re-read SSL certificate file (if it has changed)
+ -  refresh the runtime clients data from the operating system's ARP tables;
+
+ -  re-read SSL certificate file (if it has changed).
 
 Command-line arguments passed to `-s install` command will be then used by the
 service.  For instance, if you install the AdGuard Home service using `sudo
@@ -493,6 +494,18 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
   - `user` — The name of the user to switch to after the startup.
   - `rlimit_nofile` — Limit on the maximum number of open files for the server
     process (on unixlike OSes).  Set to `0` to use the system's default value.
+- **Clients settings**
+  - `clients` — Persistent and runtime clients settings.
+    - `persistent` — An array of explicitly configured clients.  **Before
+      v0.108.0** the contents of this field took up the whole `clients` section.
+    - `runtime_sources` — **Since v0.108.0** this controls the certain runtime
+      clients sources.
+      - `whois` — Request WHOIS information for clients with public IP
+        addresses.
+      - `arp` — Consider the operating system's ARP table.
+      - `rdns` — Perform rDNS lookups for client's address.
+      - `dhcp` — Check AdGuard Home's DHCP leases for client's address.
+      - `hosts` — Follow the operating system's hosts files.
 - **Log settings**
   - `log_file` — Path to the log file. If empty, writes to stdout, if `syslog` -- system log (or eventlog on Windows).
   - `log_compress` — Compress determines if the rotated log files should be compressed using gzip (default: false)
