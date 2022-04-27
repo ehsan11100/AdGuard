@@ -428,6 +428,7 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
     - `parental_cache_size` — Parental Control cache size (in bytes)
     - `cache_time` — Safe Browsing, Safe Search, Parental Control cache TTL
     - `max_goroutines` — Max. number of parallel goroutines for processing incoming requests
+    - `handle_ddr` — Handle [Discovery of Designated Resolvers (DDR)][DDR] requests.
     - `ipset` — List of domain-ipset_name associations for adding IP addresses of the specified domain names to an ipset list. Syntax: `DOMAIN[,DOMAIN].../IPSET_NAME[,IPSET_NAME]...`. IPv4 addresses are added to an ipset list with `ipv4` family, IPv6 addresses - to `ipv6` ipset list. ipset list must exist. This setting is supported on Linux only. This feature is similar to `--ipset` in dnsmasq.
     - `upstream_timeout` (**since v0.107.0**) — The timeout for querying
       upstream servers.  Zero value will be rewritten with default one which is
@@ -520,6 +521,7 @@ Removing an entry from settings file will reset it to the default value. Deletin
 [DHCP]: https://github.com/AdguardTeam/AdGuardHome/wiki/DHCP
 [DNSCrypt]: https://github.com/AdguardTeam/AdGuardHome/wiki/DNSCrypt
 [`dnscrypt`]: https://github.com/ameshkov/dnscrypt
+[DDR]: https://www.ietf.org/archive/id/draft-ietf-add-ddr-06.html
 
 
 
