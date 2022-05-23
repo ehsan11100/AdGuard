@@ -84,6 +84,8 @@ Examples:
 
 * `[/example.local/]1.1.1.1`: DNS upstream for specific domains, see below.
 
+* `[/*.example.local/]1.1.1.1`: DNS upstream for specific subdomains, see below.
+
 ###  <a href="#upstreams-for-domains" id="upstreams-for-domains" name="upstreams-for-domains">Specifying Upstreams For Domains</a>
 
 You can specify upstreams that will be used for specific domains using the
@@ -131,6 +133,10 @@ a configuration like this:
 sends queries for `*.host.com` to `1.2.3.4` except for queries for
 `*.www.host.com`, which are sent to `6.7.8.9`, which is the default upstream.
 
+Since **v0.108.0-b.8** the wildcard `*` has a special meaning of "any subdomain", 
+so `--upstream=[/*.host.com/]1.2.3.4` will send queries for `*.host.com` to `1.2.3.4`, 
+but `host.com` will be forwarded to default upstreams.
+
   ####  Examples
 
  *  A configuration like:
@@ -153,6 +159,17 @@ sends queries for `*.host.com` to `1.2.3.4` except for queries for
 
     sends queries for `*.host.com` to `1.1.1.1:53` except for `*.maps.host.com`
     which are sent to `8.8.8.8:53` along with all other queries.
+    
+ *  A configuration like:
+
+    ```none
+    8.8.8.8:53
+    [/host.com/]1.1.1.1:53
+    [/*.host.com/]2.2.2.2:53
+    ```
+
+    sends queries for `*.host.com` to `2.2.2.2:53` except for `host.com` queries
+    those are sent to `1.1.1.1:53`, but all other queries are sent to `8.8.8.8:53`.
 
    ###  <a href="#upstreams-from-file" id="upstreams-from-file" name="upstreams-from-file">Loading Upstreams From File</a>
 
