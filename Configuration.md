@@ -76,7 +76,7 @@ Examples:
 
 * `https://cloudflare-dns.com/dns-query`: encrypted [DNS-over-HTTPS].
 
-* `quic://dns-unfiltered.adguard.com:853`: experimental [DNS-over-QUIC] support.
+* `quic://dns-unfiltered.adguard.com:853`: encrypted [DNS-over-QUIC].
 
 * `tcp://1.1.1.1`: plain DNS (over TCP).
 
@@ -279,7 +279,7 @@ hostname resolution” setting in the “Upstream DNS servers” section or via 
 [2915]:           https://github.com/AdguardTeam/AdGuardHome/issues/2915
 [DNS Stamps]:     https://dnscrypt.info/stamps/
 [DNS-over-HTTPS]: https://en.wikipedia.org/wiki/DNS_over_HTTPS
-[DNS-over-QUIC]:  https://datatracker.ietf.org/doc/html/draft-ietf-dprive-dnsoquic-10
+[DNS-over-QUIC]:  https://datatracker.ietf.org/doc/html/rfc9250
 [DNS-over-TLS]:   https://en.wikipedia.org/wiki/DNS_over_TLS
 [DNSCrypt]:       https://dnscrypt.info/
 [dnsmasq-man]:    http://www.thekelleys.org.uk/dnsmasq/docs/dnsmasq-man.html
