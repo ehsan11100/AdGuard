@@ -489,7 +489,12 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
     **Before v0.108.0** this setting was a part of the `dns` object.
 - `tls` - HTTPS/DOH/DOT settings.
   - `enabled` - encryption (DOT/DOH/HTTPS) status.
-  - `server_name` - the hostname of your HTTPS/TLS server.
+  - `server_name` - The hostname of your server.  If set, it is used to detect
+    ClientIDs (using the ServerName field of ClientHello messages), respond to
+    [Discovery of Designated Resolvers (DDR)][DDR] queries, and perform
+    additional connection validations.  If not set, these features are disabled.
+
+    Must match one of the DNS Names in the certificate.
   - `force_https` - if true, forces HTTP->HTTPS redirect.
   - `port_https` - HTTPS port.  If `0`, HTTPS is disabled.
   - `port_dns_over_tls` - DNS-over-TLS port.  If `0`, DNS-over-TLS is disabled.
