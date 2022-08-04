@@ -9,8 +9,7 @@
 
 ##  <a href="#changes" id="changes" name="changes">Changes</a>
 
- *  Windows for 64-bit ARM will be added in **v0.108.0.**  Currently available
-    in **edge** and **beta.**
+ *  Support for Windows on 64-bit ARM was added in **v0.107.9.**
 
  *  Experimental support for OpenBSD on AMD64 and 64-bit ARM was added in
     **v0.107.0.**
@@ -62,7 +61,7 @@ TODO(a.garipov): Consider generating the table automatically.
 | --------------------: | :--------------------------------------------: | :--------------------------------------------: | :--------------------------------------------: | :--------------------------------------------: | :--------------------------------------------: |
 |             **AMD64** | [Release][rad]<br/>[Beta][bad]<br/>[Edge][ead] | [Release][raf]<br/>[Beta][baf]<br/>[Edge][eaf] | [Release][ral]<br/>[Beta][bal]<br/>[Edge][eal] | [Release][rao]<br/>[Beta][bao]<br/>[Edge][eao] | [Release][raw]<br/>[Beta][baw]<br/>[Edge][eaw] |
 |               **x86** |                                                | [Release][rxf]<br/>[Beta][bxf]<br/>[Edge][exf] | [Release][rxl]<br/>[Beta][bxl]<br/>[Edge][exl] |                                                | [Release][rxw]<br/>[Beta][bxw]<br/>[Edge][exw] |
-|        **64-bit ARM** | [Release][rrd]<br/>[Beta][brd]<br/>[Edge][erd] | [Release][rrf]<br/>[Beta][brf]<br/>[Edge][erf] | [Release][rrl]<br/>[Beta][brl]<br/>[Edge][erl] | [Release][rro]<br/>[Beta][bro]<br/>[Edge][ero] |                    [Beta][brw]<br/>[Edge][erw] |
+|        **64-bit ARM** | [Release][rrd]<br/>[Beta][brd]<br/>[Edge][erd] | [Release][rrf]<br/>[Beta][brf]<br/>[Edge][erf] | [Release][rrl]<br/>[Beta][brl]<br/>[Edge][erl] | [Release][rro]<br/>[Beta][bro]<br/>[Edge][ero] | [Release][rrw]<br/>[Beta][brw]<br/>[Edge][erw] |
 |             **ARMv5** |                                                | [Release][r5f]<br/>[Beta][b5f]<br/>[Edge][e5f] | [Release][r5l]<br/>[Beta][b5l]<br/>[Edge][e5l] |                                                |                                                |
 |             **ARMv6** |                                                | [Release][r6f]<br/>[Beta][b6f]<br/>[Edge][e6f] | [Release][r6l]<br/>[Beta][b6l]<br/>[Edge][e6l] |                                                |                                                |
 |             **ARMv7** |                                                | [Release][r7f]<br/>[Beta][b7f]<br/>[Edge][e7f] | [Release][r7l]<br/>[Beta][b7l]<br/>[Edge][e7l] |                                                |                                                |
@@ -92,6 +91,7 @@ TODO(a.garipov): Consider generating the table automatically.
 [rrf]: https://static.adguard.com/adguardhome/release/AdGuardHome_freebsd_arm64.tar.gz
 [rrl]: https://static.adguard.com/adguardhome/release/AdGuardHome_linux_arm64.tar.gz
 [rro]: https://static.adguard.com/adguardhome/release/AdGuardHome_openbsd_arm64.tar.gz
+[rrw]: https://static.adguard.com/adguardhome/release/AdGuardHome_windows_arm64.zip
 [rxf]: https://static.adguard.com/adguardhome/release/AdGuardHome_freebsd_386.tar.gz
 [rxl]: https://static.adguard.com/adguardhome/release/AdGuardHome_linux_386.tar.gz
 [rxw]: https://static.adguard.com/adguardhome/release/AdGuardHome_windows_386.zip
