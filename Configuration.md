@@ -63,30 +63,43 @@ functionality in the service as well.
 
 ##  <a href="#upstreams" id="upstreams" name="upstreams">Configuring Upstreams</a>
 
-AdGuard Home is basically a DNS proxy that sends your DNS queries to the
-upstream servers.  You can specify multiple upstream servers in AdGuard Home
-settings, or you can even specify a DNS server that will be used to resolve
-specific domains.
+AdGuard Home is basically a DNS proxy that sends your DNS queries to upstream
+servers.  Multiple upstream servers for all or selected domain names can be
+specified in AdGuard Home settings.
 
 Examples:
 
-* `94.140.14.140`: plain DNS (over UDP).
+ *  `94.140.14.140`, `2a10:50c0::1:ff`: regular DNS (over UDP);
 
-* `tls://dns-unfiltered.adguard.com`: encrypted [DNS-over-TLS].
+ *  `94.140.14.140:53`, `[2a10:50c0::1:ff]:53`: regular DNS (over UDP, with
+    port);
 
-* `https://cloudflare-dns.com/dns-query`: encrypted [DNS-over-HTTPS].
+ *  `udp://dns-unfiltered.adguard.com`: regular DNS (over UDP, hostname);
 
-* `quic://dns-unfiltered.adguard.com:853`: encrypted [DNS-over-QUIC].
+ *  `tcp://94.140.14.140`, `tcp://[2a10:50c0::1:ff]`: regular DNS (over TCP);
 
-* `tcp://1.1.1.1`: plain DNS (over TCP).
+ *  `tcp://94.140.14.140:53`, `tcp://[2a10:50c0::1:ff]:53`: regular DNS (over
+    TCP, with port).
 
-* `sdns://...`: [DNS Stamps] for [DNSCrypt] or [DNS-over-HTTPS] resolvers.
+ *  `tcp://dns-unfiltered.adguard.com`: regular DNS (over TCP, hostname);
 
-* `[/example.local/]1.1.1.1`: DNS upstream for specific domains, see below.
+ *  `tls://dns-unfiltered.adguard.com`: encrypted [DNS-over-TLS];
 
-* `[/*.example.local/]1.1.1.1`: DNS upstream for specific subdomains, see below.
+ *  `https://dns-unfiltered.adguard.com/dns-query`: encrypted [DNS-over-HTTPS];
 
-###  <a href="#upstreams-for-domains" id="upstreams-for-domains" name="upstreams-for-domains">Specifying Upstreams For Domains</a>
+ *  `quic://dns-unfiltered.adguard.com`: encrypted [DNS-over-QUIC];
+
+ *  `sdns://...`: [DNS Stamps] for [DNSCrypt] or [DNS-over-HTTPS] resolvers;
+
+ *  `[/example.local/]94.140.14.140`: DNS upstream for specific domains, see
+    below;
+
+ *  `[/*.example.local/]94.140.14.140`: DNS upstream for specific subdomains,
+    see below;
+
+
+
+   ###  <a href="#upstreams-for-domains" id="upstreams-for-domains" name="upstreams-for-domains">Specifying Upstreams For Domains</a>
 
 You can specify upstreams that will be used for specific domains using the
 dnsmasq-like syntax (see the documentation for the option `--server`
@@ -516,7 +529,7 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
   - `group` — The name of the user group to switch to after the startup.
   - `user` — The name of the user to switch to after the startup.
   - `rlimit_nofile` — Limit on the maximum number of open files for the server
-    process (on unixlike OSes).  Set to `0` to use the system's default value.
+    process (on unixlike OSs).  Set to `0` to use the system's default value.
 - **Clients settings**
   - `clients` — Persistent and runtime clients settings.
     - `persistent` — An array of explicitly configured clients.  **Before

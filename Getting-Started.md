@@ -60,7 +60,7 @@ Some other unofficial options include:
  *  (Maintained by @kongfl888) [OpenWrt LUCI app][luci].
 
  *  (Maintained by @graysky2) [Arch Linux][arch], [Arch Linux ARM][archarm], and
-    other Arch-based OSes, may build via the [`adguardhome` package][aghaur] in
+    other Arch-based OSs, may build via the [`adguardhome` package][aghaur] in
     the [AUR][aur].
 
  *  (Maintained by @gramakri) [Cloudron app][cloudron].
