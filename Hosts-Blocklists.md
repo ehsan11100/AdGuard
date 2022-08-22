@@ -17,6 +17,8 @@
  *  [Domains-Only Syntax](#domains-only)
  *  [Hostlists Compiler](#hostlists-compiler)
 
+
+
 ##  <a href="#introduction" id="introduction" name="introduction">Introduction</a>
 
 There are three different approaches to writing hosts blocklists:
@@ -110,6 +112,8 @@ modifiers = [modifier0, modifier1[, ...[, modifierN]]]
  *  `modifiers`: parameters that clarify the rule.  They may limit the scope of
     the rule or even completely change the way it works.
 
+
+
    ###  <a href="#special-characters" id="special-characters" name="special-characters">Special Characters</a>
 
  *  `*`: the wildcard character.  It is used to represent any set of characters.
@@ -128,6 +132,8 @@ modifiers = [modifier0, modifier1[, ...[, modifierN]]]
     `ample.org|` corresponds to `example.org` but not to `example.org.com`.
     `|example` corresponds to `example.org` but not to `test.example`.
 
+
+
    ###  <a href="#regular-expressions" id="regular-expressions" name="regular-expressions">Regular Expressions</a>
 
 If you want even more flexibility in making rules, you can use [regular
@@ -138,12 +144,14 @@ want to use a regular expression, the pattern has to look like this:
 pattern = "/" regexp "/"
 ```
 
-**Examples:**
+Examples:
 
  *  `/example.*/` will block hosts matching the `example.*` regexp.
 
  *  `@@/example.*/$important` will unblock hosts matching the `example.*`
     regexp.  Note that this rule also implies the `important` modifier.
+
+
 
    ###  <a href="#comments" id="comments" name="comments">Comments</a>
 
@@ -151,12 +159,14 @@ Any line that starts with an exclamation mark or a hash sign is a comment and it
 will be ignored by the filtering engine.  Comments are usually placed above
 rules and used to describe what a rule does.
 
-**Example:**
+Example:
 
 ```none
 ! This is a comment.
 # This is also a comment.
 ```
+
+
 
    ###  <a href="#modifiers" id="modifiers" name="modifiers">Rule Modifiers</a>
 
@@ -164,7 +174,7 @@ You can change the behavior of a rule by adding modifiers.  Modifiers must be
 located at the end of the rule after the `$` character and be separated by
 commas.
 
-**Examples:**
+Examples:
 
  *  ```none
     ||example.org^$important
@@ -228,7 +238,7 @@ supported.  Use the backslash (`\`) to escape quotes (`"` and `'`), commas
 
 **NOTE:** When excluding a client, you **must** keep `~` out of the quotes.
 
-**Examples:**
+Examples:
 
  *  `@@||*^$client=127.0.0.1`: unblock everything for localhost.
 
@@ -282,7 +292,7 @@ how to solve this with `denyallow`:
 *$denyallow=com|net
 ```
 
-**Examples:**
+Examples:
 
  *  `*$denyallow=com|net`: block everything save for `*.com` and `*.net`.
 
@@ -320,7 +330,7 @@ is equivalent to this:
 $dnstype=value2
 ```
 
-**Examples:**
+Examples:
 
  *  `||example.org^$dnstype=AAAA`: block DNS queries for the IPv6 addresses of
     `example.org`.
@@ -414,7 +424,7 @@ Name:	example.net
 Address: 1.2.3.4
 ```
 
-Next, the `CNAME` rewrite.  After that, all other records's values are summed as
+Next, the `CNAME` rewrite.  After that, all other records' values are summed as
 one response, so this:
 
 ```none
@@ -490,7 +500,7 @@ Exception rules remove one or all rules:
 The `important` modifier applied to a rule increases its priority over any
 other rule without the modifier.  Even over basic exception rules.
 
-**Examples:**
+Examples:
 
  *  In this example:
 
@@ -517,7 +527,7 @@ The rules with the `badfilter` modifier disable other basic rules to which they
 refer.  It means that the text of the disabled rule should match the text of the
 `badfilter` rule (without the `badfilter` modifier).
 
-**Examples:**
+Examples:
 
  *  `||example.com$badfilter` disables `||example.com`.
 
@@ -550,7 +560,7 @@ $ctag=~value1|~value2|...
 If one of client's tags matches the exclusion `ctag` values, this rule doesn't
 apply to the client.
 
-**Examples:**
+Examples:
 
 * `||example.org^$ctag=device_pc|device_phone`: block `example.org` for clients
   tagged as `device_pc` or `device_phone`.
@@ -591,7 +601,7 @@ The list of allowed tags:
      *  `user_child`: children.
 
 [adb]:     https://kb.adguard.com/en/general/how-to-create-your-own-ad-filters
-[regexp]:  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[regexp]:  https://github.com/google/re2/wiki/Syntax
 [rfc1035]: https://tools.ietf.org/html/rfc1035#section-3.5
 
 
@@ -613,7 +623,7 @@ and periods (`.`).  They must begin with an alphabetic character and end with an
 alphanumeric character.  Optional aliases provide for name changes, alternate
 spellings, shorter hostnames, or generic hostnames (for example, `localhost`).
 
-**Example:**
+Example:
 
 ```none
 # This is a comment
