@@ -16,16 +16,78 @@ it:
 1.  **Important!** Make sure that your TLS settings are valid and encryption is
     enabled.
 
-1.  Get the latest version of the [`dnscrypt`] utility for your system.
+1.  Get the latest version of the [`dnscrypt`] utility for your system.  Extract
+    the archive and navigate to the resulting directory.
 
-1.  Run:
+     *  On Unix, using a POSIX-compatible shell:
 
-    ```sh
-    dnscrypt generate --provider-name '2.dnscrypt-cert.example.org' --out ./dnscrypt.yaml
-    ```
+        (Here and below, `linux-amd64` is used as an example.  Make sure to
+        download and use the one for your platform.)
+
+        1.  ```sh
+            tar -f ./dnscrypt-linux-amd64-v2.2.3.tar.gz -v -x -z
+            ```
+
+            Output example:
+
+            ```none
+            linux-amd64/
+            linux-amd64/README.md
+            linux-amd64/LICENSE
+            linux-amd64/dnscrypt
+            ```
+
+        1.  ```sh
+            cd ./linux-amd64/
+            ```
+
+        1.  ```sh
+            ./dnscrypt generate --provider-name '2.dnscrypt-cert.example.org'\
+                --out ./dnscrypt.yaml
+            ```
+
+            Output example:
+
+            ```none
+            2022/01/02 12:34:56 [info] Generating configuration for 2.dnscrypt-cert.example.org
+            2022/02/02 12:34:56 [info] Configuration has been written to ./dnscrypt.yaml
+            2022/02/02 12:34:56 [info] Go to https://dnscrypt.info/stamps to generate an SDNS stamp
+            2022/02/02 12:34:56 [info] You can run a DNSCrypt server using the following command:
+            2022/02/02 12:34:56 [info] dnscrypt server -c ./dnscrypt.yaml -f 8.8.8.8
+            ```
+
+     *  On Windows, using PowerShell:
+
+        (Here and below, `windows-amd64` is used as an example.  Make sure to
+        download and use the one for your CPU architecture.)
+
+        1.  ```ps1
+            Expand-Archive -Path .\dnscrypt-windows-amd64-v2.2.3.zip
+            ```
+
+        1.  ```ps1
+            Set-Location -Path .\dnscrypt-windows-amd64-v2.2.3\windows-amd64\
+            ```
+
+        1.  ```ps1
+            .\dnscrypt.exe generate --provider-name '2.dnscrypt-cert.example.org' `
+                --out .\dnscrypt.yaml
+            ```
+
+            Output example:
+
+            ```none
+            2022/01/02 12:34:56 [info] Generating configuration for 2.dnscrypt-cert.example.org
+            2022/02/02 12:34:56 [info] Configuration has been written to .\dnscrypt.yaml
+            2022/02/02 12:34:56 [info] Go to https://dnscrypt.info/stamps to generate an SDNS stamp
+            2022/02/02 12:34:56 [info] You can run a DNSCrypt server using the following command:
+            2022/02/02 12:34:56 [info] dnscrypt server -c .\dnscrypt.yaml -f 8.8.8.8
+            ```
 
     Where `example.org` is the name of your host and `./dnscrypt.yaml` is the
     name of the configuration output file.
+
+    You may add the path to the binary into your `PATH`/`$env:PATH`.
 
 1.  Before changing the configuration file, it is important to **stop AdGuard
     Home**.  In your *AdGuardHome* configuration file (typically
@@ -42,6 +104,9 @@ it:
 
     Where `5443` is the port for your DNSCrypt server and `./dnscrypt.yaml` is
     the name of the configuration file generated in step 2.
+
+    On Windows, it is recommended to use the full path to the configuration
+    file.  For example, `C:\Users\Me\Files\dnscrypt.yaml`.
 
 [`dnscrypt`]: https://github.com/ameshkov/dnscrypt/releases
 
@@ -66,9 +131,18 @@ Here is how to generate a DNSCrypt stamp and check your installation:
     Check your installation by running:
 
     ```sh
-    dnscrypt lookup-stamp\
+    ./dnscrypt lookup-stamp\
         --domain 'example.com'\
         --stamp 'sdns://AQcAAAAAAAAADTEyNy4wLjAuMTo0NDMg8R3bzEgX5UOEX93Uy4gYSbZCJvPeOXYlZp2HuRm8T7AbMi5kbnNjcnlwdC1jZXJ0LmV4YW1wbGUub3Jn'\
+        --type 'a'
+    ```
+
+    Or, on Windows:
+
+    ```sh
+    .\dnscrypt.exe lookup-stamp `
+        --domain 'example.com' `
+        --stamp 'sdns://AQcAAAAAAAAADTEyNy4wLjAuMTo0NDMg8R3bzEgX5UOEX93Uy4gYSbZCJvPeOXYlZp2HuRm8T7AbMi5kbnNjcnlwdC1jZXJ0LmV4YW1wbGUub3Jn' `
         --type 'a'
     ```
 
