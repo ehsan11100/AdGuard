@@ -43,10 +43,16 @@ The `options` field accepts four types of values: `hex`, `ip`, `ips`, and
 255] range.  See also [RFC 2132, sec. 3][rfc-2132].
 
 In accordance with [RFC 2131, sec. 4.3.1][rfc-2131], these options override the
-default options set by Adguard Home.  Which means that if you want to set DNS
-server addresses using option `6`, you should also add Adguard Home's own
-addresses there.  Otherwise, AdGuard Home's filtering won't work for the DHCP
-clients who receive these DNS server addresses.
+default options' values set by Adguard Home and requested by a client.  Which
+means that if you want to set DNS server addresses using option `6`, you should
+also add Adguard Home's own addresses there.  Otherwise, AdGuard Home's
+filtering won't work for the DHCP clients who receive these DNS server
+addresses.
+
+Option `del` has been added in **v0.107.12**.  It is used to unconditionally
+remove options from the server's responses, which may lead to weird behaviors.
+Use with caution.  On example where this option is useful is when a client
+doesn't accept a lease because of an option, see [issue 4337].
 
  *  The `hex` format is:
 
@@ -111,6 +117,21 @@ clients who receive these DNS server addresses.
         'options':
         - '252 text http://example.com'
     ```
+
+ *  The `del` format (since **v0.107.12**) allows you to remove an option.  For
+    example:
+
+    ```yaml
+    # …
+    'dhcp':
+      # …
+      'dhcpv4':
+        # …
+        'options':
+        - '61 del'
+    ```
+
+[issue 4337]: https://github.com/adguardTeam/adGuardHome/issues/4337
 
 
 
