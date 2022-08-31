@@ -174,6 +174,10 @@ You can change the behavior of a rule by adding modifiers.  Modifiers must be
 located at the end of the rule after the `$` character and be separated by
 commas.
 
+**NOTE:**  Modifiers don't work with `/etc/hosts`-style rules.  For example,
+`127.0.0.1 example.org$badfilter` will **not** disable the original `127.0.0.1
+example.org` rule.
+
 Examples:
 
  *  ```none
@@ -533,10 +537,6 @@ Examples:
 
  *  `@@||example.org^$badfilter` disables `@@||example.org^`.
 
-**NOTE:**  The `badfilter` modifier currently doesn't work with
-`/etc/hosts`-style rules.  `127.0.0.1 example.org$badfilter` will **not**
-disable the original `127.0.0.1 example.org` rule.
-
   #### <a href="#ctag" id="ctag" name="ctag">`ctag`</a>
 
 The `ctag` modifier allows to block domains only for specific types of DNS
@@ -616,7 +616,8 @@ IP_address canonical_hostname [aliases...]
 
 Fields of the entries are separated by any number of space or tab characters.
 Text from the `#` character until the end of the line is a comment and is
-ignored.
+ignored.  Modifiers, such as `client` or `badfilter`, don't work with these
+rules.
 
 Hostnames may contain only alphanumeric characters, hyphen-minus signs (`-`),
 and periods (`.`).  They must begin with an alphabetic character and end with an
