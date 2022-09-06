@@ -76,7 +76,7 @@ work. -->
     Using the unspecified IP address (`0.0.0.0`) or a local address (`127.0.0.1`
     and alike) for a host is basically the same as blocking that host.
 
-    ```none
+    ```adblock
     # Returns the IP address 1.2.3.4 for example.org.
     1.2.3.4 example.org
     # Blocks example.com by responding with 0.0.0.0.
@@ -161,7 +161,7 @@ rules and used to describe what a rule does.
 
 Example:
 
-```none
+```adblock
 ! This is a comment.
 # This is also a comment.
 ```
@@ -180,7 +180,7 @@ example.org` rule.
 
 Examples:
 
- *  ```none
+ *  ```adblock
     ||example.org^$important
     ```
 
@@ -191,7 +191,7 @@ Examples:
  *  You may want to use multiple modifiers in a rule.  Separate them by commas
     in this case:
 
-    ```none
+    ```adblock
     ||example.org^$client=127.0.0.1,dnstype=A
     ```
 
@@ -224,14 +224,14 @@ are two main ways to identify a client:
 
 The syntax is:
 
-```none
+```adblock
 $client=value1|value2|...
 ```
 
 You can also exclude clients by adding a `~` character before the value.  In
 this case, the rule is not be applied to this client's DNS requests.
 
-```none
+```adblock
 $client=~value1
 ```
 
@@ -270,7 +270,7 @@ To add multiple domains to one rule, use the `|` character as a separator.
 
 The syntax is:
 
-```none
+```adblock
 $denyallow=domain1|domain2|...
 ```
 
@@ -279,7 +279,7 @@ blocking rule covers too many domains.  You may want to block everything save
 for a couple of TLD domains. You could use the standard approach, i.e. rules
 like this:
 
-```none
+```adblock
 ! Block everything.
 /.*/
 
@@ -292,7 +292,7 @@ The problem with this approach is that this way you will also unblock tracking
 domains that are located on those TLDs (i.e. `google-analytics.com`).  Here's
 how to solve this with `denyallow`:
 
-```none
+```adblock
 *$denyallow=com|net
 ```
 
@@ -314,7 +314,7 @@ this rule will be triggered.
 
 The syntax is:
 
-```none
+```adblock
 $dnstype=value1|value2|...
 $dnstype=~value1|~value2|~...
 ```
@@ -324,13 +324,13 @@ actual DNS resource record (RR) types.
 
 Do not combine exclusion rules with inclusion ones.  This:
 
-```none
+```adblock
 $dnstype=~value1|value2
 ```
 
 is equivalent to this:
 
-```none
+```adblock
 $dnstype=value2
 ```
 
@@ -348,7 +348,7 @@ record itself.  That caused issues, since that meant that you could not write
 rules that would allow certain `CNAME` records in responses in `A` and `AAAA`
 requests.  In **v0.108.0** that behaviour was changed, so now this:
 
-```none
+```adblock
 ||canon.example.com^$dnstype=~CNAME
 ```
 
@@ -374,7 +374,7 @@ response modifier have higher priority than other rules in AdGuard Home.
 
 The shorthand syntax is:
 
-```none
+```adblock
 $dnsrewrite=1.2.3.4
 $dnsrewrite=abcd::1234
 $dnsrewrite=example.net
@@ -392,7 +392,7 @@ supported.
 
 The full syntax is of the form `RCODE;RRTYPE;VALUE`:
 
-```none
+```adblock
 $dnsrewrite=NOERROR;A;1.2.3.4
 $dnsrewrite=NOERROR;AAAA;abcd::1234
 $dnsrewrite=NOERROR;CNAME;example.net
@@ -406,7 +406,7 @@ The `CNAME` one is special because AdGuard Home will resolve the host and add
 its info to the response.  That is, if `example.net` has IP `1.2.3.4`, and the
 user has this in their filter rules:
 
-```none
+```adblock
 ||example.com^$dnsrewrite=example.net
 ! Or:
 ||example.com^$dnsrewrite=NOERROR;CNAME;example.net
@@ -431,7 +431,7 @@ Address: 1.2.3.4
 Next, the `CNAME` rewrite.  After that, all other records' values are summed as
 one response, so this:
 
-```none
+```adblock
 ||example.com^$dnsrewrite=NOERROR;A;1.2.3.4
 ||example.com^$dnsrewrite=NOERROR;A;1.2.3.5
 ```
@@ -508,7 +508,7 @@ Examples:
 
  *  In this example:
 
-    ```none
+    ```adblock
     ||example.org^$important
     @@||example.org^
     ```
@@ -518,7 +518,7 @@ Examples:
 
  *  In this example:
 
-    ```none
+    ```adblock
     ||example.org^$important
     @@||example.org^$important
     ```
@@ -546,14 +546,14 @@ client.
 
 The syntax is:
 
-```none
+```adblock
 $ctag=value1|value2|...
 ```
 
 If one of client's tags matches the `ctag` values, this rule applies to the
 client.  The syntax for exclusion is:
 
-```none
+```adblock
 $ctag=~value1|~value2|...
 ```
 
@@ -626,7 +626,7 @@ spellings, shorter hostnames, or generic hostnames (for example, `localhost`).
 
 Example:
 
-```none
+```adblock
 # This is a comment
 127.0.0.1 example.org example.info
 127.0.0.1 example.com
@@ -643,7 +643,7 @@ A simple list of domain names, one name per line.
 
 Example:
 
-```none
+```adblock
 # This is a comment
 example.com
 example.org

@@ -101,7 +101,7 @@ On Windows, run `cmd.exe` or PowerShell with admin privileges and run
 When you run AdGuard Home for the first time, it starts listening to
 `0.0.0.0:3000` and prompts you to open it in your browser:
 
-```
+```none
 AdGuard Home is available on the following addresses:
 Go to http://127.0.0.1:3000
 Go to http://X.X.X.X:3000
@@ -292,7 +292,7 @@ using your Linux distribution's package manager.
 To allow AdGuard Home running on Linux to listen on port 53 without superuser
 privileges and bind its DNS servers to a particular interface run:
 
-```bash
+```sh
 sudo setcap 'CAP_NET_BIND_SERVICE=+eip CAP_NET_RAW=+eip' ./AdGuardHome
 ```
 
