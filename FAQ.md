@@ -271,37 +271,52 @@ enough or would require quite complicated configuration.
 
 ##  <a href="#bindinuse" id="bindinuse" name="bindinuse">Why am I getting `bind: address already in use` error when trying to install on Ubuntu?</a>
 
-This happens because the address `127.0.0.1:53`, which is used for DNS, is
-already taken by another program.
+This happens because the port 53 on `localhost`, which is used for DNS, is
+already taken by another program.  Ubuntu comes with a local DNS called
+`systemd-resolved`, which uses the address `127.0.0.53:53` and thus prevents
+AdGuard Home from binding to `127.0.0.1:53`.  You can see that by running:
 
-**The easiest solution would be simply to choose a different network interface
-and bind it to an accessible IP address (for instance, the IP address of your
-router inside your network).**
+```sh
+sudo lsof -i :53
+```
 
-If you need AdGuard Home to accept connections on `127.0.0.1`, read the
-explanation below.
+The output should be similar to:
 
-Ubuntu comes with a local DNS server by default called `systemd-resolved`, which
-uses port 53 and thus prevents AdGuard Home from binding to it.  To fix this,
-disable the `systemd-resolved` daemon.  Luckily, AdGuard Home can detect such
-configurations and disable `systemd-resolved` for you if you press the “Fix”
-button, which is shown near the `address already in use` message.
+```none
+COMMAND     PID            USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
+systemd-r 14542 systemd-resolve   13u  IPv4  86178      0t0  UDP 127.0.0.53:domain
+systemd-r 14542 systemd-resolve   14u  IPv4  86179      0t0  TCP 127.0.0.53:domain
+```
 
-Note that if you're using AdGuard Home with docker or snap, you'll have to do it
-yourself by following these steps:
+To fix this, you need to either disable the `systemd-resolved` daemon or choose
+a different network interface and bind to an accessible IP address on it, for
+instance, the IP address of your router inside your network.  But if you do need
+to listen on `localhost`, there are several solutions.
 
-1.  Deactivate `DNSStubListener` and update DNS server address.  Create a new
-    file: `/etc/systemd/resolved.conf.d/adguardhome.conf` (create
-    a `/etc/systemd/resolved.conf.d` directory if necessary) with the following
-    content:
+Firstly, AdGuard Home can detect such configurations and disable
+`systemd-resolved` for you if you press the “Fix” button, which is shown near
+the `address already in use` message on the installation screen.
 
-    ```none
+Secondly, if that doesn't work, follow the guide below.  Note that if you're
+using AdGuard Home with docker or snap, you'll have to do it yourself.
+
+1.  Create the `/etc/systemd/resolved.conf.d` directory, if necessary:
+
+    ```sh
+    sudo mkdir -p /etc/systemd/resolved.conf.d
+    ```
+
+1.  Deactivate `DNSStubListener` and update DNS server address.  To do that,
+    create a new file, `/etc/systemd/resolved.conf.d/adguardhome.conf`, with the
+    following content:
+
+    ```service
     [Resolve]
     DNS=127.0.0.1
     DNSStubListener=no
     ```
 
-1.  Specifying `127.0.0.1` as DNS server address **is necessary** because
+    Specifying `127.0.0.1` as DNS server address **is necessary** because
     otherwise the nameserver will be `127.0.0.53` which doesn't work without
     `DNSStubListener`.
 
@@ -315,8 +330,11 @@ yourself by following these steps:
 1.  Restart `DNSStubListener`:
 
     ```sh
-    systemctl reload-or-restart systemd-resolved
+    sudo systemctl reload-or-restart systemd-resolved
     ```
+
+After that, `systemd-resolved` shouldn't be shown in the output of `lsof`, and
+AdGuard Home should be able to bind to `127.0.0.1:53`.
 
 
 
