@@ -448,22 +448,38 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
       Before **v0.108.0-b.5** the TTL for such responses is 60 seconds and since
       **v0.108.0-b.5** it's 10 seconds.
   - **Other settings**
-    - `bogus_nxdomain` - Respond with `NXDOMAIN` instead of any response having
+    - `bogus_nxdomain`: Respond with `NXDOMAIN` instead of any response having
       IP addresses matching the ones from this list.  **Since v0.108.0** it also
       supports CIDRs.
-    - `enable_dnssec` - Set DNSSEC flag in the outgoing DNS requests and check the result
-    - `aaaa_disabled` — Respond with an empty answer to all AAAA requests
-    - `safebrowsing_cache_size` — Safe Browsing cache size (in bytes)
-    - `safesearch_cache_size` — Safe Search cache size (in bytes)
-    - `parental_cache_size` — Parental Control cache size (in bytes)
-    - `cache_time` — Safe Browsing, Safe Search, Parental Control cache TTL
-    - `max_goroutines` — Max. number of parallel goroutines for processing incoming requests
-    - `handle_ddr` — Handle [Discovery of Designated Resolvers (DDR)][DDR] requests.
-    - `ipset` — List of domain-ipset_name associations for adding IP addresses of the specified domain names to an ipset list. Syntax: `DOMAIN[,DOMAIN].../IPSET_NAME[,IPSET_NAME]...`. IPv4 addresses are added to an ipset list with `ipv4` family, IPv6 addresses - to `ipv6` ipset list. ipset list must exist. This setting is supported on Linux only. This feature is similar to `--ipset` in dnsmasq.
-    - `upstream_timeout` (**since v0.107.0**) — The timeout for querying
-      upstream servers.  Zero value will be rewritten with default one which is
-      10s.
-    - `resolve_clients` (**since v0.106.0**) - Enable/disable resolving clients'
+    - `enable_dnssec`: Set DNSSEC flag in the outgoing DNS requests and check
+      the result.
+    - `aaaa_disabled`: Respond with an empty answer to all `AAAA` requests.
+    - `safebrowsing_cache_size`: Safe Browsing cache size, in bytes.
+    - `safesearch_cache_size`: Safe Search cache size, in bytes.
+    - `parental_cache_size`: Parental Control cache size, in bytes.
+    - `cache_time`: Safe Browsing, Safe Search, and Parental Control cache TTL,
+      in seconds.
+    - `max_goroutines`: Maximum number of parallel goroutines for processing
+      incoming requests.
+    - `handle_ddr`: Handle [Discovery of Designated Resolvers (DDR)][DDR]
+      requests.
+    - `ipset`: List of domain-ipset_name associations for adding IP addresses of
+      the specified domain names to an ipset list. Syntax:
+
+      ```none
+      DOMAIN[,DOMAIN].../IPSET_NAME[,IPSET_NAME]
+      ```
+
+      IPv4 addresses are added to an ipset list with `ipv4` family; IPv6
+      addresses, to an `ipv6` ipset list.  ipset list must exist.
+
+      This setting is supported on Linux OSs only.  This feature is similar to
+      `--ipset` in dnsmasq.
+    - `ipset_file` **(since v0.107.13):** Same as `ipset`, but the rules are
+      read from a file.  If this property is set, property `ipset` is ignored.
+    - `upstream_timeout` **(since v0.107.0):** The timeout for querying upstream
+      servers.  Zero value will be rewritten with default one which is `10s`.
+    - `resolve_clients` **(since v0.106.0):** Enable/disable resolving clients'
       addresses by sending PTR requests.
 - `filters` — List of filters, each filter has the following values:
   - `enabled` — Current filter's status (enabled/disabled).
