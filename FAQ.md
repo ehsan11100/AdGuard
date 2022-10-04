@@ -466,7 +466,7 @@ Linux and Windows for AMD64 CPUs.
     Or, with `wget`:
 
     ```sh
-    wget -o '/tmp/AdGuardHome_linux_amd64.tar.gz'\
+    wget -O '/tmp/AdGuardHome_linux_amd64.tar.gz'\
         'https://static.adguard.com/adguardhome/release/AdGuardHome_linux_amd64.tar.gz'
     ```
 
