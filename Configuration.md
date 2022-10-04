@@ -87,6 +87,9 @@ Examples:
 
  *  `https://dns-unfiltered.adguard.com/dns-query`: encrypted [DNS-over-HTTPS];
 
+ *  `h3://dns-unfiltered.adguard.com/dns-query`: encrypted [DNS-over-HTTPS] with
+    forced [HTTP/3] and no fallback to HTTP/2 and below;
+
  *  `quic://dns-unfiltered.adguard.com`: encrypted [DNS-over-QUIC];
 
  *  `sdns://...`: [DNS Stamps] for [DNSCrypt] or [DNS-over-HTTPS] resolvers;
@@ -172,7 +175,7 @@ but `host.com` will be forwarded to default upstreams.
 
     sends queries for `*.host.com` to `1.1.1.1:53` except for `*.maps.host.com`
     which are sent to `8.8.8.8:53` along with all other queries.
-    
+
  *  A configuration like:
 
     ```none
@@ -295,6 +298,7 @@ hostname resolution” setting in the “Upstream DNS servers” section or via 
 [DNS-over-QUIC]:  https://datatracker.ietf.org/doc/html/rfc9250
 [DNS-over-TLS]:   https://en.wikipedia.org/wiki/DNS_over_TLS
 [DNSCrypt]:       https://dnscrypt.info/
+[HTTP/3]:         https://en.wikipedia.org/wiki/HTTP/3
 [dnsmasq-man]:    http://www.thekelleys.org.uk/dnsmasq/docs/dnsmasq-man.html
 [private-ip]:     https://tools.ietf.org/html/rfc6303
 
@@ -403,7 +407,7 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
 
       If enabled, the queries are sent to each server simultaneously and the
       first response is chosen.
-    
+
       If disabled, the queries are sent to each upstream server one-by-one and
       then sorted by RTT.  Note that more stable upstream servers are preferred
       by the algorithm.
@@ -413,6 +417,8 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
     - `fastest_timeout` (**since v0.107.0**) — The timeout used for dialing the
       addresses while picking the fastest.  Values other than positive ones are
       replaced with the default one, `1s`.
+    - `use_http3_upstreams` (**since v0.107.15**): Enables DNS-over-HTTP/3
+      for DNS-over-HTTPS upstreams that support it.
   - **ECS settings**
     - `edns_client_subnet` — Add EDNS Client Subnet (ECS) option to upstream
       requests and log the values sent by the clients in the query log.  Please
@@ -481,6 +487,8 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
       servers.  Zero value will be rewritten with default one which is `10s`.
     - `resolve_clients` **(since v0.106.0):** Enable/disable resolving clients'
       addresses by sending PTR requests.
+    - `serve_http3` (**since v0.107.15**): Enables DNS-over-HTTP/3 serving for
+      DNS-over-HTTPS clients as well as for the web UI.
 - `filters` — List of filters, each filter has the following values:
   - `enabled` — Current filter's status (enabled/disabled).
   - `url` — URL pointing to the filter contents (filtering rules).
