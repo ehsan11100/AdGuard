@@ -491,6 +491,8 @@ Linux and Windows for AMD64 CPUs.
     cp -r ./AdGuardHome.yaml ./data ~/my-agh-backup/
     ```
 
+    (Add `./leases.db` if it is present.)
+
 1.  Unpack the AdGuard Home archive to a temporary directory.  For example, if
     you downloaded the archive to your `~/Downloads` directory and want to
     unpack it to `/tmp/`:
@@ -567,6 +569,8 @@ In all examples below, the PowerShell must be run as Administrator.
     New-Item -Path $newDir -ItemType Directory
     Copy-Item -Path .\AdGuardHome.yaml, .\data -Destination $newDir -Recurse
     ```
+
+    (Add `.\leases.db` if it is present.)
 
 1.  Unpack the AdGuard Home archive to a temporary directory.  For example, if
     you downloaded the archive to your `Downloads` directory and want to

@@ -588,43 +588,61 @@ Removing an entry from settings file will reset it to the default value. Deletin
 
 Please follow these steps to create a new password for your user account:
 
-1. Install `htpasswd`, which is a part of *Apache2 Web Server*:
+1.  Install `htpasswd`, which is a part of *Apache2 Web Server:*
 
-    Ubuntu:
+     *  Ubuntu:
 
-    `sudo apt-get install apache2`
+        ```sh
+        sudo apt-get install apache2
+        ```
 
-    Fedora:
+     *  Fedora:
 
-    `sudo dnf install apache2`
+        ```sh
+        sudo dnf install httpd-tools
+        ```
 
-    Windows:
+     *  Windows:
 
-    > Choose a download from https://httpd.apache.org/docs/current/platform/windows.html#down, extract the downloaded folder, open a terminal, navigate to its `bin` folder with the `cd` command, and run `.\Htpasswd` (Note the capital H in the Windows version).
+        Choose a download from
+        <https://httpd.apache.org/docs/current/platform/windows.html#down>,
+        extract the downloaded folder, open a terminal, navigate to its `bin`
+        directory with the `chdir` command, and run `.\Htpasswd`.  Note the
+        capital “H” in the Windows version.
 
-    Other versions of `htpasswd` could be used, but **only** if they support *bcrypt* hash encryption, which rules out e.g. most web-hosted `htpasswd` generators.
+    Other versions of `htpasswd` could be used, but **only** if they support
+    *bcrypt* hash encryption, which rules out e.g. most web-hosted `htpasswd`
+    generators.
 
-2. Use the `htpasswd` utility to generate a new hash:
+2.  Use the `htpasswd` utility to generate a new hash:
 
-    Ubuntu/Fedora:
+     *  Ubuntu/Fedora:
 
-    `htpasswd -B -n -b <USERNAME> <PASSWORD>`
+        ```sh
+        htpasswd -B -n -b <USERNAME> <PASSWORD>
+        ```
 
-    Windows:
+     *  Windows:
 
-    `.\Htpasswd -B -n -b <USERNAME> <PASSWORD>`
+        ```ps1
+        .\Htpasswd -B -n -b <USERNAME> <PASSWORD>
+        ```
 
     It will print `<USERNAME>:<HASH>` to the terminal.
 
-3. Open `AdGuardHome.yaml` in a text editor with sudo rights.
+3.  Open `AdGuardHome.yaml` in a text editor with sudo rights.
 
-    In the `users:` section, find your username and insert the `<HASH>` value for the `password` setting:
+    In the `users:` section, find your username and insert the `<HASH>` value
+    for the `password` setting:
 
-    ```users:
-    - name: ...
-      password: <HASH>```
+    ```yaml
+    users:
+      - name: ...
+        password: <HASH>```
+    ```
 
-4. Save the file, restart AGH. Now you'll be able to log in to the Web interface using your new password.
+4.  Save the file and restart AdGuard Home.  Now you should be able to log in to
+    the web interface using your new password.
 
 
 

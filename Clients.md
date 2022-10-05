@@ -39,7 +39,7 @@ you may need to restart AdGuard Home to apply the changes.
 
 ![](images/top-clients-names.png)
 
-Since **v0.108.0** runtime clients sources can be disabled via the
+Since **v0.107.7** runtime clients sources can be disabled via the
 [`clients.runtime_sources`][sources] object of the configuration file.
 
 [whois]:   https://en.wikipedia.org/wiki/WHOIS
@@ -89,7 +89,7 @@ clients should perform queries using a special domain name or URL.  For example:
 
      *  **DNS-over-HTTPS:** `https://example.org/dns-query/my-client`.
 
-        **Since **v0.108.0-b.18:** `https://my-client.example.org/dns-query`
+        Since **v0.108.0-b.18:** `https://my-client.example.org/dns-query`
         (requires a [wildcard certificate][wild]).  **NOTE:**  The URL ClientID
         has higher priority than the server-name ClientID.  If you use both,
         only the URL ClientID is used.
