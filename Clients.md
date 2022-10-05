@@ -79,7 +79,7 @@ There are several options to do this.
 
 ClientIDs are identifiers that can be used with the following DNS protocols:
 DNS-over-HTTPS, DNS-over-TLS, and DNS-over-QUIC.  To use this identifier,
-clients should perform queries using a special domain name.  For example:
+clients should perform queries using a special domain name or URL.  For example:
 
  *  AdGuard Home has the domain name `example.org`.
 
@@ -87,10 +87,17 @@ clients should perform queries using a special domain name.  For example:
 
  *  On the client device you can now configure:
 
-     *  **DNS-over-HTTPS:** `https://example.org/dns-query/my-client`;
-     *  **DNS-over-TLS:** `tls://my-client.example.org` (requires a [wildcard
-        certificate][wild]);
+     *  **DNS-over-HTTPS:** `https://example.org/dns-query/my-client`.
+
+        **Since **v0.108.0-b.18:** `https://my-client.example.org/dns-query`
+        (requires a [wildcard certificate][wild]).  **NOTE:**  The URL ClientID
+        has higher priority than the server-name ClientID.  If you use both,
+        only the URL ClientID is used.
+
      *  **DNS-over-QUIC:** `quic://my-client.example.org` (requires a [wildcard
+        certificate][wild]).
+
+     *  **DNS-over-TLS:** `tls://my-client.example.org` (requires a [wildcard
         certificate][wild]).
 
 Note that the TLS certificate must be valid **both** for `*.example.org` **and**
