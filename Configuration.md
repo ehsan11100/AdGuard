@@ -524,30 +524,38 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
     receive an empty `NXDOMAIN` response.
 
     **Before v0.108.0** this setting was a part of the `dns` object.
-- `tls` - HTTPS/DOH/DOT settings.
-  - `enabled` - encryption (DOT/DOH/HTTPS) status.
-  - `server_name` - The hostname of your server.  If set, it is used to detect
+- `tls`: HTTPS/DoH/DoQ/DoT settings.
+  - `enabled`: Encryption (DoT/DoH+HTTPS/DoQ) status.
+  - `server_name`: The hostname of your server.  If set, it is used to detect
     ClientIDs (using the ServerName field of ClientHello messages), respond to
     [Discovery of Designated Resolvers (DDR)][DDR] queries, and perform
     additional connection validations.  If not set, these features are disabled.
 
     Must match one of the DNS Names in the certificate.
-  - `force_https` - if true, forces HTTP->HTTPS redirect.
-  - `port_https` - HTTPS port.  If `0`, HTTPS is disabled.
-  - `port_dns_over_tls` - DNS-over-TLS port.  If `0`, DNS-over-TLS is disabled.
-  - `port_dns_over_quic` - DNS-over-QUIC port.  If `0`, DNS-over-QUIC is
+  - `force_https`: If `true`, force HTTP-to-HTTPS redirect.
+  - `port_https`: The HTTPS port.  Used for both web UI and DNS-over-HTTPS.  If
+    `0`, HTTPS is disabled.
+  - `port_dns_over_tls`: The DNS-over-TLS port.  If `0`, DNS-over-TLS is
+    disabled.
+  - `port_dns_over_quic`: The DNS-over-QUIC port.  If `0`, DNS-over-QUIC is
     disabled.  Before **v0.108.0-b.5** the default value was `754`, since
     **v0.108.0-b.5** it's `853`.
-  - `port_dnscrypt` - DNSCrypt port.  If `0`, DNSCrypt is disabled.  See
+  - `port_dnscrypt`: The DNSCrypt port.  If `0`, DNSCrypt is disabled.  See
     [DNSCrypt] for more information and examples.
-  - `dnscrypt_config_file` - DNSCrypt configuration file path.  **Must** be set
-    if `port_dnscrypt` is not `0`.  See the [`dnscrypt`] utility documentation
-    for examples of configuration generation.
-  - `allow_unencrypted_doh` - Allow DOH queries via unencrypted HTTP (e.g. for reverse proxying)
-  - `certificate_chain` - PEM-encoded certificates chain.
-  - `strict_sni_check` - Reject connection if the client uses server name (in SNI) that doesn't match the certificate
-  - `private_key` - PEM-encoded private key.
-  - `icmp_timeout_msec` - time (ms) to wait for ICMP reply to detect an IP conflict. If 0, the feature is disabled.
+  - `dnscrypt_config_file`: The path to the DNSCrypt configuration file.
+    **Must** be set if `port_dnscrypt` is not `0`.  See the [`dnscrypt`] utility
+    documentation for examples of configuration generation.
+  - `allow_unencrypted_doh`: If `true`, allow DoH queries via unencrypted HTTP,
+    for example to use with reverse proxies.
+  - `certificate_chain`: The PEM-encoded certificates chain.
+  - `strict_sni_check`: If `true`, reject connections if the client uses server
+    name (in SNI) that doesn't match the one in the certificate.
+  - `private_key`: The PEM-encoded private key.
+  - `icmp_timeout_msec`: Time to wait for an ICMP reply to detect an IP
+    conflict, in milliseconds.  If `0`, the feature is disabled.
+  - `override_tls_ciphers`: If set, this array of strings allows overriding the
+    default set of TLS cipher suites to use.  The strings are the [names of
+    cipher suites][tls-names].
 - `user_rules` — User-specified filtering rules.
 - `os` (**since v0.107.0**) — Operating system related settings.
   - `group` — The name of the user group to switch to after the startup.
@@ -581,6 +589,7 @@ Removing an entry from settings file will reset it to the default value. Deletin
 [DNSCrypt]: https://github.com/AdguardTeam/AdGuardHome/wiki/DNSCrypt
 [`dnscrypt`]: https://github.com/ameshkov/dnscrypt
 [DDR]: https://www.ietf.org/archive/id/draft-ietf-add-ddr-06.html
+[tls-names]: https://pkg.go.dev/crypto/tls#pkg-constants
 
 
 
