@@ -187,6 +187,16 @@ are disabled.  Update the image instead.
 
 
 
+   ###  Command-line update
+
+To update AdGuard Home package without the need to use Web API run:
+
+```sh
+./AdGuardHome --update
+```
+
+
+
 ##  <a href="#configure-devices" id="configure-devices" name="configure-devices">Configuring Devices</a>
 
    ###  Router
