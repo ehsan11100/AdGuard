@@ -1,14 +1,14 @@
  #  AdGuard Home - DNSCrypt
 
- *  [Generating A Configuration File](#generate-config)
- *  [Generating A DNSCrypt Stamp](#generate-stamp)
- *  [Configuring Devices To Use DNSCrypt](#configure-devices)
+ *  [Generating a Configuration file](#generate-config)
+ *  [Generating a DNSCrypt stamp](#generate-stamp)
+ *  [Configuring devices to use DNSCrypt](#configure-devices)
 
 **Since v0.105.0**, AdGuard Home is able to work as a DNSCrypt server.  However,
 this feature is only available via configuration file, you cannot set it up
 using the Web UI.  This guide explains how to do this.
 
-##  <a href="#generate-config" id="#generate-config" name="generate-config">Generating A Configuration File</a>
+##  <a href="#generate-config" id="#generate-config" name="generate-config">Generating a configuration file</a>
 
 Here is how to generate a DNSCrypt configuration file and point AdGuard Home to
 it:
@@ -112,7 +112,7 @@ it:
 
 
 
-##  <a href="#generate-stamp" id="generate-stamp" name="generate-stamp">Generating A DNSCrypt Stamp</a>
+##  <a href="#generate-stamp" id="generate-stamp" name="generate-stamp">Generating a DNSCrypt stamp</a>
 
 Here is how to generate a DNSCrypt stamp and check your installation:
 
@@ -150,7 +150,7 @@ Here is how to generate a DNSCrypt stamp and check your installation:
 
 
 
-##  <a href="#configure-devices" id="configure-devices" name="configure-devices">Configuring Devices To Use DNSCrypt</a>
+##  <a href="#configure-devices" id="configure-devices" name="configure-devices">Configuring devices to use DNSCrypt</a>
 
  *  **All platforms:** [`dnscrypt-proxy`][prox] (reference implementation).
     DNSCrypt-Proxy is a command-line proxy for Linux, BSD, Windows, MacOS,

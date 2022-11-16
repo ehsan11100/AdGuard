@@ -1,19 +1,19 @@
- #  AdGuard Home - Configuring Clients
+ #  AdGuard Home - Configuring clients
 
 AdGuard Home allows flexible configuration for devices that are connected to it.
 On a basic level, you may just want to be able to distinguish them and see
 friendly names instead of naked IP addresses.  Additionally, AdGuard Home allows
 you applying different rules depending on the client.
 
- *  [Friendly Names](#friendlynames)
- *  [Persistent Clients](#newclient)
+ *  [Friendly names](#friendlynames)
+ *  [Persistent clients](#newclient)
      *  [Identifying clients](#idclient)
      *  [Settings](#clientsettings)
- *  [Per-Client Blocking](#perclientblocking)
+ *  [Per-client blocking](#perclientblocking)
 
 
 
-##  <a href="#friendlynames" id="friendlynames" name="friendlynames">Friendly Names</a>
+##  <a href="#friendlynames" id="friendlynames" name="friendlynames">Friendly names</a>
 
 AdGuard Home tries to automatically collect some basic information about the
 device that's connecting to it.
@@ -47,7 +47,7 @@ Since **v0.107.7** runtime clients sources can be disabled via the
 
 
 
-##  <a href="#newclient" id="newclient" name="newclient">Persistent Clients</a>
+##  <a href="#newclient" id="newclient" name="newclient">Persistent clients</a>
 
 If you want more than just to see the client names, you may want to configure
 each client manually.  If that's the case, head to the “Settings → Clients
@@ -117,7 +117,7 @@ of upstream DNS servers to be used for this client.
 
 
 
-##  <a href="#perclientblocking" id="perclientblocking" name="perclientblocking">Per-Client Blocking</a>
+##  <a href="#perclientblocking" id="perclientblocking" name="perclientblocking">Per-client blocking</a>
 
 There are two ways of how you can configure blocking on the per-client basis.
 Both of them are based on using AdGuard blocklist rules syntax for the rules

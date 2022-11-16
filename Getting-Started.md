@@ -1,19 +1,19 @@
  #  AdGuard Home - Getting Started
 
  *  [Installation](#installation)
- *  [First Start](#first-time)
- *  [Running As A Service](#service)
+ *  [First start](#first-time)
+ *  [Running as a service](#service)
  *  [Updating](#update)
-     *  [Manual Update](#manual-update)
- *  [Configuring Devices](#configure-devices)
- *  [Running Without Superuser (Linux Only)](#running-without-superuser)
+     *  [Manual update](#manual-update)
+ *  [Configuring devices](#configure-devices)
+ *  [Running without superuser (Linux only)](#running-without-superuser)
  *  [Limitations](#limitations)
 
 
 
 ##  <a href="#installation" id="installation" name="installation">Installation</a>
 
-   ###  Official Releases
+   ###  Official releases
 
 Download the archive with the binary file for your operating system from the
 [latest stable release page][releases].  The full list of supported platforms as
@@ -41,7 +41,7 @@ To install AdGuard Home as a service, unpack the archive, enter the
 
 
 
-   ###  Docker And Snap
+   ###  Docker and Snap
 
 We also provide an [official AdGuard Home docker image][docker] and an [official
 Snap Store package][snap].
@@ -75,7 +75,7 @@ Some other unofficial options include:
 
 
 
-##  <a href="#first-time" id="first-time" name="first-time">First Start</a>
+##  <a href="#first-time" id="first-time" name="first-time">First start</a>
 
 First of all, check your firewall settings.  To install and use AdGuard Home,
 the following ports and protocols must be available:
@@ -115,7 +115,7 @@ There you will go through the initial configuration wizard.
 
 
 
-##  <a href="#service" id="service" name="service">Running As A Service</a>
+##  <a href="#service" id="service" name="service">Running as a service</a>
 
 The next step would be to register AdGuard Home as a system service (aka
 daemon).  To install AdGuard Home as a service, run:
@@ -163,7 +163,7 @@ configuration file, so you can revert the changes, if necessary.
 
 
 
-   ###  <a href="#manual-update" id="manual-update" name="manual-update">Manual Update</a>
+   ###  <a href="#manual-update" id="manual-update" name="manual-update">Manual update</a>
 
 In case the button isn't shown or an automatic update has failed, you can update
 manually.  We have a [detailed guide on manual updates][mupd], but in short:
@@ -180,7 +180,7 @@ manually.  We have a [detailed guide on manual updates][mupd], but in short:
 
 
 
-   ###  Docker, Home Assistant, And Snapcraft Updates
+   ###  Docker, Home Assistant, and Snapcraft updates
 
 Auto-updates for Docker, Hass.io / Home Assistant, and Snapcraft installations
 are disabled.  Update the image instead.
@@ -197,7 +197,7 @@ To update AdGuard Home package without the need to use Web API run:
 
 
 
-##  <a href="#configure-devices" id="configure-devices" name="configure-devices">Configuring Devices</a>
+##  <a href="#configure-devices" id="configure-devices" name="configure-devices">Configuring devices</a>
 
    ###  Router
 
@@ -288,13 +288,13 @@ and you won't need to configure each of them manually.
 
 
 
-##  <a href="#running-without-superuser" id="running-without-superuser" name="running-without-superuser">Running Without Superuser (Linux Only)</a>
+##  <a href="#running-without-superuser" id="running-without-superuser" name="running-without-superuser">Running without superuser (Linux only)</a>
 
 You can run AdGuard Home without superuser privileges, but you need to either
 grant the binary a capability (on Linux) or instruct it to use a different port
 (all platforms).
 
-   ###  Granting The Necessary Capabilities
+   ###  Granting the necessary capabilities
 
 Using this method requires the `setcap` utility.  You may need to install it
 using your Linux distribution's package manager.
@@ -310,7 +310,7 @@ Then run `./AdGuardHome` as an unprivileged user.
 
 
 
-  ###  Changing The DNS Listen Port
+  ###  Changing the DNS listen port
 
 To configure AdGuard Home to listen on a port that does not require superuser
 privileges, stop AdGuard Home, open `AdGuardHome.yaml` in your editor, and find

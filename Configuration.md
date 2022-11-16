@@ -3,21 +3,21 @@
 Most of these settings can be changed via the web-based admin interface.
 However, we decided to list them all here just in case.
 
- *  [Command-line Arguments](#command-line)
- *  [Configuring Upstreams](#upstreams)
-     *  [Specifying Upstreams For Domains](#upstreams-for-domains)
-     *  [Loading Upstreams From File](#upstreams-from-file)
-     *  [Specifying Upstreams For Reverse DNS](#upstreams-for-rdns)
-         *  [Private Addresses](#rdns-private)
-         *  [Public Addresses](#rdns-public)
-         *  [Client Look-Ups](#rdns-clients)
- *  [Configuration File](#configuration-file)
- *  [Reset Web Password](#password-reset)
- *  [Profiling With Pprof](#pprof)
+ *  [Command-line arguments](#command-line)
+ *  [Configuring upstreams](#upstreams)
+     *  [Specifying upstreams for domains](#upstreams-for-domains)
+     *  [Loading upstreams from file](#upstreams-from-file)
+     *  [Specifying upstreams for reverse DNS](#upstreams-for-rdns)
+         *  [Private addresses](#rdns-private)
+         *  [Public addresses](#rdns-public)
+         *  [Client lookups](#rdns-clients)
+ *  [Configuration file](#configuration-file)
+ *  [Reset web password](#password-reset)
+ *  [Profiling with pprof](#pprof)
 
 
 
-##  <a href="#command-line" id="command-line" name="command-line">Command-line Arguments</a>
+##  <a href="#command-line" id="command-line" name="command-line">Command-line arguments</a>
 
 Here is a list of all available command-line arguments.
 
@@ -62,7 +62,7 @@ functionality in the service as well.
 
 
 
-##  <a href="#upstreams" id="upstreams" name="upstreams">Configuring Upstreams</a>
+##  <a href="#upstreams" id="upstreams" name="upstreams">Configuring upstreams</a>
 
 AdGuard Home is basically a DNS proxy that sends your DNS queries to upstream
 servers.  Multiple upstream servers for all or selected domain names can be
@@ -103,7 +103,7 @@ Examples:
 
 
 
-   ###  <a href="#upstreams-for-domains" id="upstreams-for-domains" name="upstreams-for-domains">Specifying Upstreams For Domains</a>
+   ###  <a href="#upstreams-for-domains" id="upstreams-for-domains" name="upstreams-for-domains">Specifying upstreams for domains</a>
 
 You can specify upstreams that will be used for specific domains using the
 dnsmasq-like syntax (see the documentation for the option `--server`
@@ -188,7 +188,7 @@ but `host.com` will be forwarded to default upstreams.
     sends queries for `*.host.com` to `2.2.2.2:53` except for `host.com` queries
     those are sent to `1.1.1.1:53`, but all other queries are sent to `8.8.8.8:53`.
 
-   ###  <a href="#upstreams-from-file" id="upstreams-from-file" name="upstreams-from-file">Loading Upstreams From File</a>
+   ###  <a href="#upstreams-from-file" id="upstreams-from-file" name="upstreams-from-file">Loading upstreams from file</a>
 
 Using specific upstreams for some domains is a common way to accelerate internet
 in China.  For an example, see https://github.com/felixonmars/dnsmasq-china-list
@@ -210,7 +210,7 @@ accept internationalized domain names (e.g. `пример.рф` or `例子.中�
 a workaround, convert them to Punycode (e.g. `xn--e1afmkfd.xn--p1ai` or
 `xn--fsqu00a.xn--fiqs8s` respectively).  See [issue 2915][2915].
 
-   ###  <a href="#upstreams-for-rdns" id="upstreams-for-rdns" name="upstreams-for-rdns">Specifying Upstreams For Reverse DNS</a>
+   ###  <a href="#upstreams-for-rdns" id="upstreams-for-rdns" name="upstreams-for-rdns">Specifying upstreams for reverse DNS</a>
 
 Using the domain-specific upstream notation, you can specify dedicated upstream
 DNS servers for reverse DNS (rDNS) requests.  If you want **all** your `PTR`
@@ -242,7 +242,7 @@ no effect.
 
 Read below for more details.
 
-  ####  <a href="#rdns-private" id="rdns-private" name="rdns-private">Private Addresses</a>
+  ####  <a href="#rdns-private" id="rdns-private" name="rdns-private">Private addresses</a>
 
 Since **v0.106.0** all the addresses from [private IP ranges][private-ip] are
 only resolved via appropriate local resolvers to avoid leaks of clients'
@@ -261,7 +261,7 @@ configuration file.  If it is disabled, the unknown addresses from locally
 served networks won't be resolved at all, and clients performing these queries
 will receive `NXDOMAIN` responses.
 
-  ####  <a href="#rdns-public" id="rdns-public" name="rdns-public">Public Addresses</a>
+  ####  <a href="#rdns-public" id="rdns-public" name="rdns-public">Public addresses</a>
 
 If you want AdGuard Home to use another DNS server for a specific IP address
 range, you can do it using the same syntax as for general upstream servers.  For
@@ -282,7 +282,7 @@ this to the “Private reverse DNS servers” field:
 [/168.192.in-addr.arpa/]192.168.7.7
 ```
 
-  ####  <a href="#rdns-clients" id="rdns-clients" name="rdns-clients">Client Look-Ups</a>
+  ####  <a href="#rdns-clients" id="rdns-clients" name="rdns-clients">Client lookups</a>
 
 AdGuard Home automatically gets the names of connected devices using reverse DNS
 lookup (rDNS).  It sends `PTR` requests with the IP addresses of clients to
@@ -305,7 +305,7 @@ hostname resolution” setting in the “Upstream DNS servers” section or via 
 
 
 
-##  <a href="#configuration-file" id="configuration-file" name="configuration-file">Configuration File</a>
+##  <a href="#configuration-file" id="configuration-file" name="configuration-file">Configuration file</a>
 
 Upon the first execution, a file named `AdGuardHome.yaml` will be created, with default values written in it. You can modify the file while your AdGuard Home service is not running. Otherwise, any changes to the file will be lost because the running program will overwrite them.
 
@@ -594,7 +594,7 @@ Removing an entry from settings file will reset it to the default value. Deletin
 
 
 
-##  <a href="#password-reset" id="password-reset" name="password-reset">Reset Web Password</a>
+##  <a href="#password-reset" id="password-reset" name="password-reset">Reset web password</a>
 
 Please follow these steps to create a new password for your user account:
 
@@ -656,7 +656,7 @@ Please follow these steps to create a new password for your user account:
 
 
 
-##  <a href="#pprof" id="pprof" name="pprof">Profiling With Pprof</a>
+##  <a href="#pprof" id="pprof" name="pprof">Profiling with pprof</a>
 
 To enable pprof, set `debug_pprof: true` in yaml configuration file and then
 restart AdGuard Home.  Now you can get profiling information with your browser,

@@ -1,4 +1,4 @@
- #  How To Install And Run AdGuard Home On A Raspberry Pi
+ #  How to install and run AdGuard Home on a Raspberry Pi
 
 You can install AdGuard Home on your [Raspberry Pi][pi] and use it to filter ads
 and save traffic.  Once it is installed, you can use your AdGuard Home on any
@@ -13,7 +13,7 @@ machine connected to the same local network.
 
 
 
-##  <a href="#prepare" id="prepare" name="prepare">Prepare Your Pi</a>
+##  <a href="#prepare" id="prepare" name="prepare">Prepare your Pi</a>
 
 You'll need a Raspberry Pi with network access and [SSH enabled][ssh].  Connect
 it to a display and a keyboard, boot it, and write down the IP address that has
@@ -84,7 +84,7 @@ Here are the other commands you might need to control the service:
 
 
 
-##  <a href="#check" id="check" name="check">Check The Filtering</a>
+##  <a href="#check" id="check" name="check">Check the filtering</a>
 
 You can verify that it's working properly by running this on your Pi:
 
@@ -105,7 +105,7 @@ Host doubleclick.net not found: 3(NXDOMAIN)
 
 
 
-##  <a href="#devices" id="devices" name="devices">Configure Your Devices</a>
+##  <a href="#devices" id="devices" name="devices">Configure your devices</a>
 
 Once it is confirmed that AdGuard Home works on our Raspberry Pi, you can use it
 on other computers in your network by changing their system DNS settings to use

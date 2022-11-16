@@ -1,5 +1,5 @@
 <a id="comparison"></a>
-## Comparing AdGuard Home to Other Solutions
+## Comparing AdGuard Home to other solutions
 
 <a id="comparison-adguard-dns"></a>
 ### How is this different from public AdGuard DNS servers?

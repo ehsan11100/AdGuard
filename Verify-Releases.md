@@ -1,4 +1,4 @@
- #  Verifying AdGuard Home Releases
+ #  Verifying AdGuard Home releases
 
 Since AdGuard Home v0.103.4 we sign the executable files we build so that you
 can verify they are really created by us and no one else.  Inside an archive

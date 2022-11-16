@@ -1,11 +1,12 @@
- #  AdGuard Home - How to Write Hosts Blocklists
+ #  AdGuard Home - How to write hosts blocklists
 
  *  [Introduction](#introduction)
- *  [Basic Examples](#rules-examples)
- *  [Adblock-Style Syntax](#adblock-style)
-     *  [Special Characters](#special-characters)
-     *  [Regular Expressions](#regular-expressions)
-     *  [Rule Modifiers](#modifiers)
+ *  [Basic examples](#rules-examples)
+ *  [Adblock-style syntax](#adblock-style)
+     *  [Special characters](#special-characters)
+     *  [Regular expressions](#regular-expressions)
+     *  [Comments](#comments)
+     *  [Rule modifiers](#modifiers)
          *  [`client`](#client)
          *  [`denyallow`](#denyallow)
          *  [`dnstype`](#dnstype)
@@ -13,9 +14,9 @@
          *  [`important`](#important)
          *  [`badfilter`](#badfilter)
          *  [`ctag`](#ctag)
- *  [`/etc/hosts`-Style Syntax](#etc-hosts)
- *  [Domains-Only Syntax](#domains-only)
- *  [Hostlists Compiler](#hostlists-compiler)
+ *  [`/etc/hosts`-style syntax](#etc-hosts)
+ *  [Domains-only syntax](#domains-only)
+ *  [Hostlists compiler](#hostlists-compiler)
 
 
 
@@ -61,7 +62,7 @@ the ID from the table of contents didn't match.  Add it here so that old links
 work. -->
 <a id="-rules-examples" name="-rules-examples"></a>
 
-##  <a href="#rules-examples" id="rules-examples" name="rules-examples">Basic Examples</a>
+##  <a href="#rules-examples" id="rules-examples" name="rules-examples">Basic examples</a>
 
  *  `||example.org^`: block access to the `example.org` domain and all its
     subdomains, like `www.example.org`.
@@ -93,7 +94,7 @@ work. -->
 
 
 
-##  <a href="#adblock-style" id="adblock-style" name="adblock-style">Adblock-Style Syntax</a>
+##  <a href="#adblock-style" id="adblock-style" name="adblock-style">Adblock-style syntax</a>
 
 This is a subset of the [traditional Adblock-style][adb] syntax which is used by
 browser ad blockers.
@@ -114,7 +115,7 @@ modifiers = [modifier0, modifier1[, ...[, modifierN]]]
 
 
 
-   ###  <a href="#special-characters" id="special-characters" name="special-characters">Special Characters</a>
+   ###  <a href="#special-characters" id="special-characters" name="special-characters">Special characters</a>
 
  *  `*`: the wildcard character.  It is used to represent any set of characters.
     This can also be an empty string or a string of any length.
@@ -134,7 +135,7 @@ modifiers = [modifier0, modifier1[, ...[, modifierN]]]
 
 
 
-   ###  <a href="#regular-expressions" id="regular-expressions" name="regular-expressions">Regular Expressions</a>
+   ###  <a href="#regular-expressions" id="regular-expressions" name="regular-expressions">Regular expressions</a>
 
 If you want even more flexibility in making rules, you can use [regular
 expressions][regexp] instead of the default simplified matching syntax.  If you
@@ -168,7 +169,7 @@ Example:
 
 
 
-   ###  <a href="#modifiers" id="modifiers" name="modifiers">Rule Modifiers</a>
+   ###  <a href="#modifiers" id="modifiers" name="modifiers">Rule modifiers</a>
 
 You can change the behavior of a rule by adding modifiers.  Modifiers must be
 located at the end of the rule after the `$` character and be separated by
@@ -606,7 +607,7 @@ The list of allowed tags:
 
 
 
-##  <a href="#etc-hosts" id="etc-hosts" name="etc-hosts">`/etc/hosts`-Style Syntax</a>
+##  <a href="#etc-hosts" id="etc-hosts" name="etc-hosts">`/etc/hosts`-style syntax</a>
 
 For each host a single line should be present with the following information:
 
@@ -637,7 +638,7 @@ The IP addresses are used to respond to the DNS queries for these domains.
 
 
 
-##  <a href="#domains-only" id="domains-only" name="domains-only">Domains-Only Syntax</a>
+##  <a href="#domains-only" id="domains-only" name="domains-only">Domains-only syntax</a>
 
 A simple list of domain names, one name per line.
 
@@ -655,7 +656,7 @@ consider it to be an [Adblock-style](#adblock-style) rule.
 
 
 
-##  <a href="#hostlists-compiler" id="hostlists-compiler" name="hostlists-compiler">Hostlists Compiler</a>
+##  <a href="#hostlists-compiler" id="hostlists-compiler" name="hostlists-compiler">Hostlists compiler</a>
 
 If you are maintaining a blocklist and use different sources in it, [Hostlists
 compiler][hlc] may be useful to you.  It is a simple tool that makes it easier

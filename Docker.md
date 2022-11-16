@@ -14,11 +14,11 @@
 </p>
 
  *  [Introduction](#introduction)
- *  [Quick Start](#quickstart)
- *  [Update To A Newer Version](#update)
- *  [Running Development Builds](#unstable)
- *  [Additional Configuration](#configuration)
- *  [DHCP Server](#dhcp)
+ *  [Quick start](#quickstart)
+ *  [Update to a newer version](#update)
+ *  [Running development builds](#unstable)
+ *  [Additional configuration](#configuration)
+ *  [DHCP server](#dhcp)
  *  [`resolved`](#resolved-daemon)
 
 
@@ -34,7 +34,7 @@ repository][agh].
 
 
 
-##  <a href="#quickstart" id="quickstart" name="quickstart">Quick Start</a>
+##  <a href="#quickstart" id="quickstart" name="quickstart">Quick start</a>
 
    ###  Pull the Docker image
 
@@ -108,7 +108,7 @@ Port mappings you might need:
 
 
 
-##  <a href="#update" id="update" name="update">Update To A Newer Version</a>
+##  <a href="#update" id="update" name="update">Update to a newer version</a>
 
 1.  Pull the new version from Docker Hub:
 
@@ -129,7 +129,7 @@ Port mappings you might need:
 
 
 
-##  <a href="#unstable" id="unstable" name="unstable">Running Development Builds</a>
+##  <a href="#unstable" id="unstable" name="unstable">Running development builds</a>
 
 If you want to be on the bleeding edge, you might want to run the image from the
 `edge` or `beta` tags.  In order to use it, simply replace `adguard/adguardhome`
@@ -142,7 +142,7 @@ docker pull adguard/adguardhome:edge
 
 
 
-## <a href="#configuration" id="configuration" name="configuration">Additional Configuration</a>
+## <a href="#configuration" id="configuration" name="configuration">Additional configuration</a>
 
 Upon the first run, a file with the default values named `AdGuardHome.yaml` is
 created.  You can modify the file while your AdGuard Home container is not
@@ -157,7 +157,7 @@ configurable parameters and their values is available on [this page][conf].
 
 
 
-##  <a href="#dhcp" id="dhcp" name="dhcp">DHCP Server</a>
+##  <a href="#dhcp" id="dhcp" name="dhcp">DHCP server</a>
 
 If you want to use AdGuardHome's DHCP server, you should pass `--network host`
 argument when creating the container:

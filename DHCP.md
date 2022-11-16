@@ -1,11 +1,11 @@
- #  AdGuard Home - DHCP Server
+ #  AdGuard Home - DHCP server
 
  *  [Prerequisites](#prereq)
- *  [Default Options](#default)
+ *  [Default options](#default)
  *  [Configuration](#config)
-     *  [The `dhcp.dhcpv4.options` Array Field](#config-4)
-     *  [DHCPv6 Options](#config-6)
- *  [Automatic Hosts](#autohosts)
+     *  [The `dhcp.dhcpv4.options` array field](#config-4)
+     *  [DHCPv6 options](#config-6)
+ *  [Automatic hosts](#autohosts)
 
 AdGuard Home can be used as a DHCP server.  This page describes how to do that.
 
@@ -20,7 +20,7 @@ AdGuard Home can be used as a DHCP server.  This page describes how to do that.
 
 
 
-##  <a id="default" href="#default">Default Options</a>
+##  <a id="default" href="#default">Default options</a>
 
 By default, AdGuard Home will set itself as the DNS server for the DHCP clients.
 The default lease time is 24 hours.
@@ -36,7 +36,7 @@ below.
 
 
 
-   ###  <a id="config-4" href="#config-4">The `dhcp.dhcpv4.options` Array Field</a>
+   ###  <a id="config-4" href="#config-4">The `dhcp.dhcpv4.options` array field</a>
 
 The `options` field is used to explicitly specify the values for DHCP options
 and modify the response.  In accordance with *Section 4.3.1* of [RFC
@@ -193,7 +193,7 @@ client implementations among the many existing.  In accordance with [RFC
 if requested by client within the option `55` (Parameter Request List).
 
 
- ###  <a id="config-6" href="#config-6">DHCPv6 Options</a>
+ ###  <a id="config-6" href="#config-6">DHCPv6 options</a>
 
 The option `dhcp.dhcpv6.ra_slaac_only`, if `true`, sends RA packets forcing the
 clients to use SLAAC.  The DHCPv6 server won't be started in this case.
@@ -208,7 +208,7 @@ the clients to choose between SLAAC and DHCPv6.
 
 
 
-##  <a id="autohosts" href="#autohosts">Automatic Hosts</a>
+##  <a id="autohosts" href="#autohosts">Automatic hosts</a>
 
 Machines in the network can be reached more easily using the hostnames they send
 in the DHCP requests with a configurable top-level domain (TLD).  By default,

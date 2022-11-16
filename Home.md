@@ -18,10 +18,10 @@ Welcome to the AdGuard Home wiki!
 
 ##  Guides
 
- *  [Getting Started](Getting-Started)
+ *  [Getting started](Getting-Started)
      *  [FAQ](FAQ)
-     *  [How to Write Hosts Blocklists](Hosts-Blocklists)
-     *  [Comparing AdGuard Home to Other Solutions](Comparison)
+     *  [How to write hosts blocklists](Hosts-Blocklists)
+     *  [Comparing AdGuard Home to other solutions](Comparison)
  *  Configuring AdGuard
      *  [Configuration](Configuration)
      *  [Configuring AdGuard Home Clients](Clients)
@@ -32,7 +32,7 @@ Welcome to the AdGuard Home wiki!
      *  [Docker](Docker)
      *  [OpenWrt][owwiki] (on the OpenWrt Wiki)
      *  [Raspberry Pi](Raspberry-Pi)
-     *  [Virtual Private Server](VPS)
- *  [Verifying Releases](Verify-Releases)
+     *  [Virtual private server](VPS)
+ *  [Verifying releases](Verify-Releases)
 
 [owwiki]: https://openwrt.org/docs/guide-user/services/dns/adguard-home

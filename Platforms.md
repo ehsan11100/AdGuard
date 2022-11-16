@@ -1,7 +1,7 @@
  #  AdGuard Home - Supported Platforms
 
  *  [Changes](#changes)
- *  [Packaged Releases](#releases)
+ *  [Packaged releases](#releases)
  *  [Docker](#docker)
  *  [Snapcraft](#snap)
 
@@ -19,7 +19,7 @@
 
 
 
-##  <a href="#releases" id="releases" name="releases">Packaged Releases</a>
+##  <a href="#releases" id="releases" name="releases">Packaged releases</a>
 
 The official AdGuard Home packaged releases are listed in the table below:
 
