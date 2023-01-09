@@ -37,7 +37,7 @@ Options:
   --pidfile VALUE                    Path to a file where PID is stored.
   --check-config                     Check configuration and exit.
   --no-check-update                  Don't check for updates.
-  --update                           Update application and exit.
+  --update                           Update the current binary and restart the service in case it's installed.
   --no-mem-optimization              Deprecated.  Disable memory optimization.
   --no-etc-hosts                     Deprecated.  Do not use the OS-provided hosts.
   --local-frontend                   Use local frontend directories.
