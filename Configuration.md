@@ -490,6 +490,8 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
       addresses by sending PTR requests.
     - `serve_http3` (**since v0.107.15**): Enables DNS-over-HTTP/3 serving for
       DNS-over-HTTPS clients as well as for the web UI.
+    - `theme` (**since v0.107.22**): The theme of UI.  The possible values are: 
+      `auto`, `dark`, `light`.
 - `filters` — List of filters, each filter has the following values:
   - `enabled` — Current filter's status (enabled/disabled).
   - `url` — URL pointing to the filter contents (filtering rules).
