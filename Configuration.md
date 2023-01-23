@@ -420,6 +420,15 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
       replaced with the default one, `1s`.
     - `use_http3_upstreams` (**since v0.107.15**): Enables DNS-over-HTTP/3
       for DNS-over-HTTPS upstreams that support it.
+    - `use_dns64` ((**since v0.107.23**) — Enables or disables the DNS64
+      functionality.  See `dns64_prefixes` for more information.
+    - `dns64_prefixes` (**since v0.107.23**): The list of DNS64 prefixes to use.
+      The first specified prefix will be used to synthesize DNS64 answers. If
+      empty, AdGuard Home will use the default (Well-Known) prefix
+      `64:ff9b::/96`.  The prefixes are validated for being IPv6 subnets not
+      longer than 96 bits.  As per [RFC 6147][rfc6147], PTR requests are routed
+      to the `local_ptr_upstreams` if the requested address is within either one
+      of the configured prefixes or the default Well-Known one.
   - **ECS settings**
     - `edns_client_subnet` — Add EDNS Client Subnet (ECS) option to upstream
       requests and log the values sent by the clients in the query log.  Please
@@ -593,6 +602,7 @@ Removing an entry from settings file will reset it to the default value. Deletin
 [`dnscrypt`]: https://github.com/ameshkov/dnscrypt
 [DDR]: https://www.ietf.org/archive/id/draft-ietf-add-ddr-06.html
 [tls-names]: https://pkg.go.dev/crypto/tls#pkg-constants
+[rfc6147]: https://datatracker.ietf.org/doc/html/rfc6147
 
 
 
