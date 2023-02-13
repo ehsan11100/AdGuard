@@ -359,7 +359,7 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
            - '0.0.0.0'
        ```
     - `port` — DNS server port to listen on.
-    - `statistics_interval` — Time interval for statistics (in days)
+    - `anonymize_client_ip` - If true, anonymize clients' IP addresses in logs and stats
   - **Protection settings**
     - `protection_enabled` — Whether any kind of filtering and protection should
       be performed.  **Since v0.107.0** it doesn't affect the rules with
@@ -377,14 +377,8 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
     - `safesearch_enabled` — Enforcing "Safe search" option for search engines, when possible.
     - `safebrowsing_enabled` — Filtering of DNS requests based on safebrowsing.
   - **Query log settings**
-    - `querylog_enabled` — Query logging (also used to calculate top 50 clients, blocked domains and requested domains for statistical purposes).
-    - `querylog_file_enabled` — Write query logs to a file.
-    - `querylog_interval` - time interval for query log files rotation.  It's in
-      days **until v0.107.0**, the possible values are: `90`, `30`, `7`, `1`.
-      **Since v0.107.0** it's a human-readable duration in hours, the possible
-      values are: `2160h`, `720h`, `168h`, `24h`, `6h`.
-    - `querylog_size_memory` - Number of entries kept in memory before they are flushed to disk
-    - `anonymize_client_ip` - If true, anonymize clients' IP addresses in logs and stats
+    - **Before v0.107.24** query log settings were part of the `dns` object.
+      **Since v0.107.24** query log settings are part of `querylog` object.
   - **Anti-DNS amplification features**
     - `ratelimit` — DDoS protection, specifies in how many packets per second a client should receive. Anything above that is silently dropped. To disable set 0, default is 20. Safe to disable if DNS server is not available from internet.
     - `ratelimit_whitelist` — If you want exclude some IP addresses from ratelimiting but keep ratelimiting on for others, put them here.
@@ -501,6 +495,18 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
       DNS-over-HTTPS clients as well as for the web UI.
     - `theme` (**since v0.107.22**): The theme of UI.  The possible values are: 
       `auto`, `dark`, `light`.
+- `querylog` (**since v0.107.24**) — Query log settings section:
+    - `enabled`: Query log status.
+    - `file_enabled`: Write query logs to a file.
+    - `interval`: Time interval for query log files rotation.  It's a
+      human-readable duration in hours, the possible values are: `2160h`,
+      `720h`, `168h`, `24h`, `6h`.
+    - `size_memory`: Number of entries kept in memory before they are flushed to disk.
+    - `ignored`: List of host names, which should not be written to log.
+- `statistics` (**since v0.107.24**) — Statistics settings section:
+    - `enabled`: Statistics status.
+    - `interval`: Time interval for statistics (in days)
+    - `ignored`: List of host names, which should not be counted.
 - `filters` — List of filters, each filter has the following values:
   - `enabled` — Current filter's status (enabled/disabled).
   - `url` — URL pointing to the filter contents (filtering rules).
