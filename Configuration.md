@@ -374,7 +374,16 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
     - `parental_block_host` — IP (or domain name) which is used to respond to DNS requests blocked by parental control
     - `safebrowsing_block_host` — IP (or domain name) which is used to respond to DNS requests blocked by safe-browsing
     - `parental_enabled` — Parental control-based DNS requests filtering.
-    - `safesearch_enabled` — Enforcing "Safe search" option for search engines, when possible.
+    - `safesearch_enabled` (**before v0.107.27**) — Enforcing "Safe search" option for search engines,
+       when possible.  Deprecated, use `enabled` flag in `safe_search` section.
+    - `safe_search` (**since v0.107.27**) — Safe search settings section:
+      - `enabled`: Enforcing "Safe search" option for search engines, when possible.
+      - `bing`: Enforcing "Safe search" option for `bing` domains.
+      - `duckduckgo`: Enforcing "Safe search" option for `duckduckgo` domains.
+      - `google`: Enforcing "Safe search" option for `google` domains.
+      - `pixabay`: Enforcing "Safe search" option for `pixabay` domains.
+      - `yandex`: Enforcing "Safe search" option for `yandex` domains.
+      - `youtube`: Enforcing "Safe search" option for `youtube` domains.
     - `safebrowsing_enabled` — Filtering of DNS requests based on safebrowsing.
   - **Query log settings**
     - **Before v0.107.24** query log settings were part of the `dns` object.
