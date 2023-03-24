@@ -371,6 +371,7 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
     - `blocking_ipv4` - IP address to be returned for a blocked A request if `blocking_mode` is set to `custom_ip`
     - `blocking_ipv6` - IP address to be returned for a blocked AAAA request if `blocking_mode` is set to `custom_ip`
     - `blocked_response_ttl` — For how many seconds the clients should cache a filtered response. Low values are useful on LAN if you change filters very often, high values are useful to increase performance and save traffic.
+    - `protection_disabled_until` — Timestamp until when the protection is disabled.
     - `parental_block_host` — IP (or domain name) which is used to respond to DNS requests blocked by parental control
     - `safebrowsing_block_host` — IP (or domain name) which is used to respond to DNS requests blocked by safe-browsing
     - `parental_enabled` — Parental control-based DNS requests filtering.
