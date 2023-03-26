@@ -152,6 +152,13 @@ program will overwrite them.
 The settings are stored in the [YAML] format.  The documentation describing all
 configurable parameters and their values is available on [this page][conf].
 
+NOTE: **Since v0.107.27** the container uses Docker-provided healthcheck
+mechanism.  The implementation uses special reserved domain name
+`healthcheck.adguardhome.test.`, expecting it to resolve into NODATA answer.  It
+imposes restrictions on usage of this particular name, so specifying it within
+the `blocked_hosts` array under the `dns` section of configuration file will
+certainly break the healthcheck.
+
 [YAML]: https://yaml.org
 [conf]: https://github.com/AdguardTeam/Adguardhome/wiki/Configuration
 
