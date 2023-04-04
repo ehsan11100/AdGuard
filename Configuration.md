@@ -393,39 +393,51 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
     - `ratelimit` — DDoS protection, specifies in how many packets per second a client should receive. Anything above that is silently dropped. To disable set 0, default is 20. Safe to disable if DNS server is not available from internet.
     - `ratelimit_whitelist` — If you want exclude some IP addresses from ratelimiting but keep ratelimiting on for others, put them here.
     - `refuse_any` — Another DDoS protection mechanism. Requests of type ANY are rarely needed, so refusing to serve them mitigates against attackers trying to use your DNS as a reflection. Safe to disable if DNS server is not available from internet.
-  - **Upstream DNS servers settings**
-    - `upstream_dns` — List of upstream DNS servers.
-    - `upstream_dns_file` — Path to a file with the list of upstream DNS servers. If it is configured, the value of `upstream_dns` is ignored.
-    - `bootstrap_dns` — List of DNS servers used for initial hostname resolution in case an upstream server name is a hostname.
-    - `private_networks` (**since v0.108.0-b.5**) — List of networks used to
+  - **Upstream DNS servers settings:**
+    - `upstream_dns`: List of upstream DNS servers.
+
+    - `upstream_dns_file`: Path to a file with the list of upstream DNS servers.
+      If it is configured, the value of `upstream_dns` is ignored.
+
+    - `bootstrap_dns`: List of DNS servers used for initial hostname resolution
+      in case an upstream server name is a hostname.
+
+    - `bootstrap_prefer_ipv6`: If `true`, instructs the bootstrapper to prefer
+      IPv6 addresses to IPv4 ones when resolving DoH, DoQ, and DoT hostnames.
+
+    - `private_networks` (**since v0.108.0-b.5**): List of networks used to
       check if an IP address belongs to a locally-served address registry.  If
       empty, AdGuard Home will use the set defined by [RFC 6303][private-ip].
-    - `use_private_ptr_resolvers` (**since v0.107.0**) – If AdGuard Home should
+
+    - `use_private_ptr_resolvers` (**since v0.107.0**): If AdGuard Home should
       use private reverse DNS servers.
-    - `local_ptr_upstreams` (**since v0.106.0**) – List of upstream DNS servers
-      to resolve PTR requests for addresses inside locally-served networks. If
-      empty, AdGuard Home will automatically try to get local resolvers from the
-      OS.  **Since v0.108.0-b.4** the domain-specific upstreams are validated
-      for being a valid ARPA domain pointing to a locally-served network.
-    - `all_servers` — Enables parallel queries to all configured upstream
-      servers to speed up resolving.
 
-      If enabled, the queries are sent to each server simultaneously and the
-      first response is chosen.
+    - `local_ptr_upstreams`: List of upstream DNS servers to resolve PTR
+      requests for addresses inside locally-served networks. If empty, AdGuard
+      Home will automatically try to get local resolvers from the OS.
 
-      If disabled, the queries are sent to each upstream server one-by-one and
-      then sorted by RTT.  Note that more stable upstream servers are preferred
-      by the algorithm.
-    - `fastest_addr` — Use the Fastest Address algorithm.  It finds an IP
-      address with the lowest latency and returns this IP address in DNS
-      response.
-    - `fastest_timeout` (**since v0.107.0**) — The timeout used for dialing the
+      **Since v0.108.0-b.4** the domain-specific upstreams are validated for
+      being a valid ARPA domain pointing to a locally-served network.
+
+    - `all_servers`: Enables parallel queries to all configured upstream servers
+      to speed up resolving.  If enabled, the queries are sent to each server
+      simultaneously and the first response is chosen.  If disabled, the queries
+      are sent to each upstream server one-by-one and then sorted by RTT.  Note
+      that more stable upstream servers are preferred by the algorithm.
+
+    - `fastest_addr`: Use the Fastest Address algorithm.  It finds an IP address
+      with the lowest latency and returns this IP address in DNS response.
+
+    - `fastest_timeout` (**since v0.107.0**): The timeout used for dialing the
       addresses while picking the fastest.  Values other than positive ones are
       replaced with the default one, `1s`.
+
     - `use_http3_upstreams` (**since v0.107.15**): Enables DNS-over-HTTP/3
       for DNS-over-HTTPS upstreams that support it.
-    - `use_dns64` ((**since v0.107.23**) — Enables or disables the DNS64
+
+    - `use_dns64` ((**since v0.107.23**): Enables or disables the DNS64
       functionality.  See `dns64_prefixes` for more information.
+
     - `dns64_prefixes` (**since v0.107.23**): The list of DNS64 prefixes to use.
       The first specified prefix will be used to synthesize DNS64 answers. If
       empty, AdGuard Home will use the default (Well-Known) prefix
