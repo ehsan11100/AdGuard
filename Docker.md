@@ -95,6 +95,11 @@ Port mappings you might need:
  *  `-p 5443:5443/tcp -p 5443:5443/udp`: add if you are going to run AdGuard
     Home as a [DNSCrypt] server.
 
+   ###  Client IPs
+
+If you want AdGuardHome to see the original client IPs as opposed to something
+like `172.17.0.1`, you should add `--network host` to the list of options.
+
    ###  Control the container
 
  *  Start: `docker start adguardhome`

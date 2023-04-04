@@ -179,15 +179,20 @@ Home will receive and interpret the value of this header as real client's
 address.  The address of the reverse proxy server will be received too and also
 checked against the "trusted" proxies list.
 
+Another header you might want to proxy is the `Host` header, which is required
+to make AdGuard Home recognize requests from clients that have a ClientID in
+their hostnames.
+
 For example, if the configuration of the reverse proxy server contains the
 following directives:
 
 ```none
 location /dns-query {
-   ...
+   # …
+   proxy_set_header Host $host;
    proxy_set_header X-Real-IP '1.2.3.4';
    proxy_bind 192.168.1.2;
-   ...
+   # …
 }
 ```
 

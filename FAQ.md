@@ -348,9 +348,10 @@ configuration for your web server:
 
 ```none
 location /aghome/ {
+    proxy_cookie_path / /aghome/;
     proxy_pass http://AGH_IP:AGH_PORT/;
     proxy_redirect / /aghome/;
-    proxy_cookie_path / /aghome/;
+    proxy_set_header Host $host;
 }
 ```
 
