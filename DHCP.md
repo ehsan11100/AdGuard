@@ -6,6 +6,7 @@
      *  [The `dhcp.dhcpv4.options` array field](#config-4)
      *  [DHCPv6 options](#config-6)
  *  [Automatic hosts](#autohosts)
+ *  [Stored leases](#storedleases)
 
 AdGuard Home can be used as a DHCP server.  This page describes how to do that.
 
@@ -218,3 +219,10 @@ you can reach it over HTTP on the host `http://workstation.lan`.
 
 You can also set a custom TLD or domain name using the `dns.local_domain_name`
 field in the [configuration] file.
+
+
+
+##  <a id="storedleases" href="#storedleases">Stored leases</a>
+
+DHCP leases stored in `data/leases.json`.  The file format is not stable and
+may change in the future releases.
