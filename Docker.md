@@ -224,3 +224,37 @@ your machine:
     ```sh
     systemctl reload-or-restart systemd-resolved
     ```
+
+
+
+##  <a href="#known-issues" id="known-issues" name="known-issues">Known issues</a>
+
+   ###  Healthcheck
+
+Since **v0.107.28** the container uses Docker-provided healthcheck mechanism.
+If the implementation of the healthcheck script causes any issues with custom
+Docker images and orchestration tools (like [#5711], [#5713]), then we recommend
+disabling it by adding `--no-healthcheck` to the `docker run` command or using
+your tool's equivalent.
+
+(The actual change was made due to a necessity to handle zombie processes of
+`wget` instances, see [PID 1 Docker problem][pid1]).
+
+<!--
+TODO(e.burkov):  Fix the healthcheck for zeroes, update and uncomment this
+section.  Add the link to the issue.
+
+   ###  Listen addresses
+
+The healthcheck script uses nslookup to check if the DNS server is up and
+healthy.  If the configuration contains `0.0.0.0` or `::` in the `bind_host`
+property, the healthcheck will try to only check the `localhost.`.
+Nevertheless, it will sometimes fail ([#5714]), the workaround is to configure
+the actual IP address of the interface you want to listen on.  Disabling the
+healthcheck as described above should also work.
+-->
+
+[#5711]: https://github.com/AdguardTeam/AdGuardHome/issues/5711
+[#5713]: https://github.com/AdguardTeam/AdGuardHome/issues/5713
+
+[pid1]: https://blog.phusion.nl/2015/01/20/docker-and-the-pid-1-zombie-reaping-problem
