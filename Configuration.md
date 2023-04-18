@@ -39,7 +39,7 @@ Options:
   --no-check-update                  Don't check for updates.
   --update                           Update the current binary and restart the service in case it's installed.
   --no-mem-optimization              Deprecated.  Disable memory optimization.
-  --no-etc-hosts                     Deprecated.  Do not use the OS-provided hosts.
+  --no-etc-hosts                     Deprecated: use clients.runtime_sources.hosts instead.  Do not use the OS-provided hosts.
   --local-frontend                   Use local frontend directories.
   -v, --verbose                      Enable verbose output.
   --glinet                           Run in GL-Inet compatibility mode.
