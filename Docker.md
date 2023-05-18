@@ -162,7 +162,10 @@ mechanism.  The implementation uses special reserved domain name
 `healthcheck.adguardhome.test.`, expecting it to resolve into NODATA answer.  It
 imposes restrictions on usage of this particular name, so specifying it within
 the `blocked_hosts` array under the `dns` section of configuration file will
-certainly break the healthcheck.
+certainly break the healthcheck.  For the same reason the `allowed_clients`
+**should** contain and `disallowed_clients` **should not** contain the
+`127.0.0.1` (`localhost`) address, which is used as a source of healthcheck
+requests.
 
 [YAML]: https://yaml.org
 [conf]: https://github.com/AdguardTeam/Adguardhome/wiki/Configuration

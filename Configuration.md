@@ -450,10 +450,29 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
       requests and log the values sent by the clients in the query log.  Please
       note that ECS option will be added automatically for clients with public
       IP addresses only.
-  - **Access settings**
-    - `allowed_clients` — IP addresses of allowed clients
-    - `disallowed_clients` — IP addresses of clients that should be blocked
-    - `blocked_hosts` — Hosts that should be blocked
+  - **Access settings:**
+    - `allowed_clients`: The list of CIDRs, IP addresses or ClientIDs of allowed
+      DNS clients.  If this list has entries, AdGuard Home will accept requests
+      only from these clients.
+      
+      See also the note in the [Docker wiki page][docker-conf] about using this
+      property within a container.
+
+    - `disallowed_clients`: The list of CIDRs, IP addresses, or ClientIDs of
+      disallowed DNS clients.  If this list has entries, AdGuard Home will drop
+      requests from these clients. Note that this field is ignored if there are
+      entries in `allowed_clients`.
+      
+      See also the note in the [Docker wiki page][docker-conf] about using this
+      property within a container.
+
+    - `blocked_hosts`: The list of domain names, wildcards or filtering rules to
+      match requests that shouldn't be processed at all.  These wiil be ignored
+      by statistics and query log as well.
+      
+      See also the note in the [Docker wiki page][docker-conf] about using this
+      property within a container.
+
     - `trusted_proxies` (**since v0.107.0**) – The list of IP addresses and CIDR
       prefixes of trusted HTTP proxy servers.  If a DNS-over-HTTPS request comes
       from one of these addresses or networks, AdGuard Home uses the provided
@@ -629,6 +648,7 @@ Removing an entry from settings file will reset it to the default value. Deletin
 
 [DHCP]: https://github.com/AdguardTeam/AdGuardHome/wiki/DHCP
 [DNSCrypt]: https://github.com/AdguardTeam/AdGuardHome/wiki/DNSCrypt
+[docker-conf]: https://github.com/AdguardTeam/AdGuardHome/wiki/Docker#configuration
 [`dnscrypt`]: https://github.com/ameshkov/dnscrypt
 [DDR]: https://www.ietf.org/archive/id/draft-ietf-add-ddr-06.html
 [tls-names]: https://pkg.go.dev/crypto/tls#pkg-constants
