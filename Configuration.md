@@ -360,6 +360,45 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
        ```
     - `port` — DNS server port to listen on.
     - `anonymize_client_ip` - If true, anonymize clients' IP addresses in logs and stats
+    - `blocked_services` (**since v0.107.33**): Blocked services settings
+      section:
+      - `ids`: List of blocked services.
+      - `schedule`: Sets periods of inactivity for filtering blocked services.
+      The schedule contains 7 days (Sunday to Saturday) and a time zone.  Each
+      day consists of `start` and `end`, which are the durations from the start
+      of day.  Duration is a string in human-readable format.  `start` is
+      greater or equal to `0s` and less than `24h`.  `end` must be greater than
+      `start` and less or equal to '24h'.  `start` and `end` are expected to be
+      rounded to minutes.
+
+      Example of valid configuration:
+
+      ```yaml
+      'blocked_services':
+          'ids':
+          - 'onlyfans'
+          'schedule':
+              'sun':
+                  'start': '0s'
+                  'end': '24h'
+              'mon':
+                  'start': '10m'
+                  'end': '23h50m'
+              'tue':
+                  'start': '20m'
+                  'end': '23h40m'
+              # No schedule for Wednesday.
+              'thu':
+                  'start': '40m'
+                  'end': '23h20m'
+              'fri':
+                  'start': '50m'
+                  'end': '23h10m'
+              'sat':
+                  'start': '1h'
+                  'end': '23h'
+              'time_zone': 'America/New_York'
+      ```
   - **Protection settings**
     - `protection_enabled` — Whether any kind of filtering and protection should
       be performed.  **Since v0.107.0** it doesn't affect the rules with
