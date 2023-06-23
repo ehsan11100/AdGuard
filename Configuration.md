@@ -30,8 +30,9 @@ Usage:
 Options:
   -c, --config VALUE                 Path to the config file.
   -w, --work-dir VALUE               Path to the working directory.
-  -h, --host VALUE                   Host address to bind HTTP server on.
-  -p, --port VALUE                   Port to serve HTTP pages on.
+  -h, --host VALUE                   Deprecated. Host address to bind HTTP server on. Use --web-addr. The short -h will work as --help in the future.
+  -p, --port VALUE                   Deprecated. Port to serve HTTP pages on. Use --web-addr.
+  --web-addr VALUE                   Address to serve the web UI on, in the host:port format.
   -s, --service VALUE                Service control action: status, install, uninstall, start, stop, restart, reload (configuration).
   -l, --logfile VALUE                Path to log file.  If empty: write to stdout; if 'syslog': write to system log.
   --pidfile VALUE                    Path to a file where PID is stored.
