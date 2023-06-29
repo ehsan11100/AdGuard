@@ -312,19 +312,26 @@ Upon the first execution, a file named `AdGuardHome.yaml` will be created, with 
 
 Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possible parameters that you can configure are listed below:
 
-- `bind_host` — Web interface IP address to listen on.
-- `bind_port` — Web interface IP port to listen on.
-- `users` — Web users info
-  - `name` — User name
-  - `password` — BCrypt-encrypted password
-- `auth_attempts` (**after v0.106.0**) – Maximum number of failed login attempts
+- `bind_host` (**before v0.107.33**): Web interface IP address to listen on.
+- `bind_port` (**before v0.107.33**): Web interface IP port to listen on.
+- `http` (**since v0.107.33**): Web interface configuration.
+  - `address`: Web interface IP address with port to listen on.
+  - `session_ttl`: Web session TTL is a time duration in a human-readable
+  format.  The web user will stay signed in for this amount of time.
+- `users`: Web users info.
+  - `name`: User name.
+  - `password`: BCrypt-encrypted password.
+- `auth_attempts` (**after v0.106.0**): Maximum number of failed login attempts
   a user can do before being blocked.  The entire blocking logic is disabled if
   it equals to 0.
-- `block_auth_min` (**after v0.106.0**) – The duration of blocking period.  The
+- `block_auth_min` (**after v0.106.0**): The duration of blocking period.  The
   entire blocking logic is disabled if it equals to 0.
-- `http_proxy` — Proxy URL for HTTP client (e.g. "http://user:password@server:port/"). Supports "http", "https" and "socks5" scheme.
-- `web_session_ttl` — Web session TTL (in hours) - a web user will stay signed in for this amount of time.
-- `debug_pprof` — Enable pprof HTTP server listening on port 6060 for debugging. See section `Profiling with pprof`.
+- `http_proxy`: Proxy URL for HTTP client, e.g. `http://user:password@server:port/`.
+  Supports `http`, `https` and `socks5` schemes.
+- `web_session_ttl` (**before v0.107.33**): Web session TTL (in hours), a web
+  user will stay signed in for this amount of time.
+- `debug_pprof`: Enable pprof HTTP server listening on port 6060 for debugging.
+  See section `Profiling with pprof`.
 
 - `dns` — DNS configuration section.
   - **General settings**

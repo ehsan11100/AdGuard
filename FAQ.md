@@ -223,13 +223,13 @@ edit the configuration file manually:
 
 1.  Open `AdGuardHome.yaml` in your editor.
 
-1.  Set the `bind_host` setting to a new network interface.  For example:
+1.  Set the `http.address` setting to a new network interface.  For example:
 
-     *  `0.0.0.0` to listen on all network interfaces.
+     *  `0.0.0.0:0` to listen on all network interfaces.
+ 
+     *  `0.0.0.0:8080` to listen on all network interfaces with port `8080`.
 
-     *  `127.0.0.1` to listen on the local loopback interface only.
-
-1.  Optionally, set the `bind_port` setting to set a new port.
+     *  `127.0.0.1:0` to listen on the local loopback interface only.
 
 1.  Restart AdGuard Home:
 
