@@ -683,13 +683,29 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
       - `dhcp` — Check AdGuard Home's DHCP leases for client's address.
       - `hosts` — Follow the operating system's hosts files.
 - **Log settings**
-  - `log_file` — Path to the log file. If empty, writes to stdout, if `syslog` -- system log (or eventlog on Windows).
-  - `log_compress` — Compress determines if the rotated log files should be compressed using gzip (default: false)
-  - `log_localtime` — If the time used for formatting the timestamps in is the computer's local time (default: false [UTC])
-  - `log_max_backups` — Maximum number of old log files to retain (MaxAge may still cause them to get deleted) (default: 0, which retains all old log files)
-  - `log_max_size` — Maximum size in megabytes of the log file before it gets rotated (default: 100 MB)
-  - `log_max_age` — MaxAge is the maximum number of days to retain old log files (default: 3)
-  - `verbose` — Enable our disables debug verbose output (default: false)
+  - `log` (**since v0.107.34**): Log settings.
+    - `file` (**since v0.107.34**): Path to the log file.  If empty, writes to
+      stdout, if `syslog` writes system log (or eventlog on Windows).
+    - `compress` (**since v0.107.34**): Compress determines if the rotated log
+      files should be compressed using gzip (default: false).
+    - `local_time` (**since v0.107.34**): If the time used for formatting the
+      timestamps in is the computer's local time (default: false [UTC]).
+    - `max_backups` (**since v0.107.34**): Maximum number of old log files to
+      retain (MaxAge may still cause them to get deleted) (default: 0, which
+      retains all old log files).
+    - `max_size` (**since v0.107.34**): Maximum size in megabytes of the log
+      file before it gets rotated (default: 100 MB).
+    - `max_age` (**since v0.107.34**): MaxAge is the maximum number of days to
+      retain old log files (default: 3).
+    - `verbose` (**since v0.107.34**): Enable our disables debug verbose output
+      (default: false).
+  - `log_file` (**before v0.107.34**): See `log.file` above.
+  - `log_compress` (**before v0.107.34**): See `log.compress` above.
+  - `log_localtime` (**before v0.107.34**): See `log.local_time` above.
+  - `log_max_backups` (**before v0.107.34**): See `log.max_backups` above.
+  - `log_max_size` (**before v0.107.34**): See `log.max_size` above.
+  - `log_max_age` (**before v0.107.34**): See `log.max_age` above.
+  - `verbose` (**before v0.107.34**): See `log.verbose` above.
 
 Removing an entry from settings file will reset it to the default value. Deleting the file will reset all settings to the default values.
 

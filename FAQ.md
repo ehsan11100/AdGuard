@@ -118,11 +118,11 @@ required.  Here's how to enable it:
 1.  Configure AdGuard Home to write verbose-level logs:
 
     1.  Open `AdGuardHome.yaml` in your editor.
-
-    1.  Set `log_file` to the desired path of the log file, for example
+    1.  Set `log.file` to the desired path of the log file, for example
         `/tmp/aghlog.txt`.  Note that the directory must exist.
+    1.  Set `log.verbose` to `true`.
 
-    1.  Set `verbose` to `true`.
+    **NOTE:** Before v0.107.34 use `verbose` and `log_file` properties.
 
 1.  Restart AdGuard Home and reproduce the issue:
 
