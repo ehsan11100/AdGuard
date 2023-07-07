@@ -157,18 +157,25 @@ program will overwrite them.
 The settings are stored in the [YAML] format.  The documentation describing all
 configurable parameters and their values is available on [this page][conf].
 
-NOTE: **Since v0.107.27** the container uses Docker-provided healthcheck
-mechanism.  The implementation uses special reserved domain name
-`healthcheck.adguardhome.test.`, expecting it to resolve into NODATA answer.  It
-imposes restrictions on usage of this particular name, so specifying it within
-the `blocked_hosts` array under the `dns` section of configuration file will
-certainly break the healthcheck.  For the same reason the `allowed_clients`
-**should** contain and `disallowed_clients` **should not** contain the
-`127.0.0.1` (`localhost`) address, which is used as a source of healthcheck
-requests.
+   ###  `HEALTHCHECK`
 
-[YAML]: https://yaml.org
-[conf]: https://github.com/AdguardTeam/Adguardhome/wiki/Configuration
+**Between v0.107.27 and v0.107.33,** the image used Docker-provided healthcheck
+mechanism.  It was causing many issues and has been removed **in v0.107.34.**
+See issues [#5711], [#5713], and discussion [#5939].
+
+If you need a healthcheck mechanism, it's better to create your own image
+tailored for your configuration.  Implementations may use the special domain
+name `healthcheck.adguardhome.test.`, expecting it to resolve into NODATA
+answer.  It imposes restrictions on usage of this particular name, so specifying
+it within the `blocked_hosts` array under the `dns` section of configuration
+file will break the healthcheck.  The `allowed_clients` and `disallowed_clients`
+properties should allow the healthcheck client IP as well.
+
+[#5711]: https://github.com/AdguardTeam/AdGuardHome/issues/5711
+[#5713]: https://github.com/AdguardTeam/AdGuardHome/issues/5713
+[#5939]: https://github.com/AdguardTeam/AdGuardHome/discussions/5939
+[YAML]:  https://yaml.org
+[conf]:  https://github.com/AdguardTeam/Adguardhome/wiki/Configuration
 
 
 
@@ -227,37 +234,3 @@ your machine:
     ```sh
     systemctl reload-or-restart systemd-resolved
     ```
-
-
-
-##  <a href="#known-issues" id="known-issues" name="known-issues">Known issues</a>
-
-   ###  Healthcheck
-
-Since **v0.107.28** the container uses Docker-provided healthcheck mechanism.
-If the implementation of the healthcheck script causes any issues with custom
-Docker images and orchestration tools (like [#5711], [#5713]), then we recommend
-disabling it by adding `--no-healthcheck` to the `docker run` command or using
-your tool's equivalent.
-
-(The actual change was made due to a necessity to handle zombie processes of
-`wget` instances, see [PID 1 Docker problem][pid1]).
-
-<!--
-TODO(e.burkov):  Fix the healthcheck for zeroes, update and uncomment this
-section.  Add the link to the issue.
-
-   ###  Listen addresses
-
-The healthcheck script uses nslookup to check if the DNS server is up and
-healthy.  If the configuration contains `0.0.0.0` or `::` in the `bind_host`
-property, the healthcheck will try to only check the `localhost.`.
-Nevertheless, it will sometimes fail ([#5714]), the workaround is to configure
-the actual IP address of the interface you want to listen on.  Disabling the
-healthcheck as described above should also work.
--->
-
-[#5711]: https://github.com/AdguardTeam/AdGuardHome/issues/5711
-[#5713]: https://github.com/AdguardTeam/AdGuardHome/issues/5713
-
-[pid1]: https://blog.phusion.nl/2015/01/20/docker-and-the-pid-1-zombie-reaping-problem
