@@ -773,7 +773,7 @@ Please follow these steps to create a new password for your user account:
     ```yaml
     users:
       - name: ...
-        password: <HASH>```
+        password: <HASH>
     ```
 
 4.  Save the file and restart AdGuard Home.  Now you should be able to log in to
