@@ -151,9 +151,10 @@ a configuration like this:
 sends queries for `*.host.com` to `1.2.3.4` except for queries for
 `*.www.host.com`, which are sent to `6.7.8.9`, which is the default upstream.
 
-Since **v0.108.0-b.8** the wildcard `*` has a special meaning of "any subdomain", 
-so `--upstream=[/*.host.com/]1.2.3.4` will send queries for `*.host.com` to `1.2.3.4`, 
-but `host.com` will be forwarded to default upstreams.
+Since **v0.108.0-b.8** the wildcard `*` has a special meaning of "any
+subdomain", so `--upstream=[/*.host.com/]1.2.3.4` will send queries for
+`*.host.com` to `1.2.3.4`, but `host.com` will be forwarded to default
+upstreams.
 
   ####  Examples
 
@@ -501,7 +502,7 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
     - `allowed_clients`: The list of CIDRs, IP addresses or ClientIDs of allowed
       DNS clients.  If this list has entries, AdGuard Home will accept requests
       only from these clients.
-      
+
       See also the note in the [Docker wiki page][docker-conf] about using this
       property within a container.
 
@@ -509,14 +510,14 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
       disallowed DNS clients.  If this list has entries, AdGuard Home will drop
       requests from these clients. Note that this field is ignored if there are
       entries in `allowed_clients`.
-      
+
       See also the note in the [Docker wiki page][docker-conf] about using this
       property within a container.
 
     - `blocked_hosts`: The list of domain names, wildcards or filtering rules to
-      match requests that shouldn't be processed at all.  These wiil be ignored
-      by statistics and query log as well.
-      
+      match requests that shouldn't be processed at all.  These are ignored by
+      statistics and query log as well.
+
       See also the note in the [Docker wiki page][docker-conf] about using this
       property within a container.
 
@@ -581,7 +582,7 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
       addresses by sending PTR requests.
     - `serve_http3` (**since v0.107.15**): Enables DNS-over-HTTP/3 serving for
       DNS-over-HTTPS clients as well as for the web UI.
-    - `theme` (**since v0.107.22**): The theme of UI.  The possible values are: 
+    - `theme` (**since v0.107.22**): The theme of UI.  The possible values are:
       `auto`, `dark`, `light`.
 - `querylog` (**since v0.107.24**) — Query log settings section:
     - `enabled`: Query log status.
@@ -686,19 +687,18 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
   - `log` (**since v0.107.34**): Log settings.
     - `file` (**since v0.107.34**): Path to the log file.  If empty, writes to
       stdout, if `syslog` writes system log (or eventlog on Windows).
-    - `compress` (**since v0.107.34**): Compress determines if the rotated log
-      files should be compressed using gzip (default: false).
-    - `local_time` (**since v0.107.34**): If the time used for formatting the
-      timestamps in is the computer's local time (default: false [UTC]).
+    - `compress` (**since v0.107.34**): If `true`, enabled GZIP compression of
+      the log files.
+    - `local_time` (**since v0.107.34**): If `true`, the time used for
+      formatting the timestamps in is the computer's local time.
     - `max_backups` (**since v0.107.34**): Maximum number of old log files to
-      retain (MaxAge may still cause them to get deleted) (default: 0, which
-      retains all old log files).
-    - `max_size` (**since v0.107.34**): Maximum size in megabytes of the log
-      file before it gets rotated (default: 100 MB).
+      retain.  `0` means retain all old log files.  Note that `max_age` may
+      still cause them to be deleted.
+    - `max_size` (**since v0.107.34**): Maximum size of the log file before it
+      gets rotated, in megabytes.
     - `max_age` (**since v0.107.34**): MaxAge is the maximum number of days to
-      retain old log files (default: 3).
-    - `verbose` (**since v0.107.34**): Enable our disables debug verbose output
-      (default: false).
+      retain old log files.
+    - `verbose` (**since v0.107.34**): If `true`, enables verbose debug output.
   - `log_file` (**before v0.107.34**): See `log.file` above.
   - `log_compress` (**before v0.107.34**): See `log.compress` above.
   - `log_localtime` (**before v0.107.34**): See `log.local_time` above.
