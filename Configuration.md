@@ -315,10 +315,14 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
 
 - `bind_host` (**before v0.107.33**): Web interface IP address to listen on.
 - `bind_port` (**before v0.107.33**): Web interface IP port to listen on.
-- `http` (**since v0.107.33**): Web interface configuration.
+- `http` (**since v0.107.36**): Web interface configuration.
   - `address`: Web interface IP address with port to listen on.
   - `session_ttl`: Web session TTL is a time duration in a human-readable
   format.  The web user will stay signed in for this amount of time.
+  - `pprof` (**since v0.107.33**): Profiling HTTP handler configuration.  See
+  section [Profiling with pprof](#pprof).
+    - `enabled`: Profiling handler status.
+    - `port`: IP port to listen on.
 - `users`: Web users info.
   - `name`: User name.
   - `password`: BCrypt-encrypted password.
@@ -331,8 +335,8 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
   Supports `http`, `https` and `socks5` schemes.
 - `web_session_ttl` (**before v0.107.33**): Web session TTL (in hours), a web
   user will stay signed in for this amount of time.
-- `debug_pprof`: Enable pprof HTTP server listening on port 6060 for debugging.
-  See section `Profiling with pprof`.
+- `debug_pprof` (**before v0.107.36**): Enable pprof HTTP server listening on
+  port 6060 for debugging.  See section [Profiling with pprof](#pprof).
 
 - `dns` — DNS configuration section.
   - **General settings**
@@ -783,13 +787,14 @@ Please follow these steps to create a new password for your user account:
 
 ##  <a href="#pprof" id="pprof" name="pprof">Profiling with pprof</a>
 
-To enable pprof, set `debug_pprof: true` in yaml configuration file and then
-restart AdGuard Home.  Now you can get profiling information with your browser,
-for example `http://localhost:6060/debug/pprof/goroutine?debug=2` will show the
-call trace of each running goroutine.
+To enable pprof, set `http.pprof.enabled` and `http.pprof.port` in the yaml
+configuration file and then restart AdGuard Home.  Now you can get profiling
+information with your browser, for example
+`http://localhost:[PORT]/debug/pprof/goroutine?debug=2` will show the call trace
+of each running goroutine.
 
 This URL lets you see information about the heap usage of the AdGuard Home
-process: `http://localhost:6060/debug/pprof/heap?debug=1`.
+process: `http://localhost:[PORT]/debug/pprof/heap?debug=1`.
 
 Or, with `go tool pprof`:
 
