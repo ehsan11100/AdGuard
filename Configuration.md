@@ -457,6 +457,9 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
     - `bootstrap_prefer_ipv6`: If `true`, instructs the bootstrapper to prefer
       IPv6 addresses to IPv4 ones when resolving DoH, DoQ, and DoT hostnames.
 
+    - `fallback_dns` (**since v0.107.37**): List of fallback DNS servers used
+      when upstream DNS servers are not responding.
+
     - `private_networks` (**since v0.108.0-b.5**): List of networks used to
       check if an IP address belongs to a locally-served address registry.  If
       empty, AdGuard Home will use the set defined by [RFC 6303][private-ip].
