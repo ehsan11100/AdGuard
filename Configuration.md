@@ -560,6 +560,8 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
     - `enable_dnssec`: Set DNSSEC flag in the outgoing DNS requests and check
       the result.
     - `aaaa_disabled`: Respond with an empty answer to all `AAAA` requests.
+      **Since v0.107.37** it also removes IPv6 hints from the answers to HTTPS
+      queries.
     - `safebrowsing_cache_size`: Safe Browsing cache size, in bytes.
     - `safesearch_cache_size`: Safe Search cache size, in bytes.
     - `parental_cache_size`: Parental Control cache size, in bytes.
