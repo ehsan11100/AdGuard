@@ -344,9 +344,11 @@ If you're already running a web server and want to access the AdGuard Home
 dashboard UI from a URL like `http://YOUR_SERVER/aghome/`, you can use this
 configuration for your web server:
 
+
+
    ###  nginx
 
-```none
+```nginx
 location /aghome/ {
     proxy_cookie_path / /aghome/;
     proxy_pass http://AGH_IP:AGH_PORT/;
@@ -368,8 +370,8 @@ location /aghome/ {
 }
 ```
 
-Or, if you just want to serve AdGuard Home with automatic TLS, use
-a configuration similar to the example shown below:
+Or, if you just want to serve AdGuard Home with automatic TLS, use a
+configuration similar to the example shown below:
 
 ```none
 DOMAIN {
@@ -393,9 +395,10 @@ AdGuard Home respond to DoH requests without TLS encryption.
 
 **Since v0.107.0,** you can set the parameter `trusted_proxies` to the IP
 address(es) of your HTTP proxy to make AdGuard Home take the headers containing
-the real client IP address into account.  See the [configuration page][conf] for
-more information.
+the real client IP address into account.  See the [configuration][conf] and
+[encryption][encr] pages for more information.
 
+[encr]: https://github.com/AdguardTeam/AdGuardHome/wiki/Encryption#reverse-proxy
 [conf]: https://github.com/AdguardTeam/AdGuardHome/wiki/Configuration
 
 

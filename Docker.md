@@ -214,7 +214,7 @@ your machine:
     the `/etc/systemd/resolved.conf.d` directory if needed) and add the
     following content to it:
 
-    ```none
+    ```service
     [Resolve]
     DNS=127.0.0.1
     DNSStubListener=no

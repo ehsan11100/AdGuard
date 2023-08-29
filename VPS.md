@@ -7,20 +7,20 @@ To run AdGuard Home on a VPS, you need a server with Debian 8 or 9, x64 or x32.
 ## Initial installation
 
 First let's ensure that your VPS has necessary minimal requirements, run this as root:
-```bash
+```sh
 apt-get install sudo nano bind9-host
 ```
 
 Go to [AdGuard Home page](https://github.com/AdguardTeam/AdGuardHome#installation) and download binaries for your architecture (64-bit Linux in this example).
 
 To download AdGuard Home and unpack it execute following commands:
-```bash
+```sh
 wget https://static.adguard.com/adguardhome/release/AdGuardHome_linux_amd64.tar.gz
 tar xvf AdGuardHome_linux_amd64.tar.gz
 ```
 
 You can find out the directory where you've unpacked it to by running these commands:
-```bash
+```sh
 cd AdGuardHome
 pwd
 ```
@@ -36,12 +36,12 @@ Here are the other commands you might need to control the service.
 * `AdGuardHome -s status` - shows the current service status.
 
 You can verify that it's working properly by running this command:
-```bash
+```sh
 host doubleclick.net 127.0.0.1
 ```
 
 If everything works correctly, you will get this output:
-```
+```none
 Using domain server:
 Name: 127.0.0.1
 Address: 127.0.0.1#53

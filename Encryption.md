@@ -17,13 +17,14 @@ AdGuard Home.
 1.  [Install AdGuard Home on your server](#install)
 1.  [Register a domain name](#register)
 1.  [Get an SSL certificate](#certificate)
-     *  [Install CertBot](#certbot)
-     *  [Get a certificate using DNS challenge](#certbot-dnschallenge)
-     *  [Alternative to CertBot: Lego](#lego)
+     *  [Using CertBot](#certbot)
+         *  [Get a certificate using DNS challenge](#certbot-dnschallenge)
+     *  [Using Lego](#lego)
 1.  [Configure AdGuard Home](#configure-home)
 1.  [Using with reverse proxy](#reverse-proxy)
      *  [Nginx](#nginx)
      *  [Cloudflare CDN](#cf-cdn)
+     *  [Other Headers](#other-hdrs)
 1.  [Configure your devices](#configure-devices)
      *  [Android](#android)
      *  [iOS](#ios)
@@ -80,7 +81,7 @@ Security Research Group (ISRG).
 
 In this guide I'll explain how to get a certificate from them.
 
-   ###  <a href="#certbot" id="certbot" name="certbot">Install CertBot</a>
+   ###  <a href="#certbot" id="certbot" name="certbot">Using CertBot</a>
 
 Certbot is an easy-to-use client that fetches a certificate from Let’s Encrypt.
 
@@ -89,7 +90,7 @@ Certbot is an easy-to-use client that fetches a certificate from Let’s Encrypt
 1.  Follow the installation instructions, and stop there – don't get to the "Get
     Started" section.
 
-   ###  <a href="#certbot-dnschallenge" id="certbot-dnschallenge" name="certbot-dnschallenge">Get a certificate using DNS challenge</a>
+  ####  <a href="#certbot-dnschallenge" id="certbot-dnschallenge" name="certbot-dnschallenge">Get a certificate using DNS challenge</a>
 
 You have just got a domain name so I suppose using DNS challenge will be the
 easiest way to get a certificate.
@@ -111,7 +112,7 @@ Both will be necessary to configure AdGuard Home.
  >  You will need to use the very same procedure to renew the existing
  >  certificate.
 
-   ###  <a href="#lego" id="lego" name="lego">Alternative to CertBot: Lego</a>
+   ###  <a href="#lego" id="lego" name="lego">Using Lego</a>
 
 There's also a really nice and easy-to-use alternative to CertBot called
 [lego][lego-source].
@@ -186,7 +187,7 @@ their hostnames.
 For example, if the configuration of the reverse proxy server contains the
 following directives:
 
-```none
+```nginx
 location /dns-query {
    # …
    proxy_set_header Host $host;
@@ -210,6 +211,23 @@ inserted into `trusted_proxies` list directly.  An official Cloudflare's
 reference on restoring the original visitor's IP may be found
 [here][cloudflare-real-ip].
 
+   ###  <a href="#other-hdrs" id="other-hdrs" name="other-hdrs">Other Headers</a>
+
+Other HTTP headers may be supported by AdGuard Home in the future.  However, any
+headers-related feature requests should first be tried to be resolved by
+configuring the reverse proxy itself.
+
+For example, to implement the [HTTP Strict Transport Security][hsts] mechanism,
+something like the following piece of configuration might be used:
+
+```nginx
+location /dns-query {
+   # …
+   add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+   # …
+}
+```
+
 
 
 [reverse-proxy-faq]:      https://github.com/AdguardTeam/AdGuardHome/wiki/FAQ#how-to-configure-a-reverse-proxy-server-for-adguard-home
@@ -217,6 +235,7 @@ reference on restoring the original visitor's IP may be found
 [cloudflare-headers]:     https://support.cloudflare.com/hc/en-us/articles/200170986
 [cloudflare-addresses]:   https://www.cloudflare.com/ips
 [cloudflare-real-ip]:     https://support.cloudflare.com/hc/en-us/articles/200170786
+[hsts]:                   https://datatracker.ietf.org/doc/html/rfc6797
 
 
 
