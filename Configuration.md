@@ -651,6 +651,9 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
 
     Must match one of the DNS Names in the certificate.
   - `force_https`: If `true`, force HTTP-to-HTTPS redirect.
+
+     **Since v0.107.37,** this setting also sets the
+     [`Strict-Transport-Security`][hsts] header.
   - `port_https`: The HTTPS port.  Used for both web UI and DNS-over-HTTPS.  If
     `0`, HTTPS is disabled.
   - `port_dns_over_tls`: The DNS-over-TLS port.  If `0`, DNS-over-TLS is
@@ -718,13 +721,14 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
 
 Removing an entry from settings file will reset it to the default value. Deleting the file will reset all settings to the default values.
 
-[DHCP]: https://github.com/AdguardTeam/AdGuardHome/wiki/DHCP
-[DNSCrypt]: https://github.com/AdguardTeam/AdGuardHome/wiki/DNSCrypt
+[DDR]:         https://www.ietf.org/archive/id/draft-ietf-add-ddr-06.html
+[DHCP]:        https://github.com/AdguardTeam/AdGuardHome/wiki/DHCP
+[DNSCrypt]:    https://github.com/AdguardTeam/AdGuardHome/wiki/DNSCrypt
+[`dnscrypt`]:  https://github.com/ameshkov/dnscrypt
 [docker-conf]: https://github.com/AdguardTeam/AdGuardHome/wiki/Docker#configuration
-[`dnscrypt`]: https://github.com/ameshkov/dnscrypt
-[DDR]: https://www.ietf.org/archive/id/draft-ietf-add-ddr-06.html
-[tls-names]: https://pkg.go.dev/crypto/tls#pkg-constants
-[rfc6147]: https://datatracker.ietf.org/doc/html/rfc6147
+[hsts]:        https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security
+[rfc6147]:     https://datatracker.ietf.org/doc/html/rfc6147
+[tls-names]:   https://pkg.go.dev/crypto/tls#pkg-constants
 
 
 

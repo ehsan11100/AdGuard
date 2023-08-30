@@ -217,13 +217,14 @@ Other HTTP headers may be supported by AdGuard Home in the future.  However, any
 headers-related feature requests should first be tried to be resolved by
 configuring the reverse proxy itself.
 
-For example, to implement the [HTTP Strict Transport Security][hsts] mechanism,
-something like the following piece of configuration might be used:
+For example, to modify the [HTTP Strict Transport Security][hsts] mechanism to
+include the experimental `preload` directive, something like the following piece
+of configuration might be used:
 
 ```nginx
 location /dns-query {
    # …
-   add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+   add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
    # …
 }
 ```
