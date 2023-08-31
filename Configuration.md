@@ -373,7 +373,7 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
        ```
     - `port` — DNS server port to listen on.
     - `anonymize_client_ip` - If true, anonymize clients' IP addresses in logs and stats
-    - `blocked_services` (**since v0.107.33**): Blocked services settings
+    - `blocked_services` (**before v0.107.37**): Blocked services settings
       section:
       - `ids`: List of blocked services.
       - `schedule`: Sets periods of inactivity for filtering blocked services.
@@ -412,7 +412,7 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
                   'end': '23h'
               'time_zone': 'America/New_York'
       ```
-  - **Protection settings**
+  - **Protection settings  (before v0.107.37)**
     - `protection_enabled` — Whether any kind of filtering and protection should
       be performed.  **Since v0.107.0** it doesn't affect the rules with
       `$dnsrewrite` modifier and other rewrites, including those taken from the
@@ -562,9 +562,12 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
     - `aaaa_disabled`: Respond with an empty answer to all `AAAA` requests.
       **Since v0.107.37** it also removes IPv6 hints from the answers to HTTPS
       queries.
-    - `safebrowsing_cache_size`: Safe Browsing cache size, in bytes.
-    - `safesearch_cache_size`: Safe Search cache size, in bytes.
-    - `parental_cache_size`: Parental Control cache size, in bytes.
+    - `safebrowsing_cache_size` (**before v0.107.37**): Safe Browsing cache
+      size, in bytes.
+    - `safesearch_cache_size` (**before v0.107.37**): Safe Search cache size,
+      in bytes.
+    - `parental_cache_size` (**before v0.107.37**): Parental Control cache size,
+      in bytes.
     - `cache_time`: Safe Browsing, Safe Search, and Parental Control cache TTL,
       in seconds.
     - `max_goroutines`: Maximum number of parallel goroutines for processing
@@ -593,6 +596,82 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
       DNS-over-HTTPS clients as well as for the web UI.
     - `theme` (**since v0.107.22**): The theme of UI.  The possible values are:
       `auto`, `dark`, `light`.
+- `filtering` (**since v0.107.37): Filtering settings section:
+    - `protection_enabled`: Whether any kind of filtering and protection should
+      be performed.  Note that it doesn't affect the rules with `$dnsrewrite`
+      modifier and other rewrites, including those taken from the operating
+      system hosts file.
+    - `filtering_enabled`: Whether filtering of DNS requests based on rule
+      lists should be performed.
+    - `blocking_mode`: Specifies how to block DNS requests. "nxdomain"
+      (default): respond with NXDOMAIN status; "null_ip": respond with the
+      unspecified IP address (0.0.0.0); or "custom_ip": respond with
+      `blocking_ipv4` or `blocking_ipv6`.
+    - `blocking_ipv4`: IP address to be returned for a blocked A request if
+      `blocking_mode` is set to `custom_ip`.
+    - `blocking_ipv6`: IP address to be returned for a blocked AAAA request if
+      `blocking_mode` is set to `custom_ip`.
+    - `blocked_response_ttl`: For how many seconds the clients should cache a
+      filtered response. Low values are useful on LAN if you change filters very
+      often, high values are useful to increase performance and save traffic.
+    - `protection_disabled_until`: Timestamp until when the protection is
+      disabled.
+    - `parental_block_host`: IP (or domain name) which is used to respond to DNS
+      requests blocked by parental control.
+    - `safebrowsing_block_host`: IP (or domain name) which is used to respond to
+      DNS requests blocked by safe-browsing.
+    - `parental_enabled`: Parental control-based DNS requests filtering.
+    - `safe_search`: Safe search settings section:
+      - `enabled`: Enforcing "Safe search" option for search engines, when
+        possible.
+      - `bing`: Enforcing "Safe search" option for `bing` domains.
+      - `duckduckgo`: Enforcing "Safe search" option for `duckduckgo` domains.
+      - `google`: Enforcing "Safe search" option for `google` domains.
+      - `pixabay`: Enforcing "Safe search" option for `pixabay` domains.
+      - `yandex`: Enforcing "Safe search" option for `yandex` domains.
+      - `youtube`: Enforcing "Safe search" option for `youtube` domains.
+    - `safebrowsing_enabled`: Filtering of DNS requests based on safebrowsing.
+    - `safebrowsing_cache_size`: Safe Browsing cache size, in bytes.
+    - `safesearch_cache_size`: Safe Search cache size, in bytes.
+    - `parental_cache_size`: Parental Control cache size, in bytes.
+    - `blocked_services`: Blocked services settings section:
+      - `ids`: List of blocked services.
+      - `schedule`: Sets periods of inactivity for filtering blocked services.
+        The schedule contains 7 days (Sunday to Saturday) and a time zone.  Each
+        day consists of `start` and `end`, which are the durations from the
+        start of day.  Duration is a string in human-readable format.  `start`
+        is greater or equal to `0s` and less than `24h`.  `end` must be greater
+        than `start` and less or equal to '24h'.  `start` and `end` are expected
+        to be rounded to minutes.
+
+    Example of valid configuration:
+
+    ```yaml
+    'blocked_services':
+        'ids':
+        - 'onlyfans'
+        'schedule':
+            'sun':
+                'start': '0s'
+                'end': '24h'
+            'mon':
+                'start': '10m'
+                'end': '23h50m'
+            'tue':
+                'start': '20m'
+                'end': '23h40m'
+            # No schedule for Wednesday.
+            'thu':
+                'start': '40m'
+                'end': '23h20m'
+            'fri':
+                'start': '50m'
+                'end': '23h10m'
+            'sat':
+                'start': '1h'
+                'end': '23h'
+            'time_zone': 'America/New_York'
+    ```
 - `querylog` (**since v0.107.24**) — Query log settings section:
     - `enabled`: Query log status.
     - `file_enabled`: Write query logs to a file.
