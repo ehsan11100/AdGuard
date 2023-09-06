@@ -596,7 +596,7 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
       DNS-over-HTTPS clients as well as for the web UI.
     - `theme` (**since v0.107.22**): The theme of UI.  The possible values are:
       `auto`, `dark`, `light`.
-- `filtering` (**since v0.107.37): Filtering settings section:
+- `filtering` (**since v0.107.37**): Filtering settings section:
     - `protection_enabled`: Whether any kind of filtering and protection should
       be performed.  Note that it doesn't affect the rules with `$dnsrewrite`
       modifier and other rewrites, including those taken from the operating
@@ -675,17 +675,21 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
 - `querylog` (**since v0.107.24**) — Query log settings section:
     - `enabled`: Query log status.
     - `file_enabled`: Write query logs to a file.
-	- `interval (**since v0.107.27**)`: Time interval for query log files
+	- `interval` (**since v0.107.27**): Time interval for query log files
 	  rotation.  It's a string with human-readable duration between an hour
       (1h) and a year (8760h).
     - `size_memory`: Number of entries kept in memory before they are flushed to disk.
     - `ignored`: List of host names, which should not be written to log.
+
+      **Since v0.107.37,** AdBlock rule syntax is supported.
 - `statistics` (**since v0.107.24**) — Statistics settings section:
     - `enabled`: Statistics status.
 	- `interval`: Time interval for statistics. (**before v0.107.27**) It's a
 	  number with duration in days. (**since v0.107.27**) It's a string with
       human-readable duration between an hour (1h) and a year (8760h).
     - `ignored`: List of host names, which should not be counted.
+
+      **Since v0.107.37,** AdBlock rule syntax is supported.
 - `filters` — List of filters, each filter has the following values:
   - `enabled` — Current filter's status (enabled/disabled).
   - `url` — URL pointing to the filter contents (filtering rules).
