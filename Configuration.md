@@ -151,6 +151,18 @@ a configuration like this:
 sends queries for `*.host.com` to `1.2.3.4` except for queries for
 `*.www.host.com`, which are sent to `6.7.8.9`, which is the default upstream.
 
+Queries for the `DS` query type are following the assumption based on
+specification for records' presence given in [RFC 4035, section
+2.4](https://datatracker.ietf.org/doc/html/rfc4035#section-2.4):
+
+ >  A DS RRset SHOULD be present at a delegation point when the child zone is
+ >  signed.  \[…\]  All DS RRsets in a zone MUST be signed, and DS RRsets MUST
+ >  NOT appear at a zone's apex.
+
+For example, the `DS` query for `domain.example.com` will be sent to the
+upstream specified for `example.com`, `com`, or the default one, even if there
+is a more specific upstream like `*.example.com`.
+
 Since **v0.108.0-b.8** the wildcard `*` has a special meaning of "any
 subdomain", so `--upstream=[/*.host.com/]1.2.3.4` will send queries for
 `*.host.com` to `1.2.3.4`, but `host.com` will be forwarded to default
