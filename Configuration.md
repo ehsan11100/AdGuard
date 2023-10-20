@@ -646,6 +646,22 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
     - `safebrowsing_cache_size`: Safe Browsing cache size, in bytes.
     - `safesearch_cache_size`: Safe Search cache size, in bytes.
     - `parental_cache_size`: Parental Control cache size, in bytes.
+    - `rewrites`: List of legacy DNS rewrites, where `domain` is the domain or
+      wildcard you want to be rewritten and `answer` is IP address, CNAME
+      record, `A` or `AAAA` special values.  Special value `A` keeps `A`
+      records from the upstream and `AAAA` keeps `AAAA` values from the
+      upstream.
+
+      ```yaml
+      'rewrites':
+        - 'domain': example.com
+          'answer': 127.0.0.1
+        - 'domain': '*.example.com'
+          'answer': A
+      ```
+
+    - `cache_time`: Time interval in minutes for keeping cache records.
+    - `filters_update_interval`: Time interval in hours for updating filters.
     - `blocked_services`: Blocked services settings section:
       - `ids`: List of blocked services.
       - `schedule`: Sets periods of inactivity for filtering blocked services.
