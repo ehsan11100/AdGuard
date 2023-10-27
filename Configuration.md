@@ -117,6 +117,9 @@ The syntax is:
 [/domain1/domain2/domainN/]upstreamString
 ```
 
+Where `upstreamString` is one or many upstreams separated by space (e.g.
+`1.1.1.1 2.2.2.2`).
+
 If one or more domains are specified, that upstream (here `upstreamString`) is
 used only for those domains.  Usually, it is used for private nameservers.  For
 instance, if you have a nameserver on your network which deals with
@@ -201,6 +204,16 @@ upstreams.
 
     sends queries for `*.host.com` to `2.2.2.2:53` except for `host.com` queries
     those are sent to `1.1.1.1:53`, but all other queries are sent to `8.8.8.8:53`.
+
+ *  A configuration like:
+
+    ```none
+    8.8.8.8:53
+    [/host.com/]1.1.1.1:53 2.2.2.2:53
+    ```
+
+    sends queries for `*.host.com` to `1.1.1.1:53` and `2.2.2.2:53`, but all
+    other queries are sent to `8.8.8.8:53`.
 
    ###  <a href="#upstreams-from-file" id="upstreams-from-file" name="upstreams-from-file">Loading upstreams from file</a>
 
