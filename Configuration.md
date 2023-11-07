@@ -786,7 +786,7 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
     disabled.  Before **v0.108.0-b.5** the default value was `754`, since
     **v0.108.0-b.5** it's `853`.
   - `port_dnscrypt`: The DNSCrypt port.  If `0`, DNSCrypt is disabled.  See
-    [DNSCrypt] for more information and examples.
+    the “[DNSCrypt][dnscrypt wiki]” page for more information and examples.
   - `dnscrypt_config_file`: The path to the DNSCrypt configuration file.
     **Must** be set if `port_dnscrypt` is not `0`.  See the [`dnscrypt`] utility
     documentation for examples of configuration generation.
@@ -845,14 +845,14 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
 
 Removing an entry from settings file will reset it to the default value. Deleting the file will reset all settings to the default values.
 
-[DDR]:         https://www.ietf.org/archive/id/draft-ietf-add-ddr-06.html
-[DHCP]:        https://github.com/AdguardTeam/AdGuardHome/wiki/DHCP
-[DNSCrypt]:    https://github.com/AdguardTeam/AdGuardHome/wiki/DNSCrypt
-[`dnscrypt`]:  https://github.com/ameshkov/dnscrypt
-[docker-conf]: https://github.com/AdguardTeam/AdGuardHome/wiki/Docker#configuration
-[hsts]:        https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security
-[rfc6147]:     https://datatracker.ietf.org/doc/html/rfc6147
-[tls-names]:   https://pkg.go.dev/crypto/tls#pkg-constants
+[DDR]:           https://www.ietf.org/archive/id/draft-ietf-add-ddr-06.html
+[DHCP]:          https://github.com/AdguardTeam/AdGuardHome/wiki/DHCP
+[dnscrypt wiki]: https://github.com/AdguardTeam/AdGuardHome/wiki/DNSCrypt
+[`dnscrypt`]:    https://github.com/ameshkov/dnscrypt
+[docker-conf]:   https://github.com/AdguardTeam/AdGuardHome/wiki/Docker#configuration
+[hsts]:          https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security
+[rfc6147]:       https://datatracker.ietf.org/doc/html/rfc6147
+[tls-names]:     https://pkg.go.dev/crypto/tls#pkg-constants
 
 
 
@@ -891,13 +891,13 @@ Please follow these steps to create a new password for your user account:
      *  Ubuntu/Fedora:
 
         ```sh
-        htpasswd -B -n -b <USERNAME> <PASSWORD>
+        htpasswd -B -C 10 -n -b <USERNAME> <PASSWORD>
         ```
 
      *  Windows:
 
         ```ps1
-        .\Htpasswd -B -n -b <USERNAME> <PASSWORD>
+        .\Htpasswd -B -C 10 -n -b <USERNAME> <PASSWORD>
         ```
 
     It will print `<USERNAME>:<HASH>` to the terminal.
