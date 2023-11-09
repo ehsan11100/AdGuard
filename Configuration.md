@@ -467,9 +467,20 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
     - **Before v0.107.24** query log settings were part of the `dns` object.
       **Since v0.107.24** query log settings are part of `querylog` object.
   - **Anti-DNS amplification features**
-    - `ratelimit` — DDoS protection, specifies in how many packets per second a client should receive. Anything above that is silently dropped. To disable set 0, default is 20. Safe to disable if DNS server is not available from internet.
-    - `ratelimit_whitelist` — If you want exclude some IP addresses from ratelimiting but keep ratelimiting on for others, put them here.
-    - `refuse_any` — Another DDoS protection mechanism. Requests of type ANY are rarely needed, so refusing to serve them mitigates against attackers trying to use your DNS as a reflection. Safe to disable if DNS server is not available from internet.
+    - `ratelimit`: DDoS protection, specifies how many queries per second
+      AdGuard Home should handle.  Anything above that is silently dropped. To
+      disable set to `0`, default is `20`.  Safe to disable if DNS server is not
+      available from internet.
+    - `ratelimit_subnet_len_ipv4`: Subnet length for IPv4 addresses used for
+      rate limiting requests.  Default is `24`.
+    - `ratelimit_subnet_len_ipv6`: Subnet length for IPv6 addresses used for
+      rate limiting requests.  Default is `56`.
+    - `ratelimit_whitelist`: If you want exclude some IP addresses from
+      ratelimiting but keep ratelimiting on for others, put them here.
+    - `refuse_any`: Another DDoS protection mechanism.  Requests of type `ANY`
+      are rarely needed, so refusing to serve them mitigates against attackers
+      trying to use your DNS as a reflection.  Safe to disable if DNS server is
+      not available from internet.
   - **Upstream DNS servers settings:**
     - `upstream_dns`: List of upstream DNS servers.
 
