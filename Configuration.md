@@ -819,9 +819,31 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
   - `rlimit_nofile` — Limit on the maximum number of open files for the server
     process (on unixlike OSs).  Set to `0` to use the system's default value.
 - **Clients settings**
-  - `clients` — Persistent and runtime clients settings.
-    - `persistent` — An array of explicitly configured clients.  **Before
+  - `clients`: Persistent and runtime clients settings.
+    - `persistent`: An array of explicitly configured clients.  **Before
       v0.108.0** the contents of this field took up the whole `clients` section.
+      Each client has the following properties:
+      - `safe_search`: Safe search settings section.
+      - `blocked_services`: Blocked services settings section.
+      - `name`: Client's name.
+      - `ids`: List of client's identifiers.
+      - `tags`: List of client's tags.
+      - `upstreams`: Upstreams configuration.
+      - `upstreams_cache_size`: **Since v0.107.41** client's cache size.
+      - `upstreams_cache_enabled`: **Since v0.107.41** if client's cache is
+        enabled.
+      - `use_global_settings`: Shows if the client-specific settings are used to
+        override the global settings.
+      - `filtering_enabled`: Indicates whether or not to use filter lists.
+      - `parental_enabled`: Indicates whether or not to use parental protection.
+      - `safebrowsing_enabled`:  Indicates whether or not to use safe browsing
+        protection.
+      - `use_global_blocked_services`: Shows if the client-specific settings are
+        used to override the global Blocked Services settings.
+      - `ignore_querylog`: Indicates whether or not to exclude client's activity
+        from the query log.
+      - `ignore_statistics`: Indicates whether or not to exclude client's
+        activity from the statistics.
     - `runtime_sources` — **Since v0.108.0** this controls the certain runtime
       clients sources.
       - `whois` — Request WHOIS information for clients with public IP
