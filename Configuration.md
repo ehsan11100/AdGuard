@@ -632,6 +632,11 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
       DNS-over-HTTPS clients as well as for the web UI.
     - `theme` (**since v0.107.22**): The theme of UI.  The possible values are:
       `auto`, `dark`, `light`.
+    - `serve_plain_dns` (**since v0.107.42**): Enables plain DNS serving.
+
+      **NOTE:** `serve_plain_dns` cannot currently be set to `false` unless one
+      or more encrypted protocols (DNS-over-HTTPS, DNS-over-TLS, etc.) is
+      enabled.
 - `filtering` (**since v0.107.37**): Filtering settings section:
     - `protection_enabled`: Whether any kind of filtering and protection should
       be performed.  Note that it doesn't affect the rules with `$dnsrewrite`
