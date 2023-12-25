@@ -510,14 +510,26 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
       **Since v0.108.0-b.4** the domain-specific upstreams are validated for
       being a valid ARPA domain pointing to a locally-served network.
 
-    - `all_servers`: Enables parallel queries to all configured upstream servers
-      to speed up resolving.  If enabled, the queries are sent to each server
-      simultaneously and the first response is chosen.  If disabled, the queries
-      are sent to each upstream server one-by-one and then sorted by RTT.  Note
-      that more stable upstream servers are preferred by the algorithm.
+    - `all_servers` (**before v0.107.44**): Enables parallel queries to all
+      configured upstream servers to speed up resolving. If enabled, the queries
+      are sent to each server simultaneously and the first response is chosen.
+      If disabled, the queries are sent to each upstream server one-by-one and
+      then sorted by RTT. Note that more stable upstream servers are preferred
+      by the algorithm.
 
-    - `fastest_addr`: Use the Fastest Address algorithm.  It finds an IP address
-      with the lowest latency and returns this IP address in DNS response.
+    - `fastest_addr` (**before v0.107.44**): Use the Fastest Address algorithm.
+      It finds an IP address with the lowest latency and returns this IP address
+      in DNS response.
+
+    - `upstream_mode` (**since v0.107.44**): The mode describes the logic
+      through which the upstreams will be used. The possible values are:
+      - `load_balance`: Queries are sent to each upstream server one-by-one.
+        AdGuard Home uses its weighted random server selection algorithm to use
+        the fastest server more often.
+      - `parallel`: Parallel queries to all configured upstream servers to speed
+        up resolving.
+      - `fastest_addr`: It finds an IP address with the lowest latency and
+        returns this IP address in DNS response.
 
     - `fastest_timeout` (**since v0.107.0**): The timeout used for dialing the
       addresses while picking the fastest.  Values other than positive ones are
