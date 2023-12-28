@@ -117,8 +117,8 @@ The syntax is:
 [/domain1/domain2/domainN/]upstreamString
 ```
 
-Where `upstreamString` is one or many upstreams separated by space (e.g.
-`1.1.1.1 2.2.2.2`).
+Where `upstreamString` is one or, since **v0.107.41**, many upstreams separated
+by space (e.g. `1.1.1.1 2.2.2.2`).
 
 If one or more domains are specified, that upstream (here `upstreamString`) is
 used only for those domains.  Usually, it is used for private nameservers.  For
@@ -471,10 +471,10 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
       AdGuard Home should handle.  Anything above that is silently dropped. To
       disable set to `0`, default is `20`.  Safe to disable if DNS server is not
       available from internet.
-    - `ratelimit_subnet_len_ipv4`: Subnet length for IPv4 addresses used for
-      rate limiting requests.  Default is `24`.
-    - `ratelimit_subnet_len_ipv6`: Subnet length for IPv6 addresses used for
-      rate limiting requests.  Default is `56`.
+    - `ratelimit_subnet_len_ipv4`: **Since v0.107.41** Subnet length for IPv4
+      addresses used for rate limiting requests.  Default is `24`.
+    - `ratelimit_subnet_len_ipv6`: **Since v0.107.41** Subnet length for IPv6
+      addresses used for rate limiting requests.  Default is `56`.
     - `ratelimit_whitelist`: If you want exclude some IP addresses from
       ratelimiting but keep ratelimiting on for others, put them here.
     - `refuse_any`: Another DDoS protection mechanism.  Requests of type `ANY`
@@ -846,6 +846,7 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
       - `ids`: List of client's identifiers.
       - `tags`: List of client's tags.
       - `upstreams`: Upstreams configuration.
+      - `uid`: **Since v0.107.44** client's unique identifier.
       - `upstreams_cache_size`: **Since v0.107.41** client's cache size.
       - `upstreams_cache_enabled`: **Since v0.107.41** if client's cache is
         enabled.
