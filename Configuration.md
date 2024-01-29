@@ -847,8 +847,8 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
       - `tags`: List of client's tags.
       - `upstreams`: Upstreams configuration.
       - `uid`: **Since v0.107.44** client's unique identifier.
-      - `upstreams_cache_size`: **Since v0.107.41** client's cache size.
-      - `upstreams_cache_enabled`: **Since v0.107.41** if client's cache is
+      - `upstreams_cache_size`: **Since v0.107.42** client's cache size.
+      - `upstreams_cache_enabled`: **Since v0.107.42** if client's cache is
         enabled.
       - `use_global_settings`: Shows if the client-specific settings are used to
         override the global settings.
