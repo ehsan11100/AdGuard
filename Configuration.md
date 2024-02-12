@@ -744,21 +744,25 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
 - `querylog` (**since v0.107.24**) — Query log settings section:
     - `enabled`: Query log status.
     - `file_enabled`: Write query logs to a file.
-	- `interval` (**since v0.107.27**): Time interval for query log files
-	  rotation.  It's a string with human-readable duration between an hour
+    - `interval` (**since v0.107.27**): Time interval for query log files
+      rotation.  It's a string with human-readable duration between an hour
       (1h) and a year (8760h).
-    - `size_memory`: Number of entries kept in memory before they are flushed to disk.
+    - `size_memory`: Number of entries kept in memory before they are flushed to
+      disk.
     - `ignored`: List of host names, which should not be written to log.
 
       **Since v0.107.37,** AdBlock rule syntax is supported.
+    - `dir_path` (**since v0.107.45**): Custom directory for storing query log
+      files.
 - `statistics` (**since v0.107.24**) — Statistics settings section:
     - `enabled`: Statistics status.
-	- `interval`: Time interval for statistics. (**before v0.107.27**) It's a
-	  number with duration in days. (**since v0.107.27**) It's a string with
+    - `interval`: Time interval for statistics.  **Before v0.107.27,** it's a
+      number with duration in days.  **Since v0.107.27,** it's a string with
       human-readable duration between an hour (1h) and a year (8760h).
     - `ignored`: List of host names, which should not be counted.
 
       **Since v0.107.37,** AdBlock rule syntax is supported.
+    - `dir_path` (**since v0.107.45**): Custom directory for storing statistics.
 - `filters` — List of filters, each filter has the following values:
   - `enabled` — Current filter's status (enabled/disabled).
   - `url` — URL pointing to the filter contents (filtering rules).
