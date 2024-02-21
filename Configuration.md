@@ -33,14 +33,14 @@ Options:
   -h, --host VALUE                   Deprecated. Host address to bind HTTP server on. Use --web-addr. The short -h will work as --help in the future.
   -p, --port VALUE                   Deprecated. Port to serve HTTP pages on. Use --web-addr.
   --web-addr VALUE                   Address to serve the web UI on, in the host:port format.
-  -s, --service VALUE                Service control action: status, install, uninstall, start, stop, restart, reload (configuration).
-  -l, --logfile VALUE                Path to log file.  If empty: write to stdout; if 'syslog': write to system log.
+  -s, --service VALUE                Service control action: status, install (as a service), uninstall (as a service), start, stop, restart, reload (configuration).
+  -l, --logfile VALUE                Path to log file.  If empty, write to stdout; if "syslog", write to system log.
   --pidfile VALUE                    Path to a file where PID is stored.
   --check-config                     Check configuration and exit.
   --no-check-update                  Don't check for updates.
   --update                           Update the current binary and restart the service in case it's installed.
   --no-mem-optimization              Deprecated.  Disable memory optimization.
-  --no-etc-hosts                     Deprecated: use clients.runtime_sources.hosts instead.  Do not use the OS-provided hosts.
+  --no-etc-hosts                     Deprecated: use clients.runtime_sources.hosts and dns.hostsfile_enabled instead.  Do not use the OS-provided hosts.
   --local-frontend                   Use local frontend directories.
   -v, --verbose                      Enable verbose output.
   --glinet                           Run in GL-Inet compatibility mode.
@@ -649,6 +649,8 @@ Settings are stored in [YAML format](https://en.wikipedia.org/wiki/YAML), possib
       **NOTE:** `serve_plain_dns` cannot currently be set to `false` unless one
       or more encrypted protocols (DNS-over-HTTPS, DNS-over-TLS, etc.) is
       enabled.
+    - `hostsfile_enabled` (**since v0.107.45**): Allows information from the
+      system hosts file to be used to resolve queries.
 - `filtering` (**since v0.107.37**): Filtering settings section:
     - `protection_enabled`: Whether any kind of filtering and protection should
       be performed.  Note that it doesn't affect the rules with `$dnsrewrite`
