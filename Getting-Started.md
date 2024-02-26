@@ -1,5 +1,12 @@
  #  AdGuard Home - Getting Started
 
+ >  [!WARNING]
+ >  This article is outdated.  See the [up-to-date version][kb-article] in our Knowledge Base.
+
+[kb-article]: https://adguard-dns.io/kb/adguard-home/getting-started/
+
+
+
  *  [Installation](#installation)
  *  [First start](#first-time)
  *  [Running as a service](#service)
@@ -13,11 +20,18 @@
 
 ##  <a href="#installation" id="installation" name="installation">Installation</a>
 
+ >  [!WARNING]
+ >  This section is outdated.  See the [up-to-date version][kb-install] in our Knowledge Base.
+
+[kb-install]: https://adguard-dns.io/kb/adguard-home/getting-started/#installation
+
+
+
    ###  Official releases
 
 Download the archive with the binary file for your operating system from the
 [latest stable release page][releases].  The full list of supported platforms as
-well as links to beta and edge (unstable) releases can be found on our
+well as links to beta and edge (unstable) releases can be found in our
 “[Platforms][platforms]” page.
 
 To install AdGuard Home as a service, unpack the archive, enter the
@@ -36,6 +50,8 @@ To install AdGuard Home as a service, unpack the archive, enter the
  *  Users of **macOS 10.15 Catalina** and newer should place the AdGuard Home
     working directory inside the `/Applications` directory.
 
+[issue 3281]: https://github.com/AdguardTeam/AdGuardHome/issues/3281
+[issue 765]:  https://github.com/AdguardTeam/AdGuardHome/issues/765#issuecomment-752262353
 [platforms]:  https://github.com/AdguardTeam/AdGuardHome/wiki/Platforms
 [releases]:   https://github.com/AdguardTeam/AdGuardHome/releases/latest
 
@@ -77,6 +93,13 @@ Some other unofficial options include:
 
 ##  <a href="#first-time" id="first-time" name="first-time">First start</a>
 
+ >  [!WARNING]
+ >  This section is outdated.  See the [up-to-date version][kb-first] in our Knowledge Base.
+
+[kb-first]: https://adguard-dns.io/kb/adguard-home/getting-started/#first-time
+
+
+
 First of all, check your firewall settings.  To install and use AdGuard Home,
 the following ports and protocols must be available:
 
@@ -117,6 +140,13 @@ There you will go through the initial configuration wizard.
 
 ##  <a href="#service" id="service" name="service">Running as a service</a>
 
+ >  [!WARNING]
+ >  This section is outdated.  See the [up-to-date version][kb-svc] in our Knowledge Base.
+
+[kb-svc]: https://adguard-dns.io/kb/adguard-home/getting-started/#service
+
+
+
 The next step would be to register AdGuard Home as a system service (aka
 daemon).  To install AdGuard Home as a service, run:
 
@@ -153,6 +183,13 @@ file](Configuration).
 
 ##  <a href="#update" id="update" name="update">Updating</a>
 
+ >  [!WARNING]
+ >  This section is outdated.  See the [up-to-date version][kb-upd] in our Knowledge Base.
+
+[kb-upd]: https://adguard-dns.io/kb/adguard-home/getting-started/#update
+
+
+
 ![](images/autoupdate-available.png)
 
 When a new version is released, AdGuard Home's UI shows a notification message
@@ -165,6 +202,13 @@ configuration file, so you can revert the changes, if necessary.
 
    ###  <a href="#manual-update" id="manual-update" name="manual-update">Manual update</a>
 
+ >  [!WARNING]
+ >  This section is outdated.  See the [up-to-date version][kb-mupd] in our Knowledge Base.
+
+[kb-mupd]: https://adguard-dns.io/kb/adguard-home/getting-started/#manual-update
+
+
+
 In case the button isn't shown or an automatic update has failed, you can update
 manually.  We have a [detailed guide on manual updates][mupd], but in short:
 
@@ -176,7 +220,7 @@ manually.  We have a [detailed guide on manual updates][mupd], but in short:
 
 1.  Restart AdGuard Home.
 
-[mupd]: https://github.com/AdguardTeam/AdGuardHome/wiki/FAQ#manual-update
+[mupd]: https://adguard-dns.io/kb/adguard-home/faq/#manual-update
 
 
 
@@ -198,6 +242,13 @@ To update AdGuard Home package without the need to use Web API run:
 
 
 ##  <a href="#configure-devices" id="configure-devices" name="configure-devices">Configuring devices</a>
+
+ >  [!WARNING]
+ >  This section is outdated.  See the [up-to-date version][kb-dev] in our Knowledge Base.
+
+[kb-dev]: https://adguard-dns.io/kb/adguard-home/getting-started/#configure-devices
+
+
 
    ###  Router
 
@@ -290,6 +341,13 @@ and you won't need to configure each of them manually.
 
 ##  <a href="#running-without-superuser" id="running-without-superuser" name="running-without-superuser">Running without superuser (Linux only)</a>
 
+ >  [!WARNING]
+ >  This section is outdated.  See the [up-to-date version][kb-su] in our Knowledge Base.
+
+[kb-su]: https://adguard-dns.io/kb/adguard-home/getting-started/#running-without-superuser
+
+
+
 You can run AdGuard Home without superuser privileges, but you need to either
 grant the binary a capability (on Linux) or instruct it to use a different port
 (all platforms).
@@ -328,6 +386,13 @@ these two lines down and save.
 
 
 ##  <a href="#limitations" id="limitations" name="limitations">Limitations</a>
+
+ >  [!WARNING]
+ >  This section is outdated.  See the [up-to-date version][kb-lim] in our Knowledge Base.
+
+[kb-lim]: https://adguard-dns.io/kb/adguard-home/getting-started/#limitations
+
+
 
 Some file systems don't support the `mmap(2)` system call that the statistics
 system requires.  See also [issue 1188].

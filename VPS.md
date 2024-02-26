@@ -1,6 +1,14 @@
  # How to install and run AdGuard Home on a virtual private server (VPS)
 
-To run AdGuard Home on a VPS, you need a server with Debian 8 or 9, x64 or x32. 
+ >  [!WARNING]
+ >  This article is outdated.  See [*Getting started*][kb-start] and [*Running securely*][kb-sec] in our Knowledge Base.
+
+[kb-sec]:   https://adguard-dns.io/kb/adguard-home/running-securely/
+[kb-start]: https://adguard-dns.io/kb/adguard-home/getting-started/
+
+
+
+To run AdGuard Home on a VPS, you need a server with Debian 8 or 9, x64 or x32.
 
 >Among possible solutions are [Vultr](https://www.vultr.com/), [1&1](https://www.1and1.co.uk/dynamic-cloud-server#configure-server), [Cloudways](https://www.cloudways.com/), [HostGator](https://hostgator.com/), [Digital Ocean](https://www.digitalocean.com/), [Bytemark](https://www.bytemark.co.uk/cloud-hosting/) and many more. AdGuard is not affiliated with any of these or other VPS services.
 

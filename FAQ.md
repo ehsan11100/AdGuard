@@ -1,5 +1,12 @@
  #  AdGuard Home - FAQ
 
+ >  [!WARNING]
+ >  This article is outdated.  See the [up-to-date version][kb-article] in our Knowledge Base.
+
+[kb-article]: https://adguard-dns.io/kb/adguard-home/faq/
+
+
+
  *  [Why AdGuard Home doesn't block ads?](#doesntblock)
  *  [Where can I inspect the logs?](#logs)
  *  [How to configure AdGuard Home to write verbose-level logs?](#verboselog)
@@ -17,6 +24,13 @@
 
 
 ##  <a href="#doesntblock" id="doesntblock" name="doesntblock">Why AdGuard Home doesn't block ads?</a>
+
+ >  [!WARNING]
+ >  This section is outdated.  See the [up-to-date version][kb-noblock] in our Knowledge Base.
+
+[kb-noblock]: https://adguard-dns.io/kb/adguard-home/faq/#doesntblock
+
+
 
 Suppose that AdGuard Home must block `somebadsite.com` but for some reason it
 doesn't.  Let's try to resolve this issue.
@@ -75,6 +89,13 @@ misconfiguration.  Please check and ensure that:
 
 ##  <a href="#logs" id="logs" name="logs">Where can I inspect the logs?</a>
 
+ >  [!WARNING]
+ >  This section is outdated.  See the [up-to-date version][kb-logs] in our Knowledge Base.
+
+[kb-logs]: https://adguard-dns.io/kb/adguard-home/faq/#logs
+
+
+
 The default location of the plain-text logs (not to be confused with the query
 logs) depends on the operating system and installation mode:
 
@@ -105,6 +126,13 @@ logs) depends on the operating system and installation mode:
 
 
 ##  <a href="#verboselog" id="verboselog" name="verboselog">How to configure AdGuard Home to write verbose-level logs?</a>
+
+ >  [!WARNING]
+ >  This section is outdated.  See the [up-to-date version][kb-verboselog] in our Knowledge Base.
+
+[kb-verboselog]: https://adguard-dns.io/kb/adguard-home/faq/#verboselog
+
+
 
 To troubleshoot a complicated issue, the verbose-level logging is sometimes
 required.  Here's how to enable it:
@@ -137,6 +165,13 @@ one on the Internet, and Cool URIs Don't Change, so use an additional ID/name
 anchor into this header. -->
 
 ## <a href="#customblock" id="customblock" name="customblock"><span id="pixelsrv" name="pixelsrv"/>How to show a custom block page?</a>
+
+ >  [!WARNING]
+ >  This section is outdated.  See the [up-to-date version][kb-custom] in our Knowledge Base.
+
+[kb-custom]: https://adguard-dns.io/kb/adguard-home/faq/#customblock
+
+
 
    ###  A note about HTTPS
 
@@ -215,6 +250,13 @@ edit the configuration file manually:
 
 ## <a href="#webaddr" id="webaddr" name="webaddr">How to change dashboard interface's address?</a>
 
+ >  [!WARNING]
+ >  This section is outdated.  See the [up-to-date version][kb-web] in our Knowledge Base.
+
+[kb-web]: https://adguard-dns.io/kb/adguard-home/faq/#webaddr
+
+
+
 1.  Stop AdGuard Home:
 
     ```sh
@@ -226,7 +268,7 @@ edit the configuration file manually:
 1.  Set the `http.address` setting to a new network interface.  For example:
 
      *  `0.0.0.0:0` to listen on all network interfaces.
- 
+
      *  `0.0.0.0:8080` to listen on all network interfaces with port `8080`.
 
      *  `127.0.0.1:0` to listen on the local loopback interface only.
@@ -241,12 +283,21 @@ edit the configuration file manually:
 
 ##  <a href="#defaultdns" id="defaultdns" name="defaultdns">How to set up AdGuard Home as default DNS server?</a>
 
-See the [“Configuring Devices” section](Getting-Started#configure-devices) on
-the “Getting Started” page.
+See the [“Configuring Devices” section][kb-dev] on the “Getting Started” page in
+the Knowledge Base.
+
+[kb-dev]: https://adguard-dns.io/kb/adguard-home/getting-started/#configure-devices
 
 
 
 ##  <a href="#limitations" id="limitations" name="limitations">Are there any known limitations?</a>
+
+ >  [!WARNING]
+ >  This section is outdated.  See the [up-to-date version][kb-lim] in our Knowledge Base.
+
+[kb-lim]: https://adguard-dns.io/kb/adguard-home/faq/#limitations
+
+
 
 Here are some examples of what cannot be blocked by a DNS-level blocker:
 
@@ -270,6 +321,13 @@ enough or would require quite complicated configuration.
 
 
 ##  <a href="#bindinuse" id="bindinuse" name="bindinuse">Why am I getting `bind: address already in use` error when trying to install on Ubuntu?</a>
+
+ >  [!WARNING]
+ >  This section is outdated.  See the [up-to-date version][kb-inuse] in our Knowledge Base.
+
+[kb-inuse]: https://adguard-dns.io/kb/adguard-home/faq/#bindinuse
+
+
 
 This happens because the port 53 on `localhost`, which is used for DNS, is
 already taken by another program.  Ubuntu comes with a local DNS called
@@ -340,6 +398,13 @@ AdGuard Home should be able to bind to `127.0.0.1:53`.
 
 ##  <a href="#reverseproxy" id="reverseproxy" name="reverseproxy">How to configure a reverse proxy server for AdGuard Home?</a>
 
+ >  [!WARNING]
+ >  This section is outdated.  See the [up-to-date version][kb-proxy] in our Knowledge Base.
+
+[kb-proxy]: https://adguard-dns.io/kb/adguard-home/faq/#reverseproxy
+
+
+
 If you're already running a web server and want to access the AdGuard Home
 dashboard UI from a URL like `http://YOUR_SERVER/aghome/`, you can use this
 configuration for your web server:
@@ -405,6 +470,13 @@ the real client IP address into account.  See the [configuration][conf] and
 
 ##  <a href="#fedora" id="fedora" name="fedora">How to fix `permission denied` errors on Fedora?</a>
 
+ >  [!WARNING]
+ >  This section is outdated.  See the [up-to-date version][kb-fedora] in our Knowledge Base.
+
+[kb-fedora]: https://adguard-dns.io/kb/adguard-home/faq/#fedora
+
+
+
 1.  Move the `AdGuardHome` binary to `/usr/local/bin`.
 
 1.  As `root`, execute the following command to change the security context of
@@ -443,6 +515,13 @@ See [issue 765] and [issue 3281].
 
 ##  <a href="#incompatfs" id="incompatfs" name="incompatfs">How to fix `incompatible file system` errors?</a>
 
+ >  [!WARNING]
+ >  This section is outdated.  See the [up-to-date version][kb-fs] in our Knowledge Base.
+
+[kb-fs]: https://adguard-dns.io/kb/adguard-home/faq/#incompatfs
+
+
+
 You should move your AdGuard Home installation or working directory to another
 location.  See the [limitations section](Getting-Started#limitations) on the
 “Getting Started” page.
@@ -451,6 +530,13 @@ location.  See the [limitations section](Getting-Started#limitations) on the
 
 ##  <a href="#manual-update" id="manual-update" name="manual-update">How to update AdGuard Home manually?</a>
 
+ >  [!WARNING]
+ >  This section is outdated.  See the [up-to-date version][kb-mupd] in our Knowledge Base.
+
+[kb-mupd]: https://adguard-dns.io/kb/adguard-home/faq/#manual-update
+
+
+
 In case the button isn't shown or an automatic update has failed, you can
 update manually.  In the examples below, we'll use AdGuard Home releases for
 Linux and Windows for AMD64 CPUs.
@@ -458,6 +544,13 @@ Linux and Windows for AMD64 CPUs.
 
 
    ###  <a href="#manual-update-unix" id="manual-update-unix" name="manual-update-unix">Unix (Linux, macOS, BSD)</a>
+
+ >  [!WARNING]
+ >  This section is outdated.  See the [up-to-date version][kb-mupdu] in our Knowledge Base.
+
+[kb-mupdu]: https://adguard-dns.io/kb/adguard-home/faq/#manual-update-unix
+
+
 
 1.  Download the new AdGuard Home package from the [releases page][releases].
     If you want to perform this step from the command line:
@@ -542,6 +635,13 @@ Linux and Windows for AMD64 CPUs.
 
    ###  <a href="#manual-update-win" id="manual-update-win" name="manual-update-win">Windows (Using PowerShell)</a>
 
+ >  [!WARNING]
+ >  This section is outdated.  See the [up-to-date version][kb-mupdw] in our Knowledge Base.
+
+[kb-mupdw]: https://adguard-dns.io/kb/adguard-home/faq/#manual-update-win
+
+
+
 In all examples below, the PowerShell must be run as Administrator.
 
 1.  Download the new AdGuard Home package from the [releases page][releases].
@@ -603,6 +703,13 @@ In all examples below, the PowerShell must be run as Administrator.
 
 
 ##  <a href="#uninstall" id="uninstall" name="uninstall">How to uninstall AdGuard Home?</a>
+
+ >  [!WARNING]
+ >  This section is outdated.  See the [up-to-date version][kb-bye] in our Knowledge Base.
+
+[kb-bye]: https://adguard-dns.io/kb/adguard-home/faq/#uninstall
+
+
 
 The way to uninstall AdGuard Home depends on how you installed it.
 
